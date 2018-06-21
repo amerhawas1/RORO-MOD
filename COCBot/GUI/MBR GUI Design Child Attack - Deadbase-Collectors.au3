@@ -158,7 +158,7 @@ Func CreateAttackSearchDeadBaseCollectors()
 			_GUICtrlSetTip(-1, $sTxtTip)
 		$g_hCmbMinCollectorMatches = GUICtrlCreateCombo("", $x + 125, $y, 75, 20, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			_GUICtrlSetTip(-1, $sTxtTip)
-			GUICtrlSetData(-1, "1|2|3|4|5|6", "4")
+			GUICtrlSetData(-1, "1|2|3|4|5|6", "2")
 			GUICtrlSetOnEvent(-1, "cmbMinCollectorMatches")
 
 	$y += 25
@@ -193,11 +193,11 @@ Func CreateAttackSearchDeadBaseCollectors()
 	$x += 240
 		$g_hChkDBMeetCollOutside = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkMeetCollOutside", "Check Collectors Outside"), $x, $y, -1, -1)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkMeetCollOutside_Info_01", "Search for bases that has their collectors outside."))
-			GUICtrlSetState(-1, $GUI_UNCHECKED)
+			GUICtrlSetState(-1, $GUI_CHECKED)
 			GUICtrlSetOnEvent(-1, "chkDBMeetCollOutside")
 	$y += 28
 		$g_hLblDBMinCollOutsideText = GUICtrlCreateLabel(GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "LblDBMinCollOutsideText", "Min") & ": ", $x + 20, $y, -1, -1)
-		$g_hTxtDBMinCollOutsidePercent = GUICtrlCreateInput("80", $x + 50, $y - 3, 31, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$g_hTxtDBMinCollOutsidePercent = GUICtrlCreateInput("90", $x + 50, $y - 3, 31, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkMeetCollOutside_Info_02", "Set the Min. % of collectors outside to search for on a village to attack."))
 			GUICtrlSetLimit(-1, 3)
 		$g_hLblDBMinCollOutsideText1 = GUICtrlCreateLabel("%", $x + 85, $y, -1, -1)
@@ -205,7 +205,7 @@ Func CreateAttackSearchDeadBaseCollectors()
 	$y += 20
 		$g_hChkDBCollectorsNearRedline = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkDBCollectorsNearRedline", "Collectors near redline"), $x, $y, -1, -1)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkDBCollectorsNearRedline_Info_01", "Check how many collectors are near redline. If more than % you set then attack."))
-			GUICtrlSetState(-1, $GUI_CHECKED)
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
 			GUICtrlSetOnEvent(-1, "chkDBCollectorsNearRedline")
 	$y += 28
 		$g_hLblRedlineTiles = GUICtrlCreateLabel(GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "LblRedlineTiles", "Tiles") & ": ", $x + 20, $y, -1, -1)
@@ -216,7 +216,7 @@ Func CreateAttackSearchDeadBaseCollectors()
 	$y += 20
 		$g_hChkSkipCollectorCheck = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkSkipCollectorCheck", "Skip outside collectors check"), $x, $y, -1, -1)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkSkipCollectorCheck_Info_01", "If you don't want compare one of the resource below, just set to 0"))
-			GUICtrlSetState(-1, $GUI_CHECKED)
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
 			GUICtrlSetOnEvent(-1, "chkSkipCollectorCheck")
 	$y += 25
 		$g_hLblSkipCollectorCheck = GUICtrlCreateLabel(GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "LblSkipCollectorCheck", "IF Target Resource Over"), $x + 15, $y, -1, -1)
@@ -243,7 +243,7 @@ Func CreateAttackSearchDeadBaseCollectors()
 	$x -= 90
 		$g_hChkSkipCollectorCheckTH = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkSkipCollectorCheckTH", "Skip outside collectors check IF"), $x, $y, -1, -1)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "ChkSkipCollectorCheckTH_Info_01", "Compare the level if is lower than or equal my setting, just attack!"))
-			GUICtrlSetState(-1, $GUI_CHECKED)
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
 			GUICtrlSetOnEvent(-1, "chkSkipCollectorCheckTH")
 	$y += 25
 		$g_hLblSkipCollectorCheckTHText1 = GUICtrlCreateLabel(GetTranslatedFileIni("MBR GUI Design Child Attack - Deadbase-Collectors", "LblSkipCollectorCheckTHText", "Target Townhall Level"), $x + 10, $y, -1, -1)
