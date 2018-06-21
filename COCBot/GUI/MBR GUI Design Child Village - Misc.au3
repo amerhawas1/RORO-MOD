@@ -224,6 +224,7 @@ Func CreateMiscNormalVillageSubTab()
 			GUICtrlSetState(-1, $GUI_UNCHECKED)
 
 		$g_hChkFreeMagicItems = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkFreeMagicItems", "Collect Free Magic Items"), $x + 250, $y + 4, -1, -1)
+		GUICtrlSetState(-1, $GUI_CHECKED)
 	$y -= 64
 		Local const $icon = @ScriptDir & "\images\Potion.bmp"
 		GUICtrlCreatePic($icon, $x + 300, $y + 20, 36, 47, $SS_BITMAP)
