@@ -358,24 +358,32 @@ Func CreateMiscClanGamesV3SubTab()
 	$x = 150
 		$g_hChkClanGamesEnabled = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesEnabled", "Clan Games"), $x, $y, -1, -1)
 			GUICtrlSetOnEvent(-1, "chkActivateClangames")
+			GUICtrlSetState(-1, $GUI_CHECKED)
 		$g_hChkClanGamesOnly = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesOnly", "Clan Games Only"), $x + 100 , $y, -1, -1)
+		GUICtrlSetState(-1, $GUI_CHECKED)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesOnly_Info_01", "Will Check if the event name is Clan or Builder Games!"))
 		$g_hChkClanGamesDebug = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesDebug", "Debug"), $x + 205, $y, -1, -1)
 	$x += 25
 	$y += 25
 		$g_hChkClanGamesLoot = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesLoot", "Loot Challenges"), $x, $y, -1, -1)
+		GUICtrlSetState(-1, $GUI_CHECKED)
 	$y += 25
 		$g_hChkClanGamesBattle = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesBattle", "Battle Challenges"), $x, $y, -1, -1)
+		GUICtrlSetState(-1, $GUI_CHECKED)
 	$y += 25
 		$g_hChkClanGamesDestruction = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesDestruction", "Destruction Challenges"), $x, $y, -1, -1)
+		GUICtrlSetState(-1, $GUI_CHECKED)
 	$y += 25
 		$g_hChkClanGamesAirTroop = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesAirTroop", "Air Troops Challenges"), $x, $y, -1, -1)
+		GUICtrlSetState(-1, $GUI_CHECKED)
 	$y += 25
 		$g_hChkClanGamesGroundTroop = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesGroundTroop", "Ground Troops Challenges"), $x, $y, -1, -1)
+		GUICtrlSetState(-1, $GUI_CHECKED)
 	$y += 25
 		$g_hChkClanGamesMiscellaneous = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesMiscellaneous", "Miscellaneous Challenges"), $x, $y, -1, -1)
 	$y += 25
 		$g_hChkClanGamesPurge = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesPurge", "Purge Versus Battles Events"), $x, $y, -1, -1)
+		GUICtrlSetState(-1, $GUI_CHECKED)
 			GUICtrlSetOnEvent(-1, "chkPurgeLimits")
 		$g_hcmbPurgeLimit = GUICtrlCreateCombo("" , $x + 155, $y, 70, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 			GUICtrlSetData(-1, "Unlimited| 1x| 2x| 3x| 4x| 5x| 6x| 7x| 8x| 9x|10x", " 5x")
