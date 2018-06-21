@@ -211,7 +211,7 @@ Func CreateAttackSearchDeadBaseSearch()
 							   GetTranslatedFileIni("MBR GUI Design Child Attack - Search", "CmbMeetGE_Info_03", "OR: One condition must meet, Gold or Elixir.") & @CRLF & _
 							   GetTranslatedFileIni("MBR GUI Design Child Attack - Search", "CmbMeetGE_Info_04", "+ (PLUS): Total amount of Gold + Elixir must meet."))
 			GUICtrlSetOnEvent(-1, "cmbDBGoldElixir")
-		$g_hTxtDBMinGold = GUICtrlCreateInput("80000", $x + 85, $y, 50, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$g_hTxtDBMinGold = GUICtrlCreateInput("300000", $x + 85, $y, 50, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Search", "TxtMinGold_Info_01", "Set the Min. amount of Gold to search for on a village to attack.")
 			_GUICtrlSetTip(-1, $sTxtTip)
 			GUICtrlSetLimit(-1, 6)
@@ -219,7 +219,7 @@ Func CreateAttackSearchDeadBaseSearch()
 			_GUICtrlSetTip(-1, $sTxtTip)
 
 	$y += 21
-		$g_hTxtDBMinElixir = GUICtrlCreateInput("80000", $x + 85, $y, 50, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$g_hTxtDBMinElixir = GUICtrlCreateInput("300000", $x + 85, $y, 50, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Search", "TxtMinElixir_Info_01", "Set the Min. amount of Elixir to search for on a village to attack.")
 			_GUICtrlSetTip(-1, $sTxtTip)
 			GUICtrlSetLimit(-1, 6)
