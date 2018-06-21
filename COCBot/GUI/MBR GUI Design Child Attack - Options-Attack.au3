@@ -47,18 +47,19 @@ Func CreateAttackSearchOptionsAttack()
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadAutoAbilities_Info_01", "Activate the Ability when the Hero becomes weak.") & @CRLF & _
 					   GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadAutoAbilities_Info_02", "Heroes are checked and activated individually.")
 			_GUICtrlSetTip(-1, $sTxtTip)
-			GUICtrlSetState(-1, $GUI_CHECKED)
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
 	$x += 145
 		$g_hRadManQueenAbility = GUICtrlCreateRadio(GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities", "Timed after") & ":", $x , $y , -1, -1)
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities_Info_01", "Activate the Ability on a timer.") & @CRLF & _
 					   GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities_Info_02", "All Heroes are activated at the same time.")
 			_GUICtrlSetTip(-1, $sTxtTip)
-			GUICtrlSetState(-1, $GUI_UNCHECKED)
+			GUICtrlSetState(-1, $GUI_CHECKED)
 
 		$g_hTxtManQueenAbility = GUICtrlCreateInput("9", $x + 80, $y + 3, 30, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "TxtManAbilities_Info_01", "Set the time in seconds for Timed Activation of Hero Abilities.")
 			_GUICtrlSetTip(-1, $sTxtTip)
 			GUICtrlSetLimit(-1, 2)
+			GUICtrlSetData(-1, 12)
 		GUICtrlCreateLabel(GetTranslatedFileIni("MBR Global GUI Design", "sec.", -1), $x + 115, $y + 4, -1, -1)
 	$x += 145
 		$g_hRadBothQueenAbility = GUICtrlCreateRadio(GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadBothAbilities_Info_01", "Check Both"), $x, $y, -1, -1)
@@ -74,18 +75,19 @@ Func CreateAttackSearchOptionsAttack()
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadAutoAbilities_Info_01", "Activate the Ability when the Hero becomes weak.") & @CRLF & _
 					   GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadAutoAbilities_Info_02", "Heroes are checked and activated individually.")
 			_GUICtrlSetTip(-1, $sTxtTip)
-			GUICtrlSetState(-1, $GUI_CHECKED)
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
 	$x += 145
 		$g_hRadManKingAbility = GUICtrlCreateRadio(GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities", "Timed after") & ":", $x , $y , -1, -1)
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities_Info_01", "Activate the Ability on a timer.") & @CRLF & _
 					   GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities_Info_02", "All Heroes are activated at the same time.")
 			_GUICtrlSetTip(-1, $sTxtTip)
-			GUICtrlSetState(-1, $GUI_UNCHECKED)
+			GUICtrlSetState(-1, $GUI_CHECKED)
 
 		$g_hTxtManKingAbility = GUICtrlCreateInput("9", $x + 80, $y + 3, 30, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "TxtManAbilities_Info_01", "Set the time in seconds for Timed Activation of Hero Abilities.")
 			_GUICtrlSetTip(-1, $sTxtTip)
 			GUICtrlSetLimit(-1, 2)
+			GUICtrlSetData(-1, 12)
 		GUICtrlCreateLabel(GetTranslatedFileIni("MBR Global GUI Design", "sec.", -1), $x + 115, $y + 4, -1, -1)
 
 	$x += 145
@@ -102,18 +104,19 @@ Func CreateAttackSearchOptionsAttack()
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadAutoAbilities_Info_01", "Activate the Ability when the Hero becomes weak.") & @CRLF & _
 					   GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadAutoAbilities_Info_02", "Heroes are checked and activated individually.")
 			_GUICtrlSetTip(-1, $sTxtTip)
-			GUICtrlSetState(-1, $GUI_CHECKED)
+			GUICtrlSetState(-1, $GUI_UNCHECKED)
 	$x += 145
 		$g_hRadManWardenAbility = GUICtrlCreateRadio(GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities", "Timed after") & ":", $x , $y , -1, -1)
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities_Info_01", "Activate the Ability on a timer.") & @CRLF & _
 					   GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "RadManAbilities_Info_02", "All Heroes are activated at the same time.")
 			_GUICtrlSetTip(-1, $sTxtTip)
-			GUICtrlSetState(-1, $GUI_UNCHECKED)
+			GUICtrlSetState(-1, $GUI_CHECKED)
 
 		$g_hTxtManWardenAbility = GUICtrlCreateInput("9", $x + 80, $y + 3, 30, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Attack", "TxtManAbilities_Info_01", "Set the time in seconds for Timed Activation of Hero Abilities.")
 			_GUICtrlSetTip(-1, $sTxtTip)
 			GUICtrlSetLimit(-1, 2)
+			GUICtrlSetData(-1, 12)
 		GUICtrlCreateLabel(GetTranslatedFileIni("MBR Global GUI Design", "sec.", -1), $x + 115, $y + 4, -1, -1)
 
 	$x += 145
