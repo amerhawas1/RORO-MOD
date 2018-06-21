@@ -62,6 +62,7 @@ Func CreateAttackSearchDeadBaseAttack()
 				_GUICtrlSetTip(-1, $sTxtTip)
 			$g_hChkDBKingAttack = GUICtrlCreateCheckbox("", $x + 27, $y, 17, 17)
 				_GUICtrlSetTip(-1, $sTxtTip)
+				GUICtrlSetState(-1, $GUI_CHECKED)
 
 		$x += 46
 			$g_hPicDBQueenAttack = _GUICtrlCreateIcon($g_sLibIconPath, $eIcnQueen, $x, $y, 24, 24)
@@ -70,6 +71,7 @@ Func CreateAttackSearchDeadBaseAttack()
 				_GUICtrlSetTip(-1, $sTxtTip)
 			$g_hChkDBQueenAttack = GUICtrlCreateCheckbox("", $x + 27, $y, 17, 17)
 				_GUICtrlSetTip(-1, $sTxtTip)
+				GUICtrlSetState(-1, $GUI_CHECKED)
 
 		$x += 46
 			$g_hPicDBWardenAttack = _GUICtrlCreateIcon($g_sLibIconPath, $eIcnWarden, $x, $y, 24, 24)
@@ -78,6 +80,7 @@ Func CreateAttackSearchDeadBaseAttack()
 				_GUICtrlSetTip(-1, $sTxtTip)
 			$g_hChkDBWardenAttack = GUICtrlCreateCheckbox("", $x + 27, $y, 17, 17)
 				_GUICtrlSetTip(-1, $sTxtTip)
+				GUICtrlSetState(-1, $GUI_CHECKED)
 
 		$y += 27
 		$x -= 92
@@ -86,6 +89,7 @@ Func CreateAttackSearchDeadBaseAttack()
 				_GUICtrlSetTip(-1, $sTxtTip)
 			$g_hChkDBDropCC = GUICtrlCreateCheckbox("", $x + 27, $y, 17, 17)
 				_GUICtrlSetTip(-1, $sTxtTip)
+				GUICtrlSetState(-1, $GUI_CHECKED)
 
 		$x += 46
 			$g_hPicDBLightSpell = _GUICtrlCreateIcon($g_sLibIconPath, $eIcnLightSpell, $x, $y, 24, 24)
