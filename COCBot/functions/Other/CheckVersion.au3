@@ -38,7 +38,7 @@ Func CheckVersion()
 			SetLog(" ")
 		Else
 			SetLog("WELCOME CHIEF, YOU HAVE THE LATEST MOD VERSION", $COLOR_SUCCESS)
-			SetLog("Developers: NguyenAnhHD And MHK2012", $COLOR_ORANGE)
+			SetLog("Developers: ABDALLA AL MHMOOD * FIRAS AS ", $COLOR_ORANGE)
 			SetLog("CHEEERS..", $COLOR_SUCCESS)
 			_PrintLogVersion($g_sLastModmessage)
 		EndIf
