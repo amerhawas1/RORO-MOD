@@ -82,7 +82,7 @@ Func CreateAttackSearchDeadBaseStandard()
 		$y +=22
 			$g_hChkSmartAttackRedAreaDB = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Attack Standard", "ChkSmartAttackRedArea", "Use Smart Attack: Near Red Line."), $x, $y, -1, -1)
 				_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Attack Standard", "ChkSmartAttackRedArea_Info_01", "Use Smart Attack to detect the outer 'Red Line' of the village to attack. And drop your troops close to it."))
-				GUICtrlSetState(-1, $GUI_CHECKED)
+				GUICtrlSetState(-1, $GUI_UNCHECKED)
 				GUICtrlSetOnEvent(-1, "chkSmartAttackRedAreaDB")
 
 		$y += 22
