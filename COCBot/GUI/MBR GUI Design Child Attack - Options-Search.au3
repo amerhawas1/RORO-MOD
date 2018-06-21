@@ -116,7 +116,7 @@ Func CreateAttackSearchOptionsSearch()
 			_GUICtrlSlider_SetTipSide(-1, $TBTS_BOTTOM)
 			_GUICtrlSlider_SetTicFreq(-1, 1)
 			GUICtrlSetLimit(-1, 12, 0) ; change max/min value
-			GUICtrlSetData(-1, 1) ; default value
+			GUICtrlSetData(-1, 0) ; default value
 			GUICtrlSetBkColor(-1, $COLOR_WHITE)
 			GUICtrlSetOnEvent(-1, "sldVSDelay")
 
@@ -133,7 +133,7 @@ Func CreateAttackSearchOptionsSearch()
 			_GUICtrlSlider_SetTipSide(-1, $TBTS_BOTTOM)
 			_GUICtrlSlider_SetTicFreq(-1, 1)
 			GUICtrlSetLimit(-1, 15, 0) ; change max/min value
-			GUICtrlSetData(-1, 4) ; default value
+			GUICtrlSetData(-1, 0) ; default value
 			GUICtrlSetBkColor(-1, $COLOR_WHITE)
 			GUICtrlSetOnEvent(-1, "sldMaxVSDelay")
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -182,8 +182,9 @@ Func CreateAttackSearchOptionsSearch()
 		$g_hChkSearchTimeout = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Search", "ChkSearchTimeout", "Restart search IF Cloud Time"), $x - 5, $y - 8, -1, -1)
 			_GUICtrlSetTip(-1,GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Search", "ChkSearchTimeout_Info_01", "Will Return to home and restart search if clouding time is > xx minutes"))
 			GUICtrlSetOnEvent(-1, "chkSearchTimeout")
+			GUICtrlSetState(-1, $GUI_CHECKED)
 		$g_hLblSearchTimeout = GUICtrlCreateLabel(ChrW(62), $x + 5, $y + 17, -1, -1)
-		$g_hTxtSearchTimeout = GUICtrlCreateInput("10", $x + 15, $y + 15, 25, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
+		$g_hTxtSearchTimeout = GUICtrlCreateInput("5", $x + 15, $y + 15, 25, 18, BitOR($GUI_SS_DEFAULT_INPUT, $ES_CENTER, $ES_NUMBER))
 		$g_hLblSearchTimeoutminutes = GUICtrlCreateLabel("minutes", $x + 50, $y + 17, -1, -1)
 
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
