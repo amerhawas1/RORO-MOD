@@ -136,7 +136,7 @@ Func applyConfig($bRedrawAtExit = True, $TypeReadSave = "Read") ;Applies the dat
 	; <><><> Attack Plan / Train Army / Options <><><>
 	ApplyConfig_641_1($TypeReadSave)
 
-	;  <><><> Team AiO MOD++ (2018) <><><>
+	;  <><><> RORO-MOD (2018) <><><>
 	ApplyConfig_MOD($TypeReadSave)
 
 	; <><><><> Attack Plan / Strategies <><><><>
@@ -2237,7 +2237,7 @@ Func ApplyConfig_641_1($TypeReadSave)
 				GUICtrlSetState($g_hCmbMinimumTimeClose, $GUI_ENABLE)
 				GUICtrlSetState($g_hLblSymbolWaiting, $GUI_ENABLE)
 				GUICtrlSetState($g_hLblWaitingInMinutes, $GUI_ENABLE)
-				; Max logout time - Team AiO MOD++
+				; Max logout time - RORO-MOD
 				GUICtrlSetState($g_hChkTrainLogoutMaxTime, $GUI_ENABLE)
 				chkTrainLogoutMaxTime()
 			Else
@@ -2247,7 +2247,7 @@ Func ApplyConfig_641_1($TypeReadSave)
 				GUICtrlSetState($g_hCmbMinimumTimeClose, $GUI_DISABLE)
 				GUICtrlSetState($g_hLblSymbolWaiting, $GUI_DISABLE)
 				GUICtrlSetState($g_hLblWaitingInMinutes, $GUI_DISABLE)
-				; Max logout time - Team AiO MOD++
+				; Max logout time - RORO-MOD
 				GUICtrlSetState($g_hChkTrainLogoutMaxTime, $GUI_DISABLE)
 			EndIf
 			GUICtrlSetState($g_hChkCloseWithoutShield, $g_bCloseWithoutShield ? $GUI_CHECKED : $GUI_UNCHECKED)

@@ -253,7 +253,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 			SetLog("      " & "Dead Base Found!", $COLOR_SUCCESS, "Lucida Console", 7.5)
 			$logwrited = True
 
-			; Check Collector Outside - Team AiO MOD++
+			; Check Collector Outside - RORO-MOD
 			Local $g_bFlagSearchAnotherBase = False
 			If Not $g_bFlagSearchAnotherBase Then
 				If $g_bDBMeetCollOutside Then ; check is that collector  near outside
@@ -331,7 +331,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 					ExitLoop
 				EndIf
 			EndIf
-			; Check Collector Outside - Team AiO MOD++
+			; Check Collector Outside - RORO-MOD
 
 		ElseIf $match[$LB] And Not $dbBase Then
 			SetLog($GetResourcesTXT, $COLOR_SUCCESS, "Lucida Console", 7.5)

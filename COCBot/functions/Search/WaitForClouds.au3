@@ -86,12 +86,12 @@ Func WaitForClouds()
 		If $iSearchTime >= $iLastTime + 1 Then
 			$g_iTotalSearchTime += 1
 			SetLog("Cloud wait time " & StringFormat("%.1f", $iSearchTime) & " minute(s), Total Searchtime = " & $g_iTotalSearchTime & " minute(s)", $COLOR_INFO)
-			; Stop on Low battery - Team AiO MOD++
+			; Stop on Low battery - RORO-MOD
 			If $g_bStopOnBatt Then
 				Setlog("Check Stop on battery", $COLOR_INFO)
 				_BatteryStatus()
 			EndIf
-			; Restart Search Legend league ~ back to home on certain minute on cloud and no reach enemy - Team AiO MOD++
+			; Restart Search Legend league ~ back to home on certain minute on cloud and no reach enemy - RORO-MOD
 			If $g_bIsSearchTimeout Then
 				If $iSearchTime > $g_iSearchTimeout Then
 					$g_bIsSearchTimeout = True

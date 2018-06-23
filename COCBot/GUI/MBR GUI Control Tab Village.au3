@@ -28,7 +28,7 @@
 	; $g_bChkCollect = (GUICtrlRead($g_hChkCollect) = $GUI_CHECKED)
 ; EndFunc   ;==>ChkCollect
 
-; Request troops for defense - Team AiO MOD++
+; Request troops for defense - RORO-MOD
 Func chkRequestDefense()
 	If GUICtrlRead($g_hChkRequestTroopsEnableDefense) = $GUI_CHECKED Then
 		For $i = $g_hTxtRequestCCDefense To $g_hTxtRequestDefenseEarly
@@ -46,15 +46,15 @@ Func chkRequestCCHours()
 
 	If GUICtrlRead($g_hChkRequestTroopsEnable) = $GUI_CHECKED Then
 		GUICtrlSetState($g_hTxtRequestCC, $GUI_SHOW + $GUI_ENABLE)
-		For $i = $g_hChkReqCCFirst To $g_hLblRequestCCHoursPM ; Request CC Troops at first - Team AiO MOD++
+		For $i = $g_hChkReqCCFirst To $g_hLblRequestCCHoursPM ; Request CC Troops at first - RORO-MOD
 			GUICtrlSetState($i, $GUI_ENABLE)
 		Next
 	Else
 		GUICtrlSetState($g_hTxtRequestCC, $GUI_SHOW + $GUI_DISABLE)
-		 ; CheckCC Troops - Team AiO MOD++
+		 ; CheckCC Troops - RORO-MOD
 		GUICtrlSetState($g_hChkTroopsCC, $GUI_UNCHECKED)
 		GUIControlCheckCC()
-		For $i = $g_hChkReqCCFirst To $g_hLblRequestCCHoursPM ; Request CC Troops at first - Team AiO MOD++
+		For $i = $g_hChkReqCCFirst To $g_hLblRequestCCHoursPM ; Request CC Troops at first - RORO-MOD
 			GUICtrlSetState($i, $GUI_DISABLE)
 		Next
 	EndIf
@@ -62,7 +62,7 @@ Func chkRequestCCHours()
 	SetRedrawBotWindowControls($bWasRedraw, $g_hGrpRequestCC, "chkRequestCCHours")
 EndFunc   ;==>chkRequestCCHours
 
-; Request CC Troops at first - Team AiO MOD++
+; Request CC Troops at first - RORO-MOD
 Func chkReqCCFirst()
 	$g_bReqCCFirst = (GUICtrlRead($g_hChkReqCCFirst) = $GUI_CHECKED)
 EndFunc   ;==>chkReqCCFirst

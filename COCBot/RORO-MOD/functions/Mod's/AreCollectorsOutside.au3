@@ -6,7 +6,7 @@
 ; Return values .: True					more collectors outside than specified
 ;				 : False				less collectors outside than specified
 ; Author ........: McSlither (Jan-2016)
-; Modified ......: TheRevenor (Jul 2016), Samkie (13 Jan 2017), Team AiO MOD++ (2018)
+; Modified ......: TheRevenor (Jul 2016), Samkie (13 Jan 2017), RORO-MOD (2018)
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
 ; Related .......:

@@ -21,7 +21,7 @@ Global $g_hChkAttackNow = 0, $g_hCmbAttackNowDelay = 0, $g_hChkRestartSearchLimi
 
 Global $g_hLblVSDelay = 0, $g_hLblTextVSDelay = 0, $g_hLblMaxVSDelay = 0, $g_hLblTextMaxVSDelay = 0, $g_hLblAttackNow = 0, $g_hLblAttackNowSec = 0
 
-; Restart Search Legend league - Team AiO MOD++
+; Restart Search Legend league - RORO-MOD
 Global $g_hChkSearchTimeout = 0, $g_hLblSearchTimeout = 0, $g_hTxtSearchTimeout = 0, $g_hLblSearchTimeoutminutes = 0
 
 Func CreateAttackSearchOptionsSearch()
@@ -177,7 +177,7 @@ Func CreateAttackSearchOptionsSearch()
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Search", "ChkAlertSearch_Info_01", "Check this if you want an Audio alarm & a Balloon Tip when a Base to attack is found."))
 			GUICtrlSetState(-1, $GUI_CHECKED)
 
-	; Restart Search Legend league - Team AiO MOD++
+	; Restart Search Legend league - RORO-MOD
 	$y += 40
 		$g_hChkSearchTimeout = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Search", "ChkSearchTimeout", "Restart search IF Cloud Time"), $x - 5, $y - 8, -1, -1)
 			_GUICtrlSetTip(-1,GetTranslatedFileIni("MBR GUI Design Child Attack - Options-Search", "ChkSearchTimeout_Info_01", "Will Return to home and restart search if clouding time is > xx minutes"))

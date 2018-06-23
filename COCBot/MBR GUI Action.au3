@@ -119,7 +119,7 @@ Func BotStart($bAutostartDelay = 0)
 		If Not $g_bRunState Then Return FuncReturn()
 		If $hWndActive = $g_hAndroidWindow And ($g_bAndroidBackgroundLaunched = True Or AndroidControlAvailable())  Then ; Really?
 
-			; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
+			; Auto Dock, Hide Emulator & Bot - RORO-MOD
 			If $g_iChkAutoDock Then
 				If Not $g_bAndroidEmbedded Then
 					SetLog("Bot Auto Dock to Emulator", $COLOR_INFO)
@@ -202,7 +202,7 @@ Func BotStop()
 	GUICtrlSetState($g_hBtnSearchMode, $GUI_SHOW)
 	;GUICtrlSetState($g_hBtnMakeScreenshot, $GUI_ENABLE)
 
-	; Enable/Disable GUI while botting - Team AiO MOD++
+	; Enable/Disable GUI while botting - RORO-MOD
 	GUICtrlSetState($g_hBtnEnableGUI, $GUI_HIDE)
 	GUICtrlSetState($g_hBtnDisableGUI, $GUI_HIDE)
 

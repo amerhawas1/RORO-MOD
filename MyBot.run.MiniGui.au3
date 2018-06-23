@@ -109,8 +109,8 @@ Global $g_hFrmBotEmbeddedMouse = 0
 #include "COCBot\functions\Other\UpdateStats.Mini.au3"
 #include "COCBot\functions\Other\_NumberFormat.au3"
 
-; Team AiO MOD++ (2018)
-#include "COCBot\Team__AiO__MOD++\functions\Config\readConfig.au3"
+; RORO-MOD (2018)
+#include "COCBot\RORO-MOD\functions\Config\readConfig.au3"
 
 Global Enum $eBotUpdateStats = $eBotClose + 1
 
@@ -888,13 +888,13 @@ Func btnResume()
 	TogglePause()
 EndFunc   ;==>btnResume
 
-; Enable/Disable GUI while botting - Team AiO MOD++
+; Enable/Disable GUI while botting - RORO-MOD
 Func btnEnableGUI()
 EndFunc   ;==>btnEnableGUI
 
 Func btnDisableGUI()
 EndFunc   ;==>btnDisableGUI
-; Enable/Disable GUI while botting - Team AiO MOD++
+; Enable/Disable GUI while botting - RORO-MOD
 
 Func btnVillageStat($source = "")
 

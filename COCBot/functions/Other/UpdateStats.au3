@@ -737,7 +737,7 @@ Func ResetStats()
 			$g_aiSkippedVillageCountAcc[$i] = 0
 		Next
 	EndIf
-	ResetGoblinsXP() ; Goblin XP - Team AiO MOD++
+	ResetGoblinsXP() ; Goblin XP - RORO-MOD
 	UpdateStats()
 EndFunc   ;==>ResetStats
 

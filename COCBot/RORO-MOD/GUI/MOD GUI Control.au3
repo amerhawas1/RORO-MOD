@@ -4,7 +4,7 @@
 ; Syntax ........:
 ; Parameters ....: None
 ; Return values .: None
-; Author ........: Team AiO MOD++ (2018)
+; Author ........: RORO-MOD (2018)
 ; Modified ......:
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
@@ -14,7 +14,7 @@
 ; ===============================================================================================================================
 #include-once
 
-; GTFO - Team AiO MOD++
+; GTFO - RORO-MOD
 Func ApplyGTFO()
 	$g_bChkUseGTFO = (GUICtrlRead($g_hChkUseGTFO) = $GUI_CHECKED)
 	If $g_bChkUseGTFO = True Then
@@ -103,13 +103,13 @@ Func ApplyKickLimits()
 	EndIf
 EndFunc   ;==>ApplyKickLimits
 
-; Check Grand Warden Mode - Team AiO MOD++
+; Check Grand Warden Mode - RORO-MOD
 Func chkCheckWardenMode()
 	$g_bCheckWardenMode = (GUICtrlRead($g_hChkCheckWardenMode) = $GUI_CHECKED)
 	GUICtrlSetState($g_hCmbCheckWardenMode, $g_bCheckWardenMode ? $GUI_ENABLE : $GUI_DISABLE)
 EndFunc   ;==>chkCheckWardenMode
 
-; Classic Four Finger - Team AiO MOD++
+; Classic Four Finger - RORO-MOD
 Func cmbStandardDropSidesAB() ; avoid conflict between FourFinger and SmartAttack
 	If _GUICtrlComboBox_GetCurSel($g_hCmbStandardDropSidesAB) = 4 Then
 		GUICtrlSetState($g_hChkSmartAttackRedAreaAB, $GUI_UNCHECKED)
@@ -144,7 +144,7 @@ Func Bridge()
 
 EndFunc   ;==>Bridge
 
-; Unit/Wave Factor - Team AiO MOD++
+; Unit/Wave Factor - RORO-MOD
 Func cmbGiantSlot()
 	If $g_iChkGiantSlot = 1 Then
 		Switch _GUICtrlComboBox_GetCurSel($g_hCmbGiantSlot)
@@ -173,7 +173,7 @@ Func chkWaveFactor()
 	GUICtrlSetState($g_hTxtWaveFactor, GUICtrlRead($g_hChkWaveFactor) = $GUI_CHECKED ? $GUI_ENABLE : $GUI_DISABLE)
 EndFunc   ;==>chkWaveFactor
 
-; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
+; Auto Dock, Hide Emulator & Bot - RORO-MOD
 Func chkEnableAuto()
 	If GUICtrlRead($g_hChkEnableAuto) = $GUI_CHECKED Then
 		$g_bEnableAuto = True
@@ -199,7 +199,7 @@ Func btnEnableAuto()
 	EndIf
 EndFunc   ;==>btnEnableAuto
 
-; Restart Search Legend league - Team AiO MOD++
+; Restart Search Legend league - RORO-MOD
 Func chkSearchTimeout()
 	If GUICtrlRead($g_hChkSearchTimeout) = $GUI_CHECKED Then
 		_GUI_Value_STATE("ENABLE", $g_hLblSearchTimeout & "#" & $g_hTxtSearchTimeout & "#" & $g_hLblSearchTimeoutminutes)
@@ -208,7 +208,7 @@ Func chkSearchTimeout()
 	EndIf
 EndFunc   ;==>chkSearchTimeout
 
-; Stop on Low battery - Team AiO MOD++
+; Stop on Low battery - RORO-MOD
 Func _BatteryStatus()
 	Local $aData = _WinAPI_GetSystemPowerStatus()
 	If @error Then Return

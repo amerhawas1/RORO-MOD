@@ -25,9 +25,9 @@ Global $g_hChkBotCustomTitleBarClick = 0, $g_hChkBotAutoSlideClick = 0, $g_hChkH
 	   $g_hChkScreenshotHideName = 0, $g_hTxtTimeAnotherDevice = 0
 Global $g_hChkSinglePBTForced = 0, $g_hTxtSinglePBTimeForced = 0, $g_hTxtPBTimeForcedExit = 0, $g_hChkFixClanCastle = 0, $g_hChkAutoResume = 0, $g_hTxtAutoResumeTime = 0, $g_hChkDisableNotifications = 0
 
-; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
+; Auto Dock, Hide Emulator & Bot - RORO-MOD
 Global $g_hChkEnableAuto = 0, $g_hChkAutoDock = 0, $g_hChkAutoHideEmulator = 0, $g_hChkAutoMinimizeBot = 0
-; Stop on Low battery - Team AiO MOD++
+; Stop on Low battery - RORO-MOD
 Global $g_hChkStopOnBatt = 0, $g_hTxtStopOnBatt = 0, $g_hLblStopOnBatt = 0
 
 Func CreateBotOptions()
@@ -97,7 +97,7 @@ Func CreateBotOptions()
 			GUICtrlSetState(-1, $GUI_DISABLE)
 		GUICtrlCreateLabel(GetTranslatedFileIni("MBR Global GUI Design", "sec.", -1), $x + 150, $y + 4, 27, 18)
 
-	; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
+	; Auto Dock, Hide Emulator & Bot - RORO-MOD
 	$y += 20
 		$g_hChkEnableAuto = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Bot - Options", "ChkEnableAuto", "Enable Auto for Emulator") & ":", $x - 10, $y, -1, -1)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Bot - Options", "ChkEnableAuto_Info_01", "Check it to Enable Auto Hide & Dock for Emulator after Start bot & Restart Emulator"))
@@ -219,7 +219,7 @@ Func CreateBotOptions()
 		$g_hChkUseRandomClick = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Bot - Options", "ChkUseRandomClick", "Random Click"), $x - 10, $y, -1, -1)
 			GUICtrlSetOnEvent(-1, "chkUseRandomClick")
 
-	; Stop on Low battery - Team AiO MOD++
+	; Stop on Low battery - RORO-MOD
 	$y += 19
 		$g_hChkStopOnBatt = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Bot - Options", "ChkStopOnBatt", "Stop IF Battery below"), $x-10, $y, -1, -1)
 			_GUICtrlSetTip(-1,GetTranslatedFileIni("MBR GUI Design Child Bot - Options", "ChkStopOnBatt_Info_01", "Will stop bot and emulator if battery status below % value"))

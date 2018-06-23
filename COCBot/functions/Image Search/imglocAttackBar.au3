@@ -37,7 +37,7 @@ Func AttackBarCheck($Remaining = False)
 		$CheckSlotwHero = False
 	EndIf
 
-	If $g_bDraggedAttackBar Then DragAttackBar($g_iTotalAttackSlot, True) ; return drag for the 2nd Recalc - Slot11 - Team AiO MOD++
+	If $g_bDraggedAttackBar Then DragAttackBar($g_iTotalAttackSlot, True) ; return drag for the 2nd Recalc - Slot11 - RORO-MOD
 
 	; Reset to level one the Spells level
 	$g_iLSpellLevel = 1
@@ -174,7 +174,7 @@ Func AttackBarCheck($Remaining = False)
 						$aResult[$i][3] = -1
 						$aResult[$i][4] = -1
 					EndIf
-					If $aResult[$i][4] <= 10 Then ; Slot11 - Team AiO MOD++
+					If $aResult[$i][4] <= 10 Then ; Slot11 - RORO-MOD
 						$strinToReturn &= "|" & TroopIndexLookup($aResult[$i][0]) & "#" & $aResult[$i][4] & "#" & $aResult[$i][3]
 					EndIf
 				EndIf
@@ -205,7 +205,7 @@ Func AttackBarCheck($Remaining = False)
 		_GDIPlus_BitmapDispose($editedImage)
 	EndIf
 
-	; Drag & checking Slot11 - Team AiO MOD++
+	; Drag & checking Slot11 - RORO-MOD
 	If $g_iMatchMode <= $LB Then
 		If $g_abChkExtendedAttackBar[$g_iMatchMode] And $CheckSlot12 And IsArray($aResult) Then
 			SetDebuglog("$strinToReturn 1st page = " & $strinToReturn)
@@ -215,7 +215,7 @@ Func AttackBarCheck($Remaining = False)
 			If Not $Remaining Then DragAttackBar($g_iTotalAttackSlot, True) ; return drag
 		EndIf
 	EndIf
-	; Drag & checking Slot11 - Team AiO MOD++
+	; Drag & checking Slot11 - RORO-MOD
 
 	$strinToReturn = StringTrimLeft($strinToReturn, 1)
 

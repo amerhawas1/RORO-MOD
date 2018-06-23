@@ -2,7 +2,7 @@
 ; Name ..........: CheckTrainingTab
 ; Description ...: Check Troops training tab and Spells brewing tab, return suggested training methods for army camp & queue
 ; Author ........: Demen
-; Modified ......: Team AiO MOD++ (2018)
+; Modified ......: RORO-MOD (2018)
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
 ; Related .......:

@@ -31,10 +31,10 @@ Global $g_hlblQueen = 0, $g_hPicQueenGray = 0, $g_hPicQueenBlue = 0, $g_hPicQuee
 Global $g_hlblWarden = 0, $g_hPicWardenGray = 0, $g_hPicWardenBlue = 0, $g_hPicWardenRed = 0, $g_hPicWardenGreen = 0
 Global $g_hlblLab = 0, $g_hPicLabGray = 0, $g_hPicLabRed = 0, $g_hPicLabGreen = 0
 
-; Enable/Disable GUI while botting - Team AiO MOD++
+; Enable/Disable GUI while botting - RORO-MOD
 Global $g_hBtnEnableGUI = 0, $g_hBtnDisableGUI = 0
 
-; Stop on Low battery - Team AiO MOD++
+; Stop on Low battery - RORO-MOD
 Global $g_hLblBatteryAC = 0, $g_hLblBatteryStatus = 0
 
 Func CreateBottomPanel()
@@ -96,7 +96,7 @@ Func CreateBottomPanel()
 		$g_hBtnAttackNowTS = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Bottom", "BtnAttackNowTS", "TH Snipe!"), $x + 190, $y + 50, 60, -1)
 			GUICtrlSetState(-1, $GUI_HIDE)
 
-		; Stop on Low battery - Team AiO MOD++
+		; Stop on Low battery - RORO-MOD
 		$g_hLblBatteryAC = GUICtrlCreateLabel("", $x + 102, $y + 75, 50, 15)
 		$g_hLblBatteryStatus = GUICtrlCreateLabel("", $x + 154, $y + 75, 30, 15)
 
@@ -105,7 +105,7 @@ Func CreateBottomPanel()
 			GUICtrlSetFont(-1, 8.5, $FW_BOLD) ;, $GUI_FONTITALIC + $GUI_FONTUNDER)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Bottom", "LblDonate_Info_01", "Paypal Donate?"))
 
-		; Enable/Disable GUI while botting - Team AiO MOD++
+		; Enable/Disable GUI while botting - RORO-MOD
 	    $g_hBtnEnableGUI = GUICtrlCreateButton(GetTranslatedFileIni("MBR GUI Design Bottom", "BtnEnableGUI", "Enable GUI"), $x + 100, $y + 72, 80, 22)
 		    _GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Bottom", "BtnEnableGUI_Info_01", "Enable GUI control while botting") & @CRLF & _
 			 				  GetTranslatedFileIni("MBR GUI Design Bottom", "BtnEnableGUI_Info_02", "Warning: USE THIS WITH CAUTION!") & @CRLF & _

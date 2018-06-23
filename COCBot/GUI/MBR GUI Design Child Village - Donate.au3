@@ -54,10 +54,10 @@ Global $g_hLblDonateTroopTBD1 = 0, $g_hLblDonateTroopTBD2 = 0, $g_hLblDonateTroo
 Global $g_hGrpDonateGeneralBlacklist = 0, $g_hTxtGeneralBlacklist = 0
 Global $lblBtnCustomE = 0
 
-; ClanHop - Team AiO MOD++
+; ClanHop - RORO-MOD
 Global $g_hGrpDonateOptions = 0, $g_hChkClanHop = 0
 
-; Request CC Troops at first - Team AiO MOD++
+; Request CC Troops at first - RORO-MOD
 Global $g_hChkReqCCFirst = 0
 
 ; Schedule
@@ -119,7 +119,7 @@ Func CreateRequestSubTab()
 			GUICtrlSetState(-1, $GUI_DISABLE)
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Village - Donate-CC", "TxtRequestCC_Info_01", "This text is used on your request for troops in the Clan chat."))
 
-		; Request troops for defense - Team AiO MOD++
+		; Request troops for defense - RORO-MOD
 		$g_hChkRequestTroopsEnableDefense = GUICtrlCreateCheckbox("Request Defense troops", $x + 235, $y - 6)
 			GUICtrlSetOnEvent(-1, "chkRequestDefense")
 		$g_hTxtRequestCCDefense = GUICtrlCreateInput("Defense troop please", $x + 235, $y + 15, 155, 20, BitOR($SS_CENTER, $ES_AUTOHSCROLL))
@@ -136,7 +136,7 @@ Func CreateRequestSubTab()
 			GUICtrlSetOnEvent(-1, "chkReqCCFirst")
 			GUICtrlSetState(-1, $GUI_CHECKED)
 
-	; CheckCC Troops - Team AiO MOD++
+	; CheckCC Troops - RORO-MOD
 	CreateGUICheckCC()
 	$y += 160
 
@@ -647,7 +647,7 @@ Func CreateDonateSubTab()
 ;~			GUICtrlSetOnEvent(-1, "btnDonateCustomC")
 
 	$x += $Offx
-		; ClanHop - Team AiO MOD++
+		; ClanHop - RORO-MOD
 		$g_hLblDonateTroopCustomD = GUICtrlCreateLabel("", $x, $y - 2, $Offx + 2, $Offx + 2)
 			GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT)
 			GUICtrlSetState(-1, $GUI_DISABLE)
@@ -1890,7 +1890,7 @@ Func CreateDonateSubTab()
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Village - Donate", "TxtGeneralBlacklist_Info_01", "General Blacklist for donation requests"))
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-	; ClanHop - Team AiO MOD++
+	; ClanHop - RORO-MOD
 	$x = $xStart
 	$y = $Offy
 	$g_hGrpDonateOptions = GUICtrlCreateGroup(GetTranslatedFileIni("MBR GUI Design Child Village - Donate", "GrpDonateOptions", "Donate Options"), $x - 20, $y - 20, $g_iSizeWGrpTab3, 169)

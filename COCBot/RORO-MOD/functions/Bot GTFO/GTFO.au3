@@ -116,7 +116,7 @@ Func TrainGTFO()
 	; Check Resources values
 	StartGainCost()
 
-	; Smart Train - Team AiO MOD++
+	; Smart Train - RORO-MOD
 	If $g_bChkSmartTrain Then
 		SmartTrain()
 ;~ 		ResetVariables("donated")

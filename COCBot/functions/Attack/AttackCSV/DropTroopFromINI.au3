@@ -88,7 +88,7 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 		EndIf
 	Next
 
-	; Slot11 - Team AiO MOD++
+	; Slot11 - RORO-MOD
 	debugAttackCSV("Troop position / Total slots: " & $troopSlotConst & " / " & $g_iTotalAttackSlot)
 	If $troopSlotConst >= 0 And $troopSlotConst < $g_iTotalAttackSlot - 10 Then ; can only be selected when in 1st page of troopbar
 		If $g_bDraggedAttackBar Then DragAttackBar($g_iTotalAttackSlot, True) ; return drag
@@ -99,7 +99,7 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 		$troopPosition = $troopSlotConst - ($g_iTotalAttackSlot - 10)
 		debugAttackCSV("New troop position: " & $troopPosition)
 	EndIf
-	; Slot11 - Team AiO MOD++
+	; Slot11 - RORO-MOD
 
 	Local $usespell = True
 	Switch $iTroopIndex
@@ -151,7 +151,7 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 		Else
 			$sleepBefore = Int($sleepBeforeMin)
 		EndIf
-		$sleepBefore = Int($sleepBefore / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - Team AiO MOD++
+		$sleepBefore = Int($sleepBefore / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - RORO-MOD
 
 		If $sleepBefore > 50 And IsKeepClicksActive() = False Then
 			debugAttackCSV(">> delay Before drop all troops: " & $sleepBefore)
@@ -200,10 +200,10 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 					If $delayPointmin <> $delayPointmax Then
 						Local $delayPoint = Random($delayPointmin, $delayPointmax, 1)
 						debugAttackCSV(">> random delay deploy point: " & $delayPoint)
-						$delayPoint = Int($delayPoint / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - Team AiO MOD++
+						$delayPoint = Int($delayPoint / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - RORO-MOD
 					Else
 						Local $delayPoint = $delayPointmin
-						$delayPoint = Int($delayPoint / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - Team AiO MOD++
+						$delayPoint = Int($delayPoint / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - RORO-MOD
 					EndIf
 					debugAttackCSV(">> delay change deploy Point: " & $delayPoint & " (x" & $g_CSVSpeedDivider[$g_iMatchMode] & " faster)")
 
@@ -218,25 +218,25 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 							If $debug = True Then
 								SetLog("dropHeroes(" & $pixel[0] & ", " & $pixel[1] & ", " & $g_iKingSlot & ", -1, -1) ")
 							Else
-								dropHeroes($pixel[0], $pixel[1], $troopPosition, -1, -1) ; was $g_iKingSlot, Team AiO MOD++
+								dropHeroes($pixel[0], $pixel[1], $troopPosition, -1, -1) ; was $g_iKingSlot, RORO-MOD
 							EndIf
 						Case $eQueen
 							If $debug = True Then
 								SetLog("dropHeroes(" & $pixel[0] & ", " & $pixel[1] & ",-1," & $g_iQueenSlot & ", -1) ")
 							Else
-								dropHeroes($pixel[0], $pixel[1], -1, $troopPosition, -1) ; was $g_iQueenSlot, Team AiO MOD++
+								dropHeroes($pixel[0], $pixel[1], -1, $troopPosition, -1) ; was $g_iQueenSlot, RORO-MOD
 							EndIf
 						Case $eWarden
 							If $debug = True Then
 								SetLog("dropHeroes(" & $pixel[0] & ", " & $pixel[1] & ", -1, -1," & $g_iWardenSlot & ") ")
 							Else
-								dropHeroes($pixel[0], $pixel[1], -1, -1, $troopPosition) ; was $g_iWardenSlot, Team AiO MOD++
+								dropHeroes($pixel[0], $pixel[1], -1, -1, $troopPosition) ; was $g_iWardenSlot, RORO-MOD
 							EndIf
 						Case $eCastle
 							If $debug = True Then
 								SetLog("dropCC(" & $pixel[0] & ", " & $pixel[1] & ", " & $g_iClanCastleSlot & ")")
 							Else
-								dropCC($pixel[0], $pixel[1], $troopPosition) ; was $g_iClanCastleSlot, Team AiO MOD++
+								dropCC($pixel[0], $pixel[1], $troopPosition) ; was $g_iClanCastleSlot, RORO-MOD
 							EndIf
 						Case $eLSpell To $eSkSpell
 							If $debug = True Then
@@ -245,7 +245,7 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 								AttackClick($pixel[0], $pixel[1], $qty2, $delayPoint, $delayDropLast, "#0667")
 							EndIf
 							; assume spells get always dropped: adjust count so CC spells can be used without recalc
-							If UBound($g_avAttackTroops) > $troopSlotConst And $g_avAttackTroops[$troopSlotConst][1] > 0 And $qty2 > 0 Then ; Slot11 - Team AiO MOD++
+							If UBound($g_avAttackTroops) > $troopSlotConst And $g_avAttackTroops[$troopSlotConst][1] > 0 And $qty2 > 0 Then ; Slot11 - RORO-MOD
 								$g_avAttackTroops[$troopSlotConst][1] -= $qty2
 								debugAttackCSV("Adjust quantity of spell use: " & $g_avAttackTroops[$troopSlotConst][0] & " x" & $g_avAttackTroops[$troopSlotConst][1])
 							EndIf
@@ -268,7 +268,7 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 		Else
 			$sleepafter = Int($sleepafterMin)
 		EndIf
-		$sleepafter = Int($sleepafter / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - Team AiO MOD++
+		$sleepafter = Int($sleepafter / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - RORO-MOD
 		If $sleepafter > 0 And IsKeepClicksActive() = False Then
 			debugAttackCSV(">> delay after drop all troops: " & $sleepafter)
 			If $sleepafter <= 1000 Then ; check SLEEPAFTER value is less than 1 second?

@@ -101,10 +101,10 @@ Global $g_hChkCloseWhileTraining = 0, $g_hChkCloseWithoutShield = 0, $g_hChkClos
 Global $g_hLblCloseWaitRdmPercent = 0, $g_hLblCloseWaitingTroops = 0, $g_hLblSymbolWaiting = 0, $g_hLblWaitingInMinutes = 0, $g_hLblTrainITDelay = 0, $g_hLblTrainITDelayTime = 0, _
 		$g_hLblAddDelayIdlePhaseBetween = 0, $g_hLblAddDelayIdlePhaseSec = 0, $g_hPicCloseWaitTrain = 0, $g_hPicCloseWaitStop = 0, $g_hPicCloseWaitExact = 0
 
-; Max logout time - Team AiO MOD++
+; Max logout time - RORO-MOD
 Global $g_hChkTrainLogoutMaxTime = 0, $g_hTxtTrainLogoutMaxTime = 0, $g_hLblTrainLogoutMaxTime = 0
 
-; Check Grand Warden Mode - Team AiO MOD++
+; Check Grand Warden Mode - RORO-MOD
 Global $g_hChkCheckWardenMode = 0, $g_hCmbCheckWardenMode = 0
 
 Func CreateAttackTroops()
@@ -1083,7 +1083,7 @@ Func CreateOptionsSubTab()
 		$g_hLblWaitingInMinutes = GUICtrlCreateLabel(GetTranslatedFileIni("MBR Global GUI Design", "min.", "min."), $x + 84, $y + 3, -1, -1)
 			_GUICtrlSetTip(-1, $sTxtTip)
 
-	; Max logout time - Team AiO MOD++
+	; Max logout time - RORO-MOD
 	$y += 28
 		$g_hChkTrainLogoutMaxTime = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "TrainLogoutMaxTime", "Max Logout Time") & ": ", $x - 14, $y, -1, -1)
 			$sTxtTip = GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "TrainLogoutMaxTime_Info_01", "Only allow logout for a maximum amount of time")
@@ -1137,7 +1137,7 @@ Func CreateOptionsSubTab()
 		$g_hLblAddDelayIdlePhaseSec = GUICtrlCreateLabel(GetTranslatedFileIni("MBR Global GUI Design", "sec.", "sec."), $x + 110, $y, 20, 30)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
 
-	; Check Grand Warden Mode - Team AiO MOD++
+	; Check Grand Warden Mode - RORO-MOD
 	$x = 55 + 151 + 5
 	$y = 130
 		GUICtrlCreateGroup(GetTranslatedFileIni("MBR GUI Design Child Attack - Troops_Options", "Group_04", "Check Grand Warden Mode"), $x - 20, $y - 20, 173, 50)

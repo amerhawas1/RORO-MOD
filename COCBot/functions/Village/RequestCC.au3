@@ -15,7 +15,7 @@
 
 Func RequestCC($ClickPAtEnd = True, $specifyText = "")
 
-	; Request troops for defense - Team AiO MOD++
+	; Request troops for defense - RORO-MOD
 	Local $bRequestDefense = False
 	If $g_bRequestTroopsEnableDefense And $g_bCanRequestCC Then
 		Local $bRequestDefenseEarly = False

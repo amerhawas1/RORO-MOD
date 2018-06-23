@@ -585,7 +585,7 @@ Func FinalInitialization(Const $sAI)
 	SetDebugLog("Maximum of " & $g_iGlobalActiveBotsAllowed & " bots running at same time configured")
 	SetDebugLog("MyBot.run launch time " & Round($g_iBotLaunchTime) & " ms.")
 
-	If $g_bStopOnBatt Then _BatteryStatus() ; Stop on Low battery - Team AiO MOD++
+	If $g_bStopOnBatt Then _BatteryStatus() ; Stop on Low battery - RORO-MOD
 
 	If $g_bAndroidShieldEnabled = False Then
 		SetLog(GetTranslatedFileIni("MBR GUI Design - Loading", "Msg_Android_instance_05", "Android Shield not available for %s", @OSVersion), $COLOR_ACTION)
@@ -662,7 +662,7 @@ Func runBot() ;Bot that runs everything in order
 		Setlog("Rematching Account [" & $g_iNextAccount + 1 & "] with Profile [" & GUICtrlRead($g_ahCmbProfile[$g_iNextAccount]) & "]")
 		SwitchCoCAcc($g_iNextAccount)
 	EndIf
-	BotHumanization() ; Bot Humanization - Team AiO MOD++
+	BotHumanization() ; Bot Humanization - RORO-MOD
 	While 1
 		;Check for debug wait command
 		If FileExists(@ScriptDir & "\EnableMBRDebug.txt") Then
@@ -721,10 +721,10 @@ Func runBot() ;Bot that runs everything in order
 			checkMainScreen(False)
 			If $g_bRestart = True Then ContinueLoop
 
-			; Request CC Troops at first - Team AiO MOD++
+			; Request CC Troops at first - RORO-MOD
 			$g_bcanRequestCC = True
 			If $g_bReqCCFirst Then
-				CheckCC() ; CheckCC Troops - Team AiO MOD++
+				CheckCC() ; CheckCC Troops - RORO-MOD
 				RequestCC()
 				If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 			EndIf
@@ -772,7 +772,7 @@ Func runBot() ;Bot that runs everything in order
 			If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) Then ; Train Donate only - force a donate cc everytime, Ignore any SkipDonate Near Full Values
 				If BalanceDonRec(True) Then DonateCC()
 			EndIf
-			MainSuperXPHandler() ; Goblin XP - Team AiO MOD++
+			MainSuperXPHandler() ; Goblin XP - RORO-MOD
 			Local $aRndFuncList = ['Laboratory', 'UpgradeHeroes', 'UpgradeBuilding', 'BuilderBase']
 			While 1
 				If $g_bRunState = False Then Return
@@ -788,12 +788,12 @@ Func runBot() ;Bot that runs everything in order
 				EndIf
 				If CheckAndroidReboot() = True Then ContinueLoop 2 ; must be level 2 due to loop-in-loop
 			WEnd
-			ClanHop() ; ClanHop - Team AiO MOD++
+			ClanHop() ; ClanHop - RORO-MOD
 			If $g_bRunState = False Then Return
 			If $g_bRestart = True Then ContinueLoop
 			If IsSearchAttackEnabled() Then ; If attack scheduled has attack disabled now, stop wall upgrades, and attack.
 				$g_iNbrOfWallsUpped = 0
-				If Not $g_bChkClanHop Then UpgradeWall() ; ClanHop - Team AiO MOD++
+				If Not $g_bChkClanHop Then UpgradeWall() ; ClanHop - RORO-MOD
 				If _Sleep($DELAYRUNBOT3) Then Return
 				If $g_bRestart = True Then ContinueLoop
 				If ProfileSwitchAccountEnabled() And $g_abDonateOnly[$g_iCurAccount] Then checkSwitchAcc()
@@ -863,8 +863,8 @@ Func _Idle() ;Sequence that runs until Full Army
 	Local $TimeIdle = 0 ;In Seconds
 	If $g_bDebugSetlog Then SetDebugLog("Func Idle ", $COLOR_DEBUG)
 
-	If $g_bStopOnBatt Then _BatteryStatus() ; Stop on Low battery - Team AiO MOD++
-	If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+	If $g_bStopOnBatt Then _BatteryStatus() ; Stop on Low battery - RORO-MOD
+	If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 
 	While $g_bIsFullArmywithHeroesAndSpells = False
 
@@ -877,7 +877,7 @@ Func _Idle() ;Sequence that runs until Full Army
 		Local $hTimer = __TimerInit()
 		Local $iReHere = 0
 
-		BotHumanization() ; Bot Humanization - Team AiO MOD++
+		BotHumanization() ; Bot Humanization - RORO-MOD
 
 		If $g_iActiveDonate And $g_bChkDonate Then
 			Local $aHeroResult = CheckArmyCamp(True, True, True, False)
@@ -933,7 +933,7 @@ Func _Idle() ;Sequence that runs until Full Army
 		checkMainScreen(False) ; required here due to many possible exits
 		If $g_iCommandStop = -1 Then
 			If $g_iActualTrainSkip < $g_iMaxTrainSkip Then
-				MainSuperXPHandler() ; Goblin XP - Team AiO MOD++
+				MainSuperXPHandler() ; Goblin XP - RORO-MOD
 				If CheckNeedOpenTrain($g_sTimeBeforeTrain) Then TrainRevamp()
 				If $g_bRestart = True Then ExitLoop
 				If _Sleep($DELAYIDLE1) Then ExitLoop
@@ -946,7 +946,7 @@ Func _Idle() ;Sequence that runs until Full Army
 				EndIf
 				CheckArmyCamp(True, True)
 			EndIf
-			MainSuperXPHandler() ; Goblin XP - Team AiO MOD++
+			MainSuperXPHandler() ; Goblin XP - RORO-MOD
 		EndIf
 		If _Sleep($DELAYIDLE1) Then Return
 		If $g_iCommandStop = 0 And $g_bTrainEnabled = True Then
@@ -1002,7 +1002,7 @@ EndFunc   ;==>_Idle
 Func AttackMain() ;Main control for attack functions
 	If ProfileSwitchAccountEnabled() And $g_abDonateOnly[$g_iCurAccount] Then Return
 
-	; Goblin XP - Team AiO MOD++
+	; Goblin XP - RORO-MOD
 	If $ichkEnableSuperXP = 1 And $irbSXTraining = 2 Then
 		MainSuperXPHandler()
 		Return
@@ -1045,7 +1045,7 @@ Func AttackMain() ;Main control for attack functions
 			If _Sleep($DELAYATTACKMAIN2) Then Return
 			Return True
 		Else
-			If Not $g_bChkClanHop Then ; ClanHop - Team AiO MOD++
+			If Not $g_bChkClanHop Then ; ClanHop - RORO-MOD
 			SetLog("No one of search condition match:", $COLOR_WARNING)
 			SetLog("Waiting on troops, heroes and/or spells according to search settings", $COLOR_WARNING)
 			$g_bIsSearchLimit = False
@@ -1133,21 +1133,21 @@ Func _RunFunction($action)
 			ReArm()
 			_Sleep($DELAYRUNBOT3)
 		Case "ReplayShare"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 			ReplayShare($g_bShareAttackEnableNow)
 			_Sleep($DELAYRUNBOT3)
 		Case "NotifyReport"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 			NotifyReport()
 			_Sleep($DELAYRUNBOT3)
 		Case "DonateCC"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 			If $g_iActiveDonate And $g_bChkDonate Then
 				If SkipDonateNearFullTroops(True) = False And BalanceDonRec(True) Then DonateCC()
 				If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 			EndIf
 		Case "DonateCC,Train"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 			If $g_iActiveDonate And $g_bChkDonate Then
 				If $g_bFirstStart Then
 					getArmyTroopCapacity(True, False)
@@ -1175,7 +1175,7 @@ Func _RunFunction($action)
 				If $g_bDebugSetlogTrain Then SetLog("Halt mode - training disabled", $COLOR_DEBUG)
 			EndIf
 		Case "Boost"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 			BoostBarracks()
 			BoostSpellFactory()
 			BoostKing()
@@ -1185,22 +1185,22 @@ Func _RunFunction($action)
 			LabGuiDisplay()
 			_Sleep($DELAYRUNBOT3)
 		Case "RequestCC"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
-			If Not $g_bReqCCFirst Then ; Request CC Troops at first - Team AiO MOD++
-				CheckCC() ; CheckCC Troops - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
+			If Not $g_bReqCCFirst Then ; Request CC Troops at first - RORO-MOD
+				CheckCC() ; CheckCC Troops - RORO-MOD
 				RequestCC()
 			EndIf
 			If _Sleep($DELAYRUNBOT1) = False Then checkMainScreen(False)
 		Case "Laboratory"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 			Laboratory()
 			If _Sleep($DELAYRUNBOT3) = False Then checkMainScreen(False)
 		Case "UpgradeHeroes"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 			UpgradeHeroes()
 			_Sleep($DELAYRUNBOT3)
 		Case "UpgradeBuilding"
-			If $g_bChkClanHop Then Return ; ClanHop - Team AiO MOD++
+			If $g_bChkClanHop Then Return ; ClanHop - RORO-MOD
 			UpgradeBuilding()
 			_Sleep($DELAYRUNBOT3)
  			AutoUpgrade()
@@ -1215,10 +1215,10 @@ Func _RunFunction($action)
 				SwitchBetweenBases()
 			EndIf
 			_Sleep($DELAYRUNBOT3)
-		Case "SuperXP" ; Goblin XP - Team AiO MOD++
+		Case "SuperXP" ; Goblin XP - RORO-MOD
 			MainSuperXPHandler()
 			_Sleep($DELAYRUNBOT3)
-		Case "Humanization" ; Bot Humanization - Team AiO MOD++
+		Case "Humanization" ; Bot Humanization - RORO-MOD
 			BotHumanization()
 			_Sleep($DELAYRUNBOT3)
 		Case "CollectFreeMagicItems"

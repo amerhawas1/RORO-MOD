@@ -2,7 +2,7 @@
 ; Name ..........: CheckWardenMode
 ; Description ...: Check in which Mode the Warden is and switch if needed
 ; Author ........: MantasM (10-2017), NguyenAnhHD (04-2018)
-; Modified ......: Team AiO MOD++ (2018)
+; Modified ......: RORO-MOD (2018)
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
 ; Related .......:

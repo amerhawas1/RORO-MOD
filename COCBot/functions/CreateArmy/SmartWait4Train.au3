@@ -227,7 +227,7 @@ Func SmartWait4Train($iTestSeconds = Default)
 			Return ; stop trying to close while training this time
 	EndSwitch
 
-	; Max logout time - Team AiO MOD++
+	; Max logout time - RORO-MOD
 	If $g_bTrainLogoutMaxTime Then
 		SetLog("Train time = " & StringFormat("%.2f", $iTrainWaitTime) & " minutes, Max Logout Time Enabled = "& Number($g_iTrainLogoutMaxTime) &" mins", $COLOR_SUCCESS)
 		$iTrainWaitTime = _Min($iTrainWaitTime, Number($g_iTrainLogoutMaxTime)-0.4)

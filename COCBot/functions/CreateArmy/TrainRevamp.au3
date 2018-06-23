@@ -31,7 +31,7 @@ Func TrainRevamp()
 		Return
 	EndIf
 
-	; Smart Train - Team AiO MOD++
+	; Smart Train - RORO-MOD
 	If Not $g_bQuickTrainEnable And Not $g_bChkSmartTrain Then
 		TrainRevampOldStyle()
 		Return
@@ -45,7 +45,7 @@ Func TrainRevamp()
 
 	If Not $g_bRunState Then Return
 
-	; Smart Train - Team AiO MOD++
+	; Smart Train - RORO-MOD
 	If $g_bChkSmartTrain Then
 		SmartTrain()
 		ResetVariables("donated")
@@ -332,7 +332,7 @@ Func IsFullClanCastleTroops()
 		Return True
 	EndIf
 
-	; CheckCC Troops - Team AiO MOD++
+	; CheckCC Troops - RORO-MOD
 	CheckCC(False)
 
 	Local $bColCheck = _ColorCheck(_GetPixelColor(24, 470, True), Hex(0x93C230, 6), 30)
@@ -1721,7 +1721,7 @@ Func ResetVariables($sArmyType = "")
 		Next
 	EndIf
 
-	; CheckCC Troops - Team AiO MOD++
+	; CheckCC Troops - RORO-MOD
 	If $sArmyType = "CCTroops" Or $sArmyType = "all" Then
 		For $i = 0 To $eTroopCount - 1
 			If Not $g_bRunState Then Return

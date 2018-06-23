@@ -121,8 +121,8 @@ Global $g_oGuiNotInMini = ObjCreate("Scripting.Dictionary")
 #include "GUI\MBR GUI Design Attack.au3"
 #include "GUI\MBR GUI Design Bot.au3"
 #include "GUI\MBR GUI Design About.au3"
-; Team AiO MOD++ (2018)
-#include "Team__AiO__MOD++\GUI\MOD GUI Design.au3"
+; RORO-MOD (2018)
+#include "RORO-MOD\GUI\MOD GUI Design.au3"
 
 Func CreateMainGUI()
 

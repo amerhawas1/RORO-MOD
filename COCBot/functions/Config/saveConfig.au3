@@ -237,7 +237,7 @@ Func SaveRegularConfig()
 	; <><><><> Bot / Debug <><><><>
 	SaveConfig_Debug()
 
-	;  <><><> Team AiO MOD++ (2018) <><><>
+	;  <><><> RORO-MOD (2018) <><><>
 	SaveConfig_MOD()
 
 	; <><><><> Attack Plan / Strategies <><><><>

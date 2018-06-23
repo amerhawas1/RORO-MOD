@@ -21,7 +21,7 @@ Global $g_hCmbStandardDropOrderDB = 0, $g_hCmbStandardDropSidesDB = 0, $g_hCmbSt
 Global $g_hLblSmartDeployDB = 0, $g_hPicAttackNearDarkElixirDrillDB = 0
 Global $g_hBtnCustomDropOrderDB = 0
 
-; Unit/Wave Factor - Team AiO MOD++
+; Unit/Wave Factor - RORO-MOD
 Global $g_hGrpSettings = 0
 Global $g_hChkGiantSlot = 0, $g_hCmbGiantSlot = 0
 Global $g_hChkUnitFactor = 0, $g_hTxtUnitFactor = 0
@@ -117,7 +117,7 @@ Func CreateAttackSearchDeadBaseStandard()
 			$g_hPicAttackNearDarkElixirDrillDB = _GUICtrlCreateIcon($g_sLibIconPath, $eIcnDrill, $x + 20 , $y - 3, 24, 24)
 				_GUICtrlSetTip(-1, $sTxtTip)
 
-		; Unit/Wave Factor - Team AiO MOD++
+		; Unit/Wave Factor - RORO-MOD
 		$x = 23
 		$y = 110
 		$g_hGrpSettings = GUICtrlCreateGroup(GetTranslatedFileIni("MBR GUI Design Child Attack - Attack Standard", "Group_02", "Settings"), $x, $y, 180, 105)

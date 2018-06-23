@@ -190,25 +190,25 @@ EndFunc   ;==>btnSearchMode
 
 Func btnPause($bRunNow = True)
 	TogglePause()
-	; Enable/Disable GUI while botting - Team AiO MOD++
+	; Enable/Disable GUI while botting - RORO-MOD
 	GUICtrlSetState($g_hBtnDisableGUI, $GUI_HIDE)
 	GUICtrlSetState($g_hBtnEnableGUI, $GUI_SHOW)
-	; Stop on Low battery - Team AiO MOD++
+	; Stop on Low battery - RORO-MOD
 	GUICtrlSetState($g_hLblBatteryAC, $GUI_HIDE)
 	GUICtrlSetState($g_hLblBatteryStatus, $GUI_HIDE)
 EndFunc   ;==>btnPause
 
 Func btnResume()
 	TogglePause()
-	; Enable/Disable GUI while botting - Team AiO MOD++
+	; Enable/Disable GUI while botting - RORO-MOD
 	GUICtrlSetState($g_hBtnDisableGUI, $GUI_HIDE)
 	GUICtrlSetState($g_hBtnEnableGUI, $GUI_HIDE)
-	; Stop on Low battery - Team AiO MOD++
+	; Stop on Low battery - RORO-MOD
 	GUICtrlSetState($g_hLblBatteryAC, $GUI_SHOW)
 	GUICtrlSetState($g_hLblBatteryStatus, $GUI_SHOW)
 EndFunc   ;==>btnResume
 
-; Enable/Disable GUI while botting - Team AiO MOD++
+; Enable/Disable GUI while botting - RORO-MOD
 Func btnEnableGUI()
 	GUICtrlSetState($g_hBtnEnableGUI, $GUI_HIDE)
 	GUICtrlSetState($g_hBtnDisableGUI, $GUI_SHOW)
@@ -229,7 +229,7 @@ Func btnDisableGUI()
 	applyConfig()
 	DisableGuiControls()
 EndFunc   ;==>btnDisableGUI
-; Enable/Disable GUI while botting - Team AiO MOD++
+; Enable/Disable GUI while botting - RORO-MOD
 
 Func btnAttackNowDB()
 	If $g_bRunState Then

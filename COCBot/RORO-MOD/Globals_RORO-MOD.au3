@@ -1,10 +1,10 @@
 ; #FUNCTION# ====================================================================================================================
-; Name ..........: Globals Team AiO MOD++
+; Name ..........: Globals RORO-MOD
 ; Description ...: This file Includes several files in the current script and all Declared variables, constant, or create an array.
 ; Syntax ........: #include , Global
 ; Parameters ....: None
 ; Return values .: None
-; Author ........: Team AiO MOD++ (2018)
+; Author ........: RORO-MOD (2018)
 ; Modified ......:
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
@@ -13,15 +13,15 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-; CSV Deploy Speed - Team AiO MOD++
+; CSV Deploy Speed - RORO-MOD
 Global $cmbCSVSpeed[2] = [$LB, $DB]
 Global $icmbCSVSpeed[2] = [2, 2]
 Global $g_CSVSpeedDivider[2] = [1, 1] ; default CSVSpeed for DB & LB
 
-; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
+; Auto Dock, Hide Emulator & Bot - RORO-MOD
 Global $g_bEnableAuto = False, $g_iChkAutoDock = False, $g_iChkAutoHideEmulator = True, $g_iChkAutoMinimizeBot = False
 
-; Check Collector Outside - Team AiO MOD++
+; Check Collector Outside - RORO-MOD
 Global $g_bScanMineAndElixir = False
 #region Check Collectors Outside
 ; Collectors Outside Filter
@@ -34,10 +34,10 @@ Global $g_iCmbRedlineTiles = 1, $g_iCmbSkipCollectorCheckTH = 1
 Global $g_iTxtSkipCollectorGold = 400000, $g_iTxtSkipCollectorElixir = 400000, $g_iTxtSkipCollectorDark = 0
 #endregion
 
-; ClanHop - Team AiO MOD++
+; ClanHop - RORO-MOD
 Global $g_bChkClanHop = False
 
-; Bot Humanization - Team AiO MOD++
+; Bot Humanization - RORO-MOD
 Global $g_iacmbPriority[13] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_iacmbMaxSpeed[2] = [1, 1]
 Global $g_iacmbPause[2] = [0, 0]
@@ -56,7 +56,7 @@ Global $g_bOnReplayWindow, $g_iReplayToPause
 
 Global $g_iLastLayout = 0
 
-; Goblin XP - Team AiO MOD++
+; Goblin XP - RORO-MOD
 Global $ichkEnableSuperXP = 0, $ichkSkipZoomOutXP = 0, $ichkFastGoblinXP = 0, $irbSXTraining = 1, $ichkSXBK = 0, $ichkSXAQ = 0, $ichkSXGW = 0, $iStartXP = 0, $iCurrentXP = 0, $iGainedXP = 0, $iGainedXPHour = 0, $itxtMaxXPtoGain = 500
 Global $g_bDebugSX = False
 
@@ -70,19 +70,19 @@ Global $g_canGainXP = False
 Global $g_hTrainTimeLeft = 0
 Global $g_hCurrentDonateButtonBitMap = 0
 
-; GTFO - Team AiO MOD++
+; GTFO - RORO-MOD
 Global $g_bChkUseGTFO = False, $g_bChkUseKickOut = False, $g_bChkKickOutSpammers = False
 Global $g_iTxtMinSaveGTFO_Elixir = 200000, $g_iTxtMinSaveGTFO_DE = 2000, _
 	$g_iTxtDonatedCap = 8, $g_iTxtReceivedCap = 35, _
 	$g_iTxtKickLimit = 6
 
-; Max logout time - Team AiO MOD++
+; Max logout time - RORO-MOD
 Global $g_bTrainLogoutMaxTime = False, $g_iTrainLogoutMaxTime = 4
 
-; Request CC Troops at first - Team AiO MOD++
+; Request CC Troops at first - RORO-MOD
 Global $g_bReqCCFirst = False
 
-; CheckCC Troops - Team AiO MOD++
+; CheckCC Troops - RORO-MOD
 Global $g_aiCCTroops[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_aiCCSpells[$eSpellCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Global $g_aiCCTroopsExpected[$eTroopCount] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -91,30 +91,30 @@ Global $g_bChkCC = False, $g_bChkCCTroops = False, $g_bChkCCSpells = False
 Global $g_aiCmbCCSlot[5], $g_aiTxtCCSlot[5]
 Global $g_iCmbCastleCapacityT = 5, $g_iCmbCastleCapacityS = 1
 
-; Attack Log New Style - Team AiO MOD++
+; Attack Log New Style - RORO-MOD
 Global $eLootPerc = "---"
 Global $starsearned = 0
 Global $eTHLevel = "-"
 Global $g_bColorfulAttackLog = False
 
-; Additional Notifactions - Team AiO MOD++
+; Additional Notifactions - RORO-MOD
 Global $eWinlose = "-"
 
-; Check Grand Warden Mode - Team AiO MOD++
+; Check Grand Warden Mode - RORO-MOD
 Global $g_bCheckWardenMode = False, $g_iCheckWardenMode = 0
 
-; Unit/Wave Factor - Team AiO MOD++
+; Unit/Wave Factor - RORO-MOD
 Global $g_iChkGiantSlot = 0, $g_iChkUnitFactor = 0, $g_iChkWaveFactor = 0
 Global $g_iCmbGiantSlot = 0, $g_iTxtUnitFactor = 10, $g_iTxtWaveFactor = 100
 Global $g_iSlotsGiants = 1, $g_aiSlotsGiants = 1
 
-; Restart Search Legend league - Team AiO MOD++
+; Restart Search Legend league - RORO-MOD
 Global $g_bIsSearchTimeout = False, $g_iSearchTimeout = 10, $g_iTotalSearchTime = 0
 
-; Stop on Low battery - Team AiO MOD++
+; Stop on Low battery - RORO-MOD
 Global $g_bStopOnBatt = False, $g_iStopOnBatt = 10
 
-; Stop For War - Team AiO MOD++
+; Stop For War - RORO-MOD
 Global $g_bStopForWar
 Global $g_iStopTime, $g_bStopBeforeBattle, $g_iReturnTime
 Global $g_iStartTimerToRecheck, $g_iTimerToRecheck, $g_sCheckOrStop
@@ -123,9 +123,9 @@ Global $g_bRequestCCForWar,	$g_sTxtRequestCCForWar
 Global $g_abStopForWar[8]
 Global $g_aiStartTimerToRecheck[8], $g_aiTimerToRecheck[8], $g_asCheckOrStop[8]
 
-; Slot11 - Team AiO MOD++
+; Slot11 - RORO-MOD
 Global $g_abChkExtendedAttackBar[2] = [True, True]
 Global $g_iTotalAttackSlot = 10, $g_bDraggedAttackBar = False ; flag if AttackBar is dragged or not
 
-; Request troops for defense - Team AiO MOD++
+; Request troops for defense - RORO-MOD
 Global $g_bRequestTroopsEnableDefense, $g_sRequestTroopsTextDefense, $g_iRequestDefenseEarly

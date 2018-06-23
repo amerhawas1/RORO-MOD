@@ -48,8 +48,8 @@ Global $g_hFrmBot_WNDPROC_ptr = 0
 #include "GUI\MBR GUI Control Child Misc.au3"
 #include "GUI\MBR GUI Control Android.au3"
 #include "MBR GUI Action.au3"
-; Team AiO MOD++ (2018)
-#include "Team__AiO__MOD++\GUI\MOD GUI Control.au3"
+; RORO-MOD (2018)
+#include "RORO-MOD\GUI\MOD GUI Control.au3"
 
 Func InitializeMainGUI($bGuiModeUpdate = False)
 	InitializeControlVariables()
@@ -1902,7 +1902,7 @@ Func tabDONATE()
 
 EndFunc   ;==>tabDONATE
 
-; Team AiO MOD++ (2018)
+; RORO-MOD (2018)
 Func tabMod()
 	Local $tabidx = GUICtrlRead($g_hGUI_MOD_TAB)
 	Select
@@ -2073,7 +2073,7 @@ Func Bind_ImageList($nCtrl, ByRef $hImageList)
 			; the icons for Attack Options tab
 			Local $aIconIndex = [$eIcnMagnifier, $eIcnCamp, $eIcnLightSpell, $eIcnSilverStar, $eIcnTrophy]
 
-		; Team AiO MOD++ (2018)
+		; RORO-MOD (2018)
 		Case $g_hGUI_MOD_TAB
 			; the icons for Mods tab
 			Local $aIconIndex = [$eIcnMiscMod, $eIcnHumanization, $eIcnGoblinXP, $eIcnWarPreparation]

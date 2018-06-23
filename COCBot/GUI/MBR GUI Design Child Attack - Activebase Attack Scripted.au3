@@ -73,7 +73,7 @@ Func CreateAttackSearchActiveBaseScripted()
 			_GUICtrlSetTip(-1, GetTranslatedFileIni("MBR GUI Design Child Attack - Attack Scripted", "IconApply_Info_01", -1))
 			GUICtrlSetOnEvent(-1, "ApplyScriptAB")
 
-	; CSV Deploy Speed - Team AiO MOD++
+	; CSV Deploy Speed - RORO-MOD
 	Local $x = 55, $y = 318
 		GUICtrlCreateLabel(GetTranslatedFileIni("MBR GUI Design Child Attack - Attack Scripted", "CSVSpeed", -1), $x - 2, $y, -1, -1)
 			$cmbCSVSpeed[$LB] = GUICtrlCreateCombo("", $x + 122, $y - 5, 50, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))

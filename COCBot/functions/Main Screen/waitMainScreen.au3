@@ -93,7 +93,7 @@ Func waitMainScreenMini()
 	If TestCapture() = False Then getBSPos() ; Update Android Window Positions
 	SetLog("Waiting for Main Screen after " & $g_sAndroidEmulator & " restart", $COLOR_INFO)
 
-	; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
+	; Auto Dock, Hide Emulator & Bot - RORO-MOD
 	If $g_iChkAutoDock Then
 		If Not $g_bAndroidEmbedded Then
 			SetLog("Bot Auto Dock to Emulator", $COLOR_INFO)

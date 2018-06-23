@@ -255,7 +255,7 @@ Func ReadRegularConfig()
 	; <><><> Attack Plan / Train Army / Options <><><>
 	ReadConfig_641_1()
 
-	;  <><><> Team AiO MOD++ (2018) <><><>
+	;  <><><> RORO-MOD (2018) <><><>
 	ReadConfig_MOD()
 
 	; <><><><> Attack Plan / Strategies <><><><>

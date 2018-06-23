@@ -6,7 +6,7 @@
 ; Parameters ....: None
 ; Return values .: None
 ; Author ........: zengzeng, MantasM (complete overhaul)
-; Modified ......: Rhinoceros, Team AiO MOD++ (2018)
+; Modified ......: Rhinoceros, RORO-MOD (2018)
 ; Remarks .......: This file is a part of MyBotRun. Copyright 2018
 ; ................ MyBotRun is distributed under the terms of the GNU GPL
 ; Related .......: No

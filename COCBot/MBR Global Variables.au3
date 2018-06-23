@@ -1671,5 +1671,5 @@ Global $g_iPurgeMax = 5 ; [0] is unlimited , 1-10
 
 Global $g_bChkCollectFreeMagicItems = True
 
-; Team AiO MOD++ (2018)
-#include "Team__AiO__MOD++\Globals_Team__AiO__MOD++.au3"
+; RORO-MOD (2018)
+#include "RORO-MOD\Globals_RORO-MOD.au3"

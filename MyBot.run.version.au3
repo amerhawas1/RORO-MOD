@@ -21,6 +21,6 @@
 
 Global $g_sBotVersion = "v7.5.3" ;~ Don't add more here, but below. Version can't be longer than vX.y.z because it is also use on Checkversion()
 
-; Check Version - Team AiO MOD++
+; Check Version - RORO-MOD
 Global $g_sModversion = "v1.1" ;<== Just Change This to Version Number
 Global $g_sModSupportUrl = "https://github.com/NguyenAnhHD/MyBot.Run-AIO-MOD/releases" ;<== Our Website Link Download

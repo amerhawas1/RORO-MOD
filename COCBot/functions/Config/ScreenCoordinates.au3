@@ -46,7 +46,7 @@ Global $aEndFightSceneBtn[4] = [429, 519 + $g_iMidOffsetY, 0xB8E35F, 20] ; Victo
 Global $aEndFightSceneAvl[4] = [241, 196 + $g_iMidOffsetY, 0xFFF090, 20] ; Victory or defeat scene left side ribbon = light gold
 Global $aReturnHomeButton[4] = [376, 567 + $g_iMidOffsetY, 0x60AC10, 20] ; Return Home Button, End Battle Screen
 
-; Restart Search Legend league ~ back to home on 10 minute cloud and no reach enemy - Team AiO MOD++
+; Restart Search Legend league ~ back to home on 10 minute cloud and no reach enemy - RORO-MOD
 Global $aReturnHomeOnSearchButton[4] = [50, 645 + $g_iMidOffsetY, 0x2C110D, 20] ; Return Home Button, on Search Screen
 
 Global $aChatTab[4] = [331, 325 + $g_iMidOffsetY, 0xF0951D, 20] ; Chat Window Open, Main Screen

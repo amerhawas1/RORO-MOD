@@ -16,7 +16,7 @@
 #include-once
 #include <WinAPISys.au3>
 
-; Bot Humanization - Team AiO MOD++
+; Bot Humanization - RORO-MOD
 Func FClick($x, $y, $times = 1, $speed = 0, $debugtxt = "")
 	If $g_bDebugClick Or TestCapture() Then
 		Local $txt = _DecodeDebug($debugtxt)
@@ -114,7 +114,7 @@ Func BuildingClickP($point, $debugtxt = "")
 	Return BuildingClick($x, $y, $debugtxt)
 EndFunc   ;==>BuildingClickP
 
-; Bot Humanization - Team AiO MOD++
+; Bot Humanization - RORO-MOD
 Func FPureClick($x, $y, $times = 1, $speed = 0, $debugtxt = "")
 	If $g_bDebugClick Then
 		Local $txt = _DecodeDebug($debugtxt)
@@ -149,7 +149,7 @@ Func PureClickP($point, $howMuch = 1, $speed = 0, $debugtxt = "")
 	PureClick($point[0], $point[1], $howMuch, $speed, $debugtxt)
 EndFunc   ;==>PureClickP
 
-; Bot Humanization - Team AiO MOD++
+; Bot Humanization - RORO-MOD
 Func FGemClick($x, $y, $times = 1, $speed = 0, $debugtxt = "")
 	If $g_bDebugClick Then
 		Local $txt = _DecodeDebug($debugtxt)
