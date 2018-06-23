@@ -581,7 +581,6 @@ Func FinalInitialization(Const $sAI)
 	DestroySplashScreen()
 
 	; InitializeVariables();initialize variables used in extrawindows
-	CheckVersion() ; check latest version on mybot.run site
 	UpdateMultiStats()
 	SetDebugLog("Maximum of " & $g_iGlobalActiveBotsAllowed & " bots running at same time configured")
 	SetDebugLog("MyBot.run launch time " & Round($g_iBotLaunchTime) & " ms.")
