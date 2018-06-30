@@ -129,3 +129,7 @@ Global $g_iTotalAttackSlot = 10, $g_bDraggedAttackBar = False ; flag if AttackBa
 
 ; Request troops for defense - RORO-MOD
 Global $g_bRequestTroopsEnableDefense, $g_sRequestTroopsTextDefense, $g_iRequestDefenseEarly
+
+Global $g_EmulatorSubTab = 0
+
+

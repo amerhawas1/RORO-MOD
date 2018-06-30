@@ -461,11 +461,11 @@ Func GUIControl_WM_COMMAND($hWind, $iMsg, $wParam, $lParam)
 			Local $CursorInfo = GUIGetCursorInfo($g_hFrmBot)
 			If IsArray($CursorInfo) = 1 Then
 				Switch $CursorInfo[4]
-					Case $g_hLblMyBotURL, $g_hLblForumURL
+			 Case $g_hLblMyBotURL, $g_hLblForumURL,$g_EmulatorSubTab
 						OpenURL_Label($CursorInfo[4])
 				EndSwitch
 			EndIf
-		Case $g_hLblMyBotURL, $g_hLblForumURL, $g_hLblUnbreakableLink
+		Case $g_hLblMyBotURL, $g_hLblForumURL, $g_hLblUnbreakableLink,$g_EmulatorSubTab
 			; Handle open URL when label fires the event normally
 			OpenURL_Label($nID)
 		Case $g_hFrmBot_URL_PIC, $g_hFrmBot_URL_PIC2
@@ -716,8 +716,8 @@ Func GUIControl_WM_NOTIFY($hWind, $iMsg, $wParam, $lParam)
 			tabActivebase()
 		Case $g_hGUI_THSNIPE_TAB
 			tabTHSnipe()
-		Case $g_hGUI_MOD_TAB
-			tabMod()
+		Case $g_hGUI_ROROMOD_TAB
+			tabROROMOD()
 		Case $g_hGUI_BOT_TAB
 			tabBot()
 		Case $g_hGUI_SWITCH_OPTIONS_TAB
@@ -1102,7 +1102,7 @@ Func BotGuiModeToggle()
 			GUICtrlDelete($g_hTabLog)
 			GUICtrlDelete($g_hTabVillage)
 			GUICtrlDelete($g_hTabAttack)
-			GUICtrlDelete($g_hTabMOD)
+			GUICtrlDelete($g_hTabROROMOD)
 			GUICtrlDelete($g_hTabBot)
 			GUICtrlDelete($g_hTabAbout)
 
@@ -1120,7 +1120,7 @@ Func BotGuiModeToggle()
 			GUICtrlDelete($g_hGUI_THSNIPE_TAB)
 			GUICtrlDelete($g_hGUI_ATTACKOPTION_TAB)
 			GUICtrlDelete($g_hGUI_STRATEGIES_TAB)
-			GUICtrlDelete($g_hGUI_MOD_TAB)
+			GUICtrlDelete($g_hGUI_ROROMOD_TAB)
 			GUICtrlDelete($g_hGUI_BOT_TAB)
 			GUICtrlDelete($g_hGUI_LOG_SA)
 			GUICtrlDelete($g_hGUI_SWITCH_OPTIONS_TAB)
@@ -1158,7 +1158,7 @@ Func BotGuiModeToggle()
 			CreateMainGUIControls(True)
 
 			; refresh tab states
-			tabMod()
+			tabROROMOD()
 			tabBot()
 			tabDONATE()
 			tabSEARCH()
@@ -1651,7 +1651,7 @@ Func tabMain()
 			GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 			GUISetState(@SW_HIDE, $g_hGUI_BOT)
 			GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
-			GUISetState(@SW_HIDE, $g_hGUI_MOD)
+			GUISetState(@SW_HIDE, $g_hGUI_ROROMOD)
 			GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_LOG)
 
 		Case $tabidx = 1 ; Village
@@ -1659,7 +1659,7 @@ Func tabMain()
 			GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 			GUISetState(@SW_HIDE, $g_hGUI_BOT)
 			GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
-			GUISetState(@SW_HIDE, $g_hGUI_MOD)
+			GUISetState(@SW_HIDE, $g_hGUI_ROROMOD)
 			GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_VILLAGE)
 			tabVillage()
 
@@ -1668,25 +1668,25 @@ Func tabMain()
 			GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 			GUISetState(@SW_HIDE, $g_hGUI_BOT)
 			GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
-			GUISetState(@SW_HIDE, $g_hGUI_MOD)
+			GUISetState(@SW_HIDE, $g_hGUI_ROROMOD)
 			GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_ATTACK)
 			tabAttack()
 
-		Case $tabidx = 3 ; Mods
+		Case $tabidx = 3 ; RORO-MOD
 			GUISetState(@SW_HIDE, $g_hGUI_LOG)
 			GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 			GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 			GUISetState(@SW_HIDE, $g_hGUI_BOT)
 			GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
-			GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_MOD)
-			tabMod()
+			GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_ROROMOD)
+			tabROROMOD()
 
 		Case $tabidx = 4 ; Options
 			GUISetState(@SW_HIDE, $g_hGUI_LOG)
 			GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 			GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 			GUISetState(@SW_HIDE, $g_hGUI_ABOUT)
-			GUISetState(@SW_HIDE, $g_hGUI_MOD)
+			GUISetState(@SW_HIDE, $g_hGUI_ROROMOD)
 			GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_BOT)
 			tabBot()
 
@@ -1695,7 +1695,7 @@ Func tabMain()
 			GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 			GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 			GUISetState(@SW_HIDE, $g_hGUI_BOT)
-			GUISetState(@SW_HIDE, $g_hGUI_MOD)
+			GUISetState(@SW_HIDE, $g_hGUI_ROROMOD)
 			GUISetState(@SW_SHOWNOACTIVATE, $g_hGUI_ABOUT)
 
 		Case Else
@@ -1703,7 +1703,7 @@ Func tabMain()
 			GUISetState(@SW_HIDE, $g_hGUI_VILLAGE)
 			GUISetState(@SW_HIDE, $g_hGUI_ATTACK)
 			GUISetState(@SW_HIDE, $g_hGUI_BOT)
-			GUISetState(@SW_HIDE, $g_hGUI_MOD)
+			GUISetState(@SW_HIDE, $g_hGUI_ROROMOD)
 	EndSelect
 
 EndFunc   ;==>tabMain
@@ -1903,8 +1903,8 @@ Func tabDONATE()
 EndFunc   ;==>tabDONATE
 
 ; RORO-MOD (2018)
-Func tabMod()
-	Local $tabidx = GUICtrlRead($g_hGUI_MOD_TAB)
+Func tabROROMOD()
+	Local $tabidx = GUICtrlRead($g_hGUI_ROROMOD_TAB)
 	Select
 		Case $tabidx = 0
 			; Tab Misc
@@ -1915,7 +1915,7 @@ Func tabMod()
 		Case $tabidx = 3
 			; Tab War Preparation
 	EndSelect
-EndFunc   ;==>tabMod
+EndFunc   ;==>tabROROMOD
 
 Func tabBot()
 	Local $tabidx = GUICtrlRead($g_hGUI_BOT_TAB)
@@ -2074,8 +2074,8 @@ Func Bind_ImageList($nCtrl, ByRef $hImageList)
 			Local $aIconIndex = [$eIcnMagnifier, $eIcnCamp, $eIcnLightSpell, $eIcnSilverStar, $eIcnTrophy]
 
 		; RORO-MOD (2018)
-		Case $g_hGUI_MOD_TAB
-			; the icons for Mods tab
+		Case $g_hGUI_ROROMOD_TAB
+			; the icons for ROROMOD tab
 			Local $aIconIndex = [$eIcnMiscMod, $eIcnHumanization, $eIcnGoblinXP, $eIcnWarPreparation]
 
 		Case $g_hGUI_BOT_TAB
