@@ -44,12 +44,12 @@ Func RequestCC($ClickPAtEnd = True, $specifyText = "")
 	If $g_bRequestTroopsEnable And Not $bRequestDefense Then
 		Local $hour = StringSplit(_NowTime(4), ":", $STR_NOCOUNT)
 		If $g_abRequestCCHours[$hour[0]] = False Then
-			SetLog("Request Clan Castle troops not planned, Skipped..", $COLOR_ACTION)
+			SetLog("طلب قوات عشيرة القلعة لم يتم التخطيط لها ، تم تخطيها ..", $COLOR_ACTION)
 			Return ; exit func if no planned donate checkmarks
 		EndIf
 	EndIf
 
-	SetLog("Requesting Clan Castle Troops", $COLOR_INFO)
+	SetLog("طلب قوات قلعة العشائر", $COLOR_INFO)
 
 	;open army overview
 	If IsMainPage() Then
@@ -79,7 +79,7 @@ Func RequestCC($ClickPAtEnd = True, $specifyText = "")
 
 	If _ColorCheck($color1, Hex($aRequestTroopsAO[2], 6), $aRequestTroopsAO[5]) Then
 		;clan full or not in clan
-		SetLog("Your Clan Castle is already full or you are not in a clan.")
+		SetLog("قلعة العشائر الخاصة بك مليئة بالفعل أو أنت لست في عشيرة.")
 		$g_bCanRequestCC = False
 	ElseIf _ColorCheck($color1, Hex($aRequestTroopsAO[3], 6), $aRequestTroopsAO[5]) Then
 		If _ColorCheck($color2, Hex($aRequestTroopsAO[4], 6), $aRequestTroopsAO[5]) Then
@@ -115,11 +115,11 @@ Func RequestCC($ClickPAtEnd = True, $specifyText = "")
 			EndIf
 		Else
 			;request has already been made
-			SetLog("Request has already been made")
+			SetLog("تم بالفعل تقديم الطلب")
 		EndIf
 	Else
 		;no button request found
-		SetLog("Cannot detect button request troops.")
+		SetLog("لا يمكن الكشف عن قوات طلب الزر.")
 		SetLog("The Pixel on " & $aRequestTroopsAO[0] & "-" & $aRequestTroopsAO[1] & " was: " & $color1, $COLOR_ERROR)
 	EndIf
 
@@ -142,7 +142,7 @@ Func _makerequest()
 		If $icount > 20 Then ExitLoop ; wait 21*500ms = 10.5 seconds max
 	WEnd
 	If $icount > 20 Then
-		SetLog("Request has already been made, or request window not available", $COLOR_ERROR)
+		SetLog("تم بالفعل تقديم طلب ، أو طلب نافذة غير متوفرة", $COLOR_ERROR)
 		ClickP($aAway, 2, 0, "#0257")
 		If _Sleep($DELAYMAKEREQUEST2) Then Return
 	Else
@@ -153,7 +153,7 @@ Func _makerequest()
 			Click($atxtRequestCCBtn[0], $atxtRequestCCBtn[1], 1, 0, "#0254") ;Select text for request $atxtRequestCCBtn[2] = [430, 140]
 			_Sleep($DELAYMAKEREQUEST2)
 			If SendText($g_sRequestTroopsText) = 0 Then
-				SetLog(" Request text entry failed, try again", $COLOR_ERROR)
+				SetLog(" أخفق طلب إدخال النص ، أعد المحاولة", $COLOR_ERROR)
 				Return
 			EndIf
 		EndIf
@@ -166,7 +166,7 @@ Func _makerequest()
 			If $icount > 25 Then ExitLoop ; wait 26*500ms = 13 seconds max
 		WEnd
 		If $icount > 25 Then
-			If $g_bDebugSetlog Then SetDebugLog("Send request button not found", $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog("إرسال زر الطلب غير موجود", $COLOR_DEBUG)
 			CheckMainScreen(False) ;emergency exit
 		EndIf
 		If $g_bChkBackgroundMode = False And $g_bNoFocusTampering = False Then ControlFocus($g_hAndroidWindow, "", "") ; make sure Android has window focus

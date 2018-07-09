@@ -49,7 +49,7 @@ Func BotDetectFirstTime()
 		If IsArray($Result) Then $g_iTownHallLevel = 0 ; Check for error finding TH level, and reset to zero if yes
 	EndIf
 	If Number($g_iTownHallLevel) > 1 And Number($g_iTownHallLevel) < 6 Then
-		SetLog("Warning: TownHall level below 6 NOT RECOMMENDED!", $COLOR_ERROR)
+		SetLog("لا يعمل البوت على اقل من لفل 6!", $COLOR_ERROR)
 		SetLog("Proceed with caution as errors may occur.", $COLOR_ERROR)
 	EndIf
 	If $g_iTownHallLevel < 2 Or ($g_aiTownHallPos[1] = "" Or $g_aiTownHallPos[1] = -1) Then LocateTownHall()
@@ -105,7 +105,7 @@ Func BotDetectFirstTime()
 
 	;Boju Display TH Level in Stats
 	_GUI_Value_STATE("HIDE", $g_aGroupListTHLevels)
-	If $g_bDebugSetlog Then SetDebugLog("Select TH Level:" & Number($g_iTownHallLevel), $COLOR_DEBUG)
+	If $g_bDebugSetlog Then SetDebugLog("حدد لفل التاون هول:" & Number($g_iTownHallLevel), $COLOR_DEBUG)
 	GUICtrlSetState($g_ahPicTHLevels[$g_iTownHallLevel], $GUI_SHOW)
 	GUICtrlSetData($g_hLblTHLevels, $g_iTownHallLevel)
 

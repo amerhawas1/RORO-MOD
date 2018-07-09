@@ -24,16 +24,16 @@ Func CollectFreeMagicItems($bTest = False)
 
 	If Not IsMainPage() Then Return
 
-	SetLog("Collecting Free Magic Items", $COLOR_INFO)
+	SetLog("جمع الجرعات السحرية المجانية", $COLOR_INFO)
 	If _Sleep($DELAYCOLLECT2) Then Return
 
 	; Check Trader Icon on Main Village
 	If QuickMIS("BC1", $g_sImgTrader, 120, 160, 210, 215, True, False) Then
-		SetLog("Trader available, Entering Daily Discounts", $COLOR_SUCCESS)
+		SetLog("التاجر متاح للجمع", $COLOR_SUCCESS)
 		Click($g_iQuickMISX + 120, $g_iQuickMISY + 160)
 		If _Sleep(1500) Then Return
 	Else
-		SetLog("Trader unvailable", $COLOR_INFO)
+		SetLog("التاجر غير متاح", $COLOR_INFO)
 		Return
 	EndIf
 
@@ -56,7 +56,7 @@ Func CollectFreeMagicItems($bTest = False)
 			If Not $bTest Then
 				If $aResults[$i] = "FREE" Then
 					Click($aOcrPositions[$i][0], $aOcrPositions[$i][1], 2, 500)
-					SetLog("Free Magic Item detected", $COLOR_INFO)
+					SetLog("تم اكتشاف عنصر سحري مجاني", $COLOR_INFO)
 					ClickP($aAway, 2, 0, "#0332") ;Click Away
 					If _Sleep(1000) Then Return
 					Return
@@ -73,8 +73,8 @@ Func CollectFreeMagicItems($bTest = False)
 		If Not $g_bRunState Then Return
 	Next
 
-	SetLog("Daily Discounts: " & $aResults[0] & " | " & $aResults[1] & " | " & $aResults[2])
-	SetLog("Nothing free to collect!", $COLOR_INFO)
+	SetLog("خصومات يومية: " & $aResults[0] & " | " & $aResults[1] & " | " & $aResults[2])
+	SetLog("لا شيء مجانا لجمع!", $COLOR_INFO)
 	ClickP($aAway, 2, 0, "#0332") ;Click Away
 	If _Sleep(1000) Then Return
 EndFunc   ;==>CollectFreeMagicItems

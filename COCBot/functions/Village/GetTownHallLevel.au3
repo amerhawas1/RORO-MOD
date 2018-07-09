@@ -48,7 +48,7 @@ Func GetTownHallLevel($bFirstTime = False)
 			Return False
 		EndIf
 	Else
-		SetLog("Your Town Hall Level was not found! Please Manually Locate", $COLOR_INFO)
+		SetLog("لم يتم العثور على مستوى قاعة تاونتك! يرجى يدويا موقع", $COLOR_INFO)
 		ClickP($aAway, 1, 0, "#0351") ; Unselect TH
 		Return False
 	EndIf

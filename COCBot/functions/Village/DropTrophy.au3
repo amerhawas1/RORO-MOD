@@ -26,7 +26,7 @@ Func DropTrophy()
 
 		For $i = 0 to 5
 			$g_aiCurrentLoot[$eLootTrophy] = getTrophyMainScreen($aTrophies[0], $aTrophies[1]) ; get OCR to read current Village Trophies
-			SetDebugLog("Current Trophy Count: " & $g_aiCurrentLoot[$eLootTrophy], $COLOR_DEBUG)
+			SetDebugLog("الكوؤس الحالية: " & $g_aiCurrentLoot[$eLootTrophy], $COLOR_DEBUG)
 			If $g_aiCurrentLoot[$eLootTrophy] <> "" then ExitLoop
 			If _Sleep(1000) then return
 			ClickP($aAway, 1, 0, "#0000") ;Click Away to prevent any pages on top
@@ -41,7 +41,7 @@ Func DropTrophy()
 				$g_bDisableDropTrophy = False
 				$bHaveTroops = True
 				If $g_bDebugSetlog Then
-					SetDebugLog("Drop Trophy Found " & StringFormat("%3s", $g_avDTtroopsToBeUsed[$i][1]) & " " & $g_avDTtroopsToBeUsed[$i][0], $COLOR_DEBUG)
+					SetDebugLog("تم العثور على تقليل الكؤؤس " & StringFormat("%3s", $g_avDTtroopsToBeUsed[$i][1]) & " " & $g_avDTtroopsToBeUsed[$i][0], $COLOR_DEBUG)
 					ContinueLoop ; display all troop counts if debug flag set
 				Else
 					ExitLoop ; Finding 1 troop type is enough to use trophy drop, stop checking rest when no debug flag
@@ -50,13 +50,13 @@ Func DropTrophy()
 		Next
 		; if heroes enabled, check them and reset drop trophy disable
 		If $g_bDropTrophyUseHeroes And $g_iHeroAvailable > 0 Then
-			If $g_bDebugSetlog Then SetDebugLog("Drop Trophy Found Hero BK|AQ|GW: " & BitOR($g_iHeroAvailable, $eHeroKing) & "|" & BitOR($g_iHeroAvailable, $eHeroQueen) & "|" & BitOR($g_iHeroAvailable, $eHeroWarden), $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog("تم العثور على تقليل الكؤس بالملوك: " & BitOR($g_iHeroAvailable, $eHeroKing) & "|" & BitOR($g_iHeroAvailable, $eHeroQueen) & "|" & BitOR($g_iHeroAvailable, $eHeroWarden), $COLOR_DEBUG)
 			$g_bDisableDropTrophy = False
 			$bHaveTroops = True
 		EndIf
 
 		If $g_bDisableDropTrophy Or Not $bHaveTroops Then ; troops available?
-			SetLog("Drop Trophy temporarily disabled, missing proper troop type", $COLOR_ERROR)
+			SetLog("تقليل الكؤؤس معلطة....تفتقد الى القوات", $COLOR_ERROR)
 			SetDebugLog("Drop Trophy(): No troops in $g_avDTtroopsToBeUsed array", $COLOR_DEBUG)
 			Return
 		EndIf
@@ -71,14 +71,14 @@ Func DropTrophy()
 
 		While Number($g_aiCurrentLoot[$eLootTrophy]) > Number($g_iDropTrophyMaxNeedCheck)
 			$g_aiCurrentLoot[$eLootTrophy] = getTrophyMainScreen($aTrophies[0], $aTrophies[1])
-			SetLog("Trophy Count : " & $g_aiCurrentLoot[$eLootTrophy], $COLOR_SUCCESS)
+			SetLog("الكؤؤس : " & $g_aiCurrentLoot[$eLootTrophy], $COLOR_SUCCESS)
 			If Number($g_aiCurrentLoot[$eLootTrophy]) > Number($g_iDropTrophyMaxNeedCheck) Then
 
 				; Check for enough troops before starting base search to save search costs
 				If $g_bDropTrophyAtkDead Then
 					; If attack dead bases during trophy drop is enabled then make sure we have enough army troops
 					If ($g_CurrentCampUtilization <= ($g_iTotalCampSpace * $DTArmyPercent)) Then ; check if current troops above setting
-						SetLog("Drop Trophy is waiting for " & $g_iDropTrophyArmyMinPct & "% full army to also attack Deadbases.", $COLOR_ACTION)
+						SetLog("تقليل الكؤؤس ينتظر " & $g_iDropTrophyArmyMinPct & "% جيش كامل للهجوم على القرية المهجورة.", $COLOR_ACTION)
 						SetDebugLog("Drop Trophy(): Drop Trophy + Dead Base skipped, army < " & $g_iDropTrophyArmyMinPct & "%.", $COLOR_DEBUG)
 						ExitLoop ; no troops then cycle again
 					EndIf
@@ -86,14 +86,14 @@ Func DropTrophy()
 					; no deadbase attacks enabled, then only 1 giant or hero needed to enable drop trophy to work
 				Else
 					If ($g_CurrentCampUtilization < 5) And ($g_bDropTrophyUseHeroes And $g_iHeroAvailable = $eHeroNone) Then
-						SetLog("No troops available to use on Drop Trophy", $COLOR_ERROR)
+						SetLog("لا يوجد قوات ل تقليل الكؤؤس", $COLOR_ERROR)
 						SetDebugLog("Drop Trophy(): Drop Trophy skipped, no army.", $COLOR_DEBUG)
 						ExitLoop ; no troops then cycle again
 					EndIf
 				EndIf
 
 				$g_iDropTrophyMaxNeedCheck = $g_iDropTrophyMin ; already checked above max trophy, so set target to min trophy value
-				SetLog("Dropping Trophies to " & $g_iDropTrophyMin, $COLOR_INFO)
+				SetLog("اسقاط الدروع ل " & $g_iDropTrophyMin, $COLOR_INFO)
 				If _Sleep($DELAYDROPTROPHY4) Then ExitLoop
 				$bDropSuccessful = True
 				ZoomOut()
@@ -123,13 +123,13 @@ Func DropTrophy()
 					Local $E = (Number($g_iSearchElixir) >= Number($g_iAimElixir[$DB]))
 					Local $GPE = ((Number($g_iSearchElixir) + Number($g_iSearchGold)) >= Number($g_iAimGoldPlusElixir[$DB]))
 					If $G = True And $E = True And $GPE = True Then
-						SetLog("Found [G]:" & StringFormat("%7s", $g_iSearchGold) & " [E]:" & StringFormat("%7s", $g_iSearchElixir) & " [D]:" & StringFormat("%5s", $g_iSearchDark) & " [T]:" & StringFormat("%2s", $g_iSearchTrophy), $COLOR_BLACK, "Lucida Console", 7.5)
+						SetLog("وجدد [ذهب]:" & StringFormat("%7s", $g_iSearchGold) & " [اكسير]:" & StringFormat("%7s", $g_iSearchElixir) & " [اكسير الدارك]:" & StringFormat("%5s", $g_iSearchDark) & " [الكؤؤس]:" & StringFormat("%2s", $g_iSearchTrophy), $COLOR_BLACK, "Lucida Console", 13)
 						If $g_bDebugDeadBaseImage Then setZombie()
 						ForceCaptureRegion()
 						_CaptureRegion2() ; take new capture for deadbase
 						If checkDeadBase() Then
 
-							SetLog("      " & "Dead Base Found while dropping Trophies!", $COLOR_SUCCESS, "Lucida Console", 7.5)
+							SetLog("      " & "العثور على قرية مهجورة اثناء التقليل الكؤؤس!", $COLOR_SUCCESS, "Lucida Console", 13)
 							Attack()
 							$g_bFirstStart = True ;reset barracks upon return when attacked a Dead Base with 70%~100% troops capacity
 							ReturnHome($g_bTakeLootSnapShot)
@@ -139,7 +139,7 @@ Func DropTrophy()
 							If $g_bDebugSetlog Then SetDebugLog("Drop Trophy END: Dead Base was attacked, reset army and return to Village.", $COLOR_DEBUG)
 							ExitLoop ; or Return, Will end function, no troops left to drop Trophies, will need to Train new Troops first
 						Else
-							SetLog("      " & "Not a Dead Base, resuming Trophy Dropping.", $COLOR_BLACK, "Lucida Console", 7.5)
+							SetLog("      " & "لا يوجد قرية مهجورة متابعة تقليل الكؤؤس.", $COLOR_BLACK, "Lucida Console", 7.5)
 						EndIf
 					EndIf
 				Else
@@ -148,7 +148,7 @@ Func DropTrophy()
 					GetResources(False, $DT)
 					If $g_bRestart = True Then Return ; exit func
 
-					SetLog("Identification of your troops:", $COLOR_INFO)
+					SetLog("التحقق من هوية القوات:", $COLOR_INFO)
 					PrepareAttack($DT) ; ==== Troops :checks for type, slot, and quantity ===
 					If $g_bRestart Then Return
 
@@ -203,7 +203,7 @@ Func DropTrophy()
 								Case "Q"
 									If $g_iQueenSlot <> -1 Then
 										SetTrophyLoss()
-										SetLog("Deploying Queen", $COLOR_INFO)
+										SetLog("اسقاط الملكة", $COLOR_INFO)
 										Click(GetXPosOfArmySlot($g_iQueenSlot, 68), 595 + $g_iBottomOffsetY, 1, 0, "#0179") ;Select Queen
 										If _Sleep($DELAYDROPTROPHY1) Then ExitLoop
 										Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0180") ;Drop Queen
@@ -216,7 +216,7 @@ Func DropTrophy()
 								Case "K"
 									If $g_iKingSlot <> -1 Then
 										SetTrophyLoss()
-										SetLog("Deploying King", $COLOR_INFO)
+										SetLog("اسقاط الملك", $COLOR_INFO)
 										Click(GetXPosOfArmySlot($g_iKingSlot, 68), 595 + $g_iBottomOffsetY, 1, 0, "#0177") ;Select King
 										If _Sleep($DELAYDROPTROPHY1) Then ExitLoop
 										Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0178") ;Drop King
@@ -229,7 +229,7 @@ Func DropTrophy()
 								Case "W"
 									If $g_iWardenSlot <> -1 Then
 										SetTrophyLoss()
-										SetLog("Deploying Warden", $COLOR_INFO)
+										SetLog("اسقاط الامر الكبير", $COLOR_INFO)
 										Click(GetXPosOfArmySlot($g_iWardenSlot, 68), 595 + $g_iBottomOffsetY, 1, 0, "#0000") ;Select Warden
 										If _Sleep($DELAYDROPTROPHY1) Then ExitLoop
 										Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0000") ;Drop Warden
@@ -251,33 +251,33 @@ Func DropTrophy()
 						Case $g_avAttackTroops[0][0] = $eBarb
 							Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0181") ;Drop one troop
 							$g_aiCurrentTroops[$eTroopBarbarian] += 1
-							SetLog("Deploying 1 Barbarian", $COLOR_INFO)
+							SetLog("اسقاط 1 بربر", $COLOR_INFO)
 						Case $g_avAttackTroops[0][0] = $eArch
 							Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0182") ;Drop one troop
 							$g_aiCurrentTroops[$eTroopArcher] += 1
-							SetLog("Deploying 1 Archer", $COLOR_INFO)
+							SetLog("اسقاط 1 ارشر", $COLOR_INFO)
 						Case $g_avAttackTroops[0][0] = $eGiant
 							Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0183") ;Drop one troop
 							$g_aiCurrentTroops[$eTroopGiant] += 1
-							SetLog("Deploying 1 Giant", $COLOR_INFO)
+							SetLog("اسقاط 1 عملاق", $COLOR_INFO)
 						Case $g_avAttackTroops[0][0] = $eWall
 							Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0184") ;Drop one troop
 							$g_aiCurrentTroops[$eTroopWallBreaker] += 1
-							SetLog("Deploying 1 WallBreaker", $COLOR_INFO)
+							SetLog("اسقاط 1 مفجر السور ", $COLOR_INFO)
 						Case $g_avAttackTroops[0][0] = $eGobl
 							Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0185") ;Drop one troop
 							$g_aiCurrentTroops[$eTroopGoblin] += 1
-							SetLog("Deploying 1 Goblin", $COLOR_INFO)
+							SetLog("اسقاط 1 حرامي", $COLOR_INFO)
 						Case $g_avAttackTroops[0][0] = $eMini
 							Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0186") ;Drop one troop
 							$g_aiCurrentTroops[$eTroopMinion] += 1
-							SetLog("Deploying 1 Minion", $COLOR_INFO)
+							SetLog("اسقاط 1 مينون", $COLOR_INFO)
 						Case $g_avAttackTroops[0][0] = $eBall
 							Click($aRandomEdge[$iRandomXY][0], $aRandomEdge[$iRandomXY][1], 1, 0, "#0186") ;Drop one troop
 							$g_aiCurrentTroops[$eTroopBalloon] += 1
-							SetLog("Deploying 1 Balloon", $COLOR_INFO)
+							SetLog("اسقاط 1 بالون", $COLOR_INFO)
 						Case Else
-							SetLog("You don't have Tier 1/2 Troops, Stop dropping trophies.", $COLOR_INFO) ; preventing of deploying Tier 2/3 expensive troops
+							SetLog("ليس لديك جيش كافي ايقاف تقليل الكؤؤس.", $COLOR_INFO) ; preventing of deploying Tier 2/3 expensive troops
 							$g_bDisableDropTrophy = True
 							$bDropSuccessful = False
 							ExitLoop
@@ -296,7 +296,7 @@ Func DropTrophy()
 					If $g_bDebugSetlog Then SetDebugLog("ChkBaseQuick new delay time= " & $sWaitToDate, $COLOR_DEBUG)
 				EndIf
 			Else
-				SetLog("Trophy Drop Complete", $COLOR_INFO)
+				SetLog("تم اكمال تقليل الكؤؤس بنجاح", $COLOR_INFO)
 			EndIf
 		WEnd
 		If $g_bDebugSetlog Then SetDebugLog("DropTrophy(): End", $COLOR_DEBUG)
@@ -313,7 +313,7 @@ Func SetTrophyLoss()
 	Else
 		$sTrophyLoss = getTrophyLossAttackScreen(48, 184)
 	EndIf
-	SetLog(" Trophy loss = " & $sTrophyLoss, $COLOR_DEBUG) ; record trophy loss
+	SetLog(" فقدان الكأس = " & $sTrophyLoss, $COLOR_DEBUG) ; record trophy loss
 	$g_iDroppedTrophyCount -= Number($sTrophyLoss)
 	UpdateStats()
 EndFunc   ;==>SetTrophyLoss

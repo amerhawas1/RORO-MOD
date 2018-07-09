@@ -20,7 +20,7 @@ Func BreakPersonalShield()
 	If $g_bDebugSetlog Then SetDebugLog("Begin BreakPersonalShield:", $COLOR_DEBUG1)
 
 	If $g_bDebugSetlog Then
-		SetDebugLog("Checking if Shield available", $COLOR_INFO)
+		SetDebugLog("التحقق مما ازا كان الدرع متاح", $COLOR_INFO)
 		SetDebugLog("Have shield pixel color: " & _GetPixelColor($aHaveShield, $g_bCapturePixel) & " :" & _CheckPixel($aHaveShield, $g_bCapturePixel), $COLOR_DEBUG)
 	EndIf
 
@@ -33,7 +33,7 @@ Func BreakPersonalShield()
 			EndIf
 			Local $result = ClickRemove("Shield") ; click remove shield
 			If ($result = False) Or @error Then ; check for errors
-				SetError(3, "shield remove button not found", "")
+				SetError(3, "لا يمكن العثور على ناقذة ازالة الدرع", "")
 				Return
 			EndIf
 			$result = ClickOkay("Shield") ; Confirm remove shield
@@ -41,10 +41,10 @@ Func BreakPersonalShield()
 				SetError(4, "shield Okay button not found", "")
 				Return
 			EndIf
-			SetLog("Shield removed", $COLOR_SUCCESS)
+			SetLog("ازالة الدرع", $COLOR_SUCCESS)
 		EndIf
 	Else
-		If $g_bDebugSetlog Then SetDebugLog("No shield available", $COLOR_SUCCESS)
+		If $g_bDebugSetlog Then SetDebugLog("الدرع غير نشط حاليا", $COLOR_SUCCESS)
 	EndIf
 
 	If _Sleep($DELAYPERSONALSHIELD1) Then ; wait for break shield window
@@ -53,7 +53,7 @@ Func BreakPersonalShield()
 	EndIf
 
 	If $g_bDebugSetlog Then
-		SetDebugLog("Checking if Personal Guard available", $COLOR_INFO)
+		SetDebugLog("التحقق من وجود استراحة شخصية/ استراحة القرية", $COLOR_INFO)
 		SetDebugLog("Have guard pixel color: " & _GetPixelColor($aHavePerGuard, $g_bCapturePixel) & " :" & _CheckPixel($aHavePerGuard, $g_bCapturePixel), $COLOR_DEBUG)
 	EndIf
 

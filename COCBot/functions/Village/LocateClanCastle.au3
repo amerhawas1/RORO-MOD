@@ -96,7 +96,7 @@ Func LocateClanCastle()
 				EndSelect
 			EndIf
 			If $sInfo[2] = "Broken" Then
-				SetLog("You did not rebuild your Clan Castle yet.", $COLOR_ACTION)
+				SetLog("لم تقم بإعادة بناء قلعة العشيرة الخاصة بك حتى الآن.", $COLOR_ACTION)
 			Else
 				SetLog("قلعة قبيلتك لفل :  " & $sInfo[2], $COLOR_SUCCESS)
 			EndIf

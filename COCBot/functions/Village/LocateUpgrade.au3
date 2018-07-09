@@ -25,12 +25,12 @@ Func LocateUpgrades()
 	WinGetAndroidHandle()
 
 	If $g_hAndroidWindow <> 0 And $g_bAndroidBackgroundLaunched = True Then ; Android is running in background mode, so restart Android
-		SetLog("Reboot " & $g_sAndroidEmulator & " for Window access", $COLOR_ERROR)
+		SetLog("اعادة التشغيل " & $g_sAndroidEmulator & " للوصول إلى النافذة", $COLOR_ERROR)
 		RebootAndroid(True)
 	EndIf
 
 	If $g_hAndroidWindow = 0 Then ; If not found, Android is not open so exit politely
-		SetLog($g_sAndroidEmulator & " is not open", $COLOR_ERROR)
+		SetLog($g_sAndroidEmulator & " ليس مفتوح", $COLOR_ERROR)
 		SetError(1)
 		Return
 	EndIf
@@ -106,14 +106,14 @@ Func LocateUpgrades()
 						$g_aiPicUpgradeStatus[$icount] = $eIcnYellowLight
 						_Sleep(750)
 					Else
-						SetLog("Bad location recorded, location skipped?", $COLOR_ERROR)
+						SetLog("موقع سيئة مسجلة ، تم تخطي الموقع?", $COLOR_ERROR)
 						$g_avBuildingUpgrades[$icount][0] = -1
 						$g_avBuildingUpgrades[$icount][1] = -1
 						ContinueLoop ; Whoops, here we go again...
 					EndIf
 				Case 2 ; No! we are done!
 					If $icount = 0 Then ; if no upgrades located, reset all values and return
-						SetLog("Locate Upgrade Cancelled", $COLOR_WARNING)
+						SetLog("تحديد موقع الترقية ملغاة", $COLOR_WARNING)
 						btnResetUpgrade()
 						AndroidGraphicsGdiEnd()
 						AndroidShieldForceDown($wasDown)
@@ -121,13 +121,13 @@ Func LocateUpgrades()
 					EndIf
 					ExitLoop
 				Case 3 ; cancel all upgrades
-					SetLog("Locate Upgrade Cancelled", $COLOR_WARNING)
+					SetLog("تحديد موقع الترقية ملغاة", $COLOR_WARNING)
 					btnResetUpgrade()
 					AndroidGraphicsGdiEnd()
 					AndroidShieldForceDown($wasDown)
 					Return False
 				Case Else
-					SetLog("Impossible value (" & $MsgBox & ") from Msgbox, you have been a bad programmer!", $COLOR_DEBUG)
+					SetLog("قيمة مستحيلة (" & $MsgBox & ") من Msgbox ، كنت مبرمجًا سيئًا!", $COLOR_DEBUG)
 			EndSwitch
 
 			ClickP($aAway, 1, 0, "#0210") ;Click Away to close windows

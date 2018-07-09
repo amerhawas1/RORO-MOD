@@ -18,7 +18,7 @@ Func ReArm()
 	If Not $g_bChkTrap Then Return ; If re-arm is not enable in GUI return and skip this code
 	If Not $g_abNotNeedAllTime[0] Then Return
 
-	SetLog("Checking if Village needs Rearming..", $COLOR_INFO)
+	SetLog("التحقق مما إذا كانت القرية بحاجة إلى إعادة التسلح..", $COLOR_INFO)
 
 	;- Verifying The TH Coordinates -
 	If Not isInsideDiamond($g_aiTownHallPos) Then
@@ -50,12 +50,12 @@ Func ReArm()
 				Click(515, 400, 1, 0, "#0226")
 				If _Sleep($DELAYREARM4) Then Return
 				If isGemOpen(True) Then
-					SetLog("Not enough loot to rearm traps.....", $COLOR_ERROR)
+					SetLog("لا نهب كاف لاعادة التسلح.....", $COLOR_ERROR)
 					Click(585, 252, 1, 0, "#0227") ; Click close gem window "X"
 					If _Sleep($DELAYREARM1) Then Return
 				Else
-					Local $sVerb = StringInStr($aTempArray[0], "Trap") ? "Rearmed" : "Reloaded"
-					SetLog($sVerb & " " & $aTempArray[0] & "(s)", $COLOR_SUCCESS)
+					Local $sVerb = StringInStr($aTempArray[0], "فخ") ? "أعاد" : "إعادة تحميل"
+					SetLog($sVerb & " " & $aTempArray[0] & "( )", $COLOR_SUCCESS)
 					$g_abNotNeedAllTime[0] = False
 					$bReArmed = True
 					If _Sleep($DELAYREARM1) Then Return
@@ -65,7 +65,7 @@ Func ReArm()
 	EndIf
 
 	If Not $bReArmed Then
-		SetLog("Rearm not needed!", $COLOR_SUCCESS)
+		SetLog("التسلح لا حاجة!", $COLOR_SUCCESS)
 		$g_abNotNeedAllTime[0] = False
 	EndIf
 

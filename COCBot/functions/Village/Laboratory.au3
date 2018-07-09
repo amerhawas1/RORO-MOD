@@ -32,27 +32,27 @@ Func Laboratory()
 	If Not $g_bAutoLabUpgradeEnable Then Return ; Lab upgrade not enabled.
 
 	If $g_iCmbLaboratory = 0 Then
-		SetLog("Laboratory enabled, but no troop upgrade selected", $COLOR_WARNING)
+		SetLog("تم تمكين المختبر ، ولكن لم يتم تحديد أي ترقية للقوات", $COLOR_WARNING)
 		Return False ; Nothing selected to upgrade
 	EndIf
 	If $g_aiLaboratoryPos[0] = 0 Or $g_aiLaboratoryPos[1] = 0 Then
-		SetLog("Laboratory Location not found!", $COLOR_ERROR)
+		SetLog("موقع المختبر غير موجود!", $COLOR_ERROR)
 		LocateLab() ; Lab location unknown, so find it.
 		If $g_aiLaboratoryPos[0] = 0 Or $g_aiLaboratoryPos[1] = 0 Then
-			SetLog("Problem locating Laboratory, train laboratory position before proceeding", $COLOR_ERROR)
+			SetLog("مشكلة في تحديد موقع المختبر ، وتدريب موقف المختبر قبل المتابعة", $COLOR_ERROR)
 			Return False
 		EndIf
 	EndIf
 
 	If $g_sLabUpgradeTime <> "" Then $TimeDiff = _DateDiff("n", _NowCalc(), $g_sLabUpgradeTime) ; what is difference between end time and now in minutes?
 	If @error Then _logErrorDateDiff(@error)
-	If $g_bDebugSetlog Then SetDebugLog($g_avLabTroops[$g_iCmbLaboratory][3] & " Lab end time: " & $g_sLabUpgradeTime & ", DIFF= " & $TimeDiff, $COLOR_DEBUG)
+	If $g_bDebugSetlog Then SetDebugLog($g_avLabTroops[$g_iCmbLaboratory][3] & " مختبر وقت الانتهاء: " & $g_sLabUpgradeTime & ", DIFF= " & $TimeDiff, $COLOR_DEBUG)
 
 	If Not $g_bRunState Then Return
 	If $TimeDiff <= 0 Then
-		SetLog("Checking Troop Upgrade in Laboratory ...", $COLOR_INFO)
+		SetLog("التحقق من ترقية القوات في المختبر ...", $COLOR_INFO)
 	Else
-		SetLog("Laboratory Upgrade in progress, waiting for completion", $COLOR_INFO)
+		SetLog("ترقية المختبر في التقدم ، في انتظار الانتهاء", $COLOR_INFO)
 		Return False
 	EndIf
 
@@ -60,10 +60,10 @@ Func Laboratory()
 	If _CheckPixel($aVillageHasDarkElixir, $g_bCapturePixel) Then ; check if the village have a Dark Elixir Storage
 		$sElixirCount = getResourcesMainScreen(696, 74)
 		$sDarkCount = getResourcesMainScreen(728, 123)
-		SetLog("Updating village values [E]: " & $sElixirCount & " [D]: " & $sDarkCount, $COLOR_SUCCESS)
+		SetLog("تحديث قيم القرية [اكسير]: " & $sElixirCount & " [اكسير الدارك]: " & $sDarkCount, $COLOR_SUCCESS)
 	Else
 		$sElixirCount = getResourcesMainScreen(701, 74)
-		SetLog("Updating village values [E]: " & $sElixirCount, $COLOR_SUCCESS)
+		SetLog("تحديث قيم القرية [اكسير]: " & $sElixirCount, $COLOR_SUCCESS)
 	EndIf
 	$iAvailElixir = Number($sElixirCount)
 	$iAvailDark = Number($sDarkCount)
@@ -83,7 +83,7 @@ Func Laboratory()
 		Click($ButtonPixel[0] + 40, $ButtonPixel[1] + 25, 1, 0, "#0198") ; Click Research Button
 		If _Sleep($DELAYLABORATORY1) Then Return ; Wait for window to open
 	Else
-		SetLog("Trouble finding research button, try again...", $COLOR_WARNING)
+		SetLog("مشكلة في العثور على زر البحث ، حاول مرة أخرى...", $COLOR_WARNING)
 		ClickP($aAway, 2, $DELAYLABORATORY4, "#0199")
 		Return False
 	EndIf
@@ -174,7 +174,7 @@ Func Laboratory()
 
 	; check for upgrade in process - look for green in finish upgrade with gems button
 	If _ColorCheck(_GetPixelColor(625, 266 + $g_iMidOffsetY, True), Hex(0x6CB91D, 6), 20) Or _ColorCheck(_GetPixelColor(660, 266 + $g_iMidOffsetY, True), Hex(0x6CB91D, 6), 20) Then
-		SetLog("Upgrade in progress, waiting for completion of other troops", $COLOR_INFO)
+		SetLog("ترقية في التقدم ، في انتظار الانتهاء من القوات الأخرى", $COLOR_INFO)
 		If _Sleep($DELAYLABORATORY2) Then Return
 		; upgrade in process and time not recorded?  Then update completion time!
 		If $g_sLabUpgradeTime = "" Or $TimeDiff <= 0 Then
@@ -207,7 +207,7 @@ Func Laboratory()
 				Next
 				$g_sLabUpgradeTime = _DateAdd('n', Ceiling($iRemainingTimeMin), _NowCalc()) ; add the time required to NOW to finish the upgrade
 				If @error Then _logErrorDateAdd(@error)
-				SetLog("Updated Lab finishing time: " & $g_sLabUpgradeTime, $COLOR_SUCCESS)
+				SetLog("تحديث وقت الانتهاء من المختبر: " & $g_sLabUpgradeTime, $COLOR_SUCCESS)
 				LabStatusGUIUpdate() ; Update GUI flag
 			Else
 				If $g_bDebugSetlog Then SetDebugLog("Invalid getRemainTLaboratory OCR", $COLOR_DEBUG)
@@ -237,30 +237,30 @@ Func Laboratory()
 	Switch $g_iCmbLaboratory ;Change messaging based on troop number
 		Case 1 To 19 ; regular elixir
 			If $iAvailElixir < ($aUpgradeValue[$g_iCmbLaboratory] + $g_iUpgradeMinElixir) Then
-				SetLog("Insufficent Elixir for " & $g_avLabTroops[$g_iCmbLaboratory][3] & ", Lab requires: " & $aUpgradeValue[$g_iCmbLaboratory] & " + " & $g_iUpgradeMinElixir & " user reserve, available: " & $iAvailElixir, $COLOR_INFO)
+				SetLog("عدم كفاية الإكسير ل " & $g_avLabTroops[$g_iCmbLaboratory][3] & ", مختبر يتطلب: " & $aUpgradeValue[$g_iCmbLaboratory] & " + " & $g_iUpgradeMinElixir & " احتياطي المستخدم ، المتاحة: " & $iAvailElixir, $COLOR_INFO)
 				ClickP($aAway, 2, $DELAYLABORATORY4, "#0355")
 				Return False
 			EndIf
 			If LabUpgrade() = True Then
-				SetLog("Elixir used = " & $aUpgradeValue[$g_iCmbLaboratory], $COLOR_INFO)
+				SetLog("الإكسير المستخدمة = " & $aUpgradeValue[$g_iCmbLaboratory], $COLOR_INFO)
 				ClickP($aAway, 2, $DELAYLABORATORY4, "#0356")
 				Return True
 			EndIf
 
 		Case 20 To 30; Dark Elixir
 			If $iAvailDark < $aUpgradeValue[$g_iCmbLaboratory] + $g_iUpgradeMinDark Then
-				SetLog("Insufficent Dark Elixir for " & $g_avLabTroops[$g_iCmbLaboratory][3] & ", Lab requires: " & $aUpgradeValue[$g_iCmbLaboratory] & " + " & $g_iUpgradeMinDark & " user reserve, available: " & $iAvailDark, $COLOR_INFO)
+				SetLog("عدم كفاية الإكسيرالدارك ل " & $g_avLabTroops[$g_iCmbLaboratory][3] & ", مختبر يتطلب: " & $aUpgradeValue[$g_iCmbLaboratory] & " + " & $g_iUpgradeMinDark & " احتياطي المستخدم ، المتاحة: " & $iAvailDark, $COLOR_INFO)
 				ClickP($aAway, 2, $DELAYLABORATORY4, "#0357")
 				Return False
 			EndIf
 			If LabUpgrade() = True Then
-				SetLog("Dark Elixir used = " & $aUpgradeValue[$g_iCmbLaboratory], $COLOR_INFO)
+				SetLog("اكسير الدارك المستخدم = " & $aUpgradeValue[$g_iCmbLaboratory], $COLOR_INFO)
 				ClickP($aAway, 2, $DELAYLABORATORY4, "#0358")
 				Return True
 			EndIf
 
 		Case Else
-			SetLog("Something went wrong with loot value on Lab upgrade on #" & $g_avLabTroops[$g_iCmbLaboratory][3], $COLOR_ERROR)
+			SetLog("حدث خطأ ما في قيمة المسروقات على ترقية Lab على #" & $g_avLabTroops[$g_iCmbLaboratory][3], $COLOR_ERROR)
 			Return False
 	EndSwitch
 
@@ -274,23 +274,23 @@ Func LabUpgrade()
 	Select
 		Case _ColorCheck(_GetPixelColor($g_avLabTroops[$g_iCmbLaboratory][0] + 47, $g_avLabTroops[$g_iCmbLaboratory][1] + 6, True), $sColorNA, 20) = True
 			; check for beige pixel in center just below edge for troop not unlocked
-			SetLog($g_avLabTroops[$g_iCmbLaboratory][3] & " not unlocked yet, select another troop", $COLOR_ERROR)
+			SetLog($g_avLabTroops[$g_iCmbLaboratory][3] & " لم يتم إلغاء قفلها بعد ، حدد مجموعة أخرى", $COLOR_ERROR)
 			If _Sleep($DELAYLABUPGRADE2) Then Return
 
 		Case _PixelSearch($g_avLabTroops[$g_iCmbLaboratory][0] + 67, $g_avLabTroops[$g_iCmbLaboratory][1] + 79, $g_avLabTroops[$g_iCmbLaboratory][0] + 69, $g_avLabTroops[$g_iCmbLaboratory][0] + 84, $sColorNoLoot, 20) <> 0
 			; Check for Pink pixels last zero of loot value to see if enough loot is available.
 			; this case should never be run if value check is working right!
-			SetLog("Value check error and Not enough Loot to upgrade " & $g_avLabTroops[$g_iCmbLaboratory][3] & "...", $COLOR_ERROR)
+			SetLog("خطأ في التحقق من القيمة ونقص غير كافٍ للترقية " & $g_avLabTroops[$g_iCmbLaboratory][3] & "...", $COLOR_ERROR)
 			If _Sleep($DELAYLABUPGRADE2) Then Return
 
 		Case _ColorCheck(_GetPixelColor($g_avLabTroops[$g_iCmbLaboratory][0] + 22, $g_avLabTroops[$g_iCmbLaboratory][1] + 60, True), Hex(0xFFC360, 6), 20) = True
 			; Look for Golden pixel inside level indicator for max troops
-			SetLog($g_avLabTroops[$g_iCmbLaboratory][3] & " already max level, select another troop", $COLOR_ERROR)
+			SetLog($g_avLabTroops[$g_iCmbLaboratory][3] & " مستوى الحد الأقصى بالفعل ، حدد مجموعة أخرى", $COLOR_ERROR)
 			If _Sleep($DELAYLABUPGRADE2) Then Return
 
 		Case _ColorCheck(_GetPixelColor($g_avLabTroops[$g_iCmbLaboratory][0] + 3, $g_avLabTroops[$g_iCmbLaboratory][1] + 19, True), Hex(0xB7B7B7, 6), 20) = True
 			; Look for Gray pixel inside left border if Lab upgrade required or if we missed that upgrade is in process
-			SetLog("Laboratory upgrade not available now for " & $g_avLabTroops[$g_iCmbLaboratory][3] & "...", $COLOR_ERROR)
+			SetLog("ترقية المختبر غير متوفرة الآن من أجل " & $g_avLabTroops[$g_iCmbLaboratory][3] & "...", $COLOR_ERROR)
 			If _Sleep($DELAYLABUPGRADE2) Then Return
 
 		Case Else
@@ -309,7 +309,7 @@ Func LabUpgrade()
 
 			; double check enough elixir?
 			If _PixelSearch($g_avLabTroops[$g_iCmbLaboratory][0] + 67, $g_avLabTroops[$g_iCmbLaboratory][1] + 79, $g_avLabTroops[$g_iCmbLaboratory][0] + 69, $g_avLabTroops[$g_iCmbLaboratory][0] + 84, $sColorNoLoot, 20) <> 0 Then ; Check for Red Zero = means not enough loot!
-				SetLog("Missing Loot to upgrade " & $g_avLabTroops[$g_iCmbLaboratory][3] & " (secondary check after Upgrade Value read failed)", $COLOR_ERROR)
+				SetLog("مفقود المسروقات للترقية " & $g_avLabTroops[$g_iCmbLaboratory][3] & " (secondary check after Upgrade Value read failed)", $COLOR_ERROR)
 				If _Sleep($DELAYLABUPGRADE2) Then Return
 				ClickP($aAway, 2, $DELAYLABUPGRADE3, "#0333")
 				Return False
@@ -317,7 +317,7 @@ Func LabUpgrade()
 
 			; triple check for upgrade in process by gray upgrade button
 			If _ColorCheck(_GetPixelColor(625, 250 + $g_iMidOffsetY, True), Hex(0x848484, 6), 20) And _ColorCheck(_GetPixelColor(660, 250 + $g_iMidOffsetY, True), Hex(0x848484, 6), 20) Then
-				SetLog("Upgrade in progress, waiting for completion of other troops", $COLOR_WARNING)
+				SetLog("ترقية في التقدم ، في انتظار الانتهاء من القوات الأخرى", $COLOR_WARNING)
 				If _Sleep($DELAYLABORATORY2) Then Return
 				ClickP($aAway, 2, $DELAYLABORATORY4, "#0000")
 				Return False
@@ -352,15 +352,15 @@ Func LabUpgrade()
 							$TimeAdd = Int($EndTime) ; change to minutes
 							$g_sLabUpgradeTime = _DateAdd('n', $TimeAdd, $StartTime) ; add the time required to finish the  upgrade
 						Case Else
-							SetLog("Upgrade time period invalid, try again!", $COLOR_WARNING)
+							SetLog("فترة زمنية غير صالحة للترقية ، حاول مرة أخرى!", $COLOR_WARNING)
 					EndSwitch
 					If $g_bDebugSetlog Then SetDebugLog("$EndTime = " & $EndTime & " , $EndPeriod = " & $EndPeriod & ", $timeadd = " & $TimeAdd, $COLOR_DEBUG)
 					SetLog($g_avLabTroops[$g_iCmbLaboratory][3] & "Upgrade Finishes @ " & $g_sLabUpgradeTime, $COLOR_SUCCESS)
 				Else
-					SetLog("Error reading the upgrade time required, try again!", $COLOR_WARNING)
+					SetLog("خطأ في قراءة وقت الترقية المطلوب ، حاول مرة أخرى!", $COLOR_WARNING)
 				EndIf
 				If _DateIsValid($g_sLabUpgradeTime) = 0 Then ; verify success of StringRegExp to process upgrade date/time
-					SetLog("Error processing upgrade time required, try again!", $COLOR_WARNING)
+					SetLog("حدث خطأ أثناء وقت الترقية المطلوب ، حاول مرة أخرى!", $COLOR_WARNING)
 					Return False
 				Else
 					Local $txtTip = GetTranslatedFileIni("MBR Func_Village_Upgrade", "BtnResetLabUpgradeTime_Info_01", "Visible Red button means that laboratory upgrade in process") & @CRLF & _
@@ -380,11 +380,11 @@ Func LabUpgrade()
 			If isGemOpen(True) = False Then ; check for gem window
 				; check for green button to use gems to finish upgrade, checking if upgrade actually started
 				If Not (_ColorCheck(_GetPixelColor(625, 218 + $g_iMidOffsetY, True), Hex(0x6fbd1f, 6), 15) Or _ColorCheck(_GetPixelColor(660, 218 + $g_iMidOffsetY, True), Hex(0x6fbd1f, 6), 15)) Then
-					SetLog("Something went wrong with " & $g_avLabTroops[$g_iCmbLaboratory][3] & " Upgrade, try again.", $COLOR_ERROR)
+					SetLog("حدث خطأ ما " & $g_avLabTroops[$g_iCmbLaboratory][3] & " Upgrade, try again.", $COLOR_ERROR)
 					ClickP($aAway, 2, $DELAYLABUPGRADE3, "#0360")
 					Return False
 				EndIf
-				SetLog("Upgrade " & $g_avLabTroops[$g_iCmbLaboratory][3] & " in your laboratory is complete...", $COLOR_SUCCESS)
+				SetLog("تطوير " & $g_avLabTroops[$g_iCmbLaboratory][3] & " في المختبر الخاص بك هو كامل...", $COLOR_SUCCESS)
 				PushMsg("LabSuccess")
 				If _Sleep($DELAYLABUPGRADE2) Then Return
 				$g_bAutoLabUpgradeEnable = False ;reset enable lab upgrade flag
@@ -394,7 +394,7 @@ Func LabUpgrade()
 
 				Return True
 			Else
-				SetLog("Oops, Gems required for " & $g_avLabTroops[$g_iCmbLaboratory][3] & " Upgrade, try again.", $COLOR_ERROR)
+				SetLog("عفوا ، الأحجار الكريمة المطلوبة ل " & $g_avLabTroops[$g_iCmbLaboratory][3] & " قم بالترقية ، حاول مرة أخرى.", $COLOR_ERROR)
 			EndIf
 	EndSelect
 	ClickP($aAway, 2, $DELAYLABUPGRADE3, "#0205")

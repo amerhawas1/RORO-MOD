@@ -20,17 +20,17 @@ Func SwitchBetweenBases($bCheckMainScreen = True)
 	If Not $g_bRunState Then Return
 
 	If isOnBuilderBase(True) Then
-		$sSwitchFrom = "Builder Base"
-		$sSwitchTo = "Normal Village"
+		$sSwitchFrom = "القرية الليليلة"
+		$sSwitchTo = "القرية الأم"
 		$bIsOnBuilderBase = True
-		$sTile = "BoatBuilderBase"
+		$sTile = "قارب القرية الليلية"
 		$sTileDir = $g_sImgBoatBB
 		$sRegionToSearch = "487,44,708,242"
 	Else
-		$sSwitchFrom = "Normal Village"
-		$sSwitchTo = "Builder Base"
+		$sSwitchFrom = "القرية الأم"
+		$sSwitchTo = "القرية الليلية"
 		$bIsOnBuilderBase = False
-		$sTile = "BoatNormalVillage"
+		$sTile = "قارب القرية الأم"
 		$sTileDir = $g_sImgBoat
 		$sRegionToSearch = "66,432,388,627"
 	EndIf
@@ -38,7 +38,7 @@ Func SwitchBetweenBases($bCheckMainScreen = True)
 	ZoomOut() ; ensure bot is visible
 	$aButtonCoords = decodeSingleCoord(findImageInPlace($sTile, $sTileDir,  $sRegionToSearch))
 	If UBound($aButtonCoords) > 1 Then
-		SetLog("Going to " & $sSwitchTo, $COLOR_INFO)
+		SetLog("الذهاب الى " & $sSwitchTo, $COLOR_INFO)
 		ClickP($aButtonCoords)
 		If _Sleep($DELAYSWITCHBASES1) Then Return
 
@@ -56,13 +56,13 @@ Func SwitchBetweenBases($bCheckMainScreen = True)
 			If $bCheckMainScreen Then checkMainScreen(True, Not $bIsOnBuilderBase)
 			Return True
 		Else
-			SetLog("Failed to go to the " & $sSwitchTo, $COLOR_ERROR)
+			SetLog("فشل في الذهاب إلى " & $sSwitchTo, $COLOR_ERROR)
 		EndIf
 	Else
 		If $bIsOnBuilderBase Then
-			SetLog("Cannot find the Boat on the Coast", $COLOR_ERROR)
+			SetLog("لا يمكن العثور على قارب على الساحل", $COLOR_ERROR)
 		Else
-			SetLog("Cannot find the Boat on the Coast. Maybe it is still broken or not visible", $COLOR_ERROR)
+			SetLog("لا يمكن العثور على قارب على الساحل. ربما لا تزال مكسورة أو غير مرئية", $COLOR_ERROR)
 		EndIf
 	EndIf
 

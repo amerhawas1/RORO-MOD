@@ -38,15 +38,15 @@ Func CheckNeedOpenTrain($TimeBeforeTrain)
 	$iTimeBeforeTrain1 = _DateAdd("s", Int(($g_aiTimeTrain[0] * 60) * ($QuickArmyCamps / 100)), $TimeBeforeTrain)
 	$iTimeBeforeTrain2 = _DateDiff("s", $sNowTime, $iTimeBeforeTrain1)
 	If $g_bDebugSetlogTrain Then
-		SetLog("Start Train: " & $TimeBeforeTrain)
-		SetLog("Now: " & $sNowTime)
-		SetLog("Train end time: " & $iTimeBeforeTrain1)
-		SetLog("Next Train in S: " & $iTimeBeforeTrain2)
+		SetLog("بدء التدريب: " & $TimeBeforeTrain)
+		SetLog("الأن: " & $sNowTime)
+		SetLog("التدريب والوقت: " & $iTimeBeforeTrain1)
+		SetLog("التدريب التالي في الثانية: " & $iTimeBeforeTrain2)
 	EndIf
 
 	If $iTimeBeforeTrain2 <= 0 Then $bToReturn = True
 	If ($g_iActiveDonate Or $g_bDonationEnabled) And $g_bChkDonate Then $bToReturn = True
-	If Not $bToReturn Then SetLog("Train end time: " & $iTimeBeforeTrain1, $COLOR_DEBUG)
+	If Not $bToReturn Then SetLog("التدريب و الوقت: " & $iTimeBeforeTrain1, $COLOR_DEBUG)
 	If Not $bToReturn Then ClickP($aAway, 1, 0, "#0332") ;Click Away
 
 	Return $bToReturn

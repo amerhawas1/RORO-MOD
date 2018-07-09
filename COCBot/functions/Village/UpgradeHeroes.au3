@@ -41,19 +41,19 @@ Func UpgradeHeroes()
 
 	;Check if Auto Lab Upgrade is enabled and if a Dark Troop is selected for Upgrade. If yes, it has priority!
 	If $g_bAutoLabUpgradeEnable And $g_iCmbLaboratory >= 19 Then
-		SetLog("Laboratory needs DE to Upgrade :  " & $g_avLabTroops[$g_iCmbLaboratory][3])
-		SetLog("Skipping the Heroes Upgrade!")
+		SetLog("يحتاج اكسير الظلام للترقية :  " & $g_avLabTroops[$g_iCmbLaboratory][3])
+		SetLog("تخطي ترقية الأبطال!")
 		Return
 	EndIf
 
-	SetLog("Upgrading Heroes", $COLOR_INFO)
+	SetLog("ترقية الأبطال", $COLOR_INFO)
 
 	; ### Archer Queen ###
 	If $g_bUpgradeQueenEnable Then
 		If Not getBuilderCount() Then Return ; update builder data, return if problem
 		If _Sleep($DELAYRESPOND) Then Return
 		If $g_iFreeBuilderCount < 1 + ($g_bUpgradeWallSaveBuilder ? 1 : 0) Then
-			SetLog("Not enough Builders available to upgrade the Archer Queen")
+			SetLog("لا يكفي بناة متوفرة لترقية الملكة آرتشر")
 			Return
 		EndIf
 		QueenUpgrade()
@@ -66,7 +66,7 @@ Func UpgradeHeroes()
 		If Not getBuilderCount() Then Return ; update builder data, return if problem
 		If _Sleep($DELAYRESPOND) Then Return
 		If $g_iFreeBuilderCount < 1 + ($g_bUpgradeWallSaveBuilder ? 1 : 0) Then
-			SetLog("Not enough Builders available to upgrade the Barbarian King")
+			SetLog("لا يكفي بناة المتاحة لترقية الملك البربري")
 			Return
 		EndIf
 		KingUpgrade()
@@ -79,7 +79,7 @@ Func UpgradeHeroes()
 		If Not getBuilderCount() Then Return ; update builder data, return if problem
 		If _Sleep($DELAYRESPOND) Then Return
 		If $g_iFreeBuilderCount < 1 + ($g_bUpgradeWallSaveBuilder ? 1 : 0) Then
-			SetLog("Not enough Builders available to upgrade the Grand Warden")
+			SetLog("لا يكفي بناة المتاحة لترقية الامر الكبير")
 			Return
 		EndIf
 		WardenUpgrade()
@@ -92,7 +92,7 @@ Func QueenUpgrade()
 	If Not $g_bUpgradeQueenEnable Then Return
 	Local $aHeroLevel = 0
 
-	SetLog("Upgrade Queen")
+	SetLog("ترقية الملكة")
 	ClickP($aTopLeftClient, 1, 0, "#0166") ; Click away
 	If _Sleep($DELAYUPGRADEHERO2) Then Return
 	BuildingClickP($g_aiQueenAltarPos) ;Click Queen Altar
@@ -115,19 +115,19 @@ Func QueenUpgrade()
 
 	If $sInfo[0] > 1 Or $sInfo[0] = "" Then
 		If StringInStr($sInfo[1], "Quee") = 0 Then
-			SetLog("Bad Archer Queen location", $COLOR_ACTION)
+			SetLog("موقع الملكة غير محدد بشكل جيد", $COLOR_ACTION)
 			Return
 		Else
 			If $sInfo[2] <> "" Then
 				$aHeroLevel = Number($sInfo[2]) ; grab hero level from building info array
-				SetLog("Your Archer Queen level read as: " & $aHeroLevel, $COLOR_SUCCESS)
+				SetLog("قراءة مستوى الملكة آرتشر الخاص بك كما: " & $aHeroLevel, $COLOR_SUCCESS)
 				If $aHeroLevel = $g_iMaxQueenLevel Then ; max hero
-					SetLog("Your Archer Queen is at max level, cannot upgrade anymore!", $COLOR_INFO)
+					SetLog("في مستوى الحد الأقصى ، لا يمكن الترقية بعد الآن!", $COLOR_INFO)
 					$g_bUpgradeQueenEnable = False ; turn Off the Queens upgrade
 					Return
 				EndIf
 			Else
-				SetLog("Your Queen Level was not found!", $COLOR_INFO)
+				SetLog("لم يتم العثور على مستوى الملكة الخاص بك!", $COLOR_INFO)
 				Return
 			EndIf
 		EndIf
@@ -201,7 +201,7 @@ Func KingUpgrade()
 	If Not $g_bUpgradeKingEnable Then Return
 	Local $aHeroLevel = 0
 
-	SetLog("Upgrade King")
+	SetLog("ترقية الملك")
 	ClickP($aTopLeftClient, 1, 0, "#0166") ; Click away
 	If _Sleep($DELAYUPGRADEHERO2) Then Return
 	BuildingClickP($g_aiKingAltarPos) ;Click King Altar
@@ -223,19 +223,19 @@ Func KingUpgrade()
 
 	If $sInfo[0] > 1 Or $sInfo[0] = "" Then
 		If StringInStr($sInfo[1], "Barbarian") = 0 Then
-			SetLog("Bad Barbarian King location", $COLOR_ACTION)
+			SetLog("لم يتم تحديد الملكة بشكل جيد", $COLOR_ACTION)
 			Return
 		Else
 			If $sInfo[2] <> "" Then
 				$aHeroLevel = Number($sInfo[2]) ; grab hero level from building info array
-				SetLog("Your King Level read as: " & $aHeroLevel, $COLOR_SUCCESS)
+				SetLog("مستوى الملك الخاص بك كما قرأ: " & $aHeroLevel, $COLOR_SUCCESS)
 				If $aHeroLevel = $g_iMaxKingLevel Then ; max hero
-					SetLog("Your Babarian King is at max level, cannot upgrade anymore!", $COLOR_INFO)
+					SetLog("ملكك البربري في مستوى الحد الأقصى ، لا يمكن ترقية بعد الآن!", $COLOR_INFO)
 					$g_bUpgradeKingEnable = False ; Turn Off the King's Upgrade
 					Return
 				EndIf
 			Else
-				SetLog("Your Barbarian King Level was not found!", $COLOR_INFO)
+				SetLog("لم يتم العثور على مستوى ملكك البربري!", $COLOR_INFO)
 				Return
 			EndIf
 		EndIf
@@ -314,7 +314,7 @@ Func WardenUpgrade()
 		Return
 	EndIf
 
-	SetLog("Upgrade Grand Warden")
+	SetLog("ترقية الامر الكبير")
 	ClickP($aTopLeftClient, 1, 0, "#0166") ; Click away
 	If _Sleep($DELAYUPGRADEHERO2) Then Return
 	ClickP($g_aiWardenAltarPos, 1, 0, "#8888") ;Click Warden Altar
@@ -336,7 +336,7 @@ Func WardenUpgrade()
 
 	If $sInfo[0] > 1 Or $sInfo[0] = "" Then
 		If StringInStr($sInfo[1], "Grand") = 0 Then
-			SetLog("Bad Warden location", $COLOR_ACTION)
+			SetLog("لم يتم تحديد الامر الكبير بشكل جيد", $COLOR_ACTION)
 			Return
 		Else
 			If $sInfo[2] <> "" Then

@@ -39,7 +39,7 @@ Func _LocateQueenAltar()
 		$g_bDisableBreakCheck = False ; restore flag
 	EndIf
 
-	SetLog("Locating Queen Altar...", $COLOR_INFO)
+	SetLog("تحديد موقع الملكة...", $COLOR_INFO)
 	While 1
 		_ExtMsgBoxSet(1 + 64, $SS_CENTER, 0x004080, 0xFFFF00, 12, "Comic Sans MS", 500)
 		$stext = $sErrorText & @CRLF & GetTranslatedFileIni("MBR Popups", "Func_Locate_Queen_Altar_01", "Click OK then click on your Queen Altar") & @CRLF & @CRLF & _
@@ -56,7 +56,7 @@ Func _LocateQueenAltar()
 				Select
 					Case $iStupid = 1
 						$sErrorText = "Queen Altar Location Not Valid!" & @CRLF
-						SetLog("Location not valid, try again", $COLOR_ERROR)
+						SetLog("الموقع غير صالح ، حاول مرة أخرى", $COLOR_ERROR)
 						ContinueLoop
 					Case $iStupid = 2
 						$sErrorText = "Please try to click inside the grass field!" & @CRLF
@@ -79,9 +79,9 @@ Func _LocateQueenAltar()
 						Return False
 				EndSelect
 			EndIf
-			SetLog("Queen Altar: " & "(" & $g_aiQueenAltarPos[0] & "," & $g_aiQueenAltarPos[1] & ")", $COLOR_SUCCESS)
+			SetLog("ملكة: " & "(" & $g_aiQueenAltarPos[0] & "," & $g_aiQueenAltarPos[1] & ")", $COLOR_SUCCESS)
 		Else
-			SetLog("Locate Queen Altar Cancelled", $COLOR_INFO)
+			SetLog("حدد موقع الملكة المذبح ملغاة", $COLOR_INFO)
 			ClickP($aTopLeftClient)
 			Return
 		EndIf
@@ -173,7 +173,7 @@ Func _LocateKingAltar()
 		$g_bDisableBreakCheck = False ; restore flag
 	EndIf
 
-	SetLog("Locating King Altar...", $COLOR_INFO)
+	SetLog("تحديد موقع الملك Altar...", $COLOR_INFO)
 	While 1
 		ClickP($aTopLeftClient)
 		_ExtMsgBoxSet(1 + 64, $SS_CENTER, 0x004080, 0xFFFF00, 12, "Comic Sans MS", 500)

@@ -30,14 +30,14 @@ Func CheckImageType()
 	If IsArray($temp) Then
 		If StringInStr($temp[0], "Snow") > 0 Then
 			$g_iDetectedImageType = 1 ;Snow Theme
-			SetLog("Snow Theme detected")
+			SetLog("تم كشفف تصميم القرية")
 		Else
 			$g_iDetectedImageType = 0 ; Normal Theme
 			SetLog("تم قراءة شكل القرية والتصميم بنجاح ")
 		EndIf
 	Else
 		$g_iDetectedImageType = 0 ; Normal Theme
-		SetLog("Normal Theme detected", $COLOR_RED)
+		SetLog("تصميم القرية انه بشكل عادي ", $COLOR_RED)
 	EndIf
 
 ;~ 	If _ColorCheck(_GetPixelColor($aImageTypeN1[0], $aImageTypeN1[1], True), Hex($aImageTypeN1[2], 6), $aImageTypeN1[3]) And _

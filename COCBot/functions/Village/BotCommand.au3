@@ -102,41 +102,41 @@ Func BotCommand()
 			Switch $iCmbBotCommand
 				Case 0
 					If $g_bDonationEnabled = False Then
-						SetLog("Halt Attack, Stay Online/Collect...", $COLOR_INFO)
+						SetLog("وقف الهجوم ، والبقاء على الانترنت / جمع ...", $COLOR_INFO)
 					ElseIf $g_bTrainEnabled = False Then
-						SetLog("Halt Attack, Stay Online/Collect/Donate...", $COLOR_INFO)
+						SetLog("وقف الهجوم ، والبقاء على الانترنت / جمع / تبرع ...", $COLOR_INFO)
 					Else
-						SetLog("Halt Attack, Stay Online/Train/Collect/Donate...", $COLOR_INFO)
+						SetLog("وقف الهجوم ، والبقاء عبر الإنترنت / التدريب / جمع / تبرع ...", $COLOR_INFO)
 					EndIf
 					$g_iCommandStop = 0 ; Halt Attack
 					If _Sleep($DELAYBOTCOMMAND1) Then Return
 				Case 1
-					SetLog("MyBot.run Bot Stop as requested!!", $COLOR_INFO)
+					SetLog("توقف البوت على النحو المطلوب!!", $COLOR_INFO)
 					If _Sleep($DELAYBOTCOMMAND1) Then Return
 					Return True
 				Case 2
-					SetLog("MyBot.run Close Bot as requested!!", $COLOR_INFO)
+					SetLog("تم اغلاق البوت على النحو المطلوب!!", $COLOR_INFO)
 					If _Sleep($DELAYBOTCOMMAND1) Then Return
 					BotClose()
 					Return True ; HaHa - No Return possible!
 				Case 3
-					SetLog("Close Android and Bot as requested!!", $COLOR_INFO)
+					SetLog("اغلاق البوت مع المحاكي حسب النحو المطلوب!!", $COLOR_INFO)
 					If _Sleep($DELAYBOTCOMMAND1) Then Return
 					CloseAndroid("BotCommand")
 					BotClose()
 					Return True ; HaHa - No Return possible!
 				Case 4
-					SetLog("Force Shutdown of PC...", $COLOR_INFO)
+					SetLog("ايقاف جهاز الكمبيوتر ....", $COLOR_INFO)
 					If _Sleep($DELAYBOTCOMMAND1) Then Return
 					Shutdown(BitOR($SD_SHUTDOWN, $SD_FORCE)) ; Force Shutdown
 					Return True ; HaHa - No Return possible!
 				Case 5
-					SetLog("PC Sleep Mode Start now ...", $COLOR_INFO)
+					SetLog("وضع الجهاز/الكمبيوتر في وضع السكون ...", $COLOR_INFO)
 					If _Sleep($DELAYBOTCOMMAND1) Then Return
 					Shutdown($SD_STANDBY) ; Sleep / Stand by
 					Return True ; HaHa - No Return possible!
 				Case 6
-					SetLog("Rebooting PC...", $COLOR_INFO)
+					SetLog("اعادة تشغيل الكمبيوتر...", $COLOR_INFO)
 					If _Sleep($DELAYBOTCOMMAND1) Then Return
 					Shutdown(BitOR($SD_REBOOT, $SD_FORCE)) ; Reboot
 					Return True ; HaHa - No Return possible!
@@ -164,7 +164,7 @@ EndFunc   ;==>BotCommand
 Func isTrophyMax()
 	Local $iTrophyCurrent = getTrophyMainScreen($aTrophies[0], $aTrophies[1])
 	If Number($iTrophyCurrent) > Number($g_iDropTrophyMax) Then
-		SetLog("Max. Trophy Reached!", $COLOR_SUCCESS)
+		SetLog("وصل بالكؤؤس الى حد الماكس المطلوب!", $COLOR_SUCCESS)
 		If _Sleep($DELAYBOTCOMMAND1) Then Return
 		Return True
 	EndIf

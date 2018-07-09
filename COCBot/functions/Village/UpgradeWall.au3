@@ -16,7 +16,7 @@
 Func UpgradeWall()
 
 	If $g_bAutoUpgradeWallsEnable = True Then
-		SetLog("Checking Upgrade Walls", $COLOR_INFO)
+		SetLog("التحقق من ترقية الجدران", $COLOR_INFO)
 		If SkipWallUpgrade() Then Return
 		If $g_iFreeBuilderCount > 0 Then
 			ClickP($aAway, 1, 0, "#0313") ; click away
@@ -28,30 +28,30 @@ Func UpgradeWall()
 				Switch $g_iUpgradeWallLootType
 					Case 0
 						If $MinWallGold Then
-							SetLog("Upgrading Wall using Gold", $COLOR_SUCCESS)
+							SetLog("ترقية الجدار باستخدام الذهب", $COLOR_SUCCESS)
 							If imglocCheckWall() Then
 								If Not UpgradeWallGold() Then
-									SetLog("Upgrade with Gold failed, skipping...", $COLOR_ERROR)
+									SetLog("ترقية مع فشل الذهب ، تخطي...", $COLOR_ERROR)
 									Return
 								EndIf
 							ElseIf SwitchToNextWallLevel() Then
-								SetLog("No more walls of current level, switching to next", $COLOR_ACTION)
+								SetLog("لا مزيد من الجدران من المستوى الحالي ، والتحول إلى التالي", $COLOR_ACTION)
 							Else
 								Return
 							EndIf
 						Else
-							SetLog("Gold is below minimum, Skipping Upgrade", $COLOR_ERROR)
+							SetLog("الذهب أقل من الحد الأدنى ، ترقية الترقي", $COLOR_ERROR)
 						EndIf
 					Case 1
 						If $MinWallElixir Then
-							SetLog("Upgrading Wall using Elixir", $COLOR_SUCCESS)
+							SetLog("ترقية الجدار باستخدام إكسير", $COLOR_SUCCESS)
 							If imglocCheckWall() Then
 								If Not UpgradeWallElixir() Then
-									SetLog("Upgrade with Elixier failed, skipping...", $COLOR_ERROR)
+									SetLog("فشل الترقية مع Elixier ، تخطي...", $COLOR_ERROR)
 									Return
 								EndIf
 							ElseIf SwitchToNextWallLevel() Then
-								SetLog("No more walls of current level, switching to next", $COLOR_ACTION)
+								SetLog("لا مزيد من الجدران من المستوى الحالي ، والتحول إلى التالي", $COLOR_ACTION)
 							Else
 								Return
 							EndIf
@@ -60,35 +60,35 @@ Func UpgradeWall()
 						EndIf
 					Case 2
 						If $MinWallElixir Then
-							SetLog("Upgrading Wall using Elixir", $COLOR_SUCCESS)
+							SetLog("ترقية الجدار باستخدام إكسير", $COLOR_SUCCESS)
 							If imglocCheckWall() Then
 								If Not UpgradeWallElixir() Then
-									SetLog("Upgrade with Elixir failed, attempt to upgrade using Gold", $COLOR_ERROR)
+									SetLog("فشل الترقية مع Elixir ، حاول الترقية باستخدام Gold", $COLOR_ERROR)
 									If Not UpgradeWallGold() Then
-										SetLog("Upgrade with Gold failed, skipping...", $COLOR_ERROR)
+										SetLog("ترقية مع فشل الذهب ، تخطي...", $COLOR_ERROR)
 										Return
 									EndIf
 								EndIf
 							ElseIf SwitchToNextWallLevel() Then
-								SetLog("No more walls of current level, switching to next", $COLOR_ACTION)
+								SetLog("لا مزيد من الجدران من المستوى الحالي ، والتحول إلى التالي", $COLOR_ACTION)
 							Else
 								Return
 							EndIf
 						Else
-							SetLog("Elixir is below minimum, attempt to upgrade using Gold", $COLOR_ERROR)
+							SetLog("الإكسير أقل من الحد الأدنى ، حاول الترقية باستخدام الذهب", $COLOR_ERROR)
 							If $MinWallGold Then
 								If imglocCheckWall() Then
 									If Not UpgradeWallGold() Then
-										SetLog("Upgrade with Gold failed, skipping...", $COLOR_ERROR)
+										SetLog("ترقية مع فشل الذهب ، تخطي...", $COLOR_ERROR)
 										Return
 									EndIf
 								ElseIf SwitchToNextWallLevel() Then
-									SetLog("No more walls of current level, switching to next", $COLOR_ACTION)
+									SetLog("لا مزيد من الجدران من المستوى الحالي ، والتحول إلى التالي", $COLOR_ACTION)
 								Else
 									Return
 								EndIf
 							Else
-								SetLog("Gold is below minimum, Skipping Upgrade", $COLOR_ERROR)
+								SetLog("الذهب أقل من الحد الأدنى ، ترقية الترقي", $COLOR_ERROR)
 							EndIf
 						EndIf
 				EndSwitch
@@ -105,7 +105,7 @@ Func UpgradeWall()
 
 			WEnd
 		Else
-			SetLog("No free builder, Upgrade Walls skipped..", $COLOR_ERROR)
+			SetLog("لا البناء مجانا ، وتخطي ترقية الجدران..", $COLOR_ERROR)
 		EndIf
 	EndIf
 	If _Sleep($DELAYUPGRADEWALL1) Then Return
@@ -138,15 +138,15 @@ Func UpgradeWallGold()
 			If _Sleep(1000) Then Return
 			If isGemOpen(True) Then
 				ClickP($aAway, 1, 0, "#0314") ; click away
-				SetLog("Upgrade stopped due no loot", $COLOR_ERROR)
+				SetLog("توقف الترقية بسبب عدم وجود المسروقات", $COLOR_ERROR)
 				Return False
 			ElseIf _ColorCheck(_GetPixelColor(677, 150 + $g_iMidOffsetY, True), Hex(0xE1090E, 6), 20) Then ; wall upgrade window red x, didnt closed on upgradeclick, so not able to upgrade
 				ClickP($aAway, 1, 0, "#0314") ; click away
-				SetLog("unable to upgrade", $COLOR_ERROR)
+				SetLog("غير قادر على الترقية", $COLOR_ERROR)
 				Return False
 			Else
 				If _Sleep($DELAYUPGRADEWALLGOLD3) Then Return
-				SetLog("Upgrade complete", $COLOR_SUCCESS)
+				SetLog("اكتملت الترقية", $COLOR_SUCCESS)
 				PushMsg("UpgradeWithGold")
 				$g_iNbrOfWallsUppedGold += 1
 				$g_iNbrOfWallsUpped += 1
@@ -156,7 +156,7 @@ Func UpgradeWallGold()
 			EndIf
 		EndIf
 	Else
-		SetLog("No Upgrade Gold Button", $COLOR_ERROR)
+		SetLog("لا ترقية زر الذهب", $COLOR_ERROR)
 		Pushmsg("NowUpgradeGoldButton")
 		Return False
 	EndIf
@@ -176,7 +176,7 @@ Func UpgradeWallElixir()
 		If _Sleep($DELAYUPGRADEWALLELIXIR2) Then Return
 		If _ColorCheck(_GetPixelColor(677, 150 + $g_iMidOffsetY, True), Hex(0xE1090E, 6), 20) Then
 			If isNoUpgradeLoot(False) = True Then
-				SetLog("Upgrade stopped due to insufficient loot", $COLOR_ERROR)
+				SetLog("توقف الترقية بسبب المسروقات غير الكافية", $COLOR_ERROR)
 				Return False
 			EndIf
 			Click(440, 480 + $g_iMidOffsetY, 1, 0, "#0318")

@@ -20,7 +20,7 @@ Func AddIdleTime()
 	Else
 		$iTimeToWait = Random($g_iTrainAddRandomDelayMax, $g_iTrainAddRandomDelayMin, 1)
 	EndIf
-	SetLog("Waiting, Add random delay of " & $iTimeToWait & " seconds.", $COLOR_INFO)
+	SetLog("الانتظار لأضافة الوقت العشوائي " & $iTimeToWait & " ثواني .", $COLOR_INFO)
 	If _SleepStatus($iTimeToWait * 1000) Then Return
 	_GUICtrlStatusBar_SetTextEx($g_hStatusBar, "")
 EndFunc   ;==>AddIdleTime

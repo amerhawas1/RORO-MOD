@@ -22,8 +22,8 @@ Func ProfileReport()
 	ClickP($aAway, 1, 0, "#0221") ;Click Away
 	If _Sleep($DELAYPROFILEREPORT1) Then Return
 
-	SetLog("Profile Report", $COLOR_INFO)
-	SetLog("Opening Profile page to read Attacks, Defenses, Donations and Recieved Troops", $COLOR_INFO)
+	SetLog("تقرير عن البروفايل", $COLOR_INFO)
+	SetLog("فتح صفحة الملف الشخصي لقراءة الهجمات والدفاعات والتبرعات والقوات المتلقية", $COLOR_INFO)
 	Click(30, 40, 1, 0, "#0222") ; Click Info Profile Button
 	If _Sleep($DELAYPROFILEREPORT2) Then Return
 
@@ -33,7 +33,7 @@ Func ProfileReport()
 		If $iCount >= 25 Then ExitLoop
 	WEnd
 	If $iCount >= 25 Then
-		SetDebugLog("Profile Page did not open after " & $iCount & " Loops", $COLOR_DEBUG)
+		SetDebugLog("لم يتم فتح صفحة الملف الشخصي بعد " & $iCount & " الحلقات", $COLOR_DEBUG)
 		Return
 	EndIf
 
@@ -41,7 +41,7 @@ Func ProfileReport()
 	For $i = 0 to 1 ; Check twice,  because the button is animated
 		If QuickMIS("BC1", $g_sImgCollectReward, 680, 165, 855, 680) Then
 			Click($g_iQuickMISX + 680, $g_iQuickMISY + 165)
-			SetLog("Reward collected", $COLOR_SUCCESS)
+			SetLog("مكافأة جمعت", $COLOR_SUCCESS)
 			For $i = 0 To 9
 				ClickDrag(421, 200, 421, 630, 2000)
 				If _Sleep(2000) Then Return ; 2000ms
@@ -57,7 +57,7 @@ Func ProfileReport()
 	$iAttacksWon = ""
 
 	If _ColorCheck(_GetPixelColor($aProfileReport[0], $aProfileReport[1], True), Hex($aProfileReport[2], 6), $aProfileReport[3]) Then
-		SetDebugLog("Profile seems to be currently unranked", $COLOR_DEBUG)
+		SetDebugLog("يبدو أن الملف الشخصي غير مفتوح حاليا", $COLOR_DEBUG)
 		$iAttacksWon = 0
 		$iDefensesWon = 0
 	Else
@@ -86,7 +86,7 @@ Func ProfileReport()
 		If _Sleep($DELAYPROFILEREPORT3) Then Return
 		$iCount += 1
 		If $iCount > 50 Then
-			SetDebugLog("Main Window did not appear after " & $iCount & " Loops", $COLOR_DEBUG)
+			SetDebugLog("النافذة الرئيسية لم تظهر بعد " & $iCount & "الحلقات", $COLOR_DEBUG)
 			ExitLoop
 		EndIf
 	WEnd

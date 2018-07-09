@@ -45,7 +45,7 @@ Func UpgradeBuilding()
 	If $iUpgradeAction < 0 Then Return False
 	$iUpgradeAction = 0 ; Reset action
 
-	SetLog("Checking Upgrades", $COLOR_INFO)
+	SetLog("التحقق من الترقيات", $COLOR_INFO)
 
 	VillageReport(True, True) ; Get current loot available after training troops and update free builder status
 	$iAvailGold = Number($g_aiCurrentLoot[$eLootGold])
@@ -56,7 +56,7 @@ Func UpgradeBuilding()
 	$iAvailBldr = $g_iFreeBuilderCount - ($g_bUpgradeWallSaveBuilder = True ? 1 : 0)
 
 	If $iAvailBldr <= 0 Then
-		SetLog("No builder available for upgrade process")
+		SetLog("لا يوجد منشئ متاح لعملية الترقية")
 		Return False
 	EndIf
 
@@ -70,7 +70,7 @@ Func UpgradeBuilding()
 
 		; Check free builder in case of multiple upgrades, but skip check when time to check repeated upgrades.
 		If $iAvailBldr <= 0 And $bChkAllRptUpgrade = False Then
-			SetLog("No builder available for #" & $iz + 1 & ", " & $g_avBuildingUpgrades[$iz][4])
+			SetLog("لا يوجد منشئ المتاحة ل #" & $iz + 1 & ", " & $g_avBuildingUpgrades[$iz][4])
 			Return False
 		EndIf
 
