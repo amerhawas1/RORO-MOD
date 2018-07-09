@@ -581,7 +581,7 @@ Func FinalInitialization(Const $sAI)
 	DestroySplashScreen()
 
 	; InitializeVariables();initialize variables used in extrawindows
-	CheckVersion() ; check latest version on mybot.run site
+	
 	UpdateMultiStats()
 	SetDebugLog("Maximum of " & $g_iGlobalActiveBotsAllowed & " bots running at same time configured")
 	SetDebugLog("MyBot.run launch time " & Round($g_iBotLaunchTime) & " ms.")
@@ -657,7 +657,7 @@ EndFunc   ;==>MainLoop
 
 Func runBot() ;Bot that runs everything in order
 	Local $iWaitTime
-
+    _ClanGames()
 	InitiateSwitchAcc()
 	If ProfileSwitchAccountEnabled() And $g_bReMatchAcc Then
 		Setlog("Rematching Account [" & $g_iNextAccount + 1 & "] with Profile [" & GUICtrlRead($g_ahCmbProfile[$g_iNextAccount]) & "]")
