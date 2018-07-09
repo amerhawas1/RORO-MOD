@@ -18,7 +18,7 @@ Func LocateTownHall($bLocationOnly = False)
 	Local $stext, $MsgBox, $Success, $sLocMsg
 	Local $iStupid = 0, $iSilly = 0, $sErrorText = ""
 
-	SetLog("Locating Town Hall ...", $COLOR_INFO)
+	SetLog("تحديد موقع التاون هول في القرية ", $COLOR_INFO)
 
 	WinGetAndroidHandle()
 	If _GetPixelColor($aTopLeftClient[0], $aTopLeftClient[1], True) <> Hex($aTopLeftClient[2], 6) Or _GetPixelColor($aTopRightClient[0], $aTopRightClient[1], True) <> Hex($aTopRightClient[2], 6) Then
@@ -64,7 +64,7 @@ Func LocateTownHall($bLocationOnly = False)
 			EndIf
 			SetLog("Townhall: " & "(" & $g_aiTownHallPos[0] & "," & $g_aiTownHallPos[1] & ")", $COLOR_SUCCESS)
 		Else
-			SetLog("Locate TownHall Cancelled", $COLOR_INFO)
+			SetLog("لقد تغير موقع التاون هول !! ", $COLOR_INFO)
 			ClickP($aAway, 1, 0, "#0393")
 			Return
 		EndIf
@@ -98,7 +98,7 @@ Func LocateTownHall($bLocationOnly = False)
 						Return False
 				EndSelect
 			Else
-				SetLog("Locate TH Success!", $COLOR_ERROR)
+				SetLog("لقد تم تحديد موقع التاون هول بنجاح ", $COLOR_ERROR)
 			EndIf
 		EndIf
 		ExitLoop

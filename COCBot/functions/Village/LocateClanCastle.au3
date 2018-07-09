@@ -16,7 +16,7 @@
 Func LocateClanCastle()
 	Local $stext, $MsgBox, $iSilly = 0, $iStupid = 0, $sErrorText = "", $sInfo
 
-	SetLog("Locating Clan Castle...", $COLOR_INFO)
+	SetLog("جاري تحديد موقع قلعة القبيلة", $COLOR_INFO)
 
 	If _GetPixelColor($aTopLeftClient[0], $aTopLeftClient[1], True) <> Hex($aTopLeftClient[2], 6) Or _GetPixelColor($aTopRightClient[0], $aTopRightClient[1], True) <> Hex($aTopRightClient[2], 6) Then
 		Zoomout()
@@ -39,7 +39,7 @@ Func LocateClanCastle()
 				Select
 					Case $iStupid = 1
 						$sErrorText = "Clan Castle Location Not Valid!" & @CRLF
-						SetLog("Location not valid, try again", $COLOR_ERROR)
+						SetLog("لم يتم العثور على الموقع الرجاء المحاولة من جديد ", $COLOR_ERROR)
 						ContinueLoop
 					Case $iStupid = 2
 						$sErrorText = "Please try to click inside the grass field!" & @CRLF
@@ -62,9 +62,9 @@ Func LocateClanCastle()
 						Return False
 				EndSelect
 			EndIf
-			SetLog("Clan Castle: " & "(" & $g_aiClanCastlePos[0] & "," & $g_aiClanCastlePos[1] & ")", $COLOR_SUCCESS)
+			SetLog("قلعة القبيلة :: " & "(" & $g_aiClanCastlePos[0] & "," & $g_aiClanCastlePos[1] & ")", $COLOR_SUCCESS)
 		Else
-			SetLog("Locate Clan Castle Cancelled", $COLOR_INFO)
+			SetLog("حدد موقع القبيلة الملغا", $COLOR_INFO)
 			ClickP($aAway, 1, 0, "#0376")
 			Return
 		EndIf
@@ -98,7 +98,7 @@ Func LocateClanCastle()
 			If $sInfo[2] = "Broken" Then
 				SetLog("You did not rebuild your Clan Castle yet.", $COLOR_ACTION)
 			Else
-				SetLog("Your Clan Castle is at level: " & $sInfo[2], $COLOR_SUCCESS)
+				SetLog("قلعة قبيلتك لفل :  " & $sInfo[2], $COLOR_SUCCESS)
 			EndIf
 		Else
 			SetLog(" Operator Error - Bad Clan Castle Location: " & "(" & $g_aiClanCastlePos[0] & "," & $g_aiClanCastlePos[1] & ")", $COLOR_ERROR)

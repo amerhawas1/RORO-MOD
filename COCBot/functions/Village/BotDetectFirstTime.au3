@@ -20,7 +20,7 @@ Func BotDetectFirstTime()
 	ClickP($aAway, 1, 0, "#0166") ; Click away
 	If _Sleep($DELAYBOTDETECT1) Then Return
 
-	SetLog("Detecting your Buildings..", $COLOR_INFO)
+	SetLog("الكشف عن المباني الخاصة بك ....", $COLOR_INFO)
 
 	If (isInsideDiamond($g_aiTownHallPos) = False) Then
 		If _GetPixelColor($aTopLeftClient[0], $aTopLeftClient[1], True) <> Hex($aTopLeftClient[2], 6) And _GetPixelColor($aTopRightClient[0], $aTopRightClient[1], True) <> Hex($aTopRightClient[2], 6) Then
@@ -41,7 +41,7 @@ Func BotDetectFirstTime()
 			$g_aiTownHallPos[1] = $g_iTHy
 			If $g_bDebugSetlog Then SetDebugLog("OldDDL Townhall: (" & $g_aiTownHallPos[0] & "," & $g_aiTownHallPos[1] & ")", $COLOR_ERROR)
 		EndIf
-		SetLog("Townhall: (" & $g_aiTownHallPos[0] & "," & $g_aiTownHallPos[1] & ")", $COLOR_DEBUG)
+		SetLog("التاون هول : (" & $g_aiTownHallPos[0] & "," & $g_aiTownHallPos[1] & ")", $COLOR_DEBUG)
 	EndIf
 
 	If Number($g_iTownHallLevel) < 2 Then

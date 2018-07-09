@@ -17,7 +17,7 @@
 Func waitMainScreen() ;Waits for main screen to popup
 	If Not $g_bRunState Then Return
 	Local $iCount
-	SetLog("Waiting for Main Screen")
+	SetLog("الرجاء الانتظار قليلاً")
 	$iCount = 0
 	For $i = 0 To 105 ;105*2000 = 3.5 Minutes
 		If Not $g_bRunState Then Return

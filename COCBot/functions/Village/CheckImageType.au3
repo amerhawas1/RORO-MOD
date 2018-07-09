@@ -12,7 +12,7 @@
 #include-once
 
 Func CheckImageType()
-	SetLog("Detecting your Village Theme", $COLOR_INFO)
+	SetLog("اكتشاف تصميم قريتك ", $COLOR_INFO)
 
 	ClickP($aAway, 2, 20, "#0467") ;Click Away
 
@@ -33,7 +33,7 @@ Func CheckImageType()
 			SetLog("Snow Theme detected")
 		Else
 			$g_iDetectedImageType = 0 ; Normal Theme
-			SetLog("Normal Theme detected")
+			SetLog("تم قراءة شكل القرية والتصميم بنجاح ")
 		EndIf
 	Else
 		$g_iDetectedImageType = 0 ; Normal Theme

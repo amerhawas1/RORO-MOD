@@ -146,6 +146,11 @@ Func ApplyConfig_MOD($TypeReadSave)
 			GUICtrlSetData($g_hTxtStopOnBatt, $g_iStopOnBatt)
 			chkStopOnBatt()
 
+            ; Skip Request CC - Team AiO MOD++
+			_Ini_Add("donate", "SkipRequestCC", $g_bSkipRequestCC ? 1 : 0)
+			_Ini_Add("donate", "SkipRequestCC_Troop", $g_iSkipRequestCCTroop)
+			_Ini_Add("donate", "SkipRequestCC_Spell", $g_iSkipRequestCCSpell)
+
 			; Attack Log - RORO-MOD
 			GUICtrlSetState($g_hChkColorfulAttackLog, $g_bColorfulAttackLog ? $GUI_CHECKED : $GUI_UNCHECKED)
 
@@ -177,6 +182,12 @@ Func ApplyConfig_MOD($TypeReadSave)
 			chkRequestDefense()
 			GUICtrlSetData($g_hTxtRequestCCDefense, $g_sRequestTroopsTextDefense)
 			GUICtrlSetData($g_hTxtRequestDefenseEarly, $g_iRequestDefenseEarly)
+
+;~ ; Skip Request CC - RORO-MOD++
+			GUICtrlSetState($g_hChkSkipRequestCC, $g_bSkipRequestCC ? $GUI_CHECKED : $GUI_UNCHECKED)
+			chkSkipRequestCC()
+			GUICtrlSetData($g_hTxtSkipRequestCCTroop, $g_iSkipRequestCCTroop)
+			GUICtrlSetData($g_hTxtSkipRequestCCSpell, $g_iSkipRequestCCSpell)
 
 		Case "Save"
 			; CSV Deploy Speed - RORO-MOD
@@ -311,5 +322,9 @@ Func ApplyConfig_MOD($TypeReadSave)
 			$g_sRequestTroopsTextDefense = GUICtrlRead($g_hTxtRequestCCDefense)
 			$g_iRequestDefenseEarly = GUICtrlRead($g_hTxtRequestDefenseEarly)
 
+; Skip Request CC - RORO-MOD++
+			$g_bSkipRequestCC = (GUICtrlRead($g_hChkSkipRequestCC) = $GUI_CHECKED)
+			$g_iSkipRequestCCTroop = GUICtrlRead($g_hTxtSkipRequestCCTroop)
+			$g_iSkipRequestCCSpell = GUICtrlRead($g_hTxtSkipRequestCCSpell)
 	EndSwitch
 EndFunc   ;==>ApplyConfig_MOD

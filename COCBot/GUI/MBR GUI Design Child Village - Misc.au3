@@ -340,8 +340,8 @@ EndFunc   ;==>CreateMiscBuilderBaseSubTab
 
 ; Clan Games v3
 Func CreateMiscClanGamesV3SubTab()
-
-	Local Const $g_sLibIconPathMOD = @ScriptDir & "\images\ClanGames.bmp"
+        GUISetBkColor(0xE0FFFF)
+	Local Const $g_sLibIconPathMOD = @ScriptDir & "\images\ROROMOD.bmp"
 
 	; GUI SubTab
 	Local $x = 15, $y = 45

@@ -56,7 +56,7 @@ Func InitiateSwitchAcc() ; Checking profiles setup in Mybot, First matching CoC 
 	If Not ProfileSwitchAccountEnabled() Or Not $g_bInitiateSwitchAcc Then Return
 	UpdateMultiStats()
 	$g_iNextAccount = -1
-	SetLog("Switch Account enable for " & $g_iTotalAcc + 1 & " accounts")
+	SetLog("تبديل الحسابات مفعلة  ل " & $g_iTotalAcc + 1 & " حسابات")
 	SetSwitchAccLog("Initiating: " & $g_iTotalAcc + 1 & " acc", $COLOR_SUCCESS)
 
 	;Local $iCurProfile = _GUICtrlComboBox_GetCurSel($g_hCmbProfile)
@@ -100,7 +100,7 @@ Func CheckSwitchAcc()
 	Local $nMinRemainTrain, $iWaitTime
 	Local $aActibePBTaccounts = _ArrayFindAll($g_abPBActive, True)
 
-	SetLog("Start Switch Account...!", $COLOR_INFO)
+	SetLog("بداية تبديل الحسابات ", $COLOR_INFO)
 
 	; Force Switch when PBT detected
 	If $g_abPBActive[$g_iCurAccount] = True Then $bForceSwitch = True
@@ -348,7 +348,7 @@ Func SwitchCOCAcc($NextAccount)
 			EndIf
 		EndIf
 		If $bSharedPrefs Then
-			SetLog("Please wait for loading CoC...!")
+			SetLog("الرجاء الانتظار ريثما يتم تشغيل اللعبة ")
 			PushSharedPrefs()
 			OpenCoC()
 		EndIf
@@ -384,8 +384,8 @@ Func SwitchCOCAcc($NextAccount)
 	Else
 		$iRetry += 1
 		$g_bReMatchAcc = True
-		SetLog("Switching account failed!", $COLOR_ERROR)
-		SetSwitchAccLog("Switching to Acc " & $NextAccount + 1 & " Failed!", $COLOR_ERROR)
+		SetLog("فشل تبديل الحسابات", $COLOR_ERROR)
+		SetSwitchAccLog("التبديل للحساب  " & $NextAccount + 1 & " فشل ", $COLOR_ERROR)
 		If $iRetry <= 3 Then
 			Local $ClickPoint = $aAway
 			If $g_bChkSuperCellID Then $ClickPoint = $aCloseTabSCID
@@ -406,11 +406,11 @@ Func SwitchCOCAcc_DisconnectConnect(ByRef $bResult, $bDisconnectOnly = $g_bChkSh
 	For $i = 0 To 20 ; Checking Green Connect Button continuously in 20sec
 		If _ColorCheck(_GetPixelColor($aButtonConnected[0], $aButtonConnected[1], True), Hex($aButtonConnected[2], 6), $aButtonConnected[3]) Then ;	Green
 			If $bDisconnectOnly = False Then
-				SetLog("   1. Click Connect & Disconnect")
+				SetLog("   1. الضغط عل اتصال /عدم الاتصال")
 				Click($aButtonConnected[0], $aButtonConnected[1], 2, 1000) ; Click Connect & Disconnect
 				If _Sleep(200) Then Return "Exit"
 			Else
-				SetLog("   1. Click Connected")
+				SetLog("   1. الضغط عل عدم الاتصال ")
 				Click($aButtonConnected[0], $aButtonConnected[1], 1, 1000) ; Click Disconnect
 				If _Sleep(200) Then Return "Exit"
 			EndIf
@@ -418,16 +418,16 @@ Func SwitchCOCAcc_DisconnectConnect(ByRef $bResult, $bDisconnectOnly = $g_bChkSh
 			Return "OK"
 		ElseIf _ColorCheck(_GetPixelColor($aButtonDisconnected[0], $aButtonDisconnected[1], True), Hex($aButtonDisconnected[2], 6), $aButtonDisconnected[3]) Then ; Red
 			If $bDisconnectOnly = False Then
-				SetLog("   1. Click Disconnect")
+				SetLog("   1. الضغط على عدم الاتصال")
 				Click($aButtonDisconnected[0], $aButtonDisconnected[1]) ; Click Disconnect
 				If _Sleep(200) Then Return "Exit"
 			Else
-				SetLog("Account already disconnected")
+				SetLog("الحساب حاليا غير متصل ")
 			EndIf
 			;ExitLoop
 			Return "OK"
 		ElseIf _ColorCheck(_GetPixelColor($aButtonConnectedSCID[0], $aButtonConnectedSCID[1], True), Hex($aButtonConnectedSCID[2], 6), $aButtonConnectedSCID[3]) Then ; Green
-			SetLog("Account connected to SuperCell ID")
+			SetLog("الحساب متصل مع سوير اي دي ")
 			;ExitLoop
 			Return "OK"
 		EndIf
@@ -451,7 +451,7 @@ Func SwitchCOCAcc_ClickAccount(ByRef $bResult, $NextAccount, $bStayDisconnected 
 				Return FuncReturn("OK")
 			EndIf
 			If _Sleep(600) Then Return FuncReturn("Exit")
-			SetLog("   2. Click Account [" & $NextAccount + 1 & "]")
+			SetLog("   2. الضغط على الحساب  [" & $NextAccount + 1 & "]")
 			Click(383, $YCoord) ; Click Account
 			If _Sleep(600) Then Return FuncReturn("Exit")
 			;ExitLoop
@@ -462,7 +462,7 @@ Func SwitchCOCAcc_ClickAccount(ByRef $bResult, $NextAccount, $bStayDisconnected 
 				Return FuncReturn("OK")
 			EndIf
 			If _Sleep(250) Then Return FuncReturn("Exit")
-			SetLog("   1.1. Click Disconnect again")
+			SetLog("   1.1. الضغط مرة ثانية على زر عدم الاتصال ")
 			Click($aButtonDisconnected[0], $aButtonDisconnected[1]) ; Click Disconnect
 			If _Sleep(600) Then Return FuncReturn("Exit")
 		ElseIf _ColorCheck(_GetPixelColor($aButtonConnectedSCID[0], $aButtonConnectedSCID[1], True), Hex($aButtonConnectedSCID[2], 6), $aButtonConnectedSCID[3]) Then ; Green
@@ -505,15 +505,15 @@ Func SwitchCOCAcc_ConfirmAccount(ByRef $bResult, $iStep = 3, $bDisconnectAfterSw
 			Return "OK"
 		ElseIf _ColorCheck(_GetPixelColor($aButtonVillageLoad[0], $aButtonVillageLoad[1], True), Hex($aButtonVillageLoad[2], 6), $aButtonVillageLoad[3]) Then ; Load Button
 			If _Sleep(250) Then Return "Exit"
-			SetLog("   " & $iStep & ". Click Load button")
+			SetLog("   " & $iStep & ". الضغط لتحميل القائمة")
 			Click($aButtonVillageLoad[0], $aButtonVillageLoad[1], 1, 0, "Click Load") ; Click Load
 
 			For $j = 0 To 25 ; Checking Text Box and OKAY Button continuously in 25sec
 				If _ColorCheck(_GetPixelColor($aButtonVillageOkay[0], $aButtonVillageOkay[1], True), Hex($aButtonVillageOkay[2], 6), $aButtonVillageOkay[3]) Then ; with modified texts.csv OKAY Button may be already green
 					If _Sleep(250) Then Return "Exit"
-					SetLog("   " & ($iStep + 1) & ". Click OKAY")
-					Click($aButtonVillageOkay[0], $aButtonVillageOkay[1], 1, 0, "Click OKAY")
-					SetLog("Please wait for loading CoC...!")
+					SetLog("   " & ($iStep + 1) & ". الضعط على OK")
+					Click($aButtonVillageOkay[0], $aButtonVillageOkay[1], 1, 0, "الضعط على OK")
+					SetLog("الرجاء الانتظار ريثما  تفتح اللعبة !")
 					$bResult = True
 					;ExitLoop 2
 					Return "OK"
@@ -586,7 +586,7 @@ Func SwitchCOCAcc_ConnectedSCID(ByRef $bResult)
 	For $i = 0 To 20 ; Checking Green Connected button continuously in 20sec
 		If _ColorCheck(_GetPixelColor($aButtonConnectedSCID[0], $aButtonConnectedSCID[1], True), Hex($aButtonConnectedSCID[2], 6), $aButtonConnectedSCID[3]) Then
 			Click($aButtonConnectedSCID[0], $aButtonConnectedSCID[1], 1, 0, "Click Connected SC_ID")
-			SetLog("   1. Click Connected Supercell ID")
+			SetLog("   1. فتح نافذة تبديل الحسابات الاي دي ")
 			If _Sleep(600) Then Return "Exit"
 			;ExitLoop
 			Return "OK"
@@ -606,14 +606,14 @@ EndFunc   ;==>SwitchCOCAcc_ConnectedSCID
 
 Func SwitchCOCAcc_ConfirmSCID(ByRef $bResult)
 	For $i = 0 To 30 ; Checking LogOut & Confirm button continuously in 30sec
-		If QuickMIS("BC1", $g_sImgLogOutButton, 587, 268, 734, 334) Then ; Check Log Out button
-			SetLog("   2. Click Log Out Supercell ID")
+		If QuickMIS("BC1", $g_sImgLogOutButton, 620, 246, 693, 308) Then ; Check Log Out button
+			SetLog("   2. تسجيل الخروج من الحساب ")
 			Click($g_iQuickMISX + 587, $g_iQuickMISY + 268, 2, 500, "Click Log Out SC_ID") ; Click LogOut button
 			If _Sleep(500) Then Return "Exit"
 
 			For $j = 0 To 20
-				If QuickMIS("BC1", $g_sImgConfirmButton, 370, 402, 636, 476) Then ; Check Confirm button
-					SetLog("   3. Click Confirm Supercell ID")
+				If QuickMIS("BC1", $g_sImgConfirmButton, 400, 414, 586, 455) Then ; Check Confirm button
+					SetLog("   3. الضغط عل زر قائمة السوبر اي دي  ")
 					Click($g_iQuickMISX + 370, $g_iQuickMISY + 402, 1, 0, "Click Confirm SC_ID") ; Click Confirm button
 					If _Sleep(500) Then Return "Exit"
 					;ExitLoop
@@ -644,7 +644,7 @@ Func SwitchCOCAcc_ClickAccountSCID(ByRef $bResult, $NextAccount, $iStep = 4)
 	For $i = 0 To 30 ; Checking "Log in with SuperCell ID" button continuously in 30sec
 		If _ColorCheck(_GetPixelColor($aLoginWithSupercellID[0], $aLoginWithSupercellID[1], True), Hex($aLoginWithSupercellID[2], 6), $aLoginWithSupercellID[3]) And _
 		_ColorCheck(_GetPixelColor($aLoginWithSupercellID2[0], $aLoginWithSupercellID2[1], True), Hex($aLoginWithSupercellID2[2], 6), $aLoginWithSupercellID2[3]) Then
-			SetLog("   " & $iStep & ". Click Log in with Supercell ID")
+			SetLog("   " & $iStep & ". الدخول ل قائمة الحسابات ")
 			Click($aLoginWithSupercellID[0], $aLoginWithSupercellID[1], 1, 0, "Click Log in with SC_ID")
 			If _Sleep(600) Then Return "Exit"
 
@@ -678,15 +678,15 @@ Func SwitchCOCAcc_ClickAccountSCID(ByRef $bResult, $NextAccount, $iStep = 4)
 				EndIf
 
 				If $bResult Then
-					SetLog("   " & ($iStep + 1) & ". Click Account [" & $NextAccount + 1 & "] Supercell ID")
-					SetLog("Please wait for loading CoC...!")
+					SetLog("   " & ($iStep + 1) & ". الضغط على الحساب [" & $NextAccount + 1 & "] سوبر سيل اي دي ")
+					SetLog("الرجاء الانتظار ريثما يتم تشغل اللعبة !")
 					Return "OK"
 				EndIf
 
 				If $j = 20 Then
 					$iRetryCloseSCIDTab += 1
 					If $iRetryCloseSCIDTab <= 3 Then
-						SetLog("   " & $iStep & ".5 Click Close Tab Supercell ID")
+						SetLog("   " & $iStep & ".5 الضغط للخروج من قائمة الحسابات ")
 						Click($aCloseTabSCID[0], $aCloseTabSCID[1], 1, 0, "Click Close Tab SC_ID")
 						If _Sleep(500) Then Return "Exit"
 						$i = 0 ; restart loop to check & click "Login With SuperCell ID" button

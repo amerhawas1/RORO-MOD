@@ -23,7 +23,7 @@ Func Collect($bCheckTreasury = True)
 	StartGainCost()
 	checkAttackDisable($g_iTaBChkIdle) ; Early Take-A-Break detection
 
-	SetLog("Collecting Resources", $COLOR_INFO)
+	SetLog("جمع المستخرجات ", $COLOR_INFO)
 	If _Sleep($DELAYCOLLECT2) Then Return
 
 	; Setup arrays, including default return values for $return
@@ -49,7 +49,7 @@ Func Collect($bCheckTreasury = True)
 	checkMainScreen(False) ; check if errors during function
 	; Loot Cart Collect Function
 
-	SetLog("Searching for a Loot Cart..", $COLOR_INFO)
+	SetLog("البحث عن عربة الموارد التي تتواجد بعد هجوم احد على القرية ", $COLOR_INFO)
 
 
 	Local $aLootCart = decodeSingleCoord(findImage("LootCart", $g_sImgCollectLootCart, "ECD", 1, True))

@@ -35,15 +35,15 @@ Func GetTownHallLevel($bFirstTime = False)
 	If $g_bDebugSetlog Then SetDebugLog("$aTHInfo[0]=" & $aTHInfo[0] & ", $aTHInfo[1]=" & $aTHInfo[1] & ", $aTHInfo[2]=" & $aTHInfo[2], $COLOR_DEBUG)
 	If $aTHInfo[0] > 1 Then
 		If StringInStr($aTHInfo[1], "Town") = 0 Then
-			SetLog("Town Hall not found! I detected a " & $aTHInfo[1] & "! Please locate again!", $COLOR_WARNING)
+			SetLog("تاون هول غير موجود " & $aTHInfo[1] & "!الرجاء قم  بتحديد موقع التاون هول مرة اخرة!", $COLOR_WARNING)
 			Return $aTHInfo
 		EndIf
 		If $aTHInfo[2] <> "" Then
 			$g_iTownHallLevel = $aTHInfo[2] ; grab building level from building info array
-			SetLog("Your Town Hall Level read as: " & $g_iTownHallLevel, $COLOR_SUCCESS)
+			SetLog("قاءة مستوى قاعة تاونتك: " & $g_iTownHallLevel, $COLOR_SUCCESS)
 			saveConfig()
 		Else
-			SetLog("Your Town Hall Level was not found! Please Manually Locate", $COLOR_INFO)
+			SetLog("لم يتم العثور على ستوى قاعة تاونتك! يرجى يدويا موقع", $COLOR_INFO)
 			ClickP($aAway, 1, 0, "#0350") ; Unselect TH
 			Return False
 		EndIf

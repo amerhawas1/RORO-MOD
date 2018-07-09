@@ -28,7 +28,7 @@ Func _checkMainScreen($bSetLog = Default, $bBuilderBase = Default) ;Checks if in
 	Local $aPixelToCheck = $aIsMain
 
 	If $bSetLog Then
-		SetLog("Trying to locate Main Screen")
+		SetLog("جاري تجهيز شاشة العرض ")
 	EndIf
 
 	If Not TestCapture() Then
