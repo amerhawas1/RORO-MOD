@@ -27,10 +27,10 @@ Func BoostStructure($sName, $sOcrName, $aPos, ByRef $icmbBoostValue, $cmbBoostCt
 			Local $sL = $aResult[2] ; Sotre bdlg level
 			If $sOcrName = "" Or StringInStr($sN, $sOcrName, $STR_NOCASESENSEBASIC) > 0 Then
 				; Structure located
-				SetLog("Boosting " & $sN & " (Level " & $sL & ") located at " & $aPos[0] & ", " & $aPos[1])
+				SetLog("تسريع " & $sN & " (لفل " & $sL & ") تقع في " & $aPos[0] & ", " & $aPos[1])
 				$ok = True
 			Else
-				SetLog("Cannot boost " & $sN & " (Level " & $sL & ") located at " & $aPos[0] & ", " & $aPos[1], $COLOR_ERROR)
+				SetLog("لا يمكن التسريع " & $sN & " (لفل " & $sL & ") تقع في  " & $aPos[0] & ", " & $aPos[1], $COLOR_ERROR)
 			EndIf
 		EndIf
 	EndIf
@@ -46,28 +46,28 @@ Func BoostStructure($sName, $sOcrName, $aPos, ByRef $icmbBoostValue, $cmbBoostCt
 				Click($Boost[0], $Boost[1], 1, 0, "#0464")
 				If _Sleep($DELAYBOOSTHEROES4) Then Return
 				If IsArray(findButton("EnterShop")) Then
-					SetLog("Not enough gems to boost " & $sName, $COLOR_ERROR)
+					SetLog("لا يوجد جواهر كافية للتسريع " & $sName, $COLOR_ERROR)
 				Else
 					If $icmbBoostValue <= 24 Then
 						$icmbBoostValue -= 1
-						SetLog($sName & ' Boost completed. Remaining iterations: ' & $icmbBoostValue, $COLOR_SUCCESS)
+						SetLog($sName & ' اكتمل التسريع . باقي التكرار: ' & $icmbBoostValue, $COLOR_SUCCESS)
 						_GUICtrlComboBox_SetCurSel($cmbBoostCtrl, $icmbBoostValue)
 					Else
-						SetLog($sName & ' Boost completed. Remaining iterations: Unlimited', $COLOR_SUCCESS)
+						SetLog($sName & ' اكتمل التسريع ..بافي عدد المرات عير محدود', $COLOR_SUCCESS)
 					EndIf
 					$boosted = True
 				EndIf
 			Else
-				SetLog($sName & " is already Boosted", $COLOR_SUCCESS)
+				SetLog($sName & " حاليا التسريع يعمل", $COLOR_SUCCESS)
 			EndIf
 			If _Sleep($DELAYBOOSTHEROES3) Then Return
 			ClickP($aAway, 1, 0, "#0465")
 		Else
-			SetLog($sName & " Boost Button not found", $COLOR_ERROR)
+			SetLog($sName & " لا يمكن العثور على نافذة التسريع", $COLOR_ERROR)
 			If _Sleep($DELAYBOOSTHEROES4) Then Return
 		EndIf
 	Else
-		SetLog("Abort boosting " & $sName & ", bad location", $COLOR_ERROR)
+		SetLog("تسريع سيء " & $sName & ", الموقع سيء", $COLOR_ERROR)
 	EndIf
 
 	Return $boosted
@@ -79,7 +79,7 @@ Func AllowBoosting($sName, $icmbBoost)
 
 	Local $hour = StringSplit(_NowTime(4), ":", $STR_NOCOUNT)
 	If $g_abBoostBarracksHours[$hour[0]] = False Then
-		SetLog("Boosting " & $sName & " is not planned and skipped...", $COLOR_SUCCESS)
+		SetLog("تسريع " & $sName & " لم يتم تخطيطه وتخطي ...", $COLOR_SUCCESS)
 		Return False
 	EndIf
 

@@ -27,12 +27,12 @@ Func BoostTrainBuilding($sName, $iCmbBoost, $iCmbBoostCtrl)
 
 	Local $aHours = StringSplit(_NowTime(4), ":", $STR_NOCOUNT)
 	If Not $g_abBoostBarracksHours[$aHours[0]] Then
-		SetLog("Boosting " & $sName & " isn't planned, skipping", $COLOR_INFO)
+		SetLog("التسريع " & $sName & " ليس مخططا ، تخطي", $COLOR_INFO)
 		Return $boosted
 	EndIf
 
 	Local $sIsAre = "are"
-	SetLog("Boosting " & $sName, $COLOR_INFO)
+	SetLog("التسريع " & $sName, $COLOR_INFO)
 
 	If OpenArmyOverview(True, "BoostTrainBuilding()") Then
 		If $sName = "Barracks" Then
@@ -55,14 +55,14 @@ Func BoostTrainBuilding($sName, $iCmbBoost, $iCmbBoostCtrl)
 				ClickP($aGemWindowBtn)
 				_Sleep($DELAYBOOSTBARRACKS2)
 				If IsArray(findButton("EnterShop")) Then
-					SetLog("Not enough gems to boost " & $sName, $COLOR_ERROR)
+					SetLog("لا يوجد جواهر كافية للتسريع " & $sName, $COLOR_ERROR)
 				Else
 					If $iCmbBoost >= 1 And $iCmbBoost <= 24 Then
 						$iCmbBoost -= 1
 						_GUICtrlComboBox_SetCurSel($iCmbBoostCtrl, $iCmbBoost)
-						SetLog("Remaining " & $sName & " Boosts: " & $iCmbBoost, $COLOR_SUCCESS)
+						SetLog("متبق " & $sName & " من التسريع: " & $iCmbBoost, $COLOR_SUCCESS)
 					ElseIf $iCmbBoost = 25 Then
-						SetLog("Remain " & $sName & " Boosts: Unlimited", $COLOR_SUCCESS)
+						SetLog("يبقى " & $sName & " التسريع: غير محدود", $COLOR_SUCCESS)
 					EndIf
 					$boosted = True
 					; Force to get the Remain Time
@@ -75,9 +75,9 @@ Func BoostTrainBuilding($sName, $iCmbBoost, $iCmbBoostCtrl)
 			EndIf
 		Else
 			If IsArray(findButton("BarrackBoosted")) Then
-				SetLog($sName & " " & $sIsAre & " already boosted", $COLOR_SUCCESS)
+				SetLog($sName & " " & $sIsAre & " حاليا بالتسريع", $COLOR_SUCCESS)
 			Else
-				SetLog($sName & "boost button not found", $COLOR_ERROR)
+				SetLog($sName & "لا يمكن تحديد نافذة التسريع", $COLOR_ERROR)
 			EndIf
 		EndIf
 	EndIf
