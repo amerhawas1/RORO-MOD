@@ -73,7 +73,7 @@ Func InitiateSwitchAcc() ; Checking profiles setup in Mybot, First matching CoC 
 				$sBotType = "Other bot"
 			EndIf
 		EndIf
-		SetLog("  - Account [" & $i + 1 & "]: " & $g_asProfileName[$i] & " - " & $sBotType)
+		SetLog("  - الحساب [" & $i + 1 & "]: " & $g_asProfileName[$i] & " - " & $sBotType)
 		SetSwitchAccLog("  - Acc. " & $i + 1 & ": " & $sBotType)
 
 		; reset all timers
@@ -82,7 +82,7 @@ Func InitiateSwitchAcc() ; Checking profiles setup in Mybot, First matching CoC 
 		$g_abPBActive[$i] = False
 	Next
 	$g_iCurAccount = $g_iNextAccount ; make sure no crash
-	SetLog("Let's start with Account [" & $g_iNextAccount + 1 & "]")
+	SetLog("لنبدأ بالحساب [" & $g_iNextAccount + 1 & "]")
 	SwitchCOCAcc($g_iNextAccount)
 
 EndFunc   ;==>InitiateSwitchAcc
@@ -106,12 +106,12 @@ Func CheckSwitchAcc()
 	If $g_abPBActive[$g_iCurAccount] = True Then $bForceSwitch = True
 
 	If $g_iCommandStop = 0 Then ; Forced to switch when in halt attack mode
-		SetLog("This account is in halt attack mode, switching to another account", $COLOR_ACTION)
+		SetLog("هذا الحساب في وضع الهجوم التوقف ، والتحول إلى حساب آخر", $COLOR_ACTION)
 		SetSwitchAccLog(" - HaltAttack, Force switch")
 		$bForceSwitch = True
 	ElseIf $g_bWaitForCCTroopSpell Then
-		SetLog("Still waiting for CC Troops/Spells, switching to another Account", $COLOR_ACTION)
-		SetSwitchAccLog(" - Waiting for CC")
+		SetLog("لا تزال تنتظر قوات التحالف / نوبات ، والتحول إلى حساب آخر", $COLOR_ACTION)
+		SetSwitchAccLog(" - انتظار الدعم")
 		$bForceSwitch = True
 	Else
 		getArmyTroopTime(True, False) ; update $g_aiTimeTrain[0]
@@ -126,38 +126,38 @@ Func CheckSwitchAcc()
 
 		$iWaitTime = _ArrayMax($g_aiTimeTrain)
 		If $bReachAttackLimit And $iWaitTime <= 0 Then
-			SetLog("This account has attacked twice in a row, switching to another account", $COLOR_INFO)
-			SetSwitchAccLog(" - Reach attack limit: " & $g_aiAttackedCountAcc[$g_iCurAccount] - $g_aiAttackedCountSwitch[$g_iCurAccount])
+			SetLog("لقد هاجم هذا الحساب مرتين متتاليًا ، وتحوّل إلى حساب آخر", $COLOR_INFO)
+			SetSwitchAccLog(" - الوصول إلى حد الهجوم: " & $g_aiAttackedCountAcc[$g_iCurAccount] - $g_aiAttackedCountSwitch[$g_iCurAccount])
 			$bForceSwitch = True
 		EndIf
 	EndIf
 
 	Local $sLogSkip = ""
 	If Not $g_abDonateOnly[$g_iCurAccount] And $iWaitTime <= $g_iTrainTimeToSkip And Not $bForceSwitch Then
-		If $iWaitTime > 0 Then $sLogSkip = " in " & Round($iWaitTime, 1) & " mins"
-		SetLog("Army is ready" & $sLogSkip & ", skip switching account", $COLOR_INFO)
-		SetSwitchAccLog(" - Army is ready" & $sLogSkip)
-		SetSwitchAccLog("Stay at [" & $g_iCurAccount + 1 & "]", $COLOR_SUCCESS)
+		If $iWaitTime > 0 Then $sLogSkip = " in " & Round($iWaitTime, 1) & " دقائق"
+		SetLog("الجيش جاهز" & $sLogSkip & ", تخطي تبديل الحساب", $COLOR_INFO)
+		SetSwitchAccLog(" - الجيش جاهز" & $sLogSkip)
+		SetSwitchAccLog("ابقى في [" & $g_iCurAccount + 1 & "]", $COLOR_SUCCESS)
 		If _Sleep(500) Then Return
 	Else
 		$nMinRemainTrain = CheckTroopTimeAllAccount($bForceSwitch)
 
 		If $g_bChkSmartSwitch = 1 Then ; Smart switch
 			If $nMinRemainTrain <= 1 And Not $bForceSwitch And Not $g_bDonateLikeCrazy Then ; Active (force switch shall give priority to Donate Account)
-				If $g_bDebugSetlog Then SetDebugLog("Switch to or Stay at Active Account: " & $g_iNextAccount + 1, $COLOR_DEBUG)
+				If $g_bDebugSetlog Then SetDebugLog("التبديل إلى أو البقاء في حساب نشط: " & $g_iNextAccount + 1, $COLOR_DEBUG)
 				$g_iDonateSwitchCounter = 0
 			Else
 				If $g_iDonateSwitchCounter < UBound($aDonateAccount) Then ; Donate
 					$g_iNextAccount = $aDonateAccount[$g_iDonateSwitchCounter]
 					$g_iDonateSwitchCounter += 1
-					If $g_bDebugSetlog Then SetDebugLog("Switch to Donate Account " & $g_iNextAccount + 1 & ". $g_iDonateSwitchCounter = " & $g_iDonateSwitchCounter, $COLOR_DEBUG)
-					SetSwitchAccLog(" - Donate Acc [" & $g_iNextAccount + 1 & "]")
+					If $g_bDebugSetlog Then SetDebugLog("التحول إلى تبرع الحساب " & $g_iNextAccount + 1 & ". $g_iDonateSwitchCounter = " & $g_iDonateSwitchCounter, $COLOR_DEBUG)
+					SetSwitchAccLog(" - حساب التبرع [" & $g_iNextAccount + 1 & "]")
 				Else ; Active
 					$g_iDonateSwitchCounter = 0
 					#cs					If $g_iCurAccount = $g_iNextAccount And $nMinRemainTrain > 3 Then ; Random
 						Local $iRandomElement = Random(0, UBound($aActiveAccount) - 1, 1)
 						$g_iNextAccount = $aActiveAccount[$iRandomElement]
-						SetLog("Still " & Round($nMinRemainTrain, 2) & " min until army is ready. Switch to a random account: " & $g_iNextAccount + 1, $COLOR_INFO)
+						SetLog("ما يزال " & Round($nMinRemainTrain, 2) & " دقيقة حتى الجيش جاهز. قم بالتبديل إلى حساب عشوائي: " & $g_iNextAccount + 1, $COLOR_INFO)
 						SetSwitchAccLog(" - Random Acc [" & $g_iNextAccount + 1 & "]")
 					#ce					EndIf
 				EndIf
@@ -175,8 +175,8 @@ Func CheckSwitchAcc()
 		For $i = 0 To $g_iTotalAcc
 			; Check if the next account is PBT and IF the remain Train Time is Less/More than 2 minutes
 			If $g_abPBActive[$g_iNextAccount] And $g_aiRemainTrainTime[$g_iNextAccount] > 2 Then
-				SetLog("Account " & $g_iNextAccount + 1 & " is in a Personal Break Time!", $COLOR_INFO)
-				SetSwitchAccLog(" - Account " & $g_iNextAccount + 1 & " is in PTB")
+				SetLog("الحساب " & $g_iNextAccount + 1 & " في فترة استراحة شخصية!", $COLOR_INFO)
+				SetSwitchAccLog(" - الحساب " & $g_iNextAccount + 1 & " is in PTB")
 				$g_iNextAccount = $g_iNextAccount + 1
 				If $g_iNextAccount > $g_iTotalAcc Then $g_iNextAccount = 0
 				While $abAccountNo[$g_iNextAccount] = False
@@ -200,13 +200,13 @@ Func CheckSwitchAcc()
 
 		If $g_iNextAccount <> $g_iCurAccount Then
 			If $g_bRequestTroopsEnable And $g_bCanRequestCC Then
-				SetLog("Try Request troops before switching account", $COLOR_INFO)
+				SetLog("جرب طلب القوات قبل تبديل الحساب", $COLOR_INFO)
 				RequestCC(True)
 			EndIf
 			If Not IsMainPage() Then checkMainScreen()
 			SwitchCOCAcc($g_iNextAccount)
 		Else
-			SetLog("Staying in this account")
+			SetLog("البقاء في هذا الحساب")
 			SetSwitchAccLog("Stay at [" & $g_iCurAccount + 1 & "]", $COLOR_SUCCESS)
 			VillageReport()
 			CheckFarmSchedule()
@@ -222,7 +222,7 @@ Func SwitchCOCAcc($NextAccount)
 	Static $StartOnlineTime = 0
 	Local $bResult
 
-	SetLog("Switching to Account [" & $NextAccount + 1 & "]")
+	SetLog("التحول إلى الحساب [" & $NextAccount + 1 & "]")
 
 	If $g_bInitiateSwitchAcc Then
 		$StartOnlineTime = 0
@@ -236,7 +236,7 @@ Func SwitchCOCAcc($NextAccount)
 		; shared prefs already pushed
 		$bResult = True
 		$bSharedPrefs = False ; don't push again
-		SetLog("Profile shared_prefs already pushed")
+		SetLog("تم دمج القرية مع البروفايل بالتبديل")
 	Else
 		If IsMainPage() Then Click($aButtonSetting[0], $aButtonSetting[1], 1, 0, "Click Setting")
 		If _Sleep(500) Then Return
@@ -262,7 +262,7 @@ Func SwitchCOCAcc($NextAccount)
 								$bResult = True
 								ExitLoop
 							Else
-								SetLog($g_asProfileName[$g_iNextAccount] & " missing shared_prefs, using normal switch account", $COLOR_WARNING)
+								SetLog($g_asProfileName[$g_iNextAccount] & " يفتقد للدمج , باستخدام حساب التبديل العادي", $COLOR_WARNING)
 							EndIf
 						EndIf
 					Case "Error"
@@ -519,8 +519,8 @@ Func SwitchCOCAcc_ConfirmAccount(ByRef $bResult, $iStep = 3, $bDisconnectAfterSw
 					Return "OK"
 				ElseIf _ColorCheck(_GetPixelColor($aTextBox[0], $aTextBox[1], True), Hex($aTextBox[2], 6), $aTextBox[3]) Then ; Pink (close icon)
 					If _Sleep(250) Then Return "Exit"
-					SetLog("   " & ($iStep + 1) & ". Click text box & type CONFIRM")
-					Click($aTextBox[0], $aTextBox[1], 1, 0, "Click Text box")
+					SetLog("   " & ($iStep + 1) & ". انقر مربع النص واكتب CONFIRM")
+					Click($aTextBox[0], $aTextBox[1], 1, 0, "انقر فوق مربع النص")
 					If _Sleep(500) Then Return "Exit"
 					AndroidSendText("CONFIRM")
 					ExitLoop
@@ -536,13 +536,13 @@ Func SwitchCOCAcc_ConfirmAccount(ByRef $bResult, $iStep = 3, $bDisconnectAfterSw
 			For $k = 0 To 10 ; Checking OKAY Button continuously in 10sec
 				If _ColorCheck(_GetPixelColor($aButtonVillageOkay[0], $aButtonVillageOkay[1], True), Hex($aButtonVillageOkay[2], 6), $aButtonVillageOkay[3]) Then
 					If _Sleep(250) Then Return "Exit"
-					SetLog("   " & ($iStep + 2) & ". Click OKAY")
+					SetLog("   " & ($iStep + 2) & ". انقر فوق OKAY")
 					Click($aButtonVillageOkay[0], $aButtonVillageOkay[1], 1, 0, "Click OKAY")
-					SetLog("Please wait for loading CoC...!")
+					SetLog("انتظر قليلة ليتم فتح اللعبة...!")
 					$bResult = True
 					If $bDisconnectAfterSwitch Then
 						If Not checkMainScreen() Then
-							SetLog("Cannot Disconnect account", $COLOR_ERROR)
+							SetLog("لا يمكن قطع الاتصال بالحساب", $COLOR_ERROR)
 							Return "Error"
 						EndIf
 						Click($aButtonSetting[0], $aButtonSetting[1], 1, 0, "Click Setting")
@@ -653,7 +653,7 @@ Func SwitchCOCAcc_ClickAccountSCID(ByRef $bResult, $NextAccount, $iStep = 4)
 					Local $bDragDone = False
 					If $NextAccount >= 4 Then
 						$YCoord = Int(408 - 73.5 * ($g_iTotalAcc - $NextAccount))
-						SetLog("     drag for more accounts")
+						SetLog("     اسحب لمزيد من الحسابات")
 						ClickDrag(700, 590, 700, 172, 2000)
 						If _Sleep(250) Then Return "Exit"
 						For $x = 0 To 5
@@ -726,7 +726,7 @@ Func CheckWaitHero() ; get hero regen time remaining if enabled
 	EndIf
 
 	If $aHeroResult = "" Then
-		SetLog("You have no hero or bad TH level detection Pls manually locate TH", $COLOR_ERROR)
+		SetLog("ليس لديك البطل أو سيئة الكشف عن مستوى TH الثابتة والمتنقلة تحديد موقع TH يدوياً", $COLOR_ERROR)
 		Return
 	EndIf
 
@@ -770,15 +770,15 @@ Func CheckTroopTimeAllAccount($bExcludeCurrent = False) ; Return the minimum rem
 				$g_aiRemainTrainTime[$i] -= Round(TimerDiff($g_aiTimerStart[$i]) / 1000 / 60, 1) ;   updated remain train time of Active accounts
 				$g_aiTimerStart[$i] = TimerInit() ; reset timer
 				If $g_aiRemainTrainTime[$i] >= 0 Then
-					SetLog("Account [" & $i + 1 & "]: " & $g_asProfileName[$i] & " will have full army in:" & $g_aiRemainTrainTime[$i] & " minutes")
+					SetLog("الحساب [" & $i + 1 & "]: " & $g_asProfileName[$i] & " سيكون لديك جيش كامل في:" & $g_aiRemainTrainTime[$i] & " دقائق")
 				Else
-					SetLog("Account [" & $i + 1 & "]: " & $g_asProfileName[$i] & " was ready:" & - $g_aiRemainTrainTime[$i] & " minutes ago")
+					SetLog("الحساب [" & $i + 1 & "]: " & $g_asProfileName[$i] & " كان مستعدا:" & - $g_aiRemainTrainTime[$i] & " دقائق مضت")
 				EndIf
 				SetSwitchAccLog("    Acc " & $i + 1 & ": " & $g_aiRemainTrainTime[$i] & "m")
 			Else ; for accounts first Run
-				SetLog("Account [" & $i + 1 & "]: " & $g_asProfileName[$i] & " has not been read its remain train time")
+				SetLog("الحساب [" & $i + 1 & "]: " & $g_asProfileName[$i] & " لم يقرأ يبقى قطار الوقت")
 				$g_aiRemainTrainTime[$i] = -999
-				SetSwitchAccLog("    Acc " & $i + 1 & ": Unknown")
+				SetSwitchAccLog("    الحساب " & $i + 1 & ": غير معروف")
 			EndIf
 		EndIf
 	Next
@@ -830,7 +830,7 @@ Func aquireSwitchAccountMutex($iSwitchAccountGroup = $g_iCmbSwitchAcc, $bReturnO
 		If $hMutex_Profile = 0 Then
 			; mutex already in use
 			SetLog($sMsg, $COLOR_ERROR)
-			;SetLog($sMsg, "Cannot switch to profile " & $sProfile, $COLOR_ERROR)
+			;SetLog($sMsg, "لا يمكن التبديل إلى الملف الشخصي " & $sProfile, $COLOR_ERROR)
 			If $bShowMsgBox Then
 				MsgBox(BitOR($MB_OK, $MB_ICONINFORMATION, $MB_TOPMOST), $g_sBotTitle, $sMsg)
 			EndIf
@@ -863,17 +863,17 @@ Func CheckGoogleSelectAccount($bSelectFirst = True)
 		; Account List check be there, validate with imgloc
 		If UBound(decodeSingleCoord(FindImageInPlace("GoogleSelectAccount", $g_sImgGoogleSelectAccount, "180,400(90,300)", False))) > 1 Then
 			; Google Account selection found
-			SetLog("Found open Google Accounts list")
+			SetLog("العثور على قائمة حسابات Google المفتوحة")
 
 			If $g_bChkSharedPrefs Then
-				SetLog("Close Google Accounts list")
+				SetLog("أغلق قائمة حسابات Google")
 				Click(90, 400) ; Close Window
 				Return True
 			EndIf
 
 			Local $a = decodeSingleCoord(FindImageInPlace("GoogleSelectEmail", $g_sImgGoogleSelectEmail, "220,80(400,600)", False))
 			If UBound($a) > 1 Then
-				SetLog("   1. Click first Google Account")
+				SetLog("   1. انقر أولاً على حساب Google")
 				ClickP($a)
 				$bResult = True
 				Switch SwitchCOCAcc_ConfirmAccount($bResult, 2)
@@ -886,7 +886,7 @@ Func CheckGoogleSelectAccount($bSelectFirst = True)
 						Return
 				EndSwitch
 			Else
-				SetLog("Cannot find Google Account Email", $COLOR_ERROR)
+				SetLog("لا يمكن العثور على البريد الإلكتروني لحساب Google", $COLOR_ERROR)
 				$bResult = False
 			EndIf
 		Else
@@ -913,10 +913,10 @@ Func CheckLoginWithSupercellID()
 		; Account List check be there, validate with imgloc
 		If UBound(decodeSingleCoord(FindImageInPlace("LoginWithSupercellID", $g_sImgLoginWithSupercellID, "318,678(125,30)", False))) > 1 Then
 			; Google Account selection found
-			SetLog("Verified Log in with Supercell ID boot screen")
+			SetLog("التحقق من تسجيل الدخول مع شاشة التمهيد Supercell معرف")
 
 			If HaveSharedPrefs($g_sProfileCurrentName) Then
-				SetLog("Close CoC and push shared_prefs for Supercell ID screen...")
+				SetLog("اغلاق اللعبة و الضغط على الدمج على شاشة سوبر سيل اي دي ...")
 				PushSharedPrefs()
 				Return True
 			Else
@@ -937,9 +937,9 @@ Func CheckLoginWithSupercellID()
 							Return
 					EndSwitch
 				Else
-					SetLog("Cannot close Supercell ID screen, shared_prefs not pulled.", $COLOR_ERROR)
-					SetLog("Please resolve Supercell ID screen manually, close CoC", $COLOR_INFO)
-					SetLog("and then pull shared_prefs in tab Bot/Profiles.", $COLOR_INFO)
+					SetLog("لا يمكن اغلاق نافذة سوبر سيل, لم يتم الدمج.", $COLOR_ERROR)
+					SetLog("الرجاء حل شاشة Supercell ID يدويًا, اغلاق اللعبة ", $COLOR_INFO)
+					SetLog("ثم اسحب shared_prefs في علامة التبويب Bot / Profiles.", $COLOR_INFO)
 				EndIf
 			EndIf
 
@@ -1000,7 +1000,7 @@ Func SwitchAccountCheckProfileInUse($sNewProfile)
 
 		If $sInGroups Then
 			; write to log
-			SetLog("Profile " & $sNewProfile & " not active, but " & $sInGroups & "!", $COLOR_ERROR)
+			SetLog("البروفايل " & $sNewProfile & " غير نشط ، ولكن " & $sInGroups & "!", $COLOR_ERROR)
 			SetSwitchAccLog($sNewProfile & " " & $sInGroups & "!", $COLOR_ERROR)
 			Return False
 		EndIf
@@ -1009,10 +1009,10 @@ Func SwitchAccountCheckProfileInUse($sNewProfile)
 	Else
 		; write to log
 		If $sInGroups Then
-			SetLog("Profile " & $sNewProfile & " active and " & $sInGroups & "!", $COLOR_ERROR)
+			SetLog("البروفايل " & $sNewProfile & " نشط و " & $sInGroups & "!", $COLOR_ERROR)
 			SetSwitchAccLog($sNewProfile & " active & " & $sInGroups & "!", $COLOR_ERROR)
 		Else
-			SetLog("Profile " & $sNewProfile & " active in another bot instance!", $COLOR_ERROR)
+			SetLog("البروفايل " & $sNewProfile & " نشط مع محاكي اخر !", $COLOR_ERROR)
 			SetSwitchAccLog($sNewProfile & " active!", $COLOR_ERROR)
 		EndIf
 		Return False
@@ -1030,7 +1030,7 @@ Func CheckFarmSchedule()
 
 	If $g_bFirstStart And $iStartHour = -1 Then $iStartHour = @HOUR
 	Local $bActionDone = False
-	If $g_bDebugSetlog Then SetDebugLog("Checking Farm Schedule...", $COLOR_DEBUG)
+	If $g_bDebugSetlog Then SetDebugLog("التحقق من جدولية تبديل الحسابات...", $COLOR_DEBUG)
 
 	For $i = 0 To 7
 		If $i > $g_iTotalAcc Then ExitLoop

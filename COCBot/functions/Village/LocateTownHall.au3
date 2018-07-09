@@ -43,7 +43,7 @@ Func LocateTownHall($bLocationOnly = False)
 				Select
 					Case $iStupid = 1
 						$sErrorText = "TownHall Location not valid!" & @CRLF
-						SetLog("Location not valid, try again", $COLOR_ERROR)
+						SetLog("الموقع غير صالح ، حاول مرة أخرى", $COLOR_ERROR)
 						ContinueLoop
 					Case $iStupid = 2
 						$sErrorText = "Please try to click inside the grass field!" & @CRLF
@@ -62,7 +62,7 @@ Func LocateTownHall($bLocationOnly = False)
 						Return False
 				EndSelect
 			EndIf
-			SetLog("Townhall: " & "(" & $g_aiTownHallPos[0] & "," & $g_aiTownHallPos[1] & ")", $COLOR_SUCCESS)
+			SetLog("التاون هول: " & "(" & $g_aiTownHallPos[0] & "," & $g_aiTownHallPos[1] & ")", $COLOR_SUCCESS)
 		Else
 			SetLog("لقد تغير موقع التاون هول !! ", $COLOR_INFO)
 			ClickP($aAway, 1, 0, "#0393")

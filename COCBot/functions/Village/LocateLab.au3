@@ -15,7 +15,7 @@
 Func LocateLab()
 	Local $stext, $MsgBox, $iStupid = 0, $iSilly = 0, $sErrorText = ""
 
-	SetLog("Locating Laboratory...", $COLOR_INFO)
+	SetLog("تحديد موقع المختبر...", $COLOR_INFO)
 
 	If _GetPixelColor($aTopLeftClient[0], $aTopLeftClient[1], True) <> Hex($aTopLeftClient[2], 6) Or _GetPixelColor($aTopRightClient[0], $aTopRightClient[1], True) <> Hex($aTopRightClient[2], 6) Then
 		Zoomout()
@@ -38,7 +38,7 @@ Func LocateLab()
 				Select
 					Case $iStupid = 1
 						$sErrorText = "Laboratory Location Not Valid!" & @CRLF
-						SetLog("Location not valid, try again", $COLOR_ERROR)
+						SetLog("الموقع غير صالح ، حاول مرة أخرى", $COLOR_ERROR)
 						ContinueLoop
 					Case $iStupid = 2
 						$sErrorText = "Please try to click inside the grass field!" & @CRLF
@@ -62,7 +62,7 @@ Func LocateLab()
 				EndSelect
 			EndIf
 		Else
-			SetLog("Locate Laboratory Cancelled", $COLOR_INFO)
+			SetLog("تحديد موقع مختبر ملغى", $COLOR_INFO)
 			ClickP($aAway, 1, 0, "#0382")
 			Return
 		EndIf
@@ -100,7 +100,7 @@ Func LocateLab()
 			ClickP($aAway, 1, 0, "#0384")
 			Return False
 		EndIf
-		SetLog("Locate Laboratory Success: " & "(" & $g_aiLaboratoryPos[0] & "," & $g_aiLaboratoryPos[1] & ")", $COLOR_SUCCESS)
+		SetLog("حدد موقع نجاح المختبر: " & "(" & $g_aiLaboratoryPos[0] & "," & $g_aiLaboratoryPos[1] & ")", $COLOR_SUCCESS)
 		ExitLoop
 	WEnd
 	Clickp($aAway, 2, 0, "#0207")

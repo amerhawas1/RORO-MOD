@@ -24,7 +24,7 @@ Func _ClanGames()
 
 	; A user Log and a Click away just in case
 	ClickP($aAway, 1, 0, "#0000") ;Click Away to prevent any pages on top
-	SetLog("Entering Clan Games...", $COLOR_INFO)
+	SetLog("فتح مبارات القبيلة...", $COLOR_INFO)
 	If _Sleep(500) Then Return
 
 	; Local and Static Variables
@@ -50,17 +50,17 @@ Func _ClanGames()
 	; Small delay
 	If _Sleep(3000) Then Return
 
-	SetLog("Your Score is: " & Int($ScoreLimits[0]), $COLOR_INFO)
+	SetLog("نقاطك : " & Int($ScoreLimits[0]), $COLOR_INFO)
 	If Int($ScoreLimits[0]) = Int($ScoreLimits[1]) Then
-		SetLog("Your Score limit was reached, Congrats...")
+		SetLog("تم الوصول إلى حد النقاط الخاص بك...")
 		ClickP($aAway, 1, 0, "#0000") ;Click Away
 		Return
 	ElseIf Int($ScoreLimits[0]) + 200 > Int($ScoreLimits[1]) Then
-		SetLog("Your Score limit is almost reached...")
+		SetLog("تم الوصول إلى حد درجاتك تقريبًا...")
 		If $g_bChkClanGamesStopBeforeReachAndPurge Then
 			If CooldownTime() Then Return
 			If IsEventRunning() Then Return
-			SetLog("Stop before completing your limit and only Purge")
+			SetLog("توقف قبل إكمال الحد الخاص بك")
 			$sEventName = "Builder Base Challenges to Purge"
 			If PurgeEvent($g_sImgPurge, $sEventName, True) Then $g_iPurgeJobCount[$g_iCurAccount] += 1
 			ClickP($aAway, 1, 0, "#0000") ;Click Away
@@ -83,14 +83,14 @@ Func _ClanGames()
 	; Screen coordinates for ScreenCapture
 	Local $x = 281, $y = 150, $x1 = 775, $y1 = 545
 
-	If $g_bChkClanGamesDebug Then SetLog("Your TownHall Level is " & $g_iTownHallLevel)
+	If $g_bChkClanGamesDebug Then SetLog("مستوى التاون هول  " & $g_iTownHallLevel)
 
 	; Check for BS/CoC errors just in case
 	If isProblemAffect(True) Then checkMainScreen(False)
 
 	; Lets test the Loot Challenges
 	If $g_bChkClanGamesLoot Then
-		SetLog("Checking 6 Loot Challenges", $COLOR_DEBUG)
+		SetLog("التحقق من تحديثات الجمع", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Name , [2] = TH level , [3] = Difficulty Level , [4] = Time to do it
 		Local $LootChallenges = ClanGamesChallenges("$LootChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
 
@@ -105,7 +105,7 @@ Func _ClanGames()
 			If $LootChallenges[$i][3] = 0 then ContinueLoop
 
 			If QuickMIS("BC1", $LootChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-				SetLog("Found " & $LootChallenges[$i][1] & " Event", $COLOR_SUCCESS)
+				SetLog("وجد " & $LootChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
 				$sEventName = "Loot Event | " & $LootChallenges[$i][1]
 				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
 				If _Sleep(1750) Then Return
@@ -120,7 +120,7 @@ Func _ClanGames()
 
 	; Lets test the Air Troops Challenges
 	If $g_bChkClanGamesAirTroop Then
-		SetLog("Checking 5 Air Troops Challenges", $COLOR_DEBUG)
+		SetLog("التحقق من تحديات القوات الجوية", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Event Quantities
 		Local $AirTroopChallenges = ClanGamesChallenges("$AirTroopChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
 
@@ -129,16 +129,16 @@ Func _ClanGames()
 			Local $TroopIndex = Int(Eval("eTroop" & $AirTroopChallenges[$i][1]))
 			; If doesn't Exist the Troop on your Army
 			If $g_aiCurrentTroops[$TroopIndex] < 1 Then
-				If $g_bChkClanGamesDebug Then SetLog("[" & $AirTroopChallenges[$i][1] & "] No " & $g_asTroopNames[$TroopIndex] & " on your army composition.")
+				If $g_bChkClanGamesDebug Then SetLog("[" & $AirTroopChallenges[$i][1] & "] لا " & $g_asTroopNames[$TroopIndex] & " على تكوين الجيش الخاص بك.")
 				ContinueLoop
 				; If Exist BUT not is required quantities
 			ElseIf $g_aiCurrentTroops[$TroopIndex] > 0 And $g_aiCurrentTroops[$TroopIndex] < $AirTroopChallenges[$i][3] Then
-				If $g_bChkClanGamesDebug Then SetLog("[" & $AirTroopChallenges[$i][1] & "] You need more " & $g_asTroopNames[$TroopIndex] & " [" & $g_aiCurrentTroops[$TroopIndex] & "/" & $AirTroopChallenges[$i][3] & "]")
+				If $g_bChkClanGamesDebug Then SetLog("[" & $AirTroopChallenges[$i][1] & "] أنت في حاجة أكثر " & $g_asTroopNames[$TroopIndex] & " [" & $g_aiCurrentTroops[$TroopIndex] & "/" & $AirTroopChallenges[$i][3] & "]")
 				ContinueLoop
 			EndIf
 
 			If QuickMIS("BC1", $AirTroopChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-				SetLog("Found " & $AirTroopChallenges[$i][1] & " Event", $COLOR_SUCCESS)
+				SetLog("وجد " & $AirTroopChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
 				$sEventName = "Troops Event | " & $AirTroopChallenges[$i][1]
 				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
 				If _Sleep(1750) Then Return
@@ -153,7 +153,7 @@ Func _ClanGames()
 
 	; Lets test the Ground Troops Challenges
 	If $g_bChkClanGamesGroundTroop Then
-		SetLog("Checking 14 Ground Troops Challenges", $COLOR_DEBUG)
+		SetLog("التحقق من تحديات القوات الارضية", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Event Quantities
 		Local $GroundTroopChallenges = ClanGamesChallenges("$GroundTroopChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
 
@@ -162,16 +162,16 @@ Func _ClanGames()
 			Local $TroopIndex = Int(Eval("eTroop" & $GroundTroopChallenges[$i][1]))
 			; If doesn't Exist the Troop on your Army
 			If $g_aiCurrentTroops[$TroopIndex] < 1 Then
-				If $g_bChkClanGamesDebug Then SetLog("[" & $GroundTroopChallenges[$i][1] & "] No " & $g_asTroopNames[$TroopIndex] & " on your army composition.")
+				If $g_bChkClanGamesDebug Then SetLog("[" & $GroundTroopChallenges[$i][1] & "] لا " & $g_asTroopNames[$TroopIndex] & " على تكوين الجيش الخاص بك.")
 				ContinueLoop
 				; If Exist BUT not is required quantities
 			ElseIf $g_aiCurrentTroops[$TroopIndex] > 0 And $g_aiCurrentTroops[$TroopIndex] < $GroundTroopChallenges[$i][3] Then
-				If $g_bChkClanGamesDebug Then SetLog("[" & $GroundTroopChallenges[$i][1] & "] You need more " & $g_asTroopNames[$TroopIndex] & " [" & $g_aiCurrentTroops[$TroopIndex] & "/" & $GroundTroopChallenges[$i][3] & "]")
+				If $g_bChkClanGamesDebug Then SetLog("[" & $GroundTroopChallenges[$i][1] & "] أنت في حاجة أكثر " & $g_asTroopNames[$TroopIndex] & " [" & $g_aiCurrentTroops[$TroopIndex] & "/" & $GroundTroopChallenges[$i][3] & "]")
 				ContinueLoop
 			EndIf
 
 			If QuickMIS("BC1", $GroundTroopChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-				SetLog("Found " & $GroundTroopChallenges[$i][1] & " Event", $COLOR_SUCCESS)
+				SetLog("وجد " & $GroundTroopChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
 				$sEventName = "Troops Event | " & $GroundTroopChallenges[$i][1]
 				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
 				If _Sleep(1750) Then Return
@@ -186,7 +186,7 @@ Func _ClanGames()
 
 	; Lets test the Battle Challenges
 	If $g_bChkClanGamesBattle Then
-		SetLog("Checking 9 Battle Challenges", $COLOR_DEBUG)
+		SetLog("التحقق من تحديات القتال او المعارك", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Difficulty Level , [4] = Time to do it
 		Local $BattleChallenges = ClanGamesChallenges("$BattleChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
 
@@ -210,7 +210,7 @@ Func _ClanGames()
 			If $BattleChallenges[$i][1] = "No Heroics Allowed" And ((Int($g_aiAttackUseHeroes[$DB]) > $eHeroNone And  $g_iMatchMode = $DB) Or (Int($g_aiAttackUseHeroes[$LB]) > $eHeroNone And $g_iMatchMode = $LB)) then ContinueLoop
 
 			If QuickMIS("BC1", $BattleChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-				SetLog("Found " & $BattleChallenges[$i][1] & " Event", $COLOR_SUCCESS)
+				SetLog("وجد " & $BattleChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
 				$sEventName = "Battle Event | " & $BattleChallenges[$i][1]
 				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
 				If _Sleep(1750) Then Return
@@ -219,7 +219,7 @@ Func _ClanGames()
 				; TODO , Test the image for a better tolerance and/or reduced region
 				If $BattleChallenges[$i][1] = "Pile Of Victories" Then
 					If QuickMIS("BC1", $g_sImgWStreakC, $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-						SetLog("Winning Streak Detected , wrong Event.. continuing", $COLOR_WARNING)
+						SetLog("الكشف عن الانتصار ، حدث خاطئ .. مستمر", $COLOR_WARNING)
 						If $g_iTownHallLevel < 9 Then
 							; Close the Start Window Event and continue the loop
 							ClickP($TabChallengesPosition, 2, 0, "#Tab")
@@ -240,7 +240,7 @@ Func _ClanGames()
 
 	; Lets test the Destruction Challenges
 	If $g_bChkClanGamesDestruction Then
-		SetLog("Checking 28 Destruction Challenges", $COLOR_DEBUG)
+		SetLog("التحقق من تحديات التدمير ", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Difficulty Level , [4] = Time to do it
 		Local $DestructionChallenges = ClanGamesChallenges("$DestructionChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
 
@@ -261,7 +261,7 @@ Func _ClanGames()
 			   $DestructionChallenges[$i][1] = "Warden Level Hunter" And ((Int($g_aiAttackUseHeroes[$DB]) = $eHeroNone And $g_iMatchMode = $DB) Or (Int($g_aiAttackUseHeroes[$LB]) = $eHeroNone And $g_iMatchMode = $LB)) then ContinueLoop
 
 			If QuickMIS("BC1", $DestructionChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-				SetLog("Found " & $DestructionChallenges[$i][1] & " Event", $COLOR_SUCCESS)
+				SetLog("وجد " & $DestructionChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
 				$sEventName = "Destruction Event | " & $DestructionChallenges[$i][1]
 				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
 				If _Sleep(1750) Then Return
@@ -276,7 +276,7 @@ Func _ClanGames()
 
 	; Lets test the Miscellaneous Challenges
 	If $g_bChkClanGamesMiscellaneous Then
-		SetLog("Checking 3 Miscellaneous Challenges", $COLOR_DEBUG)
+		SetLog("التحقق من التحديات البسيطة", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Difficulty Level , [4] = Time to do it
 		Local $MiscChallenges = ClanGamesChallenges("$MiscChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
 
@@ -301,7 +301,7 @@ Func _ClanGames()
 			If $MiscChallenges[$i][1] = "Donate Spells" And ($g_aiPrepDon[2] = 0 And $g_aiPrepDon[3] = 0) Then ContinueLoop
 
 			If QuickMIS("BC1", $MiscChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-				SetLog("Found " & $MiscChallenges[$i][1] & " Event", $COLOR_SUCCESS)
+				SetLog("وجد " & $MiscChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
 				$sEventName = "Miscellaneous Event | " & $MiscChallenges[$i][1]
 				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
 				If _Sleep(1750) Then Return
@@ -324,13 +324,13 @@ Func _ClanGames()
 			If PurgeEvent($g_sImgPurge, $sEventName, True) Then
 				$g_iPurgeJobCount[$g_iCurAccount] += 1
 			Else
-				SetLog("No Builder Base Event found to Purge", $COLOR_WARNING)
+				SetLog("لم يتم العثور على حدث من القرية الليلية", $COLOR_WARNING)
 			EndIf
 		EndIf
 		Return
 	EndIf
 
-	SetLog("No Event found, Check your settings", $COLOR_WARNING)
+	SetLog("لم يتم العثور على أي حدث ، تحقق من إعداداتك", $COLOR_WARNING)
 	ClickP($aAway, 1, 0, "#0000") ;Click Away
 	If _Sleep(2000) Then Return
 EndFunc   ;==>_ClanGames
@@ -338,11 +338,11 @@ EndFunc   ;==>_ClanGames
 Func IsClanGamesWindow($getCapture = True)
 	If QuickMIS("BC1", $g_sImgCaravan, 200, 55, 300, 135, $getCapture, False) Then
 		;If QuickMIS("BC1", $g_sImgCaravan, 236, 119, 270, 122, True) Then
-		SetLog("Caravan available... Entering Clan Games...", $COLOR_SUCCESS)
+		SetLog("العاب القبيلة متاحة... الدخول ل مبارات القبيلة...", $COLOR_SUCCESS)
 		Click($g_iQuickMISX + 200, $g_iQuickMISY + 55)
 		If _Sleep(2500) Then Return
 		If QuickMIS("BC1", $g_sImgReward, 760, 480, 830, 570, $getCapture, $g_bChkClanGamesDebug) Then
-			SetLog("Your Reward is Ready", $COLOR_INFO)
+			SetLog("مكافأتك جاهزة", $COLOR_INFO)
 			ClickP($aAway, 1, 0, "#0000") ;Click Away
 			If _Sleep(2000) Then Return
 			Return False
@@ -358,7 +358,7 @@ Func IsClanGamesWindow($getCapture = True)
 			Return False
 		EndIf
 	Else
-		SetLog("Caravan not available...", $COLOR_WARNING)
+		SetLog("مباريات القبيلة غير متاحة في الوقت الحالي ...", $COLOR_WARNING)
 		ClickP($aAway, 1, 0, "#0000") ;Click Away
 		Return False
 	EndIf
@@ -368,7 +368,7 @@ EndFunc   ;==>IsClanGamesWindow
 
 Func IsClanGamesEvent($getCapture = True)
 	If QuickMIS("BC1", $g_sImageBuilerGames, 20, 75, 110, 115, $getCapture, $g_bChkClanGamesDebug) Then
-		SetLog("Builder Games Event detected!", $COLOR_INFO)
+		SetLog("تم اكتشاف حدث من القرية الليلية!", $COLOR_INFO)
 		If GUICtrlRead($g_hLblRemainTime) <> "BG Event" Then GUICtrlSetData($g_hLblRemainTime, "BG Event")
 		ClickP($aAway, 1, 0, "#0000") ;Click Away
 		If _Sleep(2000) Then Return
@@ -385,10 +385,10 @@ Func GetTimesAndScores()
 	$sTimeRemain = StringReplace(getOcrTimeGameTime(50, 479), " ", "") ; read Clan Games waiting time
 	; JUST IN CASE
 	If Not _IsValideOCR($sTimeRemain) Then
-		SetLog("Get Time Remain error!!!", $COLOR_WARNING)
+		SetLog("الحصول على الوقت يبقى الخطأ!!!", $COLOR_WARNING)
 		Return -1
 	EndIf
-	SetLog("Clan Games Time Remaining: " & $sTimeRemain, $COLOR_INFO)
+	SetLog("الوقت المتبقي ل العاب القبيلة: " & $sTimeRemain, $COLOR_INFO)
 
 	; Update the Label on GUI
 	GUICtrlSetData($g_hLblRemainTime, $sTimeRemain)
@@ -431,12 +431,12 @@ EndFunc   ;==>CooldownTime
 Func IsEventRunning()
 	; Check if any event is running or not
 	If Not _ColorCheck(_GetPixelColor(304, 257, True), Hex(0x53E050, 6), 5) Then ; Green Bar from First Position
-		SetLog("An Event is already in progress !", $COLOR_SUCCESS)
+		SetLog("حدث قيد التقدم بالفعل !", $COLOR_SUCCESS)
 		If $g_bChkClanGamesDebug then SetLog("[0]: " & _GetPixelColor(304, 257, True))
 		ClickP($aAway, 1, 0, "#0000") ;Click Away
 		Return True
 	Else
-		SetLog("No event under progress... Lets look for one...", $COLOR_INFO)
+		SetLog("لا يوجد حدث تحت التقدم ... دعنا نبحث عن واحد ...", $COLOR_INFO)
 		Return False
 	EndIf
 
@@ -469,7 +469,7 @@ Func StartsEvent($sEventName, $g_bPurgeJob = False, $getCapture = True, $g_bChkC
 	If $g_bRunState = False Then Return
 	If QuickMIS("BC1", $g_sImgStart, 220, 150, 830, 580, $getCapture, $g_bChkClanGamesDebug) Then
 		Local $Timer = GetEventTimeInMinutes($g_iQuickMISX + 220, $g_iQuickMISY + 150)
-		SetLog("Starting  Event" & " ["& $Timer & " min]", $COLOR_SUCCESS)
+		SetLog("بدء الحدث" & " ["& $Timer & " دقيقة]", $COLOR_SUCCESS)
 		Click($g_iQuickMISX + 220, $g_iQuickMISY + 150)
 		GUICtrlSetData($g_hTxtClanGamesLog, @CRLF & _NowDate() & " " & _NowTime() & " [" & $g_sProfileCurrentName & "] - Starting " & $sEventName & " for " & $Timer & " min", 1)
 		_FileWriteLog($g_sProfileLogsPath & "\ClanGames.log", " [" & $g_sProfileCurrentName & "] - Starting " & $sEventName & " for "& $Timer & " min")
@@ -479,11 +479,11 @@ Func StartsEvent($sEventName, $g_bPurgeJob = False, $getCapture = True, $g_bChkC
 			If QuickMIS("BC1", $g_sImgTrashPurge, 220, 150, 830, 580, $getCapture, $g_bChkClanGamesDebug) Then
 				Click($g_iQuickMISX + 220, $g_iQuickMISY + 150)
 				If _Sleep(1200) Then Return
-				SetLog("Click Trash", $COLOR_INFO)
+				SetLog("انقر فوق المهملات", $COLOR_INFO)
 				If QuickMIS("BC1", $g_sImgOkayPurge, 440, 400, 580, 450, $getCapture, $g_bChkClanGamesDebug) Then
-					SetLog("Click OK", $COLOR_INFO)
+					SetLog("انقر فوق موافق", $COLOR_INFO)
 					Click($g_iQuickMISX + 440, $g_iQuickMISY + 400)
-					SetLog("Purging a job on progress !", $COLOR_SUCCESS)
+					SetLog("تطهير وظيفة على التقدم !", $COLOR_SUCCESS)
 					GUICtrlSetData($g_hTxtClanGamesLog, @CRLF & _NowDate() & " " & _NowTime() & " [" & $g_sProfileCurrentName & "] - [" & $g_iPurgeJobCount[$g_iCurAccount] + 1 & "] - Purging Event ", 1)
 					_FileWriteLog($g_sProfileLogsPath & "\ClanGames.log", " [" & $g_sProfileCurrentName & "] - [" & $g_iPurgeJobCount[$g_iCurAccount] + 1 & "] - Purging Event ")
 					ClickP($aAway, 1, 0, "#0000") ;Click Away
@@ -498,7 +498,7 @@ Func StartsEvent($sEventName, $g_bPurgeJob = False, $getCapture = True, $g_bChkC
 		EndIf
 		Return True
 	Else
-		SetLog("Didn't Get the Green Start Button Event!!", $COLOR_WARNING)
+		SetLog("لم تحصل على حدث زر البداية الخضراء!!", $COLOR_WARNING)
 		If $g_bChkClanGamesDebug Then SetLog("[X: " & 220 & " Y:" & 150 & " X1: " & 830 & " Y1: " & 580 & "]", $COLOR_WARNING)
 		ClickP($aAway, 1, 0, "#0000") ;Click Away
 		Return False
@@ -507,13 +507,13 @@ Func StartsEvent($sEventName, $g_bPurgeJob = False, $getCapture = True, $g_bChkC
 EndFunc   ;==>StartsEvent
 
 Func PurgeEvent($directoryImage, $sEventName, $getCapture = True)
-	SetLog("Checking Builder Base Challenges to Purge", $COLOR_DEBUG)
+	SetLog("التحقق من التحديات الأساسية منشئ للتطهير", $COLOR_DEBUG)
 	; Screen coordinates for ScreenCapture
 	Local $x = 281, $y = 150, $x1 = 775, $y1 = 545
 	If QuickMIS("BC1", $directoryImage, $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
 		Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
 		; Start and Purge at same time
-		SetLog("Starting Impossible Job to purge...", $COLOR_INFO)
+		SetLog("بدء وظيفة مستحيلة لتطهير...", $COLOR_INFO)
 		If _Sleep(1500) Then Return
 		If StartsEvent($sEventName, True, $getCapture, $g_bChkClanGamesDebug) Then
 			ClickP($aAway, 1, 0, "#0000") ;Click Away
