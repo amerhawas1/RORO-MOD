@@ -31,9 +31,9 @@ Func StartClockTowerBoost($bSwitchToBB = False, $bSwitchToNV = False)
 	EndIf
 
 	If Not $bCTBoost Then
-		SetLog("Skip Clock Tower Boost as no Building is currently under Upgrade!", $COLOR_INFO)
+		SetLog("تخطي تسريع برج الساعة!", $COLOR_INFO)
 	Else ; Start Boosting
-		SetLog("Boosting Clock Tower", $COLOR_INFO)
+		SetLog("تسريع برج الساعة", $COLOR_INFO)
 		If _Sleep($DELAYCOLLECT2) Then Return
 
 		Local $sCTCoords, $aCTCoords, $aCTBoost
@@ -52,15 +52,15 @@ Func StartClockTowerBoost($bSwitchToBB = False, $bSwitchToNV = False)
 				If IsArray($aCTBoost) Then
 					ClickP($aCTBoost)
 					If _Sleep($DELAYCLOCKTOWER2) Then Return
-					SetLog("Boosted Clock Tower successfully!", $COLOR_SUCCESS)
+					SetLog("تم تسريع برج الساعة بنجاح تام !", $COLOR_SUCCESS)
 				Else
-					SetLog("Failed to find the BOOST window button", $COLOR_ERROR)
+					SetLog("لم يتم العثور على برجع الساعة للتسريع", $COLOR_ERROR)
 				EndIf
 			Else
-				SetLog("Cannot find the Boost Button of Clock Tower", $COLOR_ERROR)
+				SetLog("لا استطيع العثور على برجع الساعة للتسريع", $COLOR_ERROR)
 			EndIf
 		Else
-			SetLog("Clock Tower boost is not available!")
+			SetLog("برج الساعة غير متاح للتسريع!")
 		EndIf
 	EndIf
 	ClickP($aAway, 1, 0, "#0329")

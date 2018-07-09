@@ -141,7 +141,7 @@ Func MainSuggestedUpgradeCode()
 								$bSkipGoldCheck = True
 							EndIf
 						Case "NoResources"
-							SetLog("[" & $i + 1 & "]" & " Not enough Elixir, continuing...", $COLOR_INFO)
+							SetLog("[" & $i + 1 & "]" & "لا يوجد اكسير كافي ..متابعة", $COLOR_INFO)
 							;ExitLoop ; continue as suggested upgrades are not ordered by amount
 							$bSkipGoldCheck = True
 						Case Else
@@ -161,13 +161,13 @@ Func MainSuggestedUpgradeCode()
 							EndIf
 						Case "New"
 							If $g_iChkPlacingNewBuildings = 1 Then
-								SetLog("[" & $i + 1 & "]" & " New Building detected, Placing it...", $COLOR_INFO)
+								SetLog("[" & $i + 1 & "]" & " تم اكتشاف مبنى جديد ، وضعه ...", $COLOR_INFO)
 								If NewBuildings($aResult) Then
 									ExitLoop
 								EndIf
 							EndIf
 						Case "NoResources"
-							SetLog("[" & $i + 1 & "]" & " Not enough Gold, continuing...", $COLOR_INFO)
+							SetLog("[" & $i + 1 & "]" & " لا يوجد ذهب كافي ...متابعة", $COLOR_INFO)
 							;ExitLoop ; continue as suggested upgrades are not ordered by amount
 						Case Else
 							;SetLog("[" & $i + 1 & "]" & " Unsupport Gold icon '" & $aResult[2] & "', continuing...", $COLOR_INFO)
@@ -193,7 +193,7 @@ Func ClickOnBuilder()
 	Local Const $Screencap = True
 
 	; Master Builder is not available return
-	If $g_iFreeBuilderCountBB = 0 Then SetLog("No Master Builder available! [" & $g_iFreeBuilderCountBB & "/" & $g_iTotalBuilderCountBB & "]", $COLOR_INFO)
+	If $g_iFreeBuilderCountBB = 0 Then SetLog("لا يوجد عامل متاح! [" & $g_iFreeBuilderCountBB & "/" & $g_iTotalBuilderCountBB & "]", $COLOR_INFO)
 
 	; Master Builder available
 	If $g_iFreeBuilderCountBB > 0 Then
@@ -212,7 +212,7 @@ Func ClickOnBuilder()
 			$sDebugText = "BB Pixel problem"
 		EndIf
 	EndIf
-	If $sDebugText <> "" Then SetLog("Problem on Suggested Upg Window: [" & $sDebugText & "]", $COLOR_ERROR)
+	If $sDebugText <> "" Then SetLog("مشكلة في نافذة الترقية المقترحة: [" & $sDebugText & "]", $COLOR_ERROR)
 	Return False
 EndFunc   ;==>ClickOnBuilder
 
@@ -262,7 +262,7 @@ Func GetUpgradeButton($sUpgButtom = "", $Debug = False)
 		SetLog("Building: " & $sBuildingName, $COLOR_INFO)
 		; Verify if is Builder Hall and If is to Upgrade
 		If StringInStr($sBuildingName, "Hall") > 0 And $g_iChkBBSuggestedUpgradesIgnoreHall Then
-			SetLog("Ups! Builder Hall is not to Upgrade!", $COLOR_ERROR)
+			SetLog("العامل حاليا ليس للترقية المقترحة!", $COLOR_ERROR)
 			Return False
 			#cs
 				ElseIf StringInStr($sBuildingName, "Battle") > 0 Then
@@ -275,12 +275,12 @@ Func GetUpgradeButton($sUpgButtom = "", $Debug = False)
 		If _Sleep(1500) Then Return
 		If QuickMIS("BC1", $sUpgButtom, $aBtnPos[0], $aBtnPos[1], $aBtnPos[0] + $aBtnPos[2], $aBtnPos[1] + $aBtnPos[3], True, $Debug) Then
 			Click($g_iQuickMISX + $aBtnPos[0], $g_iQuickMISY + $aBtnPos[1], 1)
-			SetLog($sBuildingName & " Upgrading!", $COLOR_INFO)
+			SetLog($sBuildingName & " ترقية!", $COLOR_INFO)
 			ClickP($aAway, 1, 0, "#0121")
 			Return True
 		Else
 			ClickP($aAway, 1, 0, "#0121")
-			SetLog("Not enough Resources to Upgrade " & $sBuildingName & " !", $COLOR_ERROR)
+			SetLog("موارد غير كافية للترقية " & $sBuildingName & " !", $COLOR_ERROR)
 		EndIf
 
 	EndIf
@@ -322,7 +322,7 @@ Func NewBuildings($aResult)
 						; Lets search for the Correct Symbol on field
 						If QuickMIS("BC1", $g_sImgAutoUpgradeNewBldgYes, 150, 150, 650, 550, $Screencap, $Debug) Then
 							Click($g_iQuickMISX + 150, $g_iQuickMISY + 150, 1)
-							SetLog("Placed a new Building on Builder Island! [" & $g_iQuickMISX + 150 & "," & $g_iQuickMISY + 150 & "]", $COLOR_INFO)
+							SetLog("وضعت مبنى جديد على جزيرة Builder! [" & $g_iQuickMISX + 150 & "," & $g_iQuickMISY + 150 & "]", $COLOR_INFO)
 							If _Sleep(1000) Then Return
 							; Lets check if exist the [x] , Some Buildings like Traps when you place one will give other to place automaticly!
 							If QuickMIS("BC1", $g_sImgAutoUpgradeNewBldgNo, 150, 150, 650, 550, $Screencap, $Debug) Then
@@ -331,27 +331,27 @@ Func NewBuildings($aResult)
 							Return True
 						Else
 							If QuickMIS("BC1", $g_sImgAutoUpgradeNewBldgNo, 150, 150, 650, 550, $Screencap, $Debug) Then
-								SetLog("Sorry! Wrong place to deploy a new building on BB! [" & $g_iQuickMISX + 150 & "," & $g_iQuickMISY + 150 & "]", $COLOR_ERROR)
+								SetLog("آسف! مكان خاطئ لنشر مبنى جديد ! [" & $g_iQuickMISX + 150 & "," & $g_iQuickMISY + 150 & "]", $COLOR_ERROR)
 								Click($g_iQuickMISX + 150, $g_iQuickMISY + 150, 1)
 							Else
-								SetLog("Error on Undo symbol!", $COLOR_ERROR)
+								SetLog("خطأ في رمز التراجع!", $COLOR_ERROR)
 							EndIf
 						EndIf
 					Else
 						If $i = UBound($ClocksCoordinates) - 1 Then
-							If $g_bDebugSetlog Then SetDebugLog("Slot without enough resources![1]", $COLOR_DEBUG)
+							If $g_bDebugSetlog Then SetDebugLog("موارد كافية![1]", $COLOR_DEBUG)
 							Click(820, 38, 1) ; exit from Shop
 							ExitLoop
 						EndIf
 						ContinueLoop
 					EndIf
 				Else
-					If $g_bDebugSetlog Then SetDebugLog("Slot without enough resources![2]", $COLOR_DEBUG)
+					If $g_bDebugSetlog Then SetDebugLog("موارد كافية![2]", $COLOR_DEBUG)
 					If $i = UBound($ClocksCoordinates) - 1 Then Click(820, 38, 1)
 				EndIf
 			Next
 		Else
-			SetLog("Slot without enough resources![3]", $COLOR_INFO)
+			SetLog("موارد كافية![3]", $COLOR_INFO)
 			Click(820, 38, 1) ; exit from Shop
 		EndIf
 	EndIf

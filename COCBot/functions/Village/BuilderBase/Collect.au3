@@ -24,7 +24,7 @@ Func CollectBuilderBase($bSwitchToBB = False, $bSwitchToNV = False)
 		If Not SwitchBetweenBases() Then Return ; Switching to Builders Base
 	EndIf
 
-	SetLog("Collecting Resources on Builders Base", $COLOR_INFO)
+	SetLog("جمع موارد القريلة الليللة", $COLOR_INFO)
 	If _Sleep($DELAYCOLLECT2) Then Return
 
 	; Collect function to Parallel Search , will run all pictures inside the directory

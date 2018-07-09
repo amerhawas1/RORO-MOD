@@ -19,14 +19,14 @@ Func BuilderBaseReport($bBypass = False, $bSetLog = True)
 
 	Switch $bBypass
 		Case False
-			If $bSetLog Then SetLog("Builder Base Report", $COLOR_INFO)
+			If $bSetLog Then SetLog("تقرير عن القرية الليلية", $COLOR_INFO)
 		Case True
-			If $bSetLog Then SetLog("Updating Builder Base Resource Values", $COLOR_INFO)
+			If $bSetLog Then SetLog("تحديث قيم الموارد", $COLOR_INFO)
 		Case Else
-			If $bSetLog Then SetLog("Village Report Error, You have been a BAD programmer!", $COLOR_ERROR)
+			If $bSetLog Then SetLog("تقرير غير صحيح!", $COLOR_ERROR)
 	EndSwitch
 
-	If Not $bSetLog Then SetLog("Village Report", $COLOR_INFO)
+	If Not $bSetLog Then SetLog("تقرير عن القرية", $COLOR_INFO)
 
 	getBuilderCount($bSetLog, True) ; update builder data
 	If _Sleep($DELAYRESPOND) Then Return
@@ -34,7 +34,7 @@ Func BuilderBaseReport($bBypass = False, $bSetLog = True)
 	$g_aiCurrentLootBB[$eLootTrophyBB] = getTrophyMainScreen(67, 84)
 	$g_aiCurrentLootBB[$eLootGoldBB] = getResourcesMainScreen(705, 23)
 	$g_aiCurrentLootBB[$eLootElixirBB] = getResourcesMainScreen(705, 72)
-	If $bSetLog Then SetLog(" [G]: " & _NumberFormat($g_aiCurrentLootBB[$eLootGoldBB]) & " [E]: " & _NumberFormat($g_aiCurrentLootBB[$eLootElixirBB]) & "[T]: " & _NumberFormat($g_aiCurrentLootBB[$eLootTrophyBB]), $COLOR_SUCCESS)
+	If $bSetLog Then SetLog(" [ذهب]: " & _NumberFormat($g_aiCurrentLootBB[$eLootGoldBB]) & " [اكسير]: " & _NumberFormat($g_aiCurrentLootBB[$eLootElixirBB]) & "[الكؤؤس]: " & _NumberFormat($g_aiCurrentLootBB[$eLootTrophyBB]), $COLOR_SUCCESS)
 
 	If Not $bBypass Then ; update stats
 		UpdateStats()
