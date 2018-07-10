@@ -18,81 +18,81 @@ Func NameOfTroop($iKind, $iPlural = 0)
 	Local $sTroopname
 	Switch $iKind
 		Case $eBarb
-			$sTroopname = "Barbarian"
+			$sTroopname = "بربر"
 		Case $eArch
-			$sTroopname = "Archer"
+			$sTroopname = "ارشر"
 		Case $eGobl
-			$sTroopname = "Goblin"
+			$sTroopname = "حرامي"
 		Case $eGiant
-			$sTroopname = "Giant"
+			$sTroopname = "عملاق"
 		Case $eWall
-			$sTroopname = "Wall Breaker"
+			$sTroopname = "مفجر السور"
 		Case $eWiza
-			$sTroopname = "Wizard"
+			$sTroopname = "ساحر"
 		Case $eBall
-			$sTroopname = "Balloon"
+			$sTroopname = "بالون"
 		Case $eHeal
-			$sTroopname = "Healer"
+			$sTroopname = "هلر"
 		Case $eDrag
-			$sTroopname = "Dragon"
+			$sTroopname = "تنين"
 		Case $ePekk
-			$sTroopname = "Pekka"
+			$sTroopname = "بيكا"
 		Case $eBabyD
-			$sTroopname = "Baby Dragon"
+			$sTroopname = "بيبي دراغون"
 		Case $eMine
-			$sTroopname = "Miner"
+			$sTroopname = "حفار"
         Case $eEDrag
-			$sTroopname = "Electro Dragon"			
+			$sTroopname = "تنين الكهربا"			
 		Case $eMini
-			$sTroopname = "Minion"
+			$sTroopname = "مينون"
 		Case $eHogs
-			$sTroopname = "Hog Rider"
+			$sTroopname = "الهوك "
 		Case $eValk
-			$sTroopname = "Valkyrie"
+			$sTroopname = "فالكري"
 		Case $eWitc
-			$sTroopname = "Witch"
+			$sTroopname = "واتس"
 		Case $eGole
-			$sTroopname = "Golem"
+			$sTroopname = "غولم"
 		Case $eLava
-			$sTroopname = "Lava Hound"
+			$sTroopname = "لافا"
 		Case $eBowl
-			$sTroopname = "Bowler"
+			$sTroopname = "باور"
 		Case $eKing
-			$sTroopname = "King"
+			$sTroopname = "الملكة"
 			$iPlural = 0 ; safety reset, $sTroopname of $eKing cannot be plural
 		Case $eQueen
-			$sTroopname = "Queen"
+			$sTroopname = "الملكة"
 			$iPlural = 0 ; safety reset
 		Case $eWarden
-			$sTroopname = "Grand Warden"
+			$sTroopname = "الامر الكبير"
 			$iPlural = 0 ; safety reset
 		Case $eCastle
-			$sTroopname = "Clan Castle"
+			$sTroopname = "قوات القبيلة"
 			$iPlural = 0 ; safety reset
 		Case $eLSpell
-			$sTroopname = "Lightning Spell"
+			$sTroopname = "سبيل الصواعق"
 		Case $eHSpell
-			$sTroopname = "Heal Spell"
+			$sTroopname = "سبيل الصحة"
 		Case $eRSpell
-			$sTroopname = "Rage Spell"
+			$sTroopname = "سبيل الغضب "
 		Case $eJSpell
-			$sTroopname = "Jump Spell"
+			$sTroopname = "سبيل القفذ"
 		Case $eFSpell
-			$sTroopname = "Freeze Spell"
+			$sTroopname = "سبيل التجميد"
 		Case $eCSpell
-			$sTroopname = "Clone Spell"
+			$sTroopname = "سبيل الاستنساخ"
 		Case $ePSpell
-			$sTroopname = "Poison Spell"
+			$sTroopname = "سبيل السم"
 		Case $eESpell
-			$sTroopname = "Earthquake Spell"
+			$sTroopname = "سبيل الزلزال"
 		Case $eHaSpell
-			$sTroopname = "Haste Spell"
+			$sTroopname = "سبيل التسريع"
 		Case $eSkSpell
-			$sTroopname = "Skeleton Spell"
+			$sTroopname = "سبيل الهياكل"
 		Case Else
 			Return "" ; error or unknown case
 	EndSwitch
-	If $iPlural = 1 And $iKind = $eWitc Then $sTroopname &= "e" ; adding the "e" for "witches"
-	If $iPlural = 1 Then $sTroopname &= "s" ; if troop is not $eKing, $eQueen, $eCastle, $eWarden add the plural "s"
+	If $iPlural = 1 And $iKind = $eWitc Then $sTroopname &= " " ; adding the "e" for "witches"
+	If $iPlural = 1 Then $sTroopname &= " " ; if troop is not $eKing, $eQueen, $eCastle, $eWarden add the plural "s"
 	Return $sTroopname
 EndFunc   ;==>NameOfTroop

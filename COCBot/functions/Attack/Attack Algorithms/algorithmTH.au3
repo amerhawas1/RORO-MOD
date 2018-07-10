@@ -41,7 +41,7 @@ Func AttackTHGrid($troopKind, $iNbOfSpots = 1, $iAtEachSpot = 1, $Sleep = Random
 		EndIf
 	Next
 
-	If ($THtroop = -1) And $g_bDebugSetlog Then SetLog("No " & $name & " Found!!!")
+	If ($THtroop = -1) And $g_bDebugSetlog Then SetLog("لا " & $name & " يوجد!!!")
 	If ($THtroop = -1) Then Return False
 
 	;Heroes And CC
@@ -55,7 +55,7 @@ Func AttackTHGrid($troopKind, $iNbOfSpots = 1, $iAtEachSpot = 1, $Sleep = Random
 			If $g_bDuringMilkingAttack = False And BitAND($g_aiAttackUseHeroes[$TS], $eHeroKing) <> $eHeroKing Then Return
 			If $g_bDuringMilkingAttack = True And BitAND($g_aiAttackUseHeroes[$DB], $eHeroKing) <> $eHeroKing Then Return
 			$g_bCheckKingPower = True
-			SetLog("Dropping King", $COLOR_SUCCESS)
+			SetLog("اسقاط الملك للهجوم", $COLOR_SUCCESS)
 			$g_bTHSnipeUsedKing = True
 		EndIf
 
@@ -64,7 +64,7 @@ Func AttackTHGrid($troopKind, $iNbOfSpots = 1, $iAtEachSpot = 1, $Sleep = Random
 			If $g_bDuringMilkingAttack = False And BitAND($g_aiAttackUseHeroes[$TS], $eHeroQueen) <> $eHeroQueen Then Return
 			If $g_bDuringMilkingAttack = True And BitAND($g_aiAttackUseHeroes[$DB], $eHeroQueen) <> $eHeroQueen Then Return
 			$g_bCheckQueenPower = True
-			SetLog("Dropping Queen", $COLOR_SUCCESS)
+			SetLog("اسقاط الملكة للهجوم", $COLOR_SUCCESS)
 			$g_bTHSnipeUsedQueen = True
 		EndIf
 
@@ -73,7 +73,7 @@ Func AttackTHGrid($troopKind, $iNbOfSpots = 1, $iAtEachSpot = 1, $Sleep = Random
 			If $g_bDuringMilkingAttack = False And BitAND($g_aiAttackUseHeroes[$TS], $eHeroWarden) <> $eHeroWarden Then Return
 			If $g_bDuringMilkingAttack = True And BitAND($g_aiAttackUseHeroes[$DB], $eHeroWarden) <> $eHeroWarden Then Return
 			$g_bCheckWardenPower = True
-			SetLog("Dropping Grand Warden", $COLOR_SUCCESS)
+			SetLog("اسقاط الامر الكبيرللهجوم", $COLOR_SUCCESS)
 			$g_bTHSnipeUsedWarden = True
 		EndIf
 
@@ -85,7 +85,7 @@ Func AttackTHGrid($troopKind, $iNbOfSpots = 1, $iAtEachSpot = 1, $Sleep = Random
 			If $g_bPlannedDropCCHoursEnable = True Then
 				Local $hour = StringSplit(_NowTime(4), ":", $STR_NOCOUNT)
 				If $g_abPlannedDropCCHours[$hour[0]] = False Then
-					SetLog("Drop Clan Castle not Planned, Skipped..", $COLOR_SUCCESS)
+					SetLog("إسقاط قلعة عشيرة غير مخطط ، تم تخطيها ..", $COLOR_SUCCESS)
 					Return ; exit func if no planned donate checkmarks
 				EndIf
 			EndIf
@@ -93,16 +93,16 @@ Func AttackTHGrid($troopKind, $iNbOfSpots = 1, $iAtEachSpot = 1, $Sleep = Random
 			If $g_bUseCCBalanced = True Then
 				If Number($g_iTroopsReceived) <> 0 Then
 					If Number(Number($g_iTroopsDonated) / Number($g_iTroopsReceived)) >= (Number($g_iCCDonated) / Number($g_iCCReceived)) Then
-						SetLog("Dropping Clan Castle, donated (" & $g_iTroopsDonated & ") / received (" & $g_iTroopsReceived & ") >= " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
+						SetLog("إسقاط قلعة عشيرة ، تبرعت (" & $g_iTroopsDonated & ") / تم الاستلام (" & $g_iTroopsReceived & ") >= " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
 					Else
-						SetLog("Not Dropping Clan Castle, donated  (" & $g_iTroopsDonated & ") / received (" & $g_iTroopsReceived & ") < " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
+						SetLog("لا تسقط قلعة عشيرة ، تبرعت  (" & $g_iTroopsDonated & ") / تم الاستلام (" & $g_iTroopsReceived & ") < " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
 						Return
 					EndIf
 				Else
 					If Number(Number($g_iTroopsDonated) / 1) >= (Number($g_iCCDonated) / Number($g_iCCReceived)) Then
-						SetLog("Dropping Clan Castle, donated (" & $g_iTroopsDonated & ") / received (" & $g_iTroopsReceived & ") >= " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
+						SetLog("إسقاط قلعة عشيرة ، تبرعت (" & $g_iTroopsDonated & ") / تم الاستلام (" & $g_iTroopsReceived & ") >= " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
 					Else
-						SetLog("Not Dropping Clan Castle, donated  (" & $g_iTroopsDonated & ") / received (" & $g_iTroopsReceived & ") < " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
+						SetLog("لا تسقط قلعة عشيرة ، تبرعت  (" & $g_iTroopsDonated & ") / تم الاستلام (" & $g_iTroopsReceived & ") < " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
 						Return
 					EndIf
 				EndIf
@@ -122,12 +122,12 @@ Func AttackTHGrid($troopKind, $iNbOfSpots = 1, $iAtEachSpot = 1, $Sleep = Random
 		If ($TroopCountBeg = 0) And $g_bDebugSetlog Then SetLog("No " & $name & " Remaining!!!")
 		If ($TroopCountBeg = 0) Then Return False
 
-		If $waveNb = 0 Then $waveName = "Only"
-		If $waveNb = 1 Then $waveName = "First"
-		If $waveNb = 2 Then $waveName = "Second"
-		If $waveNb = 3 Then $waveName = "Third"
-		If $waveNb = 4 Then $waveName = "Last"
-		SetLog("Dropping " & $waveName & " wave of " & $troopNb & " " & $name, $COLOR_SUCCESS)
+		If $waveNb = 0 Then $waveName = "فقط"
+		If $waveNb = 1 Then $waveName = "الاول"
+		If $waveNb = 2 Then $waveName = "ثانيا"
+		If $waveNb = 3 Then $waveName = "الثالث"
+		If $waveNb = 4 Then $waveName = "اخر"
+		SetLog("اسقاط " & $waveName & " موجة " & $troopNb & " " & $name, $COLOR_SUCCESS)
 	EndIf
 	;End All Barracks Troops
 
@@ -140,10 +140,10 @@ Func AttackTHGrid($troopKind, $iNbOfSpots = 1, $iAtEachSpot = 1, $Sleep = Random
 	If $troopKind >= $eBarb And $troopKind <= $eBowl Then
 		If $TroopCountBeg <> Number(ReadTroopQuantity($THtroop)) Then
 			$NumTroopDeployed = $TroopCountBeg - Number(ReadTroopQuantity($THtroop))
-			SetLog("Deployment of " & $NumTroopDeployed & " " & $name & " was Successful!")
+			SetLog("نشر " & $NumTroopDeployed & " " & $name & " كان ناجحا!")
 			If _Sleep($Sleep) Then Return
 		Else
-			SetLog("Deployment of " & $name & " wasn't Successful!")
+			SetLog("نشر " & $name & " غير ناجح!")
 		EndIf
 	EndIf
 
@@ -288,12 +288,12 @@ Func CastSpell($THSpell, $x, $y)
 	Next
 
 	If $Spell > -1 Then
-		SetLog("Dropping " & $name)
+		SetLog("اسقاط " & $name)
 		SelectDropTroop($Spell)
 		If _Sleep($DELAYATTCKTHGRID1) Then Return
 		If IsAttackPage() Then Click($x, $y, 1, 0, "#0029")
 	Else
-		If $g_bDebugSetlog Then SetDebugLog("No " & $name & " Found")
+		If $g_bDebugSetlog Then SetDebugLog("لا " & $name & " يوجد")
 	EndIf
 
 EndFunc   ;==>CastSpell
@@ -307,13 +307,13 @@ Func CheckOneStar($DelayInSec = 0, $Log = True, $CheckHeroes = True)
 		If $CheckHeroes = True And ($g_bCheckQueenPower = True Or $g_bCheckKingPower = True) Then CheckHeroesHealth() ;Check Heroes Health and activate their abilities if health is not green
 		;check for one star
 		If _ColorCheck(_GetPixelColor($aWonOneStar[0], $aWonOneStar[1], True), Hex($aWonOneStar[2], 6), $aWonOneStar[3]) Then ;exit if 1 star
-			If $Log = True Then SetLog("Townhall has been destroyed!", $COLOR_ACTION)
+			If $Log = True Then SetLog("تم تدمير التاون هول!", $COLOR_ACTION)
 			If $g_bRestart = True Then Return True
 
 			;Activate King and Queen powers to restore health before exit if they are deployed
 
 			If $g_bCheckQueenPower = True Then
-				SetLog("Activating Queen's power to restore some health before EndBattle", $COLOR_INFO)
+				SetLog("تفعيل قوة الملكة لاستعادة بعض الصحة قبل نهاية المعركة", $COLOR_INFO)
 				SelectDropTroop($g_iQueenSlot)
 				$g_bCheckQueenPower = False
 			EndIf
@@ -322,7 +322,7 @@ Func CheckOneStar($DelayInSec = 0, $Log = True, $CheckHeroes = True)
 			If $g_bRestart = True Then Return True
 
 			If $g_bCheckKingPower = True Then
-				SetLog("Activating King's power to restore some health before EndBattle", $COLOR_INFO)
+				SetLog("تفعيل قدرة الملك لاستعادة بعض الصحة قبل نهاية المعركة", $COLOR_INFO)
 				SelectDropTroop($g_iKingSlot)
 				$g_bCheckKingPower = False
 			EndIf

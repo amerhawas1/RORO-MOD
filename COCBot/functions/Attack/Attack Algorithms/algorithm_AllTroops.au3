@@ -41,10 +41,10 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 
 	If $g_iMatchMode = $TS Then ; Return ;Exit attacking if trophy hunting and not bullymode
 		If ($g_bTHSnipeUsedKing = True Or $g_bTHSnipeUsedQueen = True) And ($g_bSmartZapEnable = True And $g_bSmartZapSaveHeroes = True) Then
-			SetLog("King and/or Queen dropped, close attack")
-			If $g_bSmartZapEnable = True Then SetLog("Skipping SmartZap to protect your royals!", $COLOR_FUCHSIA)
+			SetLog("وانخفض الملك و / أو الملكة ، الهجوم الوثيق")
+			If $g_bSmartZapEnable = True Then SetLog("تخطي هجوم الصواعق لحماية العائلة المالكة الخاصة بك!", $COLOR_FUCHSIA)
 		ElseIf IsAttackPage() And Not SmartZap() And $g_bTHSnipeUsedKing = False And $g_bTHSnipeUsedQueen = False Then
-			SetLog("Wait few sec before close attack")
+			SetLog("انتظر بضع ثوان قبل الهجوم الوشيك")
 			If _Sleep(Random(0, 2, 1) * 1000) Then Return ;wait 0-2 second before exit if king and queen are not dropped
 		EndIf
 
@@ -60,26 +60,26 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 	Global $nbSides = 0
 	Switch $g_aiAttackStdDropSides[$g_iMatchMode]
 		Case 0 ;Single sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			SetLog("Attacking on a single side", $COLOR_INFO)
+			SetLog("مهاجمة على جانب واحد", $COLOR_INFO)
 			$nbSides = 1
 		Case 1 ;Two sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			SetLog("Attacking on two sides", $COLOR_INFO)
+			SetLog("مهاجمة على الجانبين", $COLOR_INFO)
 			$nbSides = 2
 		Case 2 ;Three sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			SetLog("Attacking on three sides", $COLOR_INFO)
+			SetLog("مهاجمة من ثلاثة جوانب", $COLOR_INFO)
 			$nbSides = 3
 		Case 3 ;All sides ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			SetLog("Attacking on all sides", $COLOR_INFO)
+			SetLog("مهاجمة على جميع الاطراف", $COLOR_INFO)
 			$nbSides = 4
 		Case 4 ;Classic Four Finger ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			SetLog("Attacking four finger fight style", $COLOR_INFO)
+			SetLog("مهاجمة أربعة أسلوب القتال الاصبع", $COLOR_INFO)
 			$nbSides = 5
 		Case 5 ;DE Side - Live Base only ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			SetLog("Attacking on Dark Elixir Side.", $COLOR_INFO)
+			SetLog("مهاجمة على الجانب اكسير الظلام.", $COLOR_INFO)
 			$nbSides = 1
 			If Not ($g_abAttackStdSmartAttack[$g_iMatchMode]) Then GetBuildingEdge($eSideBuildingDES) ; Get DE Storage side when Redline is not used.
 		Case 6 ;TH Side - Live Base only ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			SetLog("Attacking on Town Hall Side.", $COLOR_INFO)
+			SetLog("المهاجمة من جنب التاون هول.", $COLOR_INFO)
 			$nbSides = 1
 			If Not ($g_abAttackStdSmartAttack[$g_iMatchMode]) Then GetBuildingEdge($eSideBuildingTH) ; Get Townhall side when Redline is not used.
 	EndSwitch
@@ -320,10 +320,10 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 	CheckHeroesHealth()
 
 	If _Sleep($DELAYALGORITHM_ALLTROOPS4) Then Return
-	SetLog("Dropping left over troops", $COLOR_INFO)
+	SetLog("اسقاط اليسار على القوات", $COLOR_INFO)
 	For $x = 0 To 1
 		If PrepareAttack($g_iMatchMode, True) = 0 Then
-			If $g_bDebugSetlog Then SetDebugLog("No Wast time... exit, no troops usable left", $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog(" الخروج ، لا توجد قوات قابلة للاستخدام", $COLOR_DEBUG)
 			ExitLoop ;Check remaining quantities
 		EndIf
 		For $i = $eBarb To $eBowl ; launch all remaining troops
@@ -336,7 +336,7 @@ Func algorithm_AllTroops() ;Attack Algorithm for all existing troops
 
 	CheckHeroesHealth()
 
-	SetLog("Finished Attacking, waiting for the battle to end")
+	SetLog("انتهى الهجوم ، في انتظار انتهاء المعركة")
 EndFunc   ;==>algorithm_AllTroops
 
 Func SetSlotSpecialTroops()
@@ -389,15 +389,15 @@ Func SmartAttackStrategy($imode)
 	If $g_iMatchMode <> $MA Then ; (milking attack use own strategy)
 
 		If ($g_abAttackStdSmartAttack[$imode]) Then
-			SetLog("Calculating Smart Attack Strategy", $COLOR_INFO)
+			SetLog("حساب استراتيجية الهجوم الذكي", $COLOR_INFO)
 			Local $hTimer = __TimerInit()
 			_CaptureRegion2()
 			_GetRedArea()
 
-			SetLog("Calculated  (in " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds) :")
+			SetLog("محتسب (في " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثواني) :")
 
 			If ($g_abAttackStdSmartNearCollectors[$imode][0] Or $g_abAttackStdSmartNearCollectors[$imode][1] Or $g_abAttackStdSmartNearCollectors[$imode][2]) Then
-				SetLog("Locating Mines, Collectors & Drills", $COLOR_INFO)
+				SetLog("تحديد موقع المناجم ، جامعي & التدريبات", $COLOR_INFO)
 				$hTimer = __TimerInit()
 				Global $g_aiPixelMine[0]
 				Global $g_aiPixelElixir[0]
@@ -424,10 +424,10 @@ Func SmartAttackStrategy($imode)
 						_ArrayAdd($g_aiPixelNearCollector, $g_aiPixelDarkElixir, 0, "|", @CRLF, $ARRAYFILL_FORCE_STRING)
 					EndIf
 				EndIf
-				SetLog("Located  (in " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds) :")
-				SetLog("[" & UBound($g_aiPixelMine) & "] Gold Mines")
-				SetLog("[" & UBound($g_aiPixelElixir) & "] Elixir Collectors")
-				SetLog("[" & UBound($g_aiPixelDarkElixir) & "] Dark Elixir Drill/s")
+				SetLog("يقع في " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثواني) :")
+				SetLog("[" & UBound($g_aiPixelMine) & "] مناجم ذهب")
+				SetLog("[" & UBound($g_aiPixelElixir) & "] مناجم الاكسير")
+				SetLog("[" & UBound($g_aiPixelDarkElixir) & "] مناجم الاكسير الدارك")
 				$g_aiNbrOfDetectedMines[$imode] += UBound($g_aiPixelMine)
 				$g_aiNbrOfDetectedCollectors[$imode] += UBound($g_aiPixelElixir)
 				$g_aiNbrOfDetectedDrills[$imode] += UBound($g_aiPixelDarkElixir)

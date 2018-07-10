@@ -21,12 +21,12 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 
 	If $g_bDESideDisableOther And $g_iMatchMode = $LB And $g_aiAttackStdDropSides[$LB] = 4 And $g_bDESideEndEnable And ($g_bDropQueen Or $g_bDropKing) Then
 		SaveandDisableEBO()
-		SetLog("Disabling Normal End Battle Options", $COLOR_SUCCESS)
+		SetLog("تعطيل خيارات نهاية المعركة العادية", $COLOR_SUCCESS)
 	EndIf
 
 	If $GoldChangeCheck Then
 		If Not (IsReturnHomeBattlePage(True, False)) Then ; if already in return home battle page do not wait and try to activate Hero Ability and close battle
-			SetLog("Checking if the battle has finished", $COLOR_INFO)
+			SetLog("التحقق مما إذا كانت المعركة قد انتهت", $COLOR_INFO)
 			While GoldElixirChangeEBO()
 				If _Sleep($DELAYRETURNHOME1) Then Return
 			WEnd
@@ -36,21 +36,21 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 				;_CaptureRegion()
 				If _ColorCheck(_GetPixelColor($aRtnHomeCheck1[0], $aRtnHomeCheck1[1], True), Hex($aRtnHomeCheck1[2], 6), $aRtnHomeCheck1[3]) = False And _ColorCheck(_GetPixelColor($aRtnHomeCheck2[0], $aRtnHomeCheck2[1], True), Hex($aRtnHomeCheck2[2], 6), $aRtnHomeCheck2[3]) = False Then ; If not already at Return Homescreen
 					If $g_bCheckKingPower Then
-						SetLog("Activating King's power to restore some health before EndBattle", $COLOR_INFO)
+						SetLog("تفعيل سلطة الملك لاستعادة بعض الصحة قبل نهاية المعركة", $COLOR_INFO)
 						If IsAttackPage() Then SelectDropTroop($g_iKingSlot) ;If King was not activated: Boost King before EndBattle to restore some health
 					EndIf
 					If $g_bCheckQueenPower Then
-						SetLog("Activating Queen's power to restore some health before EndBattle", $COLOR_INFO)
+						SetLog("تفعيل قوة الملكة لاستعادة بعض الصحة قبل نهاية المعركة", $COLOR_INFO)
 						If IsAttackPage() Then SelectDropTroop($g_iQueenSlot) ;If Queen was not activated: Boost Queen before EndBattle to restore some health
 					EndIf
 					If $g_bCheckWardenPower Then
-						SetLog("Activating Warden's power to restore some health before EndBattle", $COLOR_INFO)
+						SetLog("تفعيل سلطة القائد لاستعادة بعض الصحة قبل نهاية المعركة", $COLOR_INFO)
 						If IsAttackPage() Then SelectDropTroop($g_iWardenSlot) ;If Queen was not activated: Boost Queen before EndBattle to restore some health
 					EndIf
 				EndIf
 			EndIf
 		Else
-			If $g_bDebugSetlog Then SetDebugLog("Battle already over", $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog("معركة بالفعل انتهت", $COLOR_DEBUG)
 		EndIf
 	EndIf
 
@@ -74,19 +74,19 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 
 	If $g_abAttackTypeEnable[$TS] = 1 And $g_iMatchMode = $TS Then $g_bFirstStart = True ;reset barracks upon return when TH sniping w/custom army
 
-	SetLog("Returning Home", $COLOR_INFO)
+	SetLog("العودة للقرية", $COLOR_INFO)
 	If $g_bRunState = False Then Return
 
 	; ---- CLICK SURRENDER BUTTON ----
 	If Not (IsReturnHomeBattlePage(True, False)) Then ; check if battle is already over
 		For $i = 0 To 5 ; dynamic wait loop for surrender button to appear (if end battle or surrender button are not found in 5*(200)ms + 10*(200)ms or 3 seconds, then give up.)
-			If $g_bDebugSetlog Then SetDebugLog("Wait for surrender button to appear #" & $i)
+			If $g_bDebugSetlog Then SetDebugLog("انتظر زر الاستسلام للظهور #" & $i)
 			If _CheckPixel($aSurrenderButton, $g_bCapturePixel) Then ;is surrender button is visible?
 				If IsAttackPage() Then ; verify still on attack page, and battle has not ended magically before clicking
 					ClickP($aSurrenderButton, 1, 0, "#0099") ;Click Surrender
 					$j = 0
 					While 1 ; dynamic wait for Okay button
-						If $g_bDebugSetlog Then SetDebugLog("Wait for OK button to appear #" & $j)
+						If $g_bDebugSetlog Then SetDebugLog("انتظر زر موافق للظهور #" & $j)
 						If IsEndBattlePage(False) Then
 							ClickOkay("SurrenderOkay") ; Click Okay to Confirm surrender
 							ExitLoop 2
@@ -103,7 +103,7 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 			If _Sleep($DELAYRETURNHOME5) Then Return
 		Next
 	Else
-		If $g_bDebugSetlog Then SetDebugLog("Battle already over.", $COLOR_DEBUG)
+		If $g_bDebugSetlog Then SetDebugLog("معركة بالفعل انتهت.", $COLOR_DEBUG)
 	EndIf
 	If _Sleep($DELAYRETURNHOME2) Then Return ; short wait for return to main
 
@@ -115,7 +115,7 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 		If IsAttackPage() Then
 			$counter = 0
 			While _ColorCheck(_GetPixelColor($aRtnHomeCheck1[0], $aRtnHomeCheck1[1], True), Hex($aRtnHomeCheck1[2], 6), $aRtnHomeCheck1[3]) = False And _ColorCheck(_GetPixelColor($aRtnHomeCheck2[0], $aRtnHomeCheck2[1], True), Hex($aRtnHomeCheck2[2], 6), $aRtnHomeCheck2[3]) = False ; test for Return Home Button
-				If $g_bDebugSetlog Then SetDebugLog("Wait for Return Home Button to appear #" & $counter)
+				If $g_bDebugSetlog Then SetDebugLog("انتظر زر العودة الرئيسية لتظهر #" & $counter)
 				If _Sleep($DELAYRETURNHOME2) Then ExitLoop
 				$counter += 1
 				If $counter > 40 Then ExitLoop
@@ -127,7 +127,7 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 		$g_iTotalSearchTime = 0
 	EndIf
 	If $TakeSS = 1 And $GoldChangeCheck Then
-		SetLog("Taking snapshot of your loot", $COLOR_SUCCESS)
+		SetLog("أخذ لقطة من المسروقات الخاصة بك", $COLOR_SUCCESS)
 		Local $Date = @YEAR & "-" & @MON & "-" & @MDAY
 		Local $Time = @HOUR & "." & @MIN
 		_CaptureRegion()
@@ -148,7 +148,7 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 
 	$i = 0 ; Reset Loop counter
 	While 1
-		If $g_bDebugSetlog Then SetDebugLog("Wait for End Fight Scene to appear #" & $i)
+		If $g_bDebugSetlog Then SetDebugLog("انتظر حتى تظهر نهاية مشهد القتال #" & $i)
 		If _CheckPixel($aEndFightSceneAvl, $g_bCapturePixel) Then ; check for the gold ribbon in the end of battle data screen
 			If IsReturnHomeBattlePage() Then ClickP($aReturnHomeButton, 1, 0, "#0101") ;Click Return Home Button
 			ExitLoop
@@ -162,13 +162,13 @@ Func ReturnHome($TakeSS = 1, $GoldChangeCheck = True) ;Return main screen
 
 	$counter = 0
 	While 1
-		If $g_bDebugSetlog Then SetDebugLog("Wait for Star Bonus window to appear #" & $counter)
+		If $g_bDebugSetlog Then SetDebugLog("انتظر حتى تظهر النافذة مكافأة النجوم #" & $counter)
 		If _Sleep($DELAYRETURNHOME4) Then Return
-		If StarBonus() Then SetLog("Star Bonus window closed chief!", $COLOR_INFO) ; Check for Star Bonus window to fill treasury (2016-01) update
+		If StarBonus() Then SetLog("نافذة ستار مكافأة مكافأة رئيس!", $COLOR_INFO) ; Check for Star Bonus window to fill treasury (2016-01) update
 		If ReturnHomeMainPage() Then Return
 		$counter += 1
 		If $counter >= 50 Or isProblemAffect(True) Then
-			SetLog("Cannot return home.", $COLOR_ERROR)
+			SetLog("لا يمكن العودة إلى القرية.", $COLOR_ERROR)
 			checkMainScreen()
 			Return
 		EndIf
@@ -177,7 +177,7 @@ EndFunc   ;==>ReturnHome
 
 Func ReturnHomeMainPage()
 	If IsMainPage(1) Then
-		SetLogCentered(" BOT LOG ", Default, Default, True)
+		SetLogCentered(" سجل البوت ", Default, Default, True)
 		Return True
 	EndIf
 	Return False

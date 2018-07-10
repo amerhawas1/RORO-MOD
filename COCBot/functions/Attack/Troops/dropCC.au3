@@ -27,7 +27,7 @@ Func dropCC($x, $y, $slot) ;Drop clan castle
 		If $g_bPlannedDropCCHoursEnable = True Then
 			Local $hour = StringSplit(_NowTime(4), ":", $STR_NOCOUNT)
 			If $g_abPlannedDropCCHours[$hour[0]] = False Then
-				SetLog("Drop CC not Planned, Skipped..", $COLOR_SUCCESS)
+				SetLog("اسقاط قوات القبية غير مخطط ..تم تخطيها", $COLOR_SUCCESS)
 				Return ; exit func if no planned donate checkmarks
 			EndIf
 		EndIf
@@ -37,25 +37,25 @@ Func dropCC($x, $y, $slot) ;Drop clan castle
 		If $g_bUseCCBalanced = True Then
 			If Number($g_iTroopsReceived) <> 0 Then
 				If Number(Number($g_iTroopsDonated) / Number($g_iTroopsReceived)) >= (Number($g_iCCDonated) / Number($g_iCCReceived)) Then
-					SetLog("Dropping Clan Castle, donated (" & $g_iTroopsDonated & ") / received (" & $g_iTroopsReceived & ") >= " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
+					SetLog("اسقاط قوات القبيلة, عدم اس (" & $g_iTroopsDonated & ") / تم الاستلام (" & $g_iTroopsReceived & ") >= " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
 					Click(GetXPosOfArmySlot($slot, 68), 595 + $g_iBottomOffsetY, 1, $DELAYDROPCC2, "#0086")
 					If _Sleep($DELAYDROPCC1) Then Return
 					AttackClick($x, $y, 1, 0, 0, "#0087")
 				Else
-					SetLog("No Dropping Clan Castle, donated  (" & $g_iTroopsDonated & ") / received (" & $g_iTroopsReceived & ") < " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
+					SetLog("عدم اسقاط قوات القبيلة , التبرع  (" & $g_iTroopsDonated & ") / تم الاستلام (" & $g_iTroopsReceived & ") < " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
 				EndIf
 			Else
 				If Number(Number($g_iTroopsDonated) / 1) >= (Number($g_iCCDonated) / Number($g_iCCReceived)) Then
-					SetLog("Dropping Clan Castle, donated (" & $g_iTroopsDonated & ") / received (" & $g_iTroopsReceived & ") >= " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
+					SetLog(" قوات القبيلة , التبرع, عدم اس (" & $g_iTroopsDonated & ") / تم الاستلام (" & $g_iTroopsReceived & ") >= " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
 					Click(GetXPosOfArmySlot($slot, 68), 595 + $g_iBottomOffsetY, 1, $DELAYDROPCC2, "#0088")
 					If _Sleep($DELAYDROPCC1) Then Return
 					AttackClick($x, $y, 1, 0, 0, "#0089")
 				Else
-					SetLog("No Dropping Clan Castle, donated  (" & $g_iTroopsDonated & ") / received (" & $g_iTroopsReceived & ") < " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
+					SetLog(" قوات القبيلة , التبرع, عدم اس  (" & $g_iTroopsDonated & ") / تم الاستلام (" & $g_iTroopsReceived & ") < " & $g_iCCDonated & "/" & $g_iCCReceived, $COLOR_INFO)
 				EndIf
 			EndIf
 		Else
-			SetLog("Dropping Clan Castle", $COLOR_INFO)
+			SetLog("اسقاط قوات القبيلة ", $COLOR_INFO)
 			Click(GetXPosOfArmySlot($slot, 68), 595 + $g_iBottomOffsetY, 1, $DELAYDROPCC2, "#0090")
 			If _Sleep($DELAYDROPCC1) Then Return
 			AttackClick($x, $y, 1, 0, 0, "#0091")

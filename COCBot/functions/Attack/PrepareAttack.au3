@@ -39,18 +39,18 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 	EndIf
 
 	Local $troopsnumber = 0
-	If $g_bDebugSetlog Then SetDebugLog("PrepareAttack for " & $pMatchMode & " " & $g_asModeText[$pMatchMode], $COLOR_DEBUG)
+	If $g_bDebugSetlog Then SetDebugLog("اعداد الهجوم ل " & $pMatchMode & " " & $g_asModeText[$pMatchMode], $COLOR_DEBUG)
 	If $Remaining Then
-		SetLog("Checking remaining unused troops for: " & $g_asModeText[$pMatchMode], $COLOR_INFO)
+		SetLog("التحقق من بقاء القوات غير المستخدمة ل: " & $g_asModeText[$pMatchMode], $COLOR_INFO)
 	Else
-		SetLog("Initiating attack for: " & $g_asModeText[$pMatchMode], $COLOR_ERROR)
+		SetLog("بدء الهجوم ل: " & $g_asModeText[$pMatchMode], $COLOR_ERROR)
 	EndIf
 
 	; JUNE 2018 @PROMAC
 	; Lets Select The CC and not the Siege Machine ; $eCastle
 	If Not $Remaining  And IsTroopToBeUsed($pMatchMode, $eCastle) Then
 		If QuickMIS("BC1", $g_sImgSwitchSiegeMacines, 28, 698, 820, 726, True, False) Then
-			Setlog("Switching button in a Siege Machine detected.")
+			Setlog("تم الكشف عن زر التبديل في آلة الحصار.")
 			; Was detectable lets click
 			Click($g_iQuickMISX + 28, $g_iQuickMISY + 698, 1)
 			; wait to appears the new small window
@@ -60,7 +60,7 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 			If QuickMIS("BC1", $g_sImgSwitchSiegeCastle, $lastX, 535, $LastX1, 560, True, False) Then
 				; Was detectable lets click
 				Click($g_iQuickMISX + $lastX, $g_iQuickMISY + 535, 1)
-				Setlog("Clan Castle troops selected!", $COLOR_SUCCESS)
+				Setlog("تم اختيار قوات عشيرة القلعة!", $COLOR_SUCCESS)
 			Else
 				; If was not detectable lets click again on green icon to hide the window!
 				Click($lastX + 28, $lastY + 698, 1)
@@ -111,7 +111,7 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 			If $troopKind < $eKing Then
 				;normal troop
 				If Not IsTroopToBeUsed($pMatchMode, $troopKind) Then
-					If $g_bDebugSetlog Then SetDebugLog("Discard use of troop " & $troopKind & " " & NameOfTroop($troopKind), $COLOR_ERROR)
+					If $g_bDebugSetlog Then SetDebugLog("تجاهل استخدام القوات " & $troopKind & " " & NameOfTroop($troopKind), $COLOR_ERROR)
 					$g_avAttackTroops[$i][0] = -1
 					$g_avAttackTroops[$i][1] = 0
 					$troopKind = -1

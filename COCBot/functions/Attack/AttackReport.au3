@@ -23,19 +23,19 @@ Func AttackReport()
 	While _CheckPixel($aEndFightSceneAvl, True) = False ; check for light gold pixle in the Gold ribbon in End of Attack Scene before reading values
 		$iCount += 1
 		If _Sleep($DELAYATTACKREPORT1) Then Return
-		If $g_bDebugSetlog Then SetDebugLog("Waiting Attack Report Ready, " & ($iCount / 2) & " Seconds.", $COLOR_DEBUG)
+		If $g_bDebugSetlog Then SetDebugLog("تقرير الهجوم جاهز, " & ($iCount / 2) & " ثواني.", $COLOR_DEBUG)
 		If $iCount > 30 Then ExitLoop ; wait 30*500ms = 15 seconds max for the window to render
 	WEnd
-	If $iCount > 30 Then SetLog("End of Attack scene slow to appear, attack values my not be correct", $COLOR_INFO)
+	If $iCount > 30 Then SetLog("نهاية الهجوم, قد لا تكون قيم الهجوم صحيحة", $COLOR_INFO)
 
 	$iCount = 0 ; reset loop counter
 	While getResourcesLoot(290, 289 + $g_iMidOffsetY) = "" ; check for gold value to be non-zero before reading other values as a secondary timer to make sure all values are available
 		$iCount += 1
 		If _Sleep($DELAYATTACKREPORT1) Then Return
-		If $g_bDebugSetlog Then SetDebugLog("Waiting Attack Report Ready, " & ($iCount / 2) & " Seconds.", $COLOR_DEBUG)
+		If $g_bDebugSetlog Then SetDebugLog("تقرير الهجوم جاهز, " & ($iCount / 2) & " ثواني.", $COLOR_DEBUG)
 		If $iCount > 20 Then ExitLoop ; wait 20*500ms = 10 seconds max before we have call the OCR read an error
 	WEnd
-	If $iCount > 20 Then SetLog("End of Attack scene read gold error, attack values my not be correct", $COLOR_INFO)
+	If $iCount > 20 Then SetLog("نهاية الهجوم, قد لا تكون قيم الهجوم صحيحة", $COLOR_INFO)
 
 	If _ColorCheck(_GetPixelColor($aAtkRprtDECheck[0], $aAtkRprtDECheck[1], True), Hex($aAtkRprtDECheck[2], 6), $aAtkRprtDECheck[3]) Then ; if the color of the DE drop detected
 		$g_iStatsLastAttack[$eLootGold] = getResourcesLoot(290, 289 + $g_iMidOffsetY)
@@ -48,7 +48,7 @@ Func AttackReport()
 		If _ColorCheck(_GetPixelColor($aAtkRprtTrophyCheck[0], $aAtkRprtTrophyCheck[1], True), Hex($aAtkRprtTrophyCheck[2], 6), $aAtkRprtTrophyCheck[3]) Then
 			$g_iStatsLastAttack[$eLootTrophy] = -$g_iStatsLastAttack[$eLootTrophy]
 		EndIf
-		SetLog("Loot: [G]: " & _NumberFormat($g_iStatsLastAttack[$eLootGold]) & " [E]: " & _NumberFormat($g_iStatsLastAttack[$eLootElixir]) & " [DE]: " & _NumberFormat($g_iStatsLastAttack[$eLootDarkElixir]) & " [T]: " & $g_iStatsLastAttack[$eLootTrophy], $COLOR_SUCCESS)
+		SetLog("النهب: [ذهب]: " & _NumberFormat($g_iStatsLastAttack[$eLootGold]) & " [اكسير]: " & _NumberFormat($g_iStatsLastAttack[$eLootElixir]) & " [اكسير الدارك]: " & _NumberFormat($g_iStatsLastAttack[$eLootDarkElixir]) & " [الكؤؤس]: " & $g_iStatsLastAttack[$eLootTrophy], $COLOR_SUCCESS)
 	Else
 		$g_iStatsLastAttack[$eLootGold] = getResourcesLoot(290, 289 + $g_iMidOffsetY)
 		If _Sleep($DELAYATTACKREPORT2) Then Return
@@ -59,13 +59,13 @@ Func AttackReport()
 			$g_iStatsLastAttack[$eLootTrophy] = -$g_iStatsLastAttack[$eLootTrophy]
 		EndIf
 		$g_iStatsLastAttack[$eLootDarkElixir] = ""
-		SetLog("Loot: [G]: " & _NumberFormat($g_iStatsLastAttack[$eLootGold]) & " [E]: " & _NumberFormat($g_iStatsLastAttack[$eLootElixir]) & " [T]: " & $g_iStatsLastAttack[$eLootTrophy], $COLOR_SUCCESS)
+		SetLog("النهب: [ذهب]: " & _NumberFormat($g_iStatsLastAttack[$eLootGold]) & " [اكسير]: " & _NumberFormat($g_iStatsLastAttack[$eLootElixir]) & " [الكؤؤس]: " & $g_iStatsLastAttack[$eLootTrophy], $COLOR_SUCCESS)
 	EndIf
 
 	If $g_iStatsLastAttack[$eLootTrophy] >= 0 Then
 		$iBonusLast = Number(getResourcesBonusPerc(570, 309 + $g_iMidOffsetY))
 		If $iBonusLast > 0 Then
-			SetLog("Bonus Percentage: " & $iBonusLast & "%")
+			SetLog("نسبة المكافأة: " & $iBonusLast & "%")
 			Local $iCalcMaxBonus = 0, $iCalcMaxBonusDark = 0
 
 			If _ColorCheck(_GetPixelColor($aAtkRprtDECheck2[0], $aAtkRprtDECheck2[1], True), Hex($aAtkRprtDECheck2[2], 6), $aAtkRprtDECheck2[3]) Then
@@ -81,12 +81,12 @@ Func AttackReport()
 
 				If $iBonusLast = 100 Then
 					$iCalcMaxBonus = $g_iStatsBonusLast[$eLootGold]
-					SetLog("Bonus [G]: " & _NumberFormat($g_iStatsBonusLast[$eLootGold]) & " [E]: " & _NumberFormat($g_iStatsBonusLast[$eLootElixir]) & " [DE]: " & _NumberFormat($g_iStatsBonusLast[$eLootDarkElixir]), $COLOR_SUCCESS)
+					SetLog("المكافاة [ذهب]: " & _NumberFormat($g_iStatsBonusLast[$eLootGold]) & " [اكسير]: " & _NumberFormat($g_iStatsBonusLast[$eLootElixir]) & " [اكسير الدارك]: " & _NumberFormat($g_iStatsBonusLast[$eLootDarkElixir]), $COLOR_SUCCESS)
 				Else
 					$iCalcMaxBonus = Ceiling($g_iStatsBonusLast[$eLootGold] / ($iBonusLast / 100))
 					$iCalcMaxBonusDark = Ceiling($g_iStatsBonusLast[$eLootDarkElixir] / ($iBonusLast / 100))
 
-					SetLog("Bonus [G]: " & _NumberFormat($g_iStatsBonusLast[$eLootGold]) & " out of " & _NumberFormat($iCalcMaxBonus) & " [E]: " & _NumberFormat($g_iStatsBonusLast[$eLootElixir]) & " out of " & _NumberFormat($iCalcMaxBonus) & " [DE]: " & _NumberFormat($g_iStatsBonusLast[$eLootDarkElixir]) & " out of " & _NumberFormat($iCalcMaxBonusDark), $COLOR_SUCCESS)
+					SetLog("المكافاة [ذهب]: " & _NumberFormat($g_iStatsBonusLast[$eLootGold]) & " بعيدا " & _NumberFormat($iCalcMaxBonus) & " [اكسير]: " & _NumberFormat($g_iStatsBonusLast[$eLootElixir]) & " بعيدا " & _NumberFormat($iCalcMaxBonus) & " [اكسير الدراك]: " & _NumberFormat($g_iStatsBonusLast[$eLootDarkElixir]) & " بعيدا " & _NumberFormat($iCalcMaxBonusDark), $COLOR_SUCCESS)
 				EndIf
 			Else
 				If _Sleep($DELAYATTACKREPORT2) Then Return
@@ -99,10 +99,10 @@ Func AttackReport()
 
 				If $iBonusLast = 100 Then
 					$iCalcMaxBonus = $g_iStatsBonusLast[$eLootGold]
-					SetLog("Bonus [G]: " & _NumberFormat($g_iStatsBonusLast[$eLootGold]) & " [E]: " & _NumberFormat($g_iStatsBonusLast[$eLootElixir]), $COLOR_SUCCESS)
+					SetLog("المكافاة [ذهب]: " & _NumberFormat($g_iStatsBonusLast[$eLootGold]) & " [اكسير]: " & _NumberFormat($g_iStatsBonusLast[$eLootElixir]), $COLOR_SUCCESS)
 				Else
 					$iCalcMaxBonus = Number($g_iStatsBonusLast[$eLootGold] / ($iBonusLast / 100))
-					SetLog("Bonus [G]: " & _NumberFormat($g_iStatsBonusLast[$eLootGold]) & " out of " & _NumberFormat($iCalcMaxBonus) & " [E]: " & _NumberFormat($g_iStatsBonusLast[$eLootElixir]) & " out of " & _NumberFormat($iCalcMaxBonus), $COLOR_SUCCESS)
+					SetLog("المكافاة [ذهب]: " & _NumberFormat($g_iStatsBonusLast[$eLootGold]) & " بعيدا " & _NumberFormat($iCalcMaxBonus) & " [اكسير]: " & _NumberFormat($g_iStatsBonusLast[$eLootElixir]) & " بعيدا " & _NumberFormat($iCalcMaxBonus), $COLOR_SUCCESS)
 				EndIf
 			EndIf
 
@@ -110,17 +110,17 @@ Func AttackReport()
 			For $i = 1 To 21 ; skip 0 = Bronze III, see "No Bonus" else section below
 				If _Sleep($DELAYATTACKREPORT2) Then Return
 				If $g_asLeagueDetails[$i][0] = $iCalcMaxBonus Then
-					SetLog("Your league level is: " & $g_asLeagueDetails[$i][1])
+					SetLog("مستوى ترتيب الكؤؤس: " & $g_asLeagueDetails[$i][1])
 					$g_asLeagueDetailsShort = $g_asLeagueDetails[$i][3]
 					ExitLoop
 				EndIf
 			Next
 		Else
-			SetLog("No Bonus")
+			SetLog("لا مكافأة")
 
 			$g_asLeagueDetailsShort = "--"
 			If $g_aiCurrentLoot[$eLootTrophy] + $g_iStatsLastAttack[$eLootTrophy] >= 400 And $g_aiCurrentLoot[$eLootTrophy] + $g_iStatsLastAttack[$eLootTrophy] < 500 Then ; Bronze III has no League bonus
-				SetLog("Your league level is: " & $g_asLeagueDetails[0][1])
+				SetLog("مستوى ترتيب الكؤؤس: " & $g_asLeagueDetails[0][1])
 				$g_asLeagueDetailsShort = $g_asLeagueDetails[0][3]
 			EndIf
 		EndIf
@@ -237,10 +237,10 @@ Func AttackReport()
 	; Share Replay
 	If $g_bShareAttackEnable Then
 		If (Number($g_iStatsLastAttack[$eLootGold]) >= Number($g_iShareMinGold)) And (Number($g_iStatsLastAttack[$eLootElixir]) >= Number($g_iShareMinElixir)) And (Number($g_iStatsLastAttack[$eLootDarkElixir]) >= Number($g_iShareMinDark)) Then
-			SetLog("Reached miminum Loot values... Share Replay")
+			SetLog("وصلت الى الحد الادنى لقيم النهب")
 			$g_bShareAttackEnableNow = True
 		Else
-			SetLog("Below miminum Loot values... No Share Replay")
+			SetLog("وصلت الى الحد الادنى لقيم النهب")
 			$g_bShareAttackEnableNow = False
 		EndIf
 	EndIf
@@ -272,7 +272,7 @@ Func AttackReport()
 		EndIf
 		$g_aiTrophyLootAcc[$g_iCurAccount] += $g_iStatsLastAttack[$eLootTrophy]
 		$g_aiAttackedCountAcc[$g_iCurAccount] += 1
-		SetSwitchAccLog(" - Acc. " & $g_iCurAccount + 1 & ", Attack: " & $g_aiAttackedCountAcc[$g_iCurAccount])
+		SetSwitchAccLog(" - الحساب. " & $g_iCurAccount + 1 & ", الهجوم: " & $g_aiAttackedCountAcc[$g_iCurAccount])
 	EndIf
 
 	UpdateStats()

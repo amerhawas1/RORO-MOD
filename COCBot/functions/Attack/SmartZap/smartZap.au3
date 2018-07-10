@@ -116,9 +116,9 @@ Func smartZap($minDE = -1)
 	If $g_bSmartZapEnable = False Then Return $performedZap
 	If $bZapDrills Then
 		If $g_bSmartZapEnable = True And $g_bNoobZap = False Then
-			SetLog("====== You have activated SmartZap Mode ======", $COLOR_ERROR)
+			SetLog("====== لقد قمت بتفعيل ميزة الصواعق ======", $COLOR_ERROR)
 		ElseIf $g_bNoobZap = True Then
-			SetLog("====== You have activated NoobZap Mode ======", $COLOR_ERROR)
+			SetLog("====== لقد قمت بتفعيل ميزة الزلزال ======", $COLOR_ERROR)
 		EndIf
 	EndIf
 	; Use UI Setting if no Min DE is specified
@@ -128,7 +128,7 @@ Func smartZap($minDE = -1)
 		; Get Dark Elixir value, if no DE value exists, exit.
 		$g_iSearchDark = getDarkElixirVillageSearch(48, 126)
 		If Number($g_iSearchDark) = 0 Then
-			SetLog("No Dark Elixir!", $COLOR_INFO)
+			SetLog("لا يوجد دارك اكسير!", $COLOR_INFO)
 			If $g_bDebugSmartZap = True Then SetLog("$g_iSearchDark|Current DE value: " & Number($g_iSearchDark), $COLOR_DEBUG)
 			$bZapDrills = False
 		Else
@@ -139,7 +139,7 @@ Func smartZap($minDE = -1)
 	If $bZapDrills Then
 		; Check to see if the DE Storage is already full
 		If isAtkDarkElixirFull() Then
-			SetLog("No need to zap!", $COLOR_INFO)
+			SetLog("لا حاجة ل اسقاط السبيلات!", $COLOR_INFO)
 			If $g_bDebugSmartZap = True Then SetLog("isAtkDarkElixirFull(): True", $COLOR_DEBUG)
 			$bZapDrills = False
 		Else
@@ -150,16 +150,16 @@ Func smartZap($minDE = -1)
 	If $bZapDrills Then
 		; Check to make sure the account is high enough level to store DE.
 		If $g_iTownHallLevel < 2 Then
-			SetLog("Your Townhalllevel has yet to be determined.", $COLOR_ERROR)
-			SetLog("It reads as TH" & $g_iTownHallLevel & ".", $COLOR_ERROR)
-			SetLog("Locate your Townhall manually at Village->Misc.", $COLOR_ERROR)
+			SetLog("لم يتم تحديد لفل التاون هول.", $COLOR_ERROR)
+			SetLog("تم قراءة لفل التاون هول" & $g_iTownHallLevel & ".", $COLOR_ERROR)
+			SetLog("قم بتحديد موقع التاون هدول من قائمة القرية بخانات البوت.", $COLOR_ERROR)
 			$bZapDrills = False
 		ElseIf $g_iTownHallLevel < 7 Then
-			SetLog("You do not have the ability to store Dark Elixir!", $COLOR_ERROR)
-			If $g_bDebugSmartZap = True Then SetLog("Your Town Hall Lvl: " & Number($g_iTownHallLevel), $COLOR_DEBUG)
+			SetLog("ليس لديك القدرة على تخزين الدارك !", $COLOR_ERROR)
+			If $g_bDebugSmartZap = True Then SetLog("لفل التاون هول لقريتك هو : " & Number($g_iTownHallLevel), $COLOR_DEBUG)
 			$bZapDrills = False
 		Else
-			If $g_bDebugSmartZap = True Then SetLog("Your Town Hall Lvl: " & Number($g_iTownHallLevel), $COLOR_DEBUG)
+			If $g_bDebugSmartZap = True Then SetLog("لفل التاون هول لقريتك هو: " & Number($g_iTownHallLevel), $COLOR_DEBUG)
 		EndIf
 	EndIf
 
@@ -167,7 +167,7 @@ Func smartZap($minDE = -1)
 		; Check match mode
 		If $g_bDebugSmartZap = True Then SetLog("$g_bSmartZapDB = " & $g_bSmartZapDB, $COLOR_DEBUG)
 		If $g_bSmartZapDB = True And $g_iMatchMode <> $DB Then
-			SetLog("Not a dead base!", $COLOR_INFO)
+			SetLog("لا يوجد قرية مهجورة!", $COLOR_INFO)
 			$bZapDrills = False
 		EndIf
 	EndIf
@@ -193,7 +193,7 @@ Func smartZap($minDE = -1)
 					$aSpells[0][3] = Number($g_iLSpellLevel) ; Get the Level on Attack bar
 					$aSpells[0][4] = $g_avAttackTroops[$i][1]
 				Else
-					If $g_bDebugSmartZap = True Then SetLog("Donated " & NameOfTroop($g_avAttackTroops[$i][0], 0) & ": " & $g_avAttackTroops[$i][1], $COLOR_DEBUG)
+					If $g_bDebugSmartZap = True Then SetLog("تبرع " & NameOfTroop($g_avAttackTroops[$i][0], 0) & ": " & $g_avAttackTroops[$i][1], $COLOR_DEBUG)
 					$aSpells[1][2] = $i
 					$aSpells[1][3] = Number($g_iLSpellLevel) ; Get the Level on Attack bar
 					$aSpells[1][4] = $g_avAttackTroops[$i][1]
@@ -209,19 +209,19 @@ Func smartZap($minDE = -1)
 	EndIf
 
 	If $aSpells[0][4] + $aSpells[1][4] = 0 Then
-		SetLog("No lightning spells trained, time to go home!", $COLOR_ERROR)
+		SetLog("لا توجد صواعق بترتيب الجيش, العودة الى القرية!", $COLOR_ERROR)
 		Return $performedZap
 	Else
 		If $aSpells[0][4] > 0 Then
-			SetLog(" - Number of " & NameOfTroop($aSpells[0][1], 1) & " (Lvl " & $aSpells[0][3] & "): " & Number($aSpells[0][4]), $COLOR_INFO)
+			SetLog(" - رقم ال " & NameOfTroop($aSpells[0][1], 1) & " (لفل " & $aSpells[0][3] & "): " & Number($aSpells[0][4]), $COLOR_INFO)
 		EndIf
 		If $aSpells[1][4] > 0 Then
-			SetLog(" - Number of Donated " & NameOfTroop($aSpells[1][1], 1) & " (Lvl " & $aSpells[1][3] & "): " & Number($aSpells[1][4]), $COLOR_INFO)
+			SetLog(" - رقم التبرع " & NameOfTroop($aSpells[1][1], 1) & " (لفل " & $aSpells[1][3] & "): " & Number($aSpells[1][4]), $COLOR_INFO)
 		EndIf
 	EndIf
 
 	If $aSpells[2][4] > 0 And $g_bEarthQuakeZap = True Then
-		SetLog(" - Number of " & NameOfTroop($aSpells[2][1], 1) & " (Lvl " & $aSpells[2][3] & "): " & Number($aSpells[2][4]), $COLOR_INFO)
+		SetLog(" - رقم ال  " & NameOfTroop($aSpells[2][1], 1) & " (لفل " & $aSpells[2][3] & "): " & Number($aSpells[2][4]), $COLOR_INFO)
 	Else
 		$aSpells[2][4] = 0 ; remove the EQ , is not to use it
 	EndIf
@@ -229,13 +229,13 @@ Func smartZap($minDE = -1)
 	If $bZapDrills Then
 		; Check to ensure there is at least the minimum amount of DE available.
 		If (Number($g_iSearchDark) < Number($minDE)) And $g_bNoobZap = True Then
-			SetLog("Dark Elixir is below minimum value [" & Number($g_iSmartZapMinDE) & "]!", $COLOR_INFO)
+			SetLog("ألكسير الظلام هو أقل من الحد الأدنى للقيمة [" & Number($g_iSmartZapMinDE) & "]!", $COLOR_INFO)
 			If $g_bDebugSmartZap = True Then SetLog("$g_iSearchDark|Current DE value: " & Number($g_iSearchDark), $COLOR_DEBUG)
 			$bZapDrills = False
 		ElseIf Number($g_iSearchDark) < ($g_aDrillLevelTotal[3 - $drillLvlOffset] / $g_aDrillLevelHP[3 - $drillLvlOffset] * $g_fDarkStealFactor * $g_aLSpellDmg[$aSpells[0][3] - 1] * $g_fDarkFillLevel) Then
-			SetLog("There is less Dark Elixir(" & Number($g_iSearchDark) & ") than", $COLOR_INFO)
-			SetLog("gain per zap for a single Lvl " & 3 - Number($drillLvlOffset) & " drill(" & Ceiling($g_aDrillLevelTotal[3 - $drillLvlOffset] / $g_aDrillLevelHP[3 - $drillLvlOffset] * $g_fDarkStealFactor * $g_aLSpellDmg[$aSpells[0][3] - 1] * $g_fDarkFillLevel) & ").", $COLOR_INFO)
-			SetLog("Base is not worth a Zap!", $COLOR_INFO)
+			SetLog("هناك القليل من الدارك اكسير(" & Number($g_iSearchDark) & ") than", $COLOR_INFO)
+			SetLog("كسب الموارد من اجل لفل واحد " & 3 - Number($drillLvlOffset) & " drill(" & Ceiling($g_aDrillLevelTotal[3 - $drillLvlOffset] / $g_aDrillLevelHP[3 - $drillLvlOffset] * $g_fDarkStealFactor * $g_aLSpellDmg[$aSpells[0][3] - 1] * $g_fDarkFillLevel) & ").", $COLOR_INFO)
+			SetLog("التاون هول لا يستحق اسقاط الصواعق!", $COLOR_INFO)
 			$bZapDrills = False
 		Else
 			If $g_bDebugSmartZap = True Then SetLog("$g_iSearchDark = " & Number($g_iSearchDark) & " | $g_iSmartZapMinDE = " & Number($g_iSmartZapMinDE), $COLOR_DEBUG)
@@ -253,10 +253,10 @@ Func smartZap($minDE = -1)
 
 		; Get the number of drills
 		If UBound($aDarkDrills) = 0 Then
-			SetLog("No drills found!", $COLOR_INFO)
+			SetLog("لا توجد تدريبات!", $COLOR_INFO)
 			$bZapDrills = False
 		Else
-			SetLog(" - Number of Dark Elixir Drills: " & UBound($aDarkDrills), $COLOR_INFO)
+			SetLog(" - رقم الدارك اكسير من التدريبات : " & UBound($aDarkDrills), $COLOR_INFO)
 		EndIf
 
 		_ArraySort($aDarkDrills, 1, 0, 0, 3)
@@ -274,7 +274,7 @@ Func smartZap($minDE = -1)
 		CheckHeroesHealth()
 
 		If ($g_iSearchDark < Number($g_iSmartZapMinDE)) And $g_bNoobZap = True Then
-			SetLog("Dark Elixir is below minimum value [" & Number($g_iSmartZapMinDE) & "], Exiting Now!", $COLOR_INFO)
+			SetLog("ألكسير الظلام هو أقل من الحد الأدنى للقيمة [" & Number($g_iSmartZapMinDE) & "], الخروج الان!", $COLOR_INFO)
 			$bZapDrills = False
 			ExitLoop
 		EndIf
@@ -310,11 +310,11 @@ Func smartZap($minDE = -1)
 					EndIf
 				Next
 				If $iToDelete > 1 Then 
-					SetLog("Removing " & $iToDelete & " destroyed drills from list.", $COLOR_ACTION)
+					SetLog("ازالة " & $iToDelete & " تدريبات مدمرة من القائمة.", $COLOR_ACTION)
 					_ArrayDelete($aDarkDrills, $sToDelete)
 					ContinueLoop
 				ElseIf $iToDelete > 0 Then
-					SetLog("Removing 1 destroyed drill from list.", $COLOR_ACTION)
+					SetLog("إزالة 1 حفر دمرت من القائمة.", $COLOR_ACTION)
 					_ArrayDelete($aDarkDrills, $sToDelete)
 					ContinueLoop
 				EndIf
@@ -327,7 +327,7 @@ Func smartZap($minDE = -1)
 			If ReCheckDrillExist($aDarkDrills[0][0], $aDarkDrills[0][1]) Then
 				$aDarkDrills[0][4] = 0
 			Else
-				SetLog("Removing 1 destroyed drill from list.", $COLOR_ACTION)
+				SetLog("إزالة 1 حفر دمرت من القائمة.", $COLOR_ACTION)
 				_ArrayDelete($aDarkDrills, 0)
 				ContinueLoop
 			EndIf
@@ -339,7 +339,7 @@ Func smartZap($minDE = -1)
 		$hTempTimer = __TimerInit() ; Set Last Zap Timer
 		; If you activate N00bZap, drop lightning on any DE drill
 		If $g_bNoobZap = True Then
-			SetLog("NoobZap is going to attack any drill.", $COLOR_ACTION)
+			SetLog("سوف يتم المهاجمة باستخدام الزلزال عل اي من تدريبات اكسير الظلام.", $COLOR_ACTION)
 			If $aCluster <> -1 Then
 				$Spellused = zapBuilding($aSpells, $aCluster[0] + $strikeOffsets[0], $aCluster[1] + $strikeOffsets[1])
 				For $i = 0 To UBound($aCluster[3]) - 1
@@ -356,7 +356,7 @@ Func smartZap($minDE = -1)
 		Else
 			; If you have max lightning spells, drop lightning on any level DE drill
 			If $aSpells[0][4] + $aSpells[1][4] + $aSpells[2][4] > (4 - $spellAdjust) Then
-				SetLog("First condition: More than " & 4 - $spellAdjust & " Spells so attack any drill.", $COLOR_INFO)
+				SetLog("الشرط الأول: أكثر من " & 4 - $spellAdjust & " السبيلات حتى مهاجمة اي من مستخرجات الاكسير الظلام .", $COLOR_INFO)
 				If $aCluster <> -1 Then
 					$Spellused = zapBuilding($aSpells, $aCluster[0] + $strikeOffsets[0], $aCluster[1] + $strikeOffsets[1])
 					For $i = 0 To UBound($aCluster[3]) - 1
@@ -557,29 +557,29 @@ Func smartZap($minDE = -1)
 	EndIf
 
 	If _CheckPixel($aWonOneStar, True) Then
-		SetLog("One Star already reached.", $COLOR_INFO)
+		SetLog("نجمة واحدة وصلت بالفعل.", $COLOR_INFO)
 		Return $performedZap
 	EndIf
 
 	If $aSpells[0][4] + $aSpells[1][4] = 0 Then
-		SetLog("No lightning spells left, time to go home!", $COLOR_ERROR)
+		SetLog("لا يوجد صواعق, العودة للقرية!", $COLOR_ERROR)
 		Return $performedZap
 	Else
 		If $aSpells[0][4] > 0 Then
-			SetLog(" - Number of " & NameOfTroop($aSpells[0][1], 1) & " (Lvl " & $aSpells[0][3] & "): " & Number($aSpells[0][4]), $COLOR_INFO)
+			SetLog(" - رقم ال  " & NameOfTroop($aSpells[0][1], 1) & " (لفل " & $aSpells[0][3] & "): " & Number($aSpells[0][4]), $COLOR_INFO)
 		EndIf
 		If $aSpells[1][4] > 0 Then
-			SetLog(" - Number of Donated " & NameOfTroop($aSpells[1][1], 1) & " (Lvl " & $aSpells[1][3] & "): " & Number($aSpells[1][4]), $COLOR_INFO)
+			SetLog(" - رقم التبرع " & NameOfTroop($aSpells[1][1], 1) & " (لفل " & $aSpells[1][3] & "): " & Number($aSpells[1][4]), $COLOR_INFO)
 		EndIf
 	EndIf
 
 	Local $iPercentageNeeded = 50 - getOcrOverAllDamage(780, 527 + $g_iBottomOffsetY)
-	SetLog("Percentage needed: " & $iPercentageNeeded, $COLOR_INFO)
+	SetLog("النسبة المئوية المطلوبة: " & $iPercentageNeeded, $COLOR_INFO)
 
 	_ArrayDelete($aSpells, 2)
 	Local $aEasyPrey = easyPreySearch()
 	If UBound($aEasyPrey) = 0 Then
-		SetLog("No easy targets found!", $COLOR_INFO)
+		SetLog("لم يتم العثور على أهداف سهلة!", $COLOR_INFO)
 		Return $performedZap
 	Else
 		; Get the number of targets
@@ -590,7 +590,7 @@ Func smartZap($minDE = -1)
 				SetLog($iTargets + 1 & ". target: x=" & $aEasyPrey[$iTargets][0] & ",y=" & $aEasyPrey[$iTargets][1] & ",w=" & $aEasyPrey[$iTargets][2], $COLOR_DEBUG)
 			EndIf
 		Next
-		SetLog("Count of easy targets: " & $iTargetCount, $COLOR_INFO)
+		SetLog("عد الأهداف السهلة: " & $iTargetCount, $COLOR_INFO)
 		; Get the number of zappable targets
 		$iTargetCount = 0
 		For $iTargets = 0 To _Min(Number(UBound($aEasyPrey) - 1),Number($aSpells[0][4] + $aSpells[1][4]) - 1)
@@ -598,8 +598,8 @@ Func smartZap($minDE = -1)
 		Next
 		SetLog("Easy targets, we can zap: " & $iTargetCount, $COLOR_INFO)
 		If $iPercentageNeeded > $iTargetCount Then
-			SetLog("No chance to win!", $COLOR_INFO)
-			SetLog("Needed percentage (" & $iPercentageNeeded & ") is greater than targets, we can zap (" & $iTargetCount & ")!", $COLOR_INFO)
+			SetLog("لا توجد فرصة للفوز!", $COLOR_INFO)
+			SetLog("النسبة المطلوبة (" & $iPercentageNeeded & ") is greater than targets, يمكننا الاسقاط (" & $iTargetCount & ")!", $COLOR_INFO)
 			Return $performedZap
 		EndIf
 	EndIf
@@ -612,7 +612,7 @@ Func smartZap($minDE = -1)
 	Wend
 
 	If _CheckPixel($aWonOneStar, True) Then
-		SetLog("Hooray, One Star reached, we have won!", $COLOR_INFO)
+		SetLog("الصيحة ، وصلت نجمة واحدة ، لقد فزنا!", $COLOR_INFO)
 	EndIf
 	Return $performedZap
 EndFunc   ;==>smartZap
@@ -626,13 +626,13 @@ Func zapBuilding(ByRef $Spells, $x, $y)
 		EndIf
 	Next
 	If $Spells[$iSpell][2] > -1 Then
-		SetLog("Dropping " & $Spells[$iSpell][0] & " " & String(NameOfTroop($Spells[$iSpell][1], 0)), $COLOR_ACTION)
+		SetLog("اسقاط " & $Spells[$iSpell][0] & " " & String(NameOfTroop($Spells[$iSpell][1], 0)), $COLOR_ACTION)
 		SelectDropTroop($Spells[$iSpell][2])
 		If _Sleep($DELAYCASTSPELL1) Then Return
 		If IsAttackPage() Then Click($x, $y, 1, 0, "#0029")
 		$Spells[$iSpell][4] -= 1
 	Else
-		If $g_bDebugSmartZap = True Then SetLog("No " & String(NameOfTroop($Spells[$iSpell][1], 0)) & " Found", $COLOR_DEBUG)
+		If $g_bDebugSmartZap = True Then SetLog("لا " & String(NameOfTroop($Spells[$iSpell][1], 0)) & " يوجد", $COLOR_DEBUG)
 	EndIf
 	Return $Spells[$iSpell][1]
 EndFunc   ;==>zapBuilding

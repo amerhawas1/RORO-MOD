@@ -25,14 +25,14 @@ Func Unbreakable()
 	Switch $g_iUnbrkMode
 		Case 2
 			If (Number($g_aiCurrentLoot[$eLootGold]) > Number($g_iUnbrkMaxGold)) And (Number($g_aiCurrentLoot[$eLootElixir]) > Number($g_iUnbrkMaxElixir)) And (Number($g_aiCurrentLoot[$eLootDarkElixir]) > Number($g_iUnbrkMaxDark)) Then
-				SetLog(" ====== Unbreakable Mode restarted! ====== ", $COLOR_SUCCESS)
+				SetLog(" ====== إعادة تشغيل الوضع غير قابل للكسر! ====== ", $COLOR_SUCCESS)
 				$g_iUnbrkMode = 1
 			Else
-				SetLog(" = Unbreakable Mode Paused, Farming to Refill Storages =", $COLOR_INFO)
+				SetLog(" = وضع غير قابل للكسر مؤقتا ، الزراعة لإعادة ملء المخازن =", $COLOR_INFO)
 				Return False
 			EndIf
 		Case 1
-			SetLog(" ====== Unbreakable Mode enabled! ====== ", $COLOR_SUCCESS)
+			SetLog(" ====== غير قابل للكسر وضع تمكين! ====== ", $COLOR_SUCCESS)
 		Case Else
 			SetLog(">>> Programmer Humor, You shouldn't ever see this message, RUN! <<<", $COLOR_DEBUG)
 	EndSwitch
@@ -40,29 +40,29 @@ Func Unbreakable()
 	; If attack dead bases during trophy drop is enabled then make sure we have at least 70% full army
 	If $g_bDropTrophyAtkDead Then
 		If ($g_CurrentCampUtilization <= ($g_iTotalCampSpace * 70 / 100)) Then
-			SetLog("Oops, wait for 70% troops due attack dead base checked", $COLOR_ERROR)
+			SetLog("عفوًا ، انتظر 70٪ من القوات تم تحديد قاعدة القتلى المستحقة", $COLOR_ERROR)
 			Return True ; no troops then cycle again
 		EndIf
 		; no deadbase attacks, then only a few troops needed to enable drop trophy to work
 	Else
 		If ($g_CurrentCampUtilization <= ($g_iTotalCampSpace * 20 / 100)) Then
-			SetLog("Oops, wait for 20% troops for use in trophy drop", $COLOR_ERROR)
+			SetLog("عفوًا ، انتظر 20٪ من القوات لاستخدامها في إسقاط الغنائم", $COLOR_ERROR)
 			Return True ; no troops then cycle again
 		EndIf
 	EndIf
 
 	Local $sMissingLoot = ""
 	If ((Number($g_aiCurrentLoot[$eLootGold]) - Number($g_iUnbrkMinGold)) < 0) Then
-		$sMissingLoot &= "Gold, "
+		$sMissingLoot &= "ذهب, "
 	EndIf
 	If ((Number($g_aiCurrentLoot[$eLootElixir]) - Number($g_iUnbrkMinElixir)) < 0) Then
-		$sMissingLoot &= "Elixir, "
+		$sMissingLoot &= "اكسير, "
 	EndIf
 	If ((Number($g_aiCurrentLoot[$eLootDarkElixir]) - Number($g_iUnbrkMinDark)) < 0) Then
-		$sMissingLoot &= "Dark Elixir"
+		$sMissingLoot &= "اكسير الدارك"
 	EndIf
 	If $sMissingLoot <> "" Then
-		SetLog("Oops, Out of " & $sMissingLoot & " - back to farming", $COLOR_ERROR)
+		SetLog("عفوا ، من " & $sMissingLoot & " - العودة", $COLOR_ERROR)
 		$g_iUnbrkMode = 2 ; go back to farming mode.
 		Return False
 	EndIf
@@ -74,16 +74,16 @@ Func Unbreakable()
 	If $g_bRestart = True Then Return True ; Check Restart Flag to see if drop trophy used all the troops and need to train more.
 	$iCount = 0
 	Local $iTrophyCurrent = getTrophyMainScreen($aTrophies[0], $aTrophies[1]) ; Get trophy
-	If $g_bDebugSetlog Then SetDebugLog("Trophy Count Read = " & $iTrophyCurrent, $COLOR_DEBUG)
+	If $g_bDebugSetlog Then SetDebugLog("الكأس عدد القراءة = " & $iTrophyCurrent, $COLOR_DEBUG)
 	While Number($iTrophyCurrent) > Number($g_iDropTrophyMax) ; verify that trophy dropped and didn't fail due misc errors searching
-		If $g_bDebugSetlog Then SetDebugLog("Drop Trophy Loop #" & $iCount + 1, $COLOR_DEBUG)
+		If $g_bDebugSetlog Then SetDebugLog("إسقاط الكأس #" & $iCount + 1, $COLOR_DEBUG)
 		DropTrophy()
 		If _Sleep($DELAYUNBREAKABLE2) Then Return ; wait for home screen
 		ClickP($aAway, 1, 0, "#0395") ;clear screen
 		If _Sleep($DELAYUNBREAKABLE1) Then Return ; wait for home screen
 		$iTrophyCurrent = getTrophyMainScreen($aTrophies[0], $aTrophies[1])
 		If ($iCount > 2) And (Number($iTrophyCurrent) > Number($g_iDropTrophyMax)) Then ; If unable to drop trophy after a couple of tries, restart at main loop.
-			SetLog("Unable to drop trophy, trying again", $COLOR_ERROR)
+			SetLog("غير قادر على إسقاط الكأس ، حاول مرة أخرى", $COLOR_ERROR)
 			If _Sleep(500) Then Return
 			Return True
 		EndIf
@@ -93,7 +93,7 @@ Func Unbreakable()
 
 	BreakPersonalShield() ; break personal Shield and Personal Guard
 	If @error Then
-		If @extended <> "" Then SetLog("PersonalShield button problem: " & @extended, $COLOR_ERROR)
+		If @extended <> "" Then SetLog("مشكلة زر الدرع الشخصي: " & @extended, $COLOR_ERROR)
 		ClickP($aAway, 1, 0, "#0395") ;clear screen
 		Return True ; return to runbot and try again
 	EndIf
@@ -101,9 +101,9 @@ Func Unbreakable()
 	ClickP($aAway, 2, $DELAYUNBREAKABLE8, "#0115") ;clear screen selections
 	If _Sleep($DELAYUNBREAKABLE1) Then Return True
 
-	If CheckObstacles() = True Then SetLog("Window clean required, but no problem for MyBot!", $COLOR_INFO)
+	If CheckObstacles() = True Then SetLog("نافذة نظيفة مطلوبة ، ولكن لا توجد مشكلة في MyBot!", $COLOR_INFO)
 
-	SetLog("Closing Clash Of Clans", $COLOR_INFO)
+	SetLog("اغلاق اللعبة ", $COLOR_INFO)
 
 	$i = 0
 	While 1
@@ -137,7 +137,7 @@ Func Unbreakable()
 	While 1 ; Under attack when return from sleep?  wait some more ...
 		If $g_bDebugSetlog Then SetDebugLog("Under Attack Pixels = " & _GetPixelColor(841, 342 + $g_iMidOffsetY, True) & "/" & _GetPixelColor(842, 348 + $g_iMidOffsetY, True), $COLOR_DEBUG)
 		If _ColorCheck(_GetPixelColor(841, 342 + $g_iMidOffsetY, True), Hex(0x711C0A, 6), 20) And _ColorCheck(_GetPixelColor(842, 348 + $g_iMidOffsetY, True), Hex(0x721C0E, 6), 20) Then
-			SetLog("Base is under attack, waiting 30 seocnds for end", $COLOR_INFO)
+			SetLog("القاعدة تتعرض للهجوم ، تنتظر 30 ثانية للنهاية", $COLOR_INFO)
 		Else
 			ExitLoop
 		EndIf

@@ -48,7 +48,7 @@ Func CheckHeroesHealth()
 				Local $QueenPixelColor = _GetPixelColor($aQueenHealthCopy[0], $aQueenHealthCopy[1], $g_bCapturePixel)
 				If $g_bDebugSetlog Then SetDebugLog(" Queen _GetPixelColor(" & $aQueenHealthCopy[0] & "," & $aQueenHealthCopy[1] & "): " & $QueenPixelColor, $COLOR_DEBUG)
 				If Not _CheckPixel2($aQueenHealthCopy, $QueenPixelColor, "Red+Blue") Then
-					SetLog("Queen is getting weak, Activating Queen's ability", $COLOR_INFO)
+					SetLog("ملكة تصبح ضعيفة ، تفعيل قدرة الملكة", $COLOR_INFO)
 					SelectDropTroop($TempQueenSlot) ; Slot11 - RORO-MOD
 					$g_bCheckQueenPower = False
 				EndIf
@@ -60,7 +60,7 @@ Func CheckHeroesHealth()
 					$aDisplayTime[$eHeroArcherQueen] = Ceiling(__TimerDiff($g_aHeroesTimerActivation[$eHeroArcherQueen]) / 1000) ; seconds
 				EndIf
 				If (Int($g_iDelayActivateQueen) / 1000) <= $aDisplayTime[$eHeroArcherQueen] Then
-					SetLog("Activating Queen's ability after " & $aDisplayTime[$eHeroArcherQueen] & "'s", $COLOR_INFO)
+					SetLog("تفعيل قدرة الملكة بعد " & $aDisplayTime[$eHeroArcherQueen] & "'s", $COLOR_INFO)
 					SelectDropTroop($TempQueenSlot) ; Slot11 - RORO-MOD
 					$g_bCheckQueenPower = False ; Reset check power flag
 					$g_aHeroesTimerActivation[$eHeroArcherQueen] = 0 ; Reset Timer
@@ -81,7 +81,7 @@ Func CheckHeroesHealth()
 				Local $KingPixelColor = _GetPixelColor($aKingHealthCopy[0], $aKingHealthCopy[1], $g_bCapturePixel)
 				If $g_bDebugSetlog Then SetDebugLog(" King _GetPixelColor(" & $aKingHealthCopy[0] & "," & $aKingHealthCopy[1] & "): " & $KingPixelColor, $COLOR_DEBUG)
 				If Not _CheckPixel2($aKingHealthCopy, $KingPixelColor, "Red+Blue") Then
-					SetLog("King is getting weak, Activating King's ability", $COLOR_INFO)
+					SetLog("الملك يزداد ضعفا ، تفعيل قدرة الملك", $COLOR_INFO)
 					SelectDropTroop($TempKingSlot) ; Slot11 - RORO-MOD
 					$g_bCheckKingPower = False
 				EndIf
@@ -93,7 +93,7 @@ Func CheckHeroesHealth()
 					$aDisplayTime[$eHeroBarbarianKing] = Ceiling(__TimerDiff($g_aHeroesTimerActivation[$eHeroBarbarianKing]) / 1000) ; seconds
 				EndIf
 				If (Int($g_iDelayActivateKing) / 1000) <= $aDisplayTime[$eHeroBarbarianKing] Then
-					SetLog("Activating King's ability after " & $aDisplayTime[$eHeroBarbarianKing] & "'s", $COLOR_INFO)
+					SetLog("تفعيل قدرة الملك بعد " & $aDisplayTime[$eHeroBarbarianKing] & "'s", $COLOR_INFO)
 					SelectDropTroop($TempKingSlot) ; Slot11 - RORO-MOD
 					$g_bCheckKingPower = False ; Reset check power flag
 					$g_aHeroesTimerActivation[$eHeroBarbarianKing] = 0 ; Reset Timer
@@ -114,7 +114,7 @@ Func CheckHeroesHealth()
 				Local $WardenPixelColor = _GetPixelColor($aWardenHealthCopy[0], $aWardenHealthCopy[1], $g_bCapturePixel)
 				If $g_bDebugSetlog Then SetDebugLog(" Grand Warden _GetPixelColor(" & $aWardenHealthCopy[0] & "," & $aWardenHealthCopy[1] & "): " & $WardenPixelColor, $COLOR_DEBUG)
 				If Not _CheckPixel2($aWardenHealthCopy, $WardenPixelColor, "Red+Blue") Then
-					SetLog("Grand Warden is getting weak, Activating Warden's ability", $COLOR_INFO)
+					SetLog("الامر الكبير يزداد ضعفا ، تفعيل قدرة النشطاء", $COLOR_INFO)
 					SelectDropTroop($TempWardenSlot) ; Slot11 - RORO-MOD
 					$g_bCheckWardenPower = False
 				EndIf

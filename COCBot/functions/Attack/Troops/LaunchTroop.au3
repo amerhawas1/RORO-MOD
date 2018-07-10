@@ -36,12 +36,12 @@ Func LaunchTroop($troopKind, $nbSides, $waveNb, $maxWaveNb, $slotsPerEdge = 0)
 		Return False ; nothing to do => skip this wave
 	EndIf
 
-	Local $waveName = "first"
-	If $waveNb = 2 Then $waveName = "second"
-	If $waveNb = 3 Then $waveName = "third"
-	If $maxWaveNb = 1 Then $waveName = "only"
-	If $waveNb = 0 Then $waveName = "last"
-	SetLog("Dropping " & $waveName & " wave of " & $troopNb & " " & $name, $COLOR_SUCCESS)
+	Local $waveName = "الاول"
+	If $waveNb = 2 Then $waveName = "ثانيا"
+	If $waveNb = 3 Then $waveName = "ثالثا"
+	If $maxWaveNb = 1 Then $waveName = "فقط"
+	If $waveNb = 0 Then $waveName = "اخر"
+	SetLog("اسقاط " & $waveName & " موجة من  " & $troopNb & " " & $name, $COLOR_SUCCESS)
 	DropTroop($troop, $nbSides, $troopNb, $slotsPerEdge)
 
 	Return True
@@ -98,7 +98,7 @@ Func LaunchTroop2($listInfoDeploy, $iCC, $iKing, $iQueen, $iWarden)
 
 		If (($g_abAttackStdSmartNearCollectors[$g_iMatchMode][0] Or $g_abAttackStdSmartNearCollectors[$g_iMatchMode][1] Or _
 				$g_abAttackStdSmartNearCollectors[$g_iMatchMode][2]) And UBound($g_aiPixelNearCollector) = 0) Then
-			SetLog("Error, no pixel found near collector => Normal attack near red line")
+			SetLog("خطأ ، لم يتم العثور على أي بكسل بالقرب من أداة التجميع => هجوم عادي بالقرب من الخط الأحمر")
 		EndIf
 		If ($g_aiAttackStdSmartDeploy[$g_iMatchMode] = 0) Then
 			For $numWave = 0 To UBound($listListInfoDeployTroopPixel) - 1
@@ -137,11 +137,11 @@ Func LaunchTroop2($listInfoDeploy, $iCC, $iKing, $iQueen, $iWarden)
 						If _Sleep($DELAYLAUNCHTROOP21) Then Return
 						SelectDropTroop($infoPixelDropTroop[0]) ;Select Troop
 						If _Sleep($DELAYLAUNCHTROOP21) Then Return
-						Local $waveName = "first"
-						If $numWave + 1 = 2 Then $waveName = "second"
-						If $numWave + 1 = 3 Then $waveName = "third"
-						If $numWave + 1 = 0 Then $waveName = "last"
-						SetLog("Dropping " & $waveName & " wave of " & $infoPixelDropTroop[5] & " " & $infoPixelDropTroop[4], $COLOR_SUCCESS)
+						Local $waveName = "الاول"
+						If $numWave + 1 = 2 Then $waveName = "ثانيا"
+						If $numWave + 1 = 3 Then $waveName = "ثالثا"
+						If $numWave + 1 = 0 Then $waveName = "اخر"
+						SetLog("اسقاط " & $waveName & " موجة من  " & $infoPixelDropTroop[5] & " " & $infoPixelDropTroop[4], $COLOR_SUCCESS)
 						DropOnPixel($infoPixelDropTroop[0], $infoPixelDropTroop[1], $infoPixelDropTroop[2], $infoPixelDropTroop[3])
 					EndIf
 					If ($g_bIsHeroesDropped) Then
@@ -206,7 +206,7 @@ Func LaunchTroop2($listInfoDeploy, $iCC, $iKing, $iQueen, $iWarden)
 									If _Sleep($DELAYLAUNCHTROOP21) Then Return
 									SelectDropTroop($infoTroopListArrPixel[0]) ;Select Troop
 									If _Sleep($DELAYLAUNCHTROOP23) Then Return
-									SetLog("Dropping " & $infoTroopListArrPixel[2] & "  of " & $infoTroopListArrPixel[5] & " => on each side (side : " & $i + 1 & ")", $COLOR_SUCCESS)
+									SetLog("اسقاط " & $infoTroopListArrPixel[2] & "  من " & $infoTroopListArrPixel[5] & " => على كل جانب (الجانب : " & $i + 1 & ")", $COLOR_SUCCESS)
 									Local $pixelDropTroop[1] = [$listPixel]
 									DropOnPixel($infoTroopListArrPixel[0], $pixelDropTroop, $infoTroopListArrPixel[2], $infoTroopListArrPixel[3])
 								EndIf
@@ -232,7 +232,7 @@ Func LaunchTroop2($listInfoDeploy, $iCC, $iKing, $iQueen, $iWarden)
 						If _Sleep($DELAYLAUNCHTROOP21) Then Return
 						SelectDropTroop($infoPixelDropTroop[0]) ;Select Troop
 						If _Sleep($DELAYLAUNCHTROOP23) Then Return
-						SetLog("Dropping last " & $numberLeft & "  of " & $infoPixelDropTroop[5], $COLOR_SUCCESS)
+						SetLog("اسقاط اخر  " & $numberLeft & "  من " & $infoPixelDropTroop[5], $COLOR_SUCCESS)
 						DropOnPixel($infoPixelDropTroop[0], $infoPixelDropTroop[1], Ceiling($numberLeft / UBound($infoPixelDropTroop[1])), $infoPixelDropTroop[3])
 					EndIf
 				EndIf

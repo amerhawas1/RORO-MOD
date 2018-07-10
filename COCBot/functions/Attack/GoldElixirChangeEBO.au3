@@ -57,14 +57,14 @@ Func GoldElixirChangeEBO()
 
 	;CALCULATE TWO STARS REACH
 	If $g_abStopAtkTwoStars[$g_iMatchMode] And _CheckPixel($aWonTwoStar, True) Then
-		SetLog("Two Star Reach, exit", $COLOR_SUCCESS)
+		SetLog("نجمتان الوصول ، الخروج", $COLOR_SUCCESS)
 		$exitTwoStars = 1
 		$z = 0
 	EndIf
 
 	;CALCULATE ONE STARS REACH
 	If $g_abStopAtkOneStar[$g_iMatchMode] And _CheckPixel($aWonOneStar, True) Then
-		SetLog("One Star Reach, exit", $COLOR_SUCCESS)
+		SetLog("نجمة واحدة تصل ، خروج", $COLOR_SUCCESS)
 		$exitOneStar = 1
 		$z = 0
 	EndIf
@@ -131,17 +131,17 @@ Func GoldElixirChangeEBO()
 			Local $m = Int($txtDiff / 60)
 			Local $s = $txtDiff - $m * 60
 			$txtDiff = ""
-			If $m > 0 Then $txtDiff = $m & "m "
-			$txtDiff &= $s & "s"
+			If $m > 0 Then $txtDiff = $m & "دقيقة "
+			$txtDiff &= $s & "ثانية"
 		EndIf
 		$NoResourceOCR = StringLen($Gold2) = 0 And StringLen($Elixir2) = 0 And StringLen($DarkElixir2) = 0
 		If $NoResourceOCR Then
-			SetLog("Exit now, [G]: " & $Gold2 & " [E]: " & $Elixir2 & " [DE]: " & $DarkElixir2 & " [%]: " & $CurDamage, $COLOR_INFO)
+			SetLog("الخروج الان, [ذهب]: " & $Gold2 & " [اكسير]: " & $Elixir2 & " [اكسير الدارك]: " & $DarkElixir2 & " [النسبة]: " & $CurDamage, $COLOR_INFO)
 		Else
 			If $g_bDebugSetlog Then
-				SetDebugLog("Exit in " & $txtDiff & ", [G]: " & $Gold2 & " [E]: " & $Elixir2 & " [DE]: " & $DarkElixir2 & " [%]: " & $CurDamage & ", Suspend-Time: " & $g_iSuspendAndroidTime & ", Suspend-Count: " & $g_iSuspendAndroidTimeCount &  ", Offset: " & $iSuspendAndroidTimeOffset, $COLOR_INFO)
+				SetDebugLog("الخروج في " & $txtDiff & ", [ذهب]: " & $Gold2 & " [اكسير]: " & $Elixir2 & " [اكسير الدارك]: " & $DarkElixir2 & " [النسبة]: " & $CurDamage & ", تعليق في الوقت: " & $g_iSuspendAndroidTime & ", تعليق الكونت: " & $g_iSuspendAndroidTimeCount &  ", الأوفست: " & $iSuspendAndroidTimeOffset, $COLOR_INFO)
 			Else
-				SetLog("Exit in " & $txtDiff & ", [G]: " & $Gold2 & " [E]: " & $Elixir2 & " [DE]: " & $DarkElixir2 & " [%]: " & $CurDamage, $COLOR_INFO)
+				SetLog("الخروج في  " & $txtDiff & ", [ذهب]: " & $Gold2 & " [اكسير]: " & $Elixir2 & " [اكسير الدارك]: " & $DarkElixir2 & " [النسبة]: " & $CurDamage, $COLOR_INFO)
 			EndIf
 			; Atk-Log ~ Damage %
 			If ($CurDamage > 0 ) Then
@@ -155,17 +155,17 @@ Func GoldElixirChangeEBO()
 		If Number($CurDamage) >= 92 Then
 			If ($g_bCheckKingPower Or $g_bCheckQueenPower Or $g_bCheckWardenPower) Then
 				If $g_bCheckKingPower And $g_iActivateKing = 0 Then
-					SetLog("Activating King's ability to restore some health before leaving with a 3 Star", $COLOR_INFO)
+					SetLog("تفعيل قدرة الملك على استعادة بعض الصحة قبل مغادرته مع 3 نجوم", $COLOR_INFO)
 					If IsAttackPage() Then SelectDropTroop($g_iKingSlot) ;If King was not activated: Boost King before Battle ends with a 3 Star
 					$g_bCheckKingPower = False
 				EndIf
 				If $g_bCheckQueenPower And $g_iActivateQueen = 0 Then
-					SetLog("Activating Queen's ability to restore some health before leaving with a 3 Star", $COLOR_INFO)
+					SetLog("تفعيل قدرة الملكة على استعادة بعض الصحة قبل مغادرتها مع 3 نجوم", $COLOR_INFO)
 					If IsAttackPage() Then SelectDropTroop($g_iQueenSlot) ;If Queen was not activated: Boost Queen before Battle ends with a 3 Star
 					$g_bCheckQueenPower = False
 				EndIf
 				If $g_bCheckWardenPower And $g_iActivateWarden = 0 Then
-					SetLog("Activating Warden's ability to restore some health before leaving with a 3 Star", $COLOR_INFO)
+					SetLog("تفعيل قدرة الامر الكبير على استعادة بعض الصحة قبل مغادرته مع 3 نجوم", $COLOR_INFO)
 					If IsAttackPage() Then SelectDropTroop($g_iWardenSlot) ;If Queen was not activated: Boost Queen before Battle ends with a 3 Star
 					$g_bCheckWardenPower = False
 				EndIf
@@ -182,21 +182,21 @@ Func GoldElixirChangeEBO()
 
 		;EXIT IF RESOURCES = 0
 		If $g_abStopAtkNoResources[$g_iMatchMode] And Number($Gold2) = 0 And Number($Elixir2) = 0 And Number($DarkElixir2) = 0 Then
-			SetLog("Gold & Elixir & DE = 0, end battle ", $COLOR_SUCCESS)
+			SetLog("ذهب و اكسير و اكسير الدارك صفر الخروج من المعركة  ", $COLOR_SUCCESS)
 			If _Sleep($DELAYGOLDELIXIRCHANGEEBO2) Then Return
 			ExitLoop
 		EndIf
 
 		;EXIT IF TWO STARS REACH
 		If $g_abStopAtkTwoStars[$g_iMatchMode] And _CheckPixel($aWonTwoStar, True) Then
-			SetLog("Two Star Reach, exit", $COLOR_SUCCESS)
+			SetLog("نجمتان الوصول ، الخروج", $COLOR_SUCCESS)
 			$exitTwoStars = 1
 			ExitLoop
 		EndIf
 
 		;EXIT IF ONE STARS REACH
 		If $g_abStopAtkOneStar[$g_iMatchMode] And _CheckPixel($aWonOneStar, True) Then
-			SetLog("One Star Reach, exit", $COLOR_SUCCESS)
+			SetLog("نجمة واحدة تصل ، خروج", $COLOR_SUCCESS)
 			$exitOneStar = 1
 			ExitLoop
 		EndIf
@@ -207,19 +207,19 @@ Func GoldElixirChangeEBO()
 		EndIf
 
 		If $g_abStopAtkPctHigherEnable[$g_iMatchMode] And Number(getOcrOverAllDamage(780, 527 + $g_iBottomOffsetY)) > Number($g_aiStopAtkPctHigherAmt[$g_iMatchMode]) Then
-			SetLog("Overall Damage above " & Number($g_aiStopAtkPctHigherAmt[$g_iMatchMode]) & ", exit", $COLOR_SUCCESS)
+			SetLog("الضرر الكلي أعلاه " & Number($g_aiStopAtkPctHigherAmt[$g_iMatchMode]) & ", الخروج", $COLOR_SUCCESS)
 			ExitLoop
 		EndIf
 
 		;RETURN IF RESOURCES CHANGE DETECTED
 		If ($g_abStopAtkNoLoot1Enable[$g_iMatchMode] Or $g_abStopAtkNoLoot2Enable[$g_iMatchMode]) And ($Gold1 <> $Gold2 Or $Elixir1 <> $Elixir2 Or $DarkElixir1 <> $DarkElixir2) Then
-			SetLog("Gold & Elixir & DE change detected, waiting...", $COLOR_SUCCESS)
+			SetLog("ذهب والاكسير & لا يوجد تغير يقمية الدارك, الانتظار...", $COLOR_SUCCESS)
 			Return True
 		EndIf
 
 		;RETURN IF DAMAGE CHANGE DETECTED
 		If $g_abStopAtkPctNoChangeEnable[$g_iMatchMode] And (Number($Damage) <> Number($CurDamage)) Then
-			SetLog("Overall Damage Percentage change detected, waiting...", $COLOR_SUCCESS)
+			SetLog("إجمالي نسبة الضرر التي تم اكتشافها ، الانتظار...", $COLOR_SUCCESS)
 			Return True
 		EndIf
 
@@ -228,7 +228,7 @@ Func GoldElixirChangeEBO()
 
 	;Priority Check... Exit To protect Hero Health
 	If $g_iMatchMode = $LB And $g_aiAttackStdDropSides[$LB] = 4 And $g_bDESideEndEnable And $g_iDarkLow = 1 Then
-		SetLog("Returning Now -DE-", $COLOR_SUCCESS)
+		SetLog("العودة الآن -الدارك-", $COLOR_SUCCESS)
 		Return False
 	EndIf
 
@@ -246,7 +246,7 @@ Func GoldElixirChangeEBO()
 
 	;THIRD CHECK... IF VALUES= "" REREAD AND RETURN FALSE IF = ""
 	If ($NoResourceOCR = True) Then
-		SetLog("Battle has finished", $COLOR_SUCCESS)
+		SetLog("انتهت المعركة", $COLOR_SUCCESS)
 		Return False ;end battle
 	EndIf
 
@@ -256,13 +256,13 @@ Func GoldElixirChangeEBO()
 
 	;FOURTH CHECK... IF RESOURCES = 0 THEN EXIT
 	If $g_abStopAtkNoResources[$g_iMatchMode] And $NoResourceOCR = False And Number($Gold2) = 0 And Number($Elixir2) = 0 And Number($DarkElixir2) = 0 Then
-		SetLog("Gold & Elixir & DE = 0, end battle ", $COLOR_SUCCESS)
+		SetLog("ذهب و اكسير و اكسير الدارك صفر الخروج من المعركة ", $COLOR_SUCCESS)
 		If _Sleep($DELAYGOLDELIXIRCHANGEEBO2) Then Return
 		Return False
 	EndIf
 
 	If $g_abStopAtkPctNoChangeEnable[$g_iMatchMode] And Number($Damage) = Number($CurDamage) Then
-		SetLog("No Overall Damage Percentage change detected, exit", $COLOR_SUCCESS)
+		SetLog("لا إجمالي نسبة الضرر التي تم اكتشافها ، الخروج", $COLOR_SUCCESS)
 		Return False
 	EndIf
 
@@ -270,10 +270,10 @@ Func GoldElixirChangeEBO()
 	;FIFTH CHECK... IF VALUES NOT CHANGED  RETURN FALSE ELSE RETURN TRUE
 	If (Number($Gold1) = Number($Gold2) And Number($Elixir1) = Number($Elixir2) And Number($DarkElixir1) = Number($DarkElixir2)) Then
 		If $g_abStopAtkNoLoot1Enable[$g_iMatchMode] Or $g_abStopAtkNoLoot2Enable[$g_iMatchMode] Then
-			SetLog("Gold & Elixir & DE no change detected, exit", $COLOR_SUCCESS)
+			SetLog("ذهب و اكسير & الدارك تغيير الكشف ، الخروج", $COLOR_SUCCESS)
 			Return False
 		Else
-			SetLog("Gold & Elixir & DE no change detected, waiting...", $COLOR_SUCCESS)
+			SetLog("ذهب واكسير & الدراك  تغيير الكشف ، والانتظار...", $COLOR_SUCCESS)
 		EndIf
 	Else
 		If $g_bDebugSetlog Then

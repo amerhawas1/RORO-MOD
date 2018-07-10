@@ -33,23 +33,23 @@ Func GetBuildingEdge($TypeBuilding = $eSideBuildingDES) ;Using $g_iBuildingLoc x
 
 	If $g_iBuildingLoc = 1 Then
 		If ($g_iBuildingLocX = 430) And ($g_iBuildingLocY = 313) Then
-			SetLog($TypeBuildingName & " Located in Middle... Attacking Random Side", $COLOR_INFO)
+			SetLog($TypeBuildingName & " يقع في وسط ... مهاجمة عشوائية", $COLOR_INFO)
 			$g_iBuildingEdge = (Random(Round(0, 3)))
 		ElseIf ($g_iBuildingLocX >= 430) And ($g_iBuildingLocY >= 313) Then
-			SetLog($TypeBuildingName & " Located Bottom Right... Attacking Bottom Right", $COLOR_INFO)
+			SetLog($TypeBuildingName & " يقع أسفل اليمين ... مهاجمة القاع الحق", $COLOR_INFO)
 			$g_iBuildingEdge = 0
 		ElseIf ($g_iBuildingLocX > 430) And ($g_iBuildingLocY < 313) Then
-			SetLog($TypeBuildingName & " Located Top Right... Attacking Top Right", $COLOR_INFO)
+			SetLog($TypeBuildingName & " تقع أعلى اليمين ... مهاجمة الأعلى الحق", $COLOR_INFO)
 			$g_iBuildingEdge = 3
 		ElseIf ($g_iBuildingLocX <= 430) And ($g_iBuildingLocY <= 313) Then
-			SetLog($TypeBuildingName & " Located Top Left... Attacking Top Left", $COLOR_INFO)
+			SetLog($TypeBuildingName & " تقع أعلى اليسار ... مهاجمة أعلى اليسار", $COLOR_INFO)
 			$g_iBuildingEdge = 1
 		ElseIf ($g_iBuildingLocX < 430) And ($g_iBuildingLocY > 313) Then
-			SetLog($TypeBuildingName & " Located Bottom Left... Attacking Bottom Left", $COLOR_INFO)
+			SetLog($TypeBuildingName & " يقع أسفل اليسار ... مهاجمة أسفل اليسار", $COLOR_INFO)
 			$g_iBuildingEdge = 2
 		EndIf
 	ElseIf $g_iBuildingLoc = 0 Then
-		SetLog($TypeBuildingName & " Not Located... Attacking Random Side", $COLOR_INFO)
+		SetLog($TypeBuildingName & " لا تقع ... مهاجمة الجانب العشوائي", $COLOR_INFO)
 		$g_iBuildingEdge = (Random(Round(0, 3)))
 	EndIf
 EndFunc   ;==>GetBuildingEdge
@@ -80,7 +80,7 @@ Func BuildingXY($TypeBuilding = $eSideBuildingDES)
 
 	If $pixel = -1 Then
 		$g_iBuildingLoc = 0
-		SetLog(" == " & $TypeBuildingName & " Not Found ==")
+		SetLog(" == " & $TypeBuildingName & " غير معثور لايمكن ==")
 	Else
 		$pixel[0] += 230 ; compensate CaptureRegion reduction
 		$pixel[1] += 170 ; compensate CaptureRegion reduction
@@ -100,7 +100,7 @@ Func DELow()
 		$Dchk += 1
 		If _Sleep(50) Then Return
 		If $Dchk >= 10 Then
-			SetLog("Can't find De", $COLOR_ERROR)
+			SetLog("لا يمكن العثور عليها", $COLOR_ERROR)
 			Return False
 		EndIf
 	WEnd
