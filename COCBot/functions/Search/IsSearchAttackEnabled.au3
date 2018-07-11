@@ -28,7 +28,7 @@ Func IsSearchAttackEnabled()
 	If $g_bDebugSetlog Then SetDebugLog("$bCloseGame:" & $bCloseGame, $COLOR_DEBUG)
 
 	If $g_bAttackPlannerDayLimit = True And _OverAttackLimit() Then ; check daily attack limit before checking schedule
-		SetLog("Daily attack limit reached, skip attacks till new day starts!", $COLOR_INFO)
+		SetLog("وصلت حدود الهجوم اليومية ، تخطي الهجمات حتى يبدأ يوم جديد!", $COLOR_INFO)
 		If _Sleep($DELAYRESPOND) Then Return True
 		If $bCloseGame Then
 			$iWaitTime = _getTimeRemainTimeToday() ; get seconds left in day till Midnight
@@ -47,13 +47,13 @@ Func IsSearchAttackEnabled()
 			Return True
 		EndIf
 		If _IsTimeInRange($aNoAttackTimes[0], $aNoAttackTimes[1]) Then ; returns true if time now is between start/end time
-			SetLog("Attack schedule random skip time found....", $COLOR_INFO)
+			SetLog("تم العثور على جدول زمني عشوائي لوقت الهجوم....", $COLOR_INFO)
 			If _Sleep($DELAYRESPOND) Then Return True
 			If $bCloseGame Then
 				$iWaitTime = _DateDiff("s", _NowCalc(), $aNoAttackTimes[1]) ; find time to stop attacking in seconds
 				If @error Then
 					_logErrorDateDiff(@error)
-					SetError(1, "Can not find NoAttack wait time", True)
+					SetError(1, "لا يمكن العثور على وقت الانتظار لا الهجوم", True)
 					Return True
 				EndIf
 				UniversalCloseWaitOpenCoC($iWaitTime * 1000, "IsSearchAttackScheduled_", $g_bAttackPlannerCloseAll, True, $g_bAttackPlannerSuspendComputer) ; Close and Wait for attacking to start
@@ -67,7 +67,7 @@ Func IsSearchAttackEnabled()
 		EndIf
 	Else ; if not random stop attack time, use attack planner times set in GUI
 		If IsPlannedTimeNow() = False Then
-			SetLog("Attack schedule planned skip time found...", $COLOR_INFO)
+			SetLog("تم العثور على وقت التخطي المخطط الزمني للتخطي...", $COLOR_INFO)
 			If _Sleep($DELAYRESPOND) Then Return True
 			If $bCloseGame Then
 				; determine how long to close CoC or emulator if selected
@@ -89,7 +89,7 @@ Func IsSearchAttackEnabled()
 						Next
 					EndIf
 				EndIf
-				If $g_bDebugSetlog Then SetDebugLog("Stop attack wait time= " & $iWaitTime & " Seconds", $COLOR_DEBUG)
+				If $g_bDebugSetlog Then SetDebugLog("وقف الهجوم وقت الانتظار= " & $iWaitTime & " ثواني ", $COLOR_DEBUG)
 				; close emulator as directed
 				UniversalCloseWaitOpenCoC($iWaitTime * 1000, "IsSearchAttackScheduled_", $g_bAttackPlannerCloseAll, True, $g_bAttackPlannerSuspendComputer) ; Close and Wait for attacking to start
 				$g_bRestart = True
@@ -107,19 +107,19 @@ Func _getTimeRemainTimeToday()
 	Local $iTimeRemain = _DateDiff("s", _NowCalc(), _NowCalcDate() & " 23:59:59")
 	If @error Then
 		_logErrorDateDiff(@error)
-		SetError(1, "Can not determine time remaining today", 0)
+		SetError(1, "لا يمكن تحديد الوقت المتبقي اليوم", 0)
 		Return
 	EndIf
-	If $g_bDebugSetlog Then SetDebugLog("getTimeRemainToday= " & $iTimeRemain & " Seconds", $COLOR_DEBUG)
+	If $g_bDebugSetlog Then SetDebugLog("getTimeRemainToday= " & $iTimeRemain & " ثواني ", $COLOR_DEBUG)
 	Return $iTimeRemain
 EndFunc   ;==>_getTimeRemainTimeToday
 
 Func _IsTimeAfter($sCompareTime, $sCurrentTime = _NowCalc())
 	; Check to see if the amount of seconds remaining is less than 0
-	Local $bResult = _DateDiff("s", $sCurrentTime, $sCompareTime) < 0
+	Local $bResult = _DateDiff(" ", $sCurrentTime, $sCompareTime) < 0
 	If @error Then
 		_logErrorDateDiff(@error)
-		SetError(1, "Can not check if time is after", False)
+		SetError(1, "لا يمكن معرفة ما إذا كان الوقت بعد", False)
 		Return
 	EndIf
 	If $g_bDebugSetlog Then SetDebugLog("IsTimeAfter: " & $bResult, $COLOR_DEBUG)
@@ -131,7 +131,7 @@ Func _IsTimeBefore($sCompareTime, $sCurrentTime = _NowCalc())
 	Local $bResult = _DateDiff("s", $sCurrentTime, $sCompareTime) > 0
 	If @error Then
 		_logErrorDateDiff(@error)
-		SetError(1, "Can not check if time is before", False)
+		SetError(1, "لا يمكن معرفة ما إذا كان الوقت من قبل", False)
 		Return
 	EndIf
 	If $g_bDebugSetlog Then SetDebugLog("IsTimeBefore: " & $bResult, $COLOR_DEBUG)
@@ -154,17 +154,17 @@ Func _getDailyRandomStartEnd($iDuration = 4)
 		Return
 	EndIf
 	; find 1st day random starting time
-	Local $sStartTime = _DateAdd("h", Int(_getDailyRandom() * (23 - @HOUR)), _NowCalc()) ; find initial random time during rest of day
+	Local $sStartTime = _DateAdd("ساعة", Int(_getDailyRandom() * (23 - @HOUR)), _NowCalc()) ; find initial random time during rest of day
 	If @error Then
 		_logErrorDateDiff(@error)
-		SetError(2, "Can not create initial random start time")
+		SetError(2, "لا يمكن إنشاء وقت بدء عشوائي عشوائي")
 		Return
 	EndIf
 	; find 1st day random end time
-	Local $sEndTime = _DateAdd("h", Int($iDuration), $sStartTime) ; add duration to start time
+	Local $sEndTime = _DateAdd("ساعة", Int($iDuration), $sStartTime) ; add duration to start time
 	If @error Then
 		_logErrorDateDiff(@error)
-		SetError(3, "Can not create initial random end time")
+		SetError(3, "لا يمكن إنشاء وقت نهاية عشوائي عشوائي")
 		Return
 	EndIf
 	Local Static $aNoAttackTimes[2] = [$sStartTime, $sEndTime] ; create return array with default values
@@ -173,17 +173,17 @@ Func _getDailyRandomStartEnd($iDuration = 4)
 		$iStartHour = _getDailyRandom() * 24
 		If $iStartHour <= @HOUR Then $iStartHour = @HOUR + 1.166 ; check if random start is before now, if yes add 70 minutes
 		$iEndHour = $iStartHour + $iDuration
-		If $g_bDebugSetlog Then SetDebugLog("StartHour: " & $iStartHour & "EndHour: " & $iEndHour, $COLOR_DEBUG)
-		$aNoAttackTimes[0] = _DateAdd("h", $iStartHour, _NowCalc()) ; create proper date/time string with start time
+		If $g_bDebugSetlog Then SetDebugLog("بدء ساعة: " & $iStartHour & "نهاية الساعة: " & $iEndHour, $COLOR_DEBUG)
+		$aNoAttackTimes[0] = _DateAdd("ساعة", $iStartHour, _NowCalc()) ; create proper date/time string with start time
 		If @error Then
 			_logErrorDateDiff(@error)
-			SetError(4, "Can not create random start time")
+			SetError(4, "لا يمكن إنشاء وقت بدء عشوائي")
 			Return
 		EndIf
-		$aNoAttackTimes[1] = _DateAdd("h", $iEndHour, _NowCalc()) ; create proper date/time string with end time
+		$aNoAttackTimes[1] = _DateAdd("ساعة", $iEndHour, _NowCalc()) ; create proper date/time string with end time
 		If @error Then
 			_logErrorDateDiff(@error)
-			SetError(5, "Can not create random end time")
+			SetError(5, "لا يمكن إنشاء وقت نهاية عشوائي")
 			Return
 		EndIf
 	EndIf
@@ -209,15 +209,15 @@ Func IsPlannedTimeNow()
 		$hour = StringSplit(_NowTime(4), ":", $STR_NOCOUNT)
 		$hourloot = $hour[0]
 		If $g_abPlannedattackHours[$hourloot] = True Then
-			If $g_bDebugSetlog Then SetDebugLog("Attack plan enabled for now..", $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog("تم تمكين خطة الهجوم في الوقت الحالي..", $COLOR_DEBUG)
 			Return True
 		Else
-			SetLog("Attack plan enabled today, but not this hour", $COLOR_INFO)
+			SetLog("تم تمكين خطة الهجوم اليوم ، ولكن ليس هذه الساعة", $COLOR_INFO)
 			If _Sleep($DELAYRESPOND) Then Return False
 			Return False
 		EndIf
 	Else
-		SetLog("Attack plan not enabled today", $COLOR_INFO)
+		SetLog("لم يتم تمكين خطة الهجوم اليوم", $COLOR_INFO)
 		If _Sleep($DELAYRESPOND) Then Return False
 		Return False
 	EndIf

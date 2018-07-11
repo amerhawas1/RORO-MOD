@@ -68,16 +68,16 @@ Func resetAttackSearch($bStuck = False)
 		$g_iNbrOfOoS += 1
 		UpdateStats()
 		If $bStuck Then
-			SetLog("Connection Lost While Searching", $COLOR_ERROR)
+			SetLog("فقد الاتصال اثناء البحث", $COLOR_ERROR)
 		Else
-			SetLog("Disconnected At Search Clouds", $COLOR_ERROR)
+			SetLog("غير متصل في البحث", $COLOR_ERROR)
 		EndIf
 		PushMsg("OoSResources")
 	Else
 		If $bStuck Then
-			SetLog("Attack Is Disabled Or Slow connection issues, Restarting CoC and Bot...", $COLOR_ERROR)
+			SetLog("الهجوم غير مفعل  او الاتصال ضعيف, الرجاء اعادة تشغيل البوت مع اللعبة يدويا...", $COLOR_ERROR)
 		Else
-			SetLog("Stuck At Search Clouds, Restarting CoC and Bot...", $COLOR_ERROR)
+			SetLog("تعليق البحث في الهجوم, اعادة تشغيل البوت مع اللعبة يدويا ...", $COLOR_ERROR)
 		EndIf
 		$g_bIsClientSyncError = False ; disable fast OOS restart if not simple error and restarting CoC
 		CloseCoC(True)

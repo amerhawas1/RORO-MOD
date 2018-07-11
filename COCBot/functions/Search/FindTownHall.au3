@@ -41,7 +41,7 @@ Func FindTownHall($check = True, $forceCaptureRegion = True)
 		; Atk-Log ~ TownHall Info
 		$eTHLevel = StringFormat("%2s", $g_iSearchTH)
 
-		Return " [TH]:" & StringFormat("%2s", $g_iSearchTH) & ", " & $g_sTHLoc
+		Return " [التاون هول]:" & StringFormat("%2s", $g_iSearchTH) & ", " & $g_sTHLoc
 	EndIf
 	$g_sTHLoc = $g_iSearchTH
 	$g_iTHx = 0

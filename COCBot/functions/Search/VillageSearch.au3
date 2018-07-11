@@ -65,7 +65,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 	If Not ($g_bIsSearchLimit) Then
 		SetLogCentered("=", "=", $COLOR_INFO)
 	Else
-		SetLogCentered(" Restart To Search ", Default, $COLOR_INFO)
+		SetLogCentered(" العودة للبحث مرة تانية ", Default, $COLOR_INFO)
 	EndIf
 
 	If $g_bSearchAttackNowEnable Then
@@ -191,7 +191,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 		If $g_iSearchTHLResult = -1 Then CompareTH(0) ; inside have a conditional to update $g_iSearchTHLResult
 
 		; ----------------- WRITE LOG OF ENEMY RESOURCES -----------------------------------
-		Local $GetResourcesTXT = StringFormat("%3s", $g_iSearchCount) & "> [G]:" & StringFormat("%7s", $g_iSearchGold) & " [E]:" & StringFormat("%7s", $g_iSearchElixir) & " [D]:" & StringFormat("%5s", $g_iSearchDark) & " [T]:" & StringFormat("%2s", $g_iSearchTrophy) & $THString
+		Local $GetResourcesTXT = StringFormat("%3s", $g_iSearchCount) & "> [ذهب]:" & StringFormat("%7s", $g_iSearchGold) & " [اكسير]:" & StringFormat("%7s", $g_iSearchElixir) & " [اكسير الدارك]:" & StringFormat("%5s", $g_iSearchDark) & " [الكؤؤس]:" & StringFormat("%2s", $g_iSearchTrophy) & $THString
 
 		; ----------------- CHECK DEAD BASE -------------------------------------------------
 		If Not $g_bRunState Then Return
@@ -218,7 +218,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 						$match[$i] = True
 					Else
 						$match[$i] = False
-						$noMatchTxt &= ", Not a Weak Base for " & $g_asModeText[$i]
+						$noMatchTxt &= ", ليست قاعدة ضعيفة " & $g_asModeText[$i]
 					EndIf
 				EndIf
 			Next
@@ -250,7 +250,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 			ExitLoop
 		ElseIf $match[$DB] And $dbBase Then
 			SetLog($GetResourcesTXT, $COLOR_SUCCESS, "Lucida Console", 7.5)
-			SetLog("      " & "Dead Base Found!", $COLOR_SUCCESS, "Lucida Console", 7.5)
+			SetLog("      " & "تم العثور على قرية مهجورة!", $COLOR_SUCCESS, "Lucida Console", 7.5)
 			$logwrited = True
 
 			; Check Collector Outside - RORO-MOD
@@ -260,64 +260,64 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 					$g_bScanMineAndElixir = False
 
 					If AreCollectorsOutside($g_iTxtDBMinCollOutsidePercent) Then
-						SetLog("Collectors are outside, match found !", $COLOR_GREEN, "Lucida Console", 7.5)
+						SetLog("المستخرجات خارج القرية..تم العثور عليها  !", $COLOR_GREEN, "Lucida Console", 7.5)
 						$g_bFlagSearchAnotherBase = False
 					Else
 						$g_bFlagSearchAnotherBase = True
 						If $g_bSkipCollectorCheck = 1 Then
 							If Number($g_iTxtSkipCollectorGold) <> 0 And Number($g_iTxtSkipCollectorElixir) <> 0 And Number($g_iTxtSkipCollectorDark) <> 0 Then
 								If Number($g_iSearchGold) >= Number($g_iTxtSkipCollectorGold) And Number($g_iSearchElixir) >= Number($g_iTxtSkipCollectorElixir) And Number($g_iSearchDark) >= Number($g_iTxtSkipCollectorDark) Then
-									SetLog("Target Resource(G,E,D) over for skip collectors check, Prepare for attack...", $COLOR_GREEN, "Lucida Console", 7.5)
+									SetLog("هدف الموارد ذهب+اكسير الدارك+اكسير  التحضير للهجوم...", $COLOR_GREEN, "Lucida Console", 7.5)
 									$g_bFlagSearchAnotherBase = False
 								EndIf
 							ElseIf Number($g_iTxtSkipCollectorGold) <> 0 And Number($g_iTxtSkipCollectorElixir) <> 0 Then
 								If Number($g_iSearchGold) >= Number($g_iTxtSkipCollectorGold) And Number($g_iSearchElixir) >= Number($g_iTxtSkipCollectorElixir) Then
-									SetLog("Target Resource(G,E) over for skip collectors check, Prepare for attack...", $COLOR_GREEN, "Lucida Console", 7.5)
+									SetLog("هدف الموارد ذهب+اكسير  التحضير للهجوم...", $COLOR_GREEN, "Lucida Console", 7.5)
 									$g_bFlagSearchAnotherBase = False
 								EndIf
 							ElseIf Number($g_iTxtSkipCollectorGold) <> 0 And Number($g_iTxtSkipCollectorDark) <> 0 Then
 								If Number($g_iSearchGold) >= Number($g_iTxtSkipCollectorGold) And Number($g_iSearchDark) >= Number($g_iTxtSkipCollectorDark) Then
-									SetLog("Target Resource(G,D) over for skip collectors check, Prepare for attack...", $COLOR_GREEN, "Lucida Console", 7.5)
+									SetLog("هدف الموارد ذهب+اكسيرالدارك  التحضير للهجوم...", $COLOR_GREEN, "Lucida Console", 7.5)
 									$g_bFlagSearchAnotherBase = False
 								EndIf
 							ElseIf Number($g_iTxtSkipCollectorElixir) <> 0 And Number($g_iTxtSkipCollectorDark) <> 0 Then
 								If Number($g_iSearchElixir) >= Number($g_iTxtSkipCollectorElixir) And Number($g_iSearchDark) >= Number($g_iTxtSkipCollectorDark) Then
-									SetLog("Target Resource(E,D) over for skip collectors check, Prepare for attack...", $COLOR_GREEN, "Lucida Console", 7.5)
+									SetLog("هدف الموارد اكسير+اكسيرالدارك  التحضير للهجوم...تخطي المستخرجات...", $COLOR_GREEN, "Lucida Console", 7.5)
 									$g_bFlagSearchAnotherBase = False
 								EndIf
 							ElseIf Number($g_iTxtSkipCollectorGold) <> 0 Then
 								If Number($g_iSearchGold) >= Number($g_iTxtSkipCollectorGold) Then
-									SetLog("Target Resource(G) over for skip collectors check, Prepare for attack...", $COLOR_GREEN, "Lucida Console", 7.5)
+									SetLog("تحقق من الموارد المستهدفة  ذهب في حالة تخطي المستخرجات ، الاستعداد للهجوم...", $COLOR_GREEN, "Lucida Console", 7.5)
 									$g_bFlagSearchAnotherBase = False
 								EndIf
 							ElseIf Number($g_iTxtSkipCollectorElixir) <> 0 Then
 								If Number($g_iSearchElixir) >= Number($g_iTxtSkipCollectorElixir) Then
-									SetLog("Target Resource(E) over for skip collectors check, Prepare for attack...", $COLOR_GREEN, "Lucida Console", 7.5)
+									SetLog("تحقق من الموارد المستهدفة  اكسير في حالة تخطي المستخرجات ، الاستعداد للهجوم...", $COLOR_GREEN, "Lucida Console", 7.5)
 									$g_bFlagSearchAnotherBase = False
 								EndIf
 							ElseIf Number($g_iTxtSkipCollectorDark) <> 0 Then
 								If Number($g_iSearchDark) >= Number($g_iTxtSkipCollectorDark) Then
-									SetLog("Target Resource(D) over for skip collectors check, Prepare for attack...", $COLOR_GREEN, "Lucida Console", 7.5)
+									SetLog("تحقق من الموارد المستهدفة  اكسير في حالة تخطي المستخرجات ، الاستعداد للهجوم...", $COLOR_GREEN, "Lucida Console", 7.5)
 									$g_bFlagSearchAnotherBase = False
 								EndIf
 							EndIf
 							If $g_bFlagSearchAnotherBase Then
-								SetLog("Collectors are not outside AND Target Resource not match for attack, skipping search !", $COLOR_RED, "Lucida Console", 7.5)
+								SetLog("للا يوجد جامعو خارج و الموارد المستهدفة غير متطابقة مع الهجوم ، تخطي البحث !", $COLOR_RED, "Lucida Console", 7.5)
 							EndIf
 						Else
-							SetLog("Collectors are not outside, skipping search !", $COLOR_RED, "Lucida Console", 7.5)
+							SetLog("المستخرجات ليست بالخارج تخطي البحث  !", $COLOR_RED, "Lucida Console", 7.5)
 						EndIf
 						If $g_bSkipCollectorCheckTH Then
 							If $g_bFlagSearchAnotherBase Then
 								If $g_iSearchTH <> "-" Then
 									If Number($g_iSearchTH) <= $g_iCmbSkipCollectorCheckTH Then
-										SetLog("Target TownHall Level is " & $g_iSearchTH & ", lower than or equal my setting " & $g_iCmbSkipCollectorCheckTH & ", Prepare for attack...", $COLOR_GREEN, "Lucida Console", 7.5)
+										SetLog("المستوى المستهدف قاعة تاون هو " & $g_iSearchTH & ", أقل من أو يساوي الإعداد الخاص بي " & $g_iCmbSkipCollectorCheckTH & ", الاستعداد للهجوم...", $COLOR_GREEN, "Lucida Console", 7.5)
 										$g_bFlagSearchAnotherBase = False
 									Else
-										SetLog("Collectors are not outside, and TownHall Level is " & $g_iSearchTH & " Over " & $g_iCmbSkipCollectorCheckTH & ", skipping search !", $COLOR_RED, "Lucida Console", 7.5)
+										SetLog("المستخرجات ليست بالخارج القرية, و مستوى التاون هول هو  " & $g_iSearchTH & " على " & $g_iCmbSkipCollectorCheckTH & ", تخطي البحث !", $COLOR_RED, "Lucida Console", 7.5)
 									EndIf
 								Else
-									SetLog("Collectors are not outside, and failded to get townhall level, skipping search !", $COLOR_RED, "Lucida Console", 7.5)
+									SetLog("جامعي ليست خارج ، وفشلت في الحصول على مستوى قاعة المدينة ، وتخطي البحث !", $COLOR_RED, "Lucida Console", 7.5)
 								EndIf
 							EndIf
 						EndIf
@@ -335,20 +335,20 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 
 		ElseIf $match[$LB] And Not $dbBase Then
 			SetLog($GetResourcesTXT, $COLOR_SUCCESS, "Lucida Console", 7.5)
-			SetLog("      " & "Live Base Found!", $COLOR_SUCCESS, "Lucida Console", 7.5)
+			SetLog("      " & "العثور على قرية نشيطة!", $COLOR_SUCCESS, "Lucida Console", 7.5)
 			$logwrited = True
 			$g_iMatchMode = $LB
 			ExitLoop
 		ElseIf $match[$LB] And $g_bCollectorFilterDisable Then
 			SetLog($GetResourcesTXT, $COLOR_SUCCESS, "Lucida Console", 7.5)
-			SetLog("      " & "Live Base Found!*", $COLOR_SUCCESS, "Lucida Console", 7.5)
+			SetLog("      " & "العثور على قرية نشيطة!*", $COLOR_SUCCESS, "Lucida Console", 7.5)
 			$logwrited = True
 			$g_iMatchMode = $LB
 			ExitLoop
 		ElseIf $g_abAttackTypeEnable[$TB] = 1 And ($g_iSearchCount >= $g_iAtkTBEnableCount) Then ; TH bully doesn't need the resources conditions
 			If $g_iSearchTHLResult = 1 Then
 				SetLog($GetResourcesTXT, $COLOR_SUCCESS, "Lucida Console", 7.5)
-				SetLog("      " & "Not a match, but TH Bully Level Found! ", $COLOR_SUCCESS, "Lucida Console", 7.5)
+				SetLog("      " & "لا تطابق, لكن وجد المستوى! ", $COLOR_SUCCESS, "Lucida Console", 7.5)
 				$logwrited = True
 				$g_iMatchMode = $g_iAtkTBMode
 				ExitLoop
@@ -358,19 +358,19 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 		If SearchTownHallLoc() And $match[$TS] Then ; attack this base anyway because outside TH found to snipe
 			If CompareResources($TS) Then
 				SetLog($GetResourcesTXT, $COLOR_SUCCESS, "Lucida Console", 7.5)
-				SetLog("      " & "TH Outside Found! ", $COLOR_SUCCESS, "Lucida Console", 7.5)
+				SetLog("      " & "تم العثور على التاون هول خارج القرية! ", $COLOR_SUCCESS, "Lucida Console", 7.5)
 				$logwrited = True
 				$g_iMatchMode = $TS
 				ExitLoop
 			Else
-				$noMatchTxt &= ", Not a " & $g_asModeText[$TS] & ", fails resource min"
+				$noMatchTxt &= ", ليست  " & $g_asModeText[$TS] & ", فشل في الموارد ليست دقيقة"
 			EndIf
 		EndIf
 
 		If $match[$DB] And Not $dbBase Then
-			$noMatchTxt &= ", Not a " & $g_asModeText[$DB]
+			$noMatchTxt &= ", ليست قرية مهجورة " 
 		ElseIf $match[$LB] And $dbBase Then
-			$noMatchTxt &= ", Not a " & $g_asModeText[$LB]
+			$noMatchTxt &= ", ليست قرية نشطة  " 
 		EndIf
 
 		If $noMatchTxt <> "" Then
@@ -433,7 +433,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 				EndIf
 				ExitLoop
 			Else
-				If $g_bDebugSetlog Then SetDebugLog("Wait to see Next Button... " & $i, $COLOR_DEBUG)
+				If $g_bDebugSetlog Then SetDebugLog("انتظر لرؤية الزر التالي... " & $i, $COLOR_DEBUG)
 			EndIf
 			If $i >= 99 Or isProblemAffect() Or (Mod($i, 10) = 0 And checkObstacles_Network(False, False)) Then ; if we can't find the next button or there is an error, then restart
 				$g_bIsClientSyncError = True
@@ -441,10 +441,10 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 				If $g_bRestart Then
 					$g_iNbrOfOoS += 1
 					UpdateStats()
-					SetLog("Couldn't locate Next button", $COLOR_ERROR)
+					SetLog("تعذر تحديد موقع زر التالي", $COLOR_ERROR)
 					PushMsg("OoSResources")
 				Else
-					SetLog("Have strange problem Couldn't locate Next button, Restarting CoC and Bot...", $COLOR_ERROR)
+					SetLog("لديك مشكلة غريبة لا يمكن تحديد موقع زر التالي, الرجاء اعادة تشغيل البوت ...", $COLOR_ERROR)
 					$g_bIsClientSyncError = False ; disable fast OOS restart if not simple error and try restarting CoC
 					CloseCoC(True)
 				EndIf
@@ -458,7 +458,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 		If $g_bRestart = True Then Return ; exit func
 
 		If isGemOpen(True) = True Then
-			SetLog(" Not enough gold to keep searching.....", $COLOR_ERROR)
+			SetLog(" لا يوجد ذهب كافي لمتابعة البحث مع الاسف.....", $COLOR_ERROR)
 			Click(585, 252, 1, 0, "#0156") ; Click close gem window "X"
 			If _Sleep($DELAYVILLAGESEARCH3) Then Return
 			$g_bOutOfGold = True ; Set flag for out of gold to search for attack
@@ -487,7 +487,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 
 	;--- show buttons attacknow ----
 	If $g_bBtnAttackNowPressed = True Then
-		SetLogCentered(" Attack Now Pressed! ", "~", $COLOR_SUCCESS)
+		SetLogCentered(" ضغط الهجوم الان ! ", "~", $COLOR_SUCCESS)
 	EndIf
 
 	If $g_bSearchAttackNowEnable Then
@@ -505,7 +505,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 
 	;--- write in log match found ----
 	If $g_bSearchAlertMe Then
-		TrayTip($g_asModeText[$g_iMatchMode] & " Match Found!", "Gold: " & $g_iSearchGold & "; Elixir: " & $g_iSearchElixir & "; Dark: " & $g_iSearchDark & "; Trophy: " & $g_iSearchTrophy, "", 0)
+		TrayTip($g_asModeText[$g_iMatchMode] & " وجد تطابق!", "ذهب: " & $g_iSearchGold & "; اكسير: " & $g_iSearchElixir & "; دارك: " & $g_iSearchDark & "; الكؤؤس: " & $g_iSearchTrophy, "", 0)
 		If FileExists(@WindowsDir & "\media\Festival\Windows Exclamation.wav") Then
 			SoundPlay(@WindowsDir & "\media\Festival\Windows Exclamation.wav", 1)
 		ElseIf FileExists(@WindowsDir & "\media\Windows Exclamation.wav") Then
@@ -513,7 +513,7 @@ Func _VillageSearch() ;Control for searching a village that meets conditions
 		EndIf
 	EndIf
 
-	SetLogCentered(" Search Complete ", Default, $COLOR_INFO)
+	SetLogCentered(" متابعة البحث ", Default, $COLOR_INFO)
 	PushMsg("MatchFound")
 
 	$g_bIsClientSyncError = False
@@ -526,7 +526,7 @@ Func SearchLimit($iSkipped)
 		While _CheckPixel($aSurrenderButton, $g_bCapturePixel) = False
 			If _Sleep($DELAYSEARCHLIMIT) Then Return
 			$Wcount += 1
-			If $g_bDebugSetlog Then SetDebugLog("wait surrender button " & $Wcount, $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog("انتظر زر الاستسلام " & $Wcount, $COLOR_DEBUG)
 			If $Wcount >= 50 Or isProblemAffect(True) Then
 				checkMainScreen()
 				$g_bIsClientSyncError = False ; reset OOS flag for long restart
@@ -557,21 +557,21 @@ Func WriteLogVillageSearch($x)
 	;[18.07.30] - Weak Base(Mortar: 5, WizTower: 5)
 
 	Local $MeetGxEtext = "", $MeetGorEtext = "", $MeetGplusEtext = "", $MeetDEtext = "", $MeetTrophytext = "", $MeetTHtext = "", $MeetTHOtext = "", $MeetWeakBasetext = "", $EnabledAftertext = ""
-	If $g_aiFilterMeetGE[$x] = 0 Then $MeetGxEtext = "- Meet: Gold and Elixir"
-	If $g_aiFilterMeetGE[$x] = 1 Then $MeetGorEtext = "- Meet: Gold or Elixir"
-	If $g_aiFilterMeetGE[$x] = 2 Then $MeetGplusEtext = "- Meet: Gold + Elixir"
-	If $g_abFilterMeetDEEnable[$x] Then $MeetDEtext = "- Dark"
-	If $g_abFilterMeetTrophyEnable[$x] Then $MeetTrophytext = "- Trophy"
-	If $g_abFilterMeetTH[$x] Then $MeetTHtext = "- Max TH " & $g_aiMaxTH[$x] ;$g_aiFilterMeetTHMin
+	If $g_aiFilterMeetGE[$x] = 0 Then $MeetGxEtext = "- يجتمع: الذهب والإكسير"
+	If $g_aiFilterMeetGE[$x] = 1 Then $MeetGorEtext = "- يجتمع: الذهب أو الإكسير"
+	If $g_aiFilterMeetGE[$x] = 2 Then $MeetGplusEtext = "- يجتمع: الذهب + إكسير"
+	If $g_abFilterMeetDEEnable[$x] Then $MeetDEtext = "- اكسير الدارك"
+	If $g_abFilterMeetTrophyEnable[$x] Then $MeetTrophytext = "- الكؤؤس"
+	If $g_abFilterMeetTH[$x] Then $MeetTHtext = "- ماكس تاون هول " & $g_aiMaxTH[$x] ;$g_aiFilterMeetTHMin
 	If $g_abFilterMeetTHOutsideEnable[$x] Then $MeetTHOtext = "- TH Outside"
-	If IsWeakBaseActive($x) Then $MeetWeakBasetext = "- Weak Base"
+	If IsWeakBaseActive($x) Then $MeetWeakBasetext = "- قاعدة ضعيفة"
 	If Not ($g_bIsSearchLimit) And $g_bDebugSetlog Then
-		SetLogCentered(" Searching For " & $g_asModeText[$x] & " ", Default, $COLOR_INFO)
-		SetLog("Enable " & $g_asModeText[$x] & " search IF ", $COLOR_INFO)
-		If $g_abSearchSearchesEnable[$x] Then SetLog("- Numbers of searches range " & $g_aiSearchSearchesMin[$x] & " - " & $g_aiSearchSearchesMax[$x], $COLOR_INFO)
-		If $g_abSearchTropiesEnable[$x] Then SetLog("- Search tropies range " & $g_aiSearchTrophiesMin[$x] & " - " & $g_aiSearchTrophiesMax[$x], $COLOR_INFO)
-		If $g_abSearchCampsEnable[$x] Then SetLog("- Army Camps % >  " & $g_aiSearchCampsPct[$x], $COLOR_INFO)
-		SetLog("Match " & $g_asModeText[$x] & "  village IF ", $COLOR_INFO)
+		SetLogCentered(" البحث من اجل  " & $g_asModeText[$x] & " ", Default, $COLOR_INFO)
+		SetLog("مفعل " & $g_asModeText[$x] & " لو البحث ", $COLOR_INFO)
+		If $g_abSearchSearchesEnable[$x] Then SetLog("- مجموعة من نطاق البحث " & $g_aiSearchSearchesMin[$x] & " - " & $g_aiSearchSearchesMax[$x], $COLOR_INFO)
+		If $g_abSearchTropiesEnable[$x] Then SetLog("- بحث المدى المدارات " & $g_aiSearchTrophiesMin[$x] & " - " & $g_aiSearchTrophiesMax[$x], $COLOR_INFO)
+		If $g_abSearchCampsEnable[$x] Then SetLog("- جيش الثكنات % >  " & $g_aiSearchCampsPct[$x], $COLOR_INFO)
+		SetLog("مباراة " & $g_asModeText[$x] & "  لو القرية ", $COLOR_INFO)
 		If $MeetGxEtext <> "" Then SetLog($MeetGxEtext, $COLOR_INFO)
 		If $MeetGorEtext <> "" Then SetLog($MeetGorEtext, $COLOR_INFO)
 		If $MeetGplusEtext <> "" Then SetLog($MeetGplusEtext, $COLOR_INFO)
@@ -580,18 +580,18 @@ Func WriteLogVillageSearch($x)
 		If $MeetTHtext <> "" Then SetLog($MeetTHtext, $COLOR_INFO)
 		If $MeetTHOtext <> "" Then SetLog($MeetTHOtext, $COLOR_INFO)
 		If $MeetWeakBasetext <> "" Then SetLog($MeetWeakBasetext, $COLOR_INFO)
-		If $g_abFilterMeetOneConditionEnable[$x] Then SetLog("Meet One and Attack!")
-		SetLogCentered(" RESOURCE CONDITIONS ", "~", $COLOR_INFO)
+		If $g_abFilterMeetOneConditionEnable[$x] Then SetLog("تلبية واحد والهجوم!")
+		SetLogCentered(" شروط الموارد ", "~", $COLOR_INFO)
 	EndIf
 	If Not ($g_bIsSearchLimit) Then
 		Local $txtTrophies = "", $txtTownhall = ""
-		If $g_abFilterMeetTrophyEnable[$x] Then $txtTrophies = " [T]:" & StringFormat("%2s", $g_iAimTrophy[$x]) & "-" & StringFormat("%2s", $g_iAimTrophyMax[$x])
-		If $g_abFilterMeetTH[$x] Then $txtTownhall = " [TH]:" & StringFormat("%2s", $g_aiMaxTH[$x]) ;$g_aiFilterMeetTHMin
+		If $g_abFilterMeetTrophyEnable[$x] Then $txtTrophies = " [الكؤؤس]:" & StringFormat("%2s", $g_iAimTrophy[$x]) & "-" & StringFormat("%2s", $g_iAimTrophyMax[$x])
+		If $g_abFilterMeetTH[$x] Then $txtTownhall = " [التاون هول]:" & StringFormat("%2s", $g_aiMaxTH[$x]) ;$g_aiFilterMeetTHMin
 		If $g_abFilterMeetTHOutsideEnable[$x] Then $txtTownhall &= ", Out"
 		If $g_aiFilterMeetGE[$x] = 2 Then
-			SetLog("Aim:           [G+E]:" & StringFormat("%7s", $g_iAimGoldPlusElixir[$x]) & " [D]:" & StringFormat("%5s", $g_iAimDark[$x]) & $txtTrophies & $txtTownhall & " for: " & $g_asModeText[$x], $COLOR_SUCCESS, "Lucida Console", 7.5)
+			SetLog(" الهدف:           [ذهب+اكسير]:" & StringFormat("%7s", $g_iAimGoldPlusElixir[$x]) & " [اكسير دارك]:" & StringFormat("%5s", $g_iAimDark[$x]) & $txtTrophies & $txtTownhall & " من اجل : " & $g_asModeText[$x], $COLOR_SUCCESS, "Lucida Console", 7.5)
 		Else
-			SetLog("Aim: [G]:" & StringFormat("%7s", $g_iAimGold[$x]) & " [E]:" & StringFormat("%7s", $g_iAimElixir[$x]) & " [D]:" & StringFormat("%5s", $g_iAimDark[$x]) & $txtTrophies & $txtTownhall & " for: " & $g_asModeText[$x], $COLOR_SUCCESS, "Lucida Console", 7.5)
+			SetLog(" الهدف: [ذهب]:" & StringFormat("%7s", $g_iAimGold[$x]) & " [اكسير]:" & StringFormat("%7s", $g_iAimElixir[$x]) & " [اكسير دارك]:" & StringFormat("%5s", $g_iAimDark[$x]) & $txtTrophies & $txtTownhall & " من اجل : " & $g_asModeText[$x], $COLOR_SUCCESS, "Lucida Console", 7.5)
 		EndIf
 	EndIf
 

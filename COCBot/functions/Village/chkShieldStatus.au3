@@ -32,16 +32,16 @@ Func chkShieldStatus($bChkShield = True, $bForceChkPBT = False)
 			Local $iShieldExp = _DateDiff('n', $Result[2], _NowCalc())
 			If Abs($iShieldExp) > 0 Then
 				Local $sFormattedDiff = _Date_Difference(_NowCalc(), $Result[2], 4)
-				SetLog("Shield expires in: " & $sFormattedDiff)
+				SetLog("ينتهي الدرع في : " & $sFormattedDiff)
 			Else
-				SetLog("Shield has expired")
+				SetLog("لا يوجد درع ")
 			EndIf
 
 			If _DateIsValid($g_asShieldStatus[2]) Then ; if existing global shield time is valid
 				$ichkTime = Abs(Int(_DateDiff('s', $g_asShieldStatus[2], $Result[2]))) ; compare old and new time
 				If $ichkTime > 60 Then ; test if more than 60 seconds different in case of attack while shield has reduced time
 					$bForceChkPBT = True ; update PB time
-					If $g_bDebugSetlog Then SetDebugLog("Shield time changed: " & $ichkTime & " Sec, Force PBT OCR: " & $bForceChkPBT, $COLOR_WARNING)
+					If $g_bDebugSetlog Then SetDebugLog("درع الوقت تغيرت: " & $ichkTime & " Sec, Force PBT OCR: " & $bForceChkPBT, $COLOR_WARNING)
 				EndIf
 			EndIf
 
@@ -49,14 +49,14 @@ Func chkShieldStatus($bChkShield = True, $bForceChkPBT = False)
 
 			If $g_bChkBotStop = True And $g_iCmbBotCond >= 19 Then ; is Halt mode enabled and With Shield selected?
 				If $g_asShieldStatus[0] = "shield" Then ; verify shield
-					SetLog("Shield found, Halt Attack Now!", $COLOR_INFO)
+					SetLog("وجدت الدرع ، وقف الهجوم الآن!", $COLOR_INFO)
 					$g_bWaitShield = True
 					$g_bIsClientSyncError = False ; cancel OOS restart to enable BotCommand to process Halt mode
 					$g_bIsSearchLimit = False ; reset search limit flag to enable BotCommand to process Halt mode
 				Else
 					$g_bWaitShield = False
 					If $g_bMeetCondStop = True Then
-						SetLog("Shield expired, resume attacking", $COLOR_INFO)
+						SetLog("انتهت الدرع ، استئناف الهجوم", $COLOR_INFO)
 						$g_bTrainEnabled = True
 						$g_bDonationEnabled = True
 						$g_bMeetCondStop = False
@@ -101,22 +101,22 @@ Func chkShieldStatus($bChkShield = True, $bForceChkPBT = False)
 
 			If Abs($iTimeTillPBTstartMin) > 0 Then
 				Local $sFormattedDiff = _Date_Difference(_DateAdd("n", -1, _NowCalc()), $Result, 4)
-				SetLog("Personal Break starts in: " & $sFormattedDiff)
-				Local $CorrectstringPB_GUI = StringReplace($sFormattedDiff, StringInStr($sFormattedDiff, " hours ") >= 1 ? " hours " : " hour ", "h")
-				$CorrectstringPB_GUI = StringReplace($CorrectstringPB_GUI, StringInStr($CorrectstringPB_GUI, " minutes ") >= 1 ? " minutes " : " minute ", "'")
+				SetLog("يبدأ استراحة الشخصية في: " & $sFormattedDiff)
+				Local $CorrectstringPB_GUI = StringReplace($sFormattedDiff, StringInStr($sFormattedDiff, " ساعات ") >= 1 ? " ساعات " : " ساعة ", "ساعة")
+				$CorrectstringPB_GUI = StringReplace($CorrectstringPB_GUI, StringInStr($CorrectstringPB_GUI, " دقائق ") >= 1 ? " دقائق " : " دقيقة ", "'")
 				$g_aiPersonalBreak[$g_iCurAccount] = $CorrectstringPB_GUI
 			Else
 				$g_aiPersonalBreak[$g_iCurAccount] = ""
 			EndIf
 
 			If $iTimeTillPBTstartMin < -(Int($g_iSinglePBForcedEarlyExitTime)) Then
-				$g_sPBStartTime = _DateAdd('n', -(Int($g_iSinglePBForcedEarlyExitTime)), $Result) ; subtract GUI time setting from PB start time to set early forced break time
+				$g_sPBStartTime = _DateAdd('دn', -(Int($g_iSinglePBForcedEarlyExitTime)), $Result) ; subtract GUI time setting from PB start time to set early forced break time
 			ElseIf $iTimeTillPBTstartMin < 0 Then ; Might have missed it if less 15 min, but try anyway
 				$g_sPBStartTime = $Result
 			Else
 				$g_sPBStartTime = "" ; clear value, can not log off ealy.
 			EndIf
-			If $g_bDebugSetlog Then SetDebugLog("Early Log Off time=" & $g_sPBStartTime & ", In " & _DateDiff('n', $g_sPBStartTime, _NowCalc()) & " Minutes", $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog("وقت تسجيل الخروج المبكر=" & $g_sPBStartTime & ", في " & _DateDiff('n', $g_sPBStartTime, _NowCalc()) & " دقائق", $COLOR_DEBUG)
 		Else
 			SetLog("Bad getPBTtime() return value: " & $Result, $COLOR_ERROR)
 			$g_sPBStartTime = "" ; reset to force update next pass
@@ -131,8 +131,8 @@ EndFunc   ;==>chkShieldStatus
 ; Returns formatted difference between two dates
 ; $iGrain from 0 To 5, to control level of detail that is returned
 Func _Date_Difference($sStartDate, Const $sEndDate, Const $iGrain)
-	Local $aUnit[6] = ["Y", "M", "D", "h", "n", "s"]
-	Local $aType[6] = ["year", "month", "day", "hour", "minute", "second"]
+	Local $aUnit[6] = ["سنة", "شهر", "يوم", "ساعة", "دقيقة", "ثانية"]
+	Local $aType[6] = ["سنة", "شهر", "يوم", "ساعة", "دقيقة", "ثانية"]
 	Local $sReturn = "", $iUnit
 
 	For $i = 0 To $iGrain

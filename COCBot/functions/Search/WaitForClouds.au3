@@ -85,10 +85,10 @@ Func WaitForClouds()
 		$iSearchTime = __TimerDiff($hMinuteTimer) / 60000 ;get time since minute timer start in minutes
 		If $iSearchTime >= $iLastTime + 1 Then
 			$g_iTotalSearchTime += 1
-			SetLog("Cloud wait time " & StringFormat("%.1f", $iSearchTime) & " minute(s), Total Searchtime = " & $g_iTotalSearchTime & " minute(s)", $COLOR_INFO)
+			SetLog("وقت الانتظار السحابي " & StringFormat("%.1f", $iSearchTime) & " دقيقة (دقائق) ، إجمالي وقت البحث = " & $g_iTotalSearchTime & " دقائق ", $COLOR_INFO)
 			; Stop on Low battery - RORO-MOD
 			If $g_bStopOnBatt Then
-				Setlog("Check Stop on battery", $COLOR_INFO)
+				Setlog("تحقق وقف على البطارية", $COLOR_INFO)
 				_BatteryStatus()
 			EndIf
 			; Restart Search Legend league ~ back to home on certain minute on cloud and no reach enemy - RORO-MOD

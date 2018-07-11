@@ -17,7 +17,7 @@
 Func AreCollectorsOutside($percent)
 	If $g_bDBCollectorsNearRedline = 1 Then Return AreCollectorsNearRedline($percent)
 
-	SetLog("Locating Mines & Collectors", $COLOR_INFO)
+	SetLog("تحديد المستخرجات ذهب اكسير و اكسير الدارك", $COLOR_INFO)
 	; reset variables
 	Global $g_aiPixelMine[0]
 	Global $g_aiPixelElixir[0]
@@ -41,9 +41,9 @@ Func AreCollectorsOutside($percent)
 	$g_bScanMineAndElixir = True
 
 	Global $colNbr = UBound($g_aiPixelNearCollector)
-	SetLog("Located collectors in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds")
-	SetLog("[" & UBound($g_aiPixelMine) & "] Gold Mines")
-	SetLog("[" & UBound($g_aiPixelElixir) & "] Elixir Collectors")
+	SetLog("يقع المستخرج في " & Round(TimerDiff($hTimer) / 1000, 2) & " ثواني ")
+	SetLog("[" & UBound($g_aiPixelMine) & "] مستخرج الذهب")
+	SetLog("[" & UBound($g_aiPixelElixir) & "] مستخرج الاكسير")
 
 	Global $minColOutside = Round($colNbr * $percent / 100)
 	Global $radiusAdjustment = 1
@@ -119,9 +119,9 @@ Func AreCollectorsNearRedline($percent)
 
 	Global $colNbr = UBound($g_aiPixelNearCollector)
 
-	SetLog("Located collectors in " & Round(TimerDiff($hTimer) / 1000, 2) & " seconds")
-	SetLog("[" & UBound($g_aiPixelMine) & "] Gold Mines")
-	SetLog("[" & UBound($g_aiPixelElixir) & "] Elixir Collectors")
+	SetLog("يقع المستخرج في " & Round(TimerDiff($hTimer) / 1000, 2) & " ثواني")
+	SetLog("[" & UBound($g_aiPixelMine) & "] مستخرج الذهب")
+	SetLog("[" & UBound($g_aiPixelElixir) & "] مستخرج الاكسير")
 
  	Local $diamondx = $g_iMilkFarmOffsetX + $g_iMilkFarmOffsetXStep * $g_iCmbRedlineTiles
  	Local $diamondy = $g_iMilkFarmOffsetY + $g_iMilkFarmOffsetYStep * $g_iCmbRedlineTiles

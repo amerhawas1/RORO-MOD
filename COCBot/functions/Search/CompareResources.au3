@@ -24,13 +24,13 @@ Func CompareResources($pMode) ;Compares resources and returns true if conditions
 			If $g_iAimGoldPlusElixir[$pMode] - $g_iSearchReductionGoldPlusElixir >= 0 Then $g_iAimGoldPlusElixir[$pMode] -= $g_iSearchReductionGoldPlusElixir
 
 			Local $txtTrophies = "", $txtTownhall = ""
-			If $g_abFilterMeetTrophyEnable[$pMode] Then $txtTrophies = " [T]:" & StringFormat("%2s", $g_iAimTrophy[$pMode]) & "-" & StringFormat("%2s", $g_iAimTrophyMax[$pMode])
-			If $g_abFilterMeetTH[$pMode] Then $txtTownhall = " [TH]:" & StringFormat("%2s", $g_aiMaxTH[$pMode]) ;$g_aiFilterMeetTHMin
+			If $g_abFilterMeetTrophyEnable[$pMode] Then $txtTrophies = " [الكؤؤس]:" & StringFormat("%2s", $g_iAimTrophy[$pMode]) & "-" & StringFormat("%2s", $g_iAimTrophyMax[$pMode])
+			If $g_abFilterMeetTH[$pMode] Then $txtTownhall = " [التاون هول]:" & StringFormat("%2s", $g_aiMaxTH[$pMode]) ;$g_aiFilterMeetTHMin
 			If $g_abFilterMeetTHOutsideEnable[$pMode] Then $txtTownhall &= ", Out"
 			If $g_aiFilterMeetGE[$pMode] = 2 Then
-				SetLog("Aim:           [G+E]:" & StringFormat("%7s", $g_iAimGoldPlusElixir[$pMode]) & " [D]:" & StringFormat("%5s", $g_iAimDark[$pMode]) & $txtTrophies & $txtTownhall & " for: " & $g_asModeText[$pMode], $COLOR_SUCCESS, "Lucida Console", 7.5)
+				SetLog("الهدف:           [اكسير+ ذهب]:" & StringFormat("%7s", $g_iAimGoldPlusElixir[$pMode]) & " [اكسير الدارك]:" & StringFormat("%5s", $g_iAimDark[$pMode]) & $txtTrophies & $txtTownhall & " من أجل: " & $g_asModeText[$pMode], $COLOR_SUCCESS, "Lucida Console", 7.5)
 			Else
-				SetLog("Aim: [G]:" & StringFormat("%7s", $g_iAimGold[$pMode]) & " [E]:" & StringFormat("%7s", $g_iAimElixir[$pMode]) & " [D]:" & StringFormat("%5s", $g_iAimDark[$pMode]) & $txtTrophies & $txtTownhall & " for: " & $g_asModeText[$pMode], $COLOR_SUCCESS, "Lucida Console", 7.5)
+				SetLog("الهدف: [ذهب]:" & StringFormat("%7s", $g_iAimGold[$pMode]) & " [اكسير]:" & StringFormat("%7s", $g_iAimElixir[$pMode]) & " [اكسير الدارك]:" & StringFormat("%5s", $g_iAimDark[$pMode]) & $txtTrophies & $txtTownhall & " من أجل: " & $g_asModeText[$pMode], $COLOR_SUCCESS, "Lucida Console", 7.5)
 			EndIf
 		EndIf
 	EndIf
@@ -96,7 +96,7 @@ Func CompareResources($pMode) ;Compares resources and returns true if conditions
 
 		If $g_aiFilterMeetGE[$pMode] = 2 Then
 			If $GPE = False Then Return False
-			;SetLog("[G + E]:" & StringFormat("%7s", $g_iSearchGold + $g_iSearchElixir), $COLOR_SUCCESS, "Lucida Console", 7.5)
+			;SetLog("[ذهب + اكسير]:" & StringFormat("%7s", $g_iSearchGold + $g_iSearchElixir), $COLOR_SUCCESS, "Lucida Console", 7.5)
 		EndIf
 	EndIf
 

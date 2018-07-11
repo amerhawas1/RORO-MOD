@@ -15,7 +15,7 @@
 ; ===============================================================================================================================
 Func PrepareSearch() ;Click attack button and find match button, will break shield
 
-	SetLog("Going to Attack...", $COLOR_INFO)
+	SetLog("الذهاب للهجوم...", $COLOR_INFO)
 
 	ChkAttackCSVConfig()
 
@@ -23,7 +23,7 @@ Func PrepareSearch() ;Click attack button and find match button, will break shie
 
 		If _Sleep($DELAYTREASURY4) Then Return
 		If _CheckPixel($aAttackForTreasury, $g_bCapturePixel, Default, "Is attack for treasury:") Then
-			SetLog("It isn't attack for Treasury :-(", $COLOR_SUCCESS)
+			SetLog("إنه ليس هجومًا على الخزانة :-(", $COLOR_SUCCESS)
 			Return
 		EndIf
 		If _Sleep($DELAYTREASURY4) Then Return
@@ -43,7 +43,7 @@ Func PrepareSearch() ;Click attack button and find match button, will break shie
 		If $j > 15 Then ExitLoop
 	WEnd
 	If $j > 15 Then
-		SetLog("Launch attack Page Fail", $COLOR_ERROR)
+		SetLog("الفشل في الدخول الى نافذة الهجوم", $COLOR_ERROR)
 		AndroidPageError("PrepareSearch")
 		checkMainScreen()
 		$g_bRestart = True
@@ -69,7 +69,7 @@ Func PrepareSearch() ;Click attack button and find match button, will break shie
 	Local $Result = getAttackDisable(346, 182) ; Grab Ocr for TakeABreak check
 
 	If isGemOpen(True) = True Then ; Check for gem window open)
-		SetLog(" Not enough gold to start searching.....", $COLOR_ERROR)
+		SetLog(" لا يوجد ذهب كافي للقيام بالبحث بالهجوم.....", $COLOR_ERROR)
 		Click(585, 252, 1, 0, "#0151") ; Click close gem window "X"
 		If _Sleep($DELAYPREPARESEARCH1) Then Return
 		Click(822, 32, 1, 0, "#0152") ; Click close attack window "X"
