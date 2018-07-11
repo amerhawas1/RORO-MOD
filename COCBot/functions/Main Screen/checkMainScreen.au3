@@ -51,7 +51,7 @@ Func _checkMainScreen($bSetLog = Default, $bBuilderBase = Default) ;Checks if in
 	While _CaptureRegions() And Not _checkMainScreenImage($bLocated, $aPixelToCheck)
 		$i += 1
 		If TestCapture() Then
-			SetLog("Main Screen not Located", $COLOR_ERROR)
+			SetLog("الشاشة الرئيسية غير موجودة", $COLOR_ERROR)
 			ExitLoop
 		EndIf
 		WinGetAndroidHandle()
@@ -94,9 +94,9 @@ Func _checkMainScreen($bSetLog = Default, $bBuilderBase = Default) ;Checks if in
 
 	If $bSetLog Then
 		If $bLocated Then
-			SetLog("Main Screen located", $COLOR_SUCCESS)
+			SetLog("الشاشة الرئيسية", $COLOR_SUCCESS)
 		Else
-			SetLog("Main Screen not located", $COLOR_ERROR)
+			SetLog("لم تم تحديد الشاشة الرئيسية ", $COLOR_ERROR)
 		EndIf
 	EndIf
 

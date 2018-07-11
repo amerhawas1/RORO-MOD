@@ -60,7 +60,7 @@ Func CheckHeroesHealth()
 					$aDisplayTime[$eHeroArcherQueen] = Ceiling(__TimerDiff($g_aHeroesTimerActivation[$eHeroArcherQueen]) / 1000) ; seconds
 				EndIf
 				If (Int($g_iDelayActivateQueen) / 1000) <= $aDisplayTime[$eHeroArcherQueen] Then
-					SetLog("تفعيل قدرة الملكة بعد " & $aDisplayTime[$eHeroArcherQueen] & "'s", $COLOR_INFO)
+					SetLog("تفعيل قدرة الملكة بعد " & $aDisplayTime[$eHeroArcherQueen] & "'ثانية ", $COLOR_INFO)
 					SelectDropTroop($TempQueenSlot) ; Slot11 - RORO-MOD
 					$g_bCheckQueenPower = False ; Reset check power flag
 					$g_aHeroesTimerActivation[$eHeroArcherQueen] = 0 ; Reset Timer
@@ -93,7 +93,7 @@ Func CheckHeroesHealth()
 					$aDisplayTime[$eHeroBarbarianKing] = Ceiling(__TimerDiff($g_aHeroesTimerActivation[$eHeroBarbarianKing]) / 1000) ; seconds
 				EndIf
 				If (Int($g_iDelayActivateKing) / 1000) <= $aDisplayTime[$eHeroBarbarianKing] Then
-					SetLog("تفعيل قدرة الملك بعد " & $aDisplayTime[$eHeroBarbarianKing] & "'s", $COLOR_INFO)
+					SetLog("تفعيل قدرة الملك بعد " & $aDisplayTime[$eHeroBarbarianKing] & "'ثانية", $COLOR_INFO)
 					SelectDropTroop($TempKingSlot) ; Slot11 - RORO-MOD
 					$g_bCheckKingPower = False ; Reset check power flag
 					$g_aHeroesTimerActivation[$eHeroBarbarianKing] = 0 ; Reset Timer
@@ -126,7 +126,7 @@ Func CheckHeroesHealth()
 					$aDisplayTime[$eHeroGrandWarden] = Ceiling(__TimerDiff($g_aHeroesTimerActivation[$eHeroGrandWarden]) / 1000) ; seconds
 				EndIf
 				If (Int($g_iDelayActivateWarden) / 1000) <= $aDisplayTime[$eHeroGrandWarden] Then
-					SetLog("Activating Warden's ability after " & $aDisplayTime[$eHeroGrandWarden] & "'s", $COLOR_INFO)
+					SetLog("تفعيل قدرة الامر الكبير بعد " & $aDisplayTime[$eHeroGrandWarden] & "'ثانية", $COLOR_INFO)
 					SelectDropTroop($TempWardenSlot) ; Slot11 - RORO-MOD
 					$g_bCheckWardenPower = False ; Reset check power flag
 					$g_aHeroesTimerActivation[$eHeroGrandWarden] = 0 ; Reset Timer

@@ -49,7 +49,7 @@ Func waitMainScreen() ;Waits for main screen to popup
 		If ($i > 105) Or ($iCount > 120) Then ExitLoop ; If CheckObstacles forces reset, limit total time to 4 minutes
 
 		If TestCapture() Then
-			Return "Main screen not available"
+			Return "الشاشة الرئيسية غير متوفرة"
 		EndIf
 
 	Next
@@ -63,7 +63,7 @@ Func waitMainScreen() ;Waits for main screen to popup
 	$iCount = 0
 	While 1
 		If Not $g_bRunState Then Return
-		SetLog("Unable to load CoC, attempt to fix it...", $COLOR_ERROR)
+		SetLog("يتعذر تحميل اللعبة..حاول اصلاحها يدويا...", $COLOR_ERROR)
 		If $g_bDebugSetlog Then SetDebugLog("Restart Loop = " & $iCount, $COLOR_DEBUG) ; Debug stuck loop data
 		CloseAndroid("waitMainScreen") ; Android must die!
 		If _Sleep(1000) Then Return
@@ -76,7 +76,7 @@ Func waitMainScreen() ;Waits for main screen to popup
 		CheckObstacles() ; Check for random error windows and close them
 		$iCount += 1
 		If $iCount > 2 Then ; If we can't restart BS after 2 tries, exit the loop
-			SetLog("Stuck trying to Restart " & $g_sAndroidEmulator & "...", $COLOR_ERROR)
+			SetLog("احاول اعادة التشغيل " & $g_sAndroidEmulator & "...", $COLOR_ERROR)
 			SetError(1, 0, 0)
 			Return
 		EndIf
@@ -91,17 +91,17 @@ Func waitMainScreenMini()
 	Local $hTimer = __TimerInit()
 	SetDebugLog("waitMainScreenMini")
 	If TestCapture() = False Then getBSPos() ; Update Android Window Positions
-	SetLog("Waiting for Main Screen after " & $g_sAndroidEmulator & " restart", $COLOR_INFO)
+	SetLog("في انتظار الشاشة الرئيسية بعد " & $g_sAndroidEmulator & " اعادة التشغيل", $COLOR_INFO)
 
 	; Auto Dock, Hide Emulator & Bot - RORO-MOD
 	If $g_iChkAutoDock Then
 		If Not $g_bAndroidEmbedded Then
-			SetLog("Bot Auto Dock to Emulator", $COLOR_INFO)
+			SetLog("دمج البوت مع المحاكي", $COLOR_INFO)
 			btnEmbed()
 		EndIf
 	ElseIf $g_iChkAutoHideEmulator Then
 		If Not $g_bIsHidden Then
-			SetLog("Bot Auto Hide Emulator", $COLOR_INFO)
+			SetLog("اخفاء المحاكي والبوت يعمل", $COLOR_INFO)
 			btnHide()
 			$g_bIsHidden = True
 		EndIf
@@ -117,13 +117,13 @@ Func waitMainScreenMini()
 			If Not TestCapture() And _Sleep(1000) Then Return
 			If CheckObstacles() Then $i = 0 ;See if there is anything in the way of mainscreen
 		Else
-			SetLog("CoC main window took " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds", $COLOR_SUCCESS)
+			SetLog("فتح اللعبة خلال " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثواني ", $COLOR_SUCCESS)
 			Return
 		EndIf
 		_StatusUpdateTime($hTimer, "Main Screen")
 		If ($i > 60) Or ($iCount > 80) Then ExitLoop ; If CheckObstacles forces reset, limit total time to 6 minute before Force restart BS
 		If TestCapture() Then
-			Return "Main screen not available"
+			Return "الشاشة الرئيسية غير متوفرة"
 		EndIf
 	Next
 	Return SetError(1, 0, -1)

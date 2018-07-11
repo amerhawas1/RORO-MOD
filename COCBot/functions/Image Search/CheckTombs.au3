@@ -60,13 +60,13 @@ Func CheckTombs()
 			Next
 		EndIf
 		If $bRemoved Then
-			SetLog("Tombs removed!", $COLOR_DEBUG1)
+			SetLog("ازالة المقابر", $COLOR_DEBUG1)
 			$g_abNotNeedAllTime[1] = False
 		Else
-			SetLog("Tombs not removed, please do manually!", $COLOR_WARNING)
+			SetLog("المقابر لم تتم إزالتها ، يرجى القيام يدويا!", $COLOR_WARNING)
 		EndIf
 	Else
-		SetLog("No Tombs Found!", $COLOR_SUCCESS)
+		SetLog("لا توجد مقابر!", $COLOR_SUCCESS)
 		$g_abNotNeedAllTime[1] = False
 	EndIf
 
@@ -115,7 +115,7 @@ Func CleanYard()
 						If getBuilderCount() = False Then Return ; update builder data, return if problem
 						If _Sleep($DELAYRESPOND) Then Return
 						If $g_iFreeBuilderCount = 0 Then
-							SetLog("No More Builders available")
+							SetLog("لا يوجد عامل متاح للقيام بهذا الامر ")
 							If _Sleep(2000) Then Return
 							ExitLoop (2)
 						EndIf
@@ -166,24 +166,24 @@ Func CleanYard()
 						If getBuilderCount() = False Then Return ; update builder data, return if problem
 						If _Sleep($DELAYRESPOND) Then Return
 						If $g_iFreeBuilderCount = 0 Then
-							SetLog("No More Builders available")
+							SetLog("لا يوجد عامل متاح للقيام بهذا الامر")
 							If _Sleep(2000) Then Return
 							ExitLoop
 						EndIf
 					EndIf
 				Next
 			EndIf
-			SetLog("GemBox removed!", $COLOR_DEBUG1)
+			SetLog("ازالة صندوق الجواهر !", $COLOR_DEBUG1)
 		Else
-			SetLog("No GemBox Found!", $COLOR_SUCCESS)
+			SetLog("لا يوجد صندوق جواهر للإزالة!", $COLOR_SUCCESS)
 		EndIf
 	EndIf
 
 	If $bNoBuilders Then
-		SetLog("No Builders available to remove Obstacles!")
+		SetLog("لا يوجد عامل متاح لإزالو العقبات!")
 	Else
-		If $Locate = 0 And $g_bChkCleanYard And Number($g_aiCurrentLoot[$eLootElixir]) > 50000 Then SetLog("No Obstacles found, Yard is clean!", $COLOR_SUCCESS)
-		If $g_bDebugSetlog Then SetDebugLog("Time: " & Round(__TimerDiff($hObstaclesTimer) / 1000, 2) & "'s", $COLOR_SUCCESS)
+		If $Locate = 0 And $g_bChkCleanYard And Number($g_aiCurrentLoot[$eLootElixir]) > 50000 Then SetLog("لا توجد عقبات كل شيء نظيف!", $COLOR_SUCCESS)
+		If $g_bDebugSetlog Then SetDebugLog("الوقت: " & Round(__TimerDiff($hObstaclesTimer) / 1000, 2) & "'  ", $COLOR_SUCCESS)
 	EndIf
 	UpdateStats()
 	ClickP($aAway, 1, 300, "#0329") ;Click Away

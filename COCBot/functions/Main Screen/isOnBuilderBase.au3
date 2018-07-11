@@ -17,7 +17,7 @@ Func isOnBuilderBase($bNeedCaptureRegion = False)
 	_Sleep($DELAYISBUILDERBASE)
 
 	If _CheckPixel($aIsOnBuilderBase, $bNeedCaptureRegion) Then
-		If $g_bDebugSetlog Then SetDebugLog("Builder Base Builder detected", $COLOR_DEBUG)
+		If $g_bDebugSetlog Then SetDebugLog("تم اكتشاف عن قرية ليلية", $COLOR_DEBUG)
 		Return True
 	Else
 		Return False

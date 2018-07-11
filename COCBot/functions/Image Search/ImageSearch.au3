@@ -70,7 +70,7 @@ Func _ImageSearchArea($findImage, $resultPosition, $x1, $y1, $right, $bottom, By
 	If IsArray($result) Then
 		If $result[0] = "0" Then Return 0
 	Else
-		SetLog("Error: Image Search not working...", $COLOR_ERROR)
+		SetLog("خطأ: لا يعمل البحث عن الصور...", $COLOR_ERROR)
 		Return 1
 	EndIf
 

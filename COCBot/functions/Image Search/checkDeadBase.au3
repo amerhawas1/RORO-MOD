@@ -399,7 +399,7 @@ Func checkDeadBaseFolder($directory, $executeOldCode = "checkDeadBaseNew()", $ex
 	Local $wasDebugsetlog = $g_bDebugSetlog
 	$g_bDebugSetlog = True
 
-	SetLog("Checking " & $aFiles[0] & " village screenshots for dead base...")
+	SetLog("التحقق " & $aFiles[0] & " لقطات من القرية لقاعدة ميتة...")
 
 	DirCreate($directory & "\better")
 	DirCreate($directory & "\worse")
@@ -479,7 +479,7 @@ Func checkDeadBaseFolder($directory, $executeOldCode = "checkDeadBaseNew()", $ex
 
 	Next
 
-	SetLog("Checking dead base completed")
+	SetLog("التحقق من القرية المهجورة تم")
 	SetLog("Super new image detection BETTER : " & $iBetter)
 	SetLog("Super new image detection WORSE  : " & $iWorse)
 	SetLog("Super new image detection SAME   : " & $iSame)

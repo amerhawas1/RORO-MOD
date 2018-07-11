@@ -167,14 +167,14 @@ Func AttackReport()
 	If _ColorCheck(_GetPixelColor($aWonOneStarAtkRprt[0], $aWonOneStarAtkRprt[1], True), Hex($aWonOneStarAtkRprt[2], 6), $aWonOneStarAtkRprt[3]) Then $starsearned += 1
 	If _ColorCheck(_GetPixelColor($aWonTwoStarAtkRprt[0], $aWonTwoStarAtkRprt[1], True), Hex($aWonTwoStarAtkRprt[2], 6), $aWonTwoStarAtkRprt[3]) Then $starsearned += 1
 	If _ColorCheck(_GetPixelColor($aWonThreeStarAtkRprt[0], $aWonThreeStarAtkRprt[1], True), Hex($aWonThreeStarAtkRprt[2], 6), $aWonThreeStarAtkRprt[3]) Then $starsearned += 1
-	SetLog("Stars earned: " & $starsearned)
+	SetLog("النجوم  التي تم الفوز بها: " & $starsearned)
 
 	If $starsearned >= 1 Then
-		$eWinlose = "VICTORY"
+		$eWinlose = "الفوز وسحق الخصم والحصول على الموارد المطلوبة"
 	Else
-		$eWinlose = "DEFEAT"
+		$eWinlose = "لقد خسرنا ايها الزعيم نعتذر عن عدم قدرتنا على سرقة المطلوب"
 	EndIf
-	SetLog("RESULT: " & $eWinlose)
+	SetLog("نتيجية هجومنا ايها الزعيم : " & $eWinlose)
 	Local $AtkLogTxt
 	$AtkLogTxt = "  " & String($g_iCurAccount + 1) & "|" & _NowTime(4) & "|"
 	$AtkLogTxt &= StringFormat("%4d", $g_aiCurrentLoot[$eLootTrophy]) & "|"

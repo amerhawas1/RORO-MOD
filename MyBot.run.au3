@@ -68,7 +68,7 @@ InitializeBot()
 MainLoop(CheckPrerequisites())
 
 Func UpdateBotTitle()
-	Local $sTitle = "My Bot " & $g_sBotVersion & " - " & " AiO++ MOD " & $g_sModversion & " -"
+	Local $sTitle = "My Bot " & $g_sBotVersion & " - " & " RORO-MOD " & $g_sModversion & " -"
 	Local $sConsoleTitle ; Console title has also Android Emulator Name
 	If $g_sBotTitle = "" Then
 		$g_sBotTitle = $sTitle
@@ -109,7 +109,7 @@ Func InitializeBot()
 
 	SetupProfileFolder() ; Setup profile folders
 
-	SetLogCentered(" BOT LOG ") ; Initial text for log
+	SetLogCentered(" سجل البوت ") ; Initial text for log
 
 	SetSwitchAccLog(_PadStringCenter(" SwitchAcc LOG ", 25, "="), $COLOR_BLACK, "Lucida Console", 8, False)
 
@@ -874,7 +874,7 @@ Func _Idle() ;Sequence that runs until Full Army
 		;Execute Notify Pending Actions
 		NotifyPendingActions()
 		If _Sleep($DELAYIDLE1) Then Return
-		If $g_iCommandStop = -1 Then SetLog("====== Waiting for full army ======", $COLOR_SUCCESS)
+		If $g_iCommandStop = -1 Then SetLog("====== الانتظار حتى يكون الجيش كامل ======", $COLOR_SUCCESS)
 		Local $hTimer = __TimerInit()
 		Local $iReHere = 0
 
@@ -1065,7 +1065,7 @@ EndFunc   ;==>AttackMain
 
 Func Attack() ;Selects which algorithm
 	$g_bAttackActive = True
-	SetLog(" ====== Start Attack ====== ", $COLOR_SUCCESS)
+	SetLog(" ====== بداية الهجوم ====== ", $COLOR_SUCCESS)
 	If ($g_iMatchMode = $DB And $g_aiAttackAlgorithm[$DB] = 1) Or ($g_iMatchMode = $LB And $g_aiAttackAlgorithm[$LB] = 1) Then
 		If $g_bDebugSetlog Then SetDebugLog("start scripted attack", $COLOR_ERROR)
 		Algorithm_AttackCSV()
