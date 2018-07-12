@@ -38,7 +38,7 @@ Func CheckOverviewFullArmy($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 			If $j > 15 Then ExitLoop
 		WEnd
 		If $j > 15 Then
-			SetLog("Training Overview Window didn't open", $COLOR_ERROR)
+			SetLog("لا يمكن فتح نافذة التدريب", $COLOR_ERROR)
 			Return
 		EndIf
 	EndIf
@@ -50,13 +50,13 @@ Func CheckOverviewFullArmy($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 		$Pixel = _CheckPixel($aIsCampFull, True) And _ColorCheck(_GetPixelColor(128, 176, True), Hex(0x90C030, 6), 20)
 	EndIf
 
-	If $g_bDebugSetlogTrain Then SetLog("Checking Overview for full army [!] " & $Pixel & ", " & _GetPixelColor(128, 176, True), $COLOR_DEBUG)
+	If $g_bDebugSetlogTrain Then SetLog("التحقق من الجيش بشكل كامل [!] " & $Pixel & ", " & _GetPixelColor(128, 176, True), $COLOR_DEBUG)
 	If $Pixel Then
 		$g_bFullArmy = True
 	EndIf
 
 	$g_bCanRequestCC = _ColorCheck(_GetPixelColor($aRequestTroopsAO[0], $aRequestTroopsAO[1] + 20, True), Hex($aRequestTroopsAO[3], 6), $aRequestTroopsAO[5]) And _ColorCheck(_GetPixelColor($aRequestTroopsAO[0], $aRequestTroopsAO[1], True), Hex($aRequestTroopsAO[4], 6), $aRequestTroopsAO[5])
-	If $g_bDebugSetlog Then SetDebugLog("Can Request CC: " & $g_bCanRequestCC, $COLOR_DEBUG)
+	If $g_bDebugSetlog Then SetDebugLog("يمكن طلب الدعم: " & $g_bCanRequestCC, $COLOR_DEBUG)
 
 	If $bCloseArmyWindow Then
 		ClickP($aAway, 1, 0, "#0348") ;Click Away

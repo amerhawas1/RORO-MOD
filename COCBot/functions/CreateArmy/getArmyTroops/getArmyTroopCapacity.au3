@@ -73,7 +73,7 @@ Func getArmyTroopCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False, $
 		If $g_iTotalCampSpace = 0 Then $g_iTotalCampSpace = $tmpTotalCamp
 		If $g_bDebugSetlogTrain Then SetLog("$g_CurrentCampUtilization = " & $g_CurrentCampUtilization & ", $g_iTotalCampSpace = " & $g_iTotalCampSpace, $COLOR_DEBUG)
 	Else
-		SetLog("Army size read error, Troop numbers may not train correctly", $COLOR_ERROR) ; log if there is read error
+		SetLog("الجيش حجم قراءة الخطأ ، قد لا تدرب أعداد القوات بشكل صحيح", $COLOR_ERROR) ; log if there is read error
 		$g_CurrentCampUtilization = 0
 		CheckOverviewFullArmy()
 	EndIf
@@ -83,14 +83,14 @@ Func getArmyTroopCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False, $
 			Local $proposedTotalCamp = $tmpTotalCamp
 			If $g_iTotalCampSpace > $tmpTotalCamp Then $proposedTotalCamp = $g_iTotalCampSpace
 			$sInputbox = InputBox("Question", _
-					"Enter your total Army Camp capacity." & @CRLF & @CRLF & _
-					"Please check it matches with total Army Camp capacity" & @CRLF & _
+					"أدخل السعة الإجمالية للجيش." & @CRLF & @CRLF & _
+					"يرجى التحقق من ذلك مباريات مع إجمالي سعة معسكر الجيش" & @CRLF & _
 					"you see in Army Overview right now in Android Window:" & @CRLF & _
 					$g_sAndroidTitle & @CRLF & @CRLF & _
 					"(This window closes in 2 Minutes with value of " & $proposedTotalCamp & ")", $proposedTotalCamp, "", 330, 220, Default, Default, 120, $g_hFrmBot)
 			Local $error = @error
 			If $error = 1 Then
-				SetLog("Army Camp User input cancelled, still using " & $g_iTotalCampSpace, $COLOR_ACTION)
+				SetLog("تم إلغاء إدخال User Camp Camp ، ولا يزال يستخدم " & $g_iTotalCampSpace, $COLOR_ACTION)
 			Else
 				If $error = 2 Then
 					; Cancelled, using proposed value
@@ -101,10 +101,10 @@ Func getArmyTroopCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False, $
 				If $error = 0 Then
 					$g_iTotalCampForcedValue = $g_iTotalCampSpace
 					$g_bTotalCampForced = True
-					SetLog("Army Camp User input = " & $g_iTotalCampSpace, $COLOR_INFO)
+					SetLog("دخول معسكر الجيش = " & $g_iTotalCampSpace, $COLOR_INFO)
 				Else
 					; timeout
-					SetLog("Army Camp proposed value = " & $g_iTotalCampSpace, $COLOR_ACTION)
+					SetLog("معسكر الجيش المقترح القيمة = " & $g_iTotalCampSpace, $COLOR_ACTION)
 				EndIf
 			EndIf
 		Else
@@ -116,10 +116,10 @@ Func getArmyTroopCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False, $
 	If $g_bTotalCampForced = True Then $g_iTotalCampSpace = Number($g_iTotalCampForcedValue)
 
 	If $g_iTotalCampSpace > 0 Then
-		If $bSetLog Then SetLog("Total Army Camp Capacity: " & $g_CurrentCampUtilization & "/" & $g_iTotalCampSpace & " (" & Int($g_CurrentCampUtilization / $g_iTotalCampSpace * 100) & "%)")
+		If $bSetLog Then SetLog("مجموع معسكر الجيش القدرات: " & $g_CurrentCampUtilization & "/" & $g_iTotalCampSpace & " (" & Int($g_CurrentCampUtilization / $g_iTotalCampSpace * 100) & "%)")
 		$g_iArmyCapacity = Int($g_CurrentCampUtilization / $g_iTotalCampSpace * 100)
 	Else
-		If $bSetLog Then SetLog("Total Army Camp Capacity: " & $g_CurrentCampUtilization & "/" & $g_iTotalCampSpace)
+		If $bSetLog Then SetLog("مجموع معسكر الجيش القدرات: " & $g_CurrentCampUtilization & "/" & $g_iTotalCampSpace)
 		$g_iArmyCapacity = 0
 	EndIf
 

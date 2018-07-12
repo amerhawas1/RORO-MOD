@@ -23,7 +23,7 @@ EndFunc
 Func _checkArmyCamp($bOpenArmyWindow, $bCloseArmyWindow, $bGetHeroesTime, $bSetLog)
 	If $g_bDebugFuncTime Then StopWatchStart("checkArmyCamp")
 
-	If $g_bDebugSetlogTrain Then SetLog("Begin checkArmyCamp:", $COLOR_DEBUG1)
+	If $g_bDebugSetlogTrain Then SetLog("بداية checkArmyCamp:", $COLOR_DEBUG1)
 
 	If $g_bDebugFuncTime Then StopWatchStart("IsTrainPage/openArmyOverview")
 	If Not $bOpenArmyWindow And Not IsTrainPage() Then ; check for train page
@@ -102,7 +102,7 @@ Func _checkArmyCamp($bOpenArmyWindow, $bCloseArmyWindow, $bGetHeroesTime, $bSetL
 		If _Sleep($DELAYCHECKARMYCAMP4) Then Return
 	EndIf
 
-	If $g_bDebugSetlogTrain Then SetLog("End checkArmyCamp: canRequestCC= " & $g_bCanRequestCC & ", fullArmy= " & $g_bFullArmy, $COLOR_DEBUG)
+	If $g_bDebugSetlogTrain Then SetLog("انهاء checkArmyCamp: canRequestCC= " & $g_bCanRequestCC & ", الجيش كامل = " & $g_bFullArmy, $COLOR_DEBUG)
 
 	If $g_bDebugFuncTime Then StopWatchStopLog()
 	Return $HeroesRegenTime
@@ -162,11 +162,11 @@ Func DeleteExcessTroops()
 		Click(670, 485 + $g_iMidOffsetY) ;  Green button Edit Army
 	EndIf
 
-	SetLog("Troops in excess!...")
+	SetLog("القوات صحيحة!...")
 	If $g_bDebugSetlogTrain Then SetLog("Start-Loop Regular Troops Only To Donate ")
 	For $i = 0 To $eTroopCount - 1
 		If IsTroopToDonateOnly($i) Then ; Will delete ONLY the Excess quantity of troop for donations , the rest is to use in Attack
-			If $g_bDebugSetlogTrain Then SetLog("Troop :" & $g_asTroopNames[$i])
+			If $g_bDebugSetlogTrain Then SetLog("القوات :" & $g_asTroopNames[$i])
 			If ($g_aiCurrentTroops[$i] * -1) > $g_aiArmyCompTroops[$i] Then ; verify if the exist excess of troops
 
 				$Delete = ($g_aiCurrentTroops[$i] * -1) - $g_aiArmyCompTroops[$i] ; existent troops - troops selected in GUI
@@ -177,14 +177,14 @@ Func DeleteExcessTroops()
 				If _Sleep(250) Then Return
 				If _ColorCheck(_GetPixelColor(170 + (62 * $SlotTemp), 235 + $g_iMidOffsetY, True), Hex(0xD40003, 6), 10) Then ; Verify if existe the RED [-] button
 					Click(170 + (62 * $SlotTemp), 235 + $g_iMidOffsetY, $Delete, 300)
-					SetLog("~Deleted " & $Delete & " " & $g_asTroopNames[$i], $COLOR_ERROR)
+					SetLog("~ازالة " & $Delete & " " & $g_asTroopNames[$i], $COLOR_ERROR)
 					$g_aiCurrentTroops[$i] += $Delete ; Remove From $CurTroop the deleted Troop quantity
 				EndIf
 			EndIf
 		EndIf
 	Next
 
-	If $g_bDebugSetlogTrain Then SetLog("Start-Loop Dark Troops Only To Donate ")
+	If $g_bDebugSetlogTrain Then SetLog("بدء حلقة القوات المظلمة فقط للتبرع ")
 
 	If _ColorCheck(_GetPixelColor(674, 436 + $g_iMidOffsetY, True), Hex(0x60B010, 6), 5) Then
 		Click(674, 436 + $g_iMidOffsetY) ; click CONFIRM EDIT

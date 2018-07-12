@@ -17,7 +17,7 @@
 Func TrainRevamp()
 
 	If Not $g_bTrainEnabled Then ; check for training disabled in halt mode
-		If $g_bDebugSetlogTrain Then SetLog("Halt mode - training disabled", $COLOR_DEBUG)
+		If $g_bDebugSetlogTrain Then SetLog("وضع وقف - تعطيل التدريب", $COLOR_DEBUG)
 		Return
 	EndIf
 
@@ -26,7 +26,7 @@ Func TrainRevamp()
 
 	;Test for Train/Donate Only and Fullarmy
 	If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) And $g_bFullArmy Then
-		SetLog("You are in halt attack mode and your Army is prepared!", $COLOR_DEBUG) ;Debug
+		SetLog("كنت في وضع الهجوم وقف ويتم إعداد الجيش الخاص بك!", $COLOR_DEBUG) ;Debug
 		If $g_bFirstStart Then $g_bFirstStart = False
 		Return
 	EndIf
@@ -37,9 +37,9 @@ Func TrainRevamp()
 		Return
 	EndIf
 
-	If $g_bDebugSetlogTrain Then SetLog(" - Initial Quick train Function")
+	If $g_bDebugSetlogTrain Then SetLog(" - وظيفة القطار السريع الأولية")
 
-	If $g_bDebugSetlogTrain Then SetLog(" - Line Open Army Window")
+	If $g_bDebugSetlogTrain Then SetLog(" - خط فتح نافذة الجيش")
 
 	CheckIfArmyIsReady()
 
@@ -55,9 +55,9 @@ Func TrainRevamp()
 
 	If $g_bIsFullArmywithHeroesAndSpells Or ($g_CurrentCampUtilization = 0 And $g_bFirstStart) Then
 
-		If $g_bIsFullArmywithHeroesAndSpells Then SetLog(" - Your Army is Full, let's make troops before Attack!", $COLOR_INFO)
+		If $g_bIsFullArmywithHeroesAndSpells Then SetLog(" - الجيش الخاص بك ممتلئ ، دعونا نجعل القوات قبل الهجوم!", $COLOR_INFO)
 		If ($g_CurrentCampUtilization = 0 And $g_bFirstStart) Then
-			SetLog(" - Your Army is Empty, let's make troops before Attack!", $COLOR_ACTION1)
+			SetLog(" - الجيش الخاص بك هو فارغ ، دعونا جعل القوات قبل الهجوم!", $COLOR_ACTION1)
 			SetLog(" - Go to Train Army Tab and select your Quick Army position!", $COLOR_ACTION1)
 		EndIf
 
@@ -88,7 +88,7 @@ Func TrainRevamp()
 
 	ClickP($aAway, 2, 0, "#0346") ;Click Away
 	If _Sleep(1000) Then Return ; Delay AFTER the click Away Prevents lots of coc restarts
-	SetLog("Army Window Closed", $COLOR_INFO)
+	SetLog("نافذة الجيش مغلقة", $COLOR_INFO)
 
 	EndGainCost("Train")
 
@@ -164,7 +164,7 @@ Func TrainRevampOldStyle()
 
 		;Test for Train/Donate Only and Fullarmy
 		If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) And $g_bFullArmy Then
-			SetLog("You are in halt attack mode and your Army is prepared!", $COLOR_DEBUG) ;Debug
+			SetLog("كنت في وضع الهجوم وقف ويتم إعداد الجيش الخاص بك!", $COLOR_DEBUG) ;Debug
 			If $g_bFirstStart Then $g_bFirstStart = False
 			Return
 		EndIf
@@ -289,10 +289,10 @@ Func CheckIfArmyIsReady()
 
 	If $g_bIsFullArmywithHeroesAndSpells Then
 		If (($g_bNotifyPBEnable Or $g_bNotifyTGEnable) And $g_bNotifyAlertCampFull) Then PushMsg("CampFull")
-		SetLog("Chief, is your Army ready for battle? Yes, it is!", $COLOR_SUCCESS)
+		SetLog("الرئيس ، هل جيشك جاهز للمعركة؟ نعم إنه كذلك!", $COLOR_SUCCESS)
 	Else
-		SetLog("Chief, is your Army ready for the battle? No, not yet!", $COLOR_ACTION)
-		If $sLogText <> "" Then SetLog(" -" & $sLogText & " are not Ready!", $COLOR_ACTION)
+		SetLog("الرئيس ، هل جيشك جاهز للمعركة؟ لا ليس بعد!", $COLOR_ACTION)
+		If $sLogText <> "" Then SetLog(" -" & $sLogText & " ليست جاهزة!", $COLOR_ACTION)
 	EndIf
 
 	; Force to Request CC troops or Spells
@@ -362,7 +362,7 @@ Func IsFullClanCastleSpells($bReturnOnly = False)
 	If $g_iCurrentCCSpells = $g_iTotalCCSpells And $g_iTotalCCSpells > 0 Then $bCCSpellFull = True
 
 	If $bCCSpellFull And (($g_abAttackTypeEnable[$DB] And $g_abSearchCastleSpellsWaitEnable[$DB]) Or ($g_abAttackTypeEnable[$LB] And $g_abSearchCastleSpellsWaitEnable[$LB])) Then
-		If $g_bDebugSetlogTrain Then SetLog("Getting current available spell in Clan Castle.")
+		If $g_bDebugSetlogTrain Then SetLog("الحصول على موجة المتاحة الحالية في قلعة كلان.")
 		; Imgloc Detection
 		If $g_iTotalCCSpells >= 1 Then $sCurCCSpell1 = GetCurCCSpell(1)
 		If $g_iTotalCCSpells >= 2 Then $sCurCCSpell2 = GetCurCCSpell(2)
@@ -370,7 +370,7 @@ Func IsFullClanCastleSpells($bReturnOnly = False)
 		; If the OCR gives > 0 and the Imgloc empty will proceeds with an error!
 		If $sCurCCSpell1 = "" And $g_iCurrentCCSpells > 0 Then
 			If Not $bReturnOnly Then
-				SetLog("Failed to get current available spell in Clan Castle", $COLOR_ERROR)
+				SetLog("فشل الحصول على الإملاء الحالي المتاح في قلعة كلان", $COLOR_ERROR)
 				Return False
 			Else
 				Return ""

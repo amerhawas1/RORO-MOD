@@ -66,10 +66,10 @@ Func getArmySpellCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False, $
 			$g_iTotalSpells = $g_iTotalSpellValue
 		EndIf
 
-		If $bSetLog Then SetLog("Total Spell Factory Capacity: " & $g_iCurrentSpells & "/" & $g_iTotalSpells)
+		If $bSetLog Then SetLog("مجموع العناصر السحرية: " & $g_iCurrentSpells & "/" & $g_iTotalSpells)
 	EndIf
 
-	If $g_iTotalSpells <> $g_iTotalSpellValue And $bSetLog Then SetLog("Warning: Total Spell Capacity is not the same as in GUI", $COLOR_WARNING)
+	If $g_iTotalSpells <> $g_iTotalSpellValue And $bSetLog Then SetLog("غلط : العناصر السحرية بالجيش ليست نفسها على اعدادات البوت ", $COLOR_WARNING)
 
 	If $bCloseArmyWindow Then
 		ClickP($aAway, 1, 0, "#0000") ;Click Away

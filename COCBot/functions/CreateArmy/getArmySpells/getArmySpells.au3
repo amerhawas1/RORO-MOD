@@ -52,7 +52,7 @@ Func getArmySpells($bOpenArmyWindow = False, $bCloseArmyWindow = False, $bCheckW
 			$g_aiCurrentSpells[$iSpellIndex] = Number(getBarracksNewTroopQuantity(Slot($aSpellCoords[0], $aSpellCoords[1]), 341, $bNeedCapture)) ; Get The Quantity of the Spell, Slot() Does return the exact spot to read the Number from
 
 			$sSpellName = $g_aiCurrentSpells[$iSpellIndex] >= 2 ? $g_asSpellNames[$iSpellIndex] & " Spells" : $g_asSpellNames[$iSpellIndex] & " Spell" ; Select the right Spell Name, If more than one then use Spells at the end
-			If $bSetLog Then SetLog(" - " & $g_aiCurrentSpells[$iSpellIndex] & " " & $sSpellName & " Brewed", $COLOR_SUCCESS) ; Log What Spell is available and How many
+			If $bSetLog Then SetLog(" - " & $g_aiCurrentSpells[$iSpellIndex] & " " & $sSpellName & " مصنوع من العناصر السحرية", $COLOR_SUCCESS) ; Log What Spell is available and How many
 		Next
 	EndIf
 

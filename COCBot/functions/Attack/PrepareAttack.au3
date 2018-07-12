@@ -41,9 +41,9 @@ Func PrepareAttack($pMatchMode, $Remaining = False) ;Assigns troops
 	Local $troopsnumber = 0
 	If $g_bDebugSetlog Then SetDebugLog("اعداد الهجوم ل " & $pMatchMode & " " & $g_asModeText[$pMatchMode], $COLOR_DEBUG)
 	If $Remaining Then
-		SetLog("التحقق من بقاء القوات غير المستخدمة ل: " & $g_asModeText[$pMatchMode], $COLOR_INFO)
+		SetLog("التحقق من القوات الغير مستخدمة ", $COLOR_INFO)
 	Else
-		SetLog("بدء الهجوم ل: " & $g_asModeText[$pMatchMode], $COLOR_ERROR)
+		SetLog("الى الهجوم الان: " , $COLOR_ERROR)
 	EndIf
 
 	; JUNE 2018 @PROMAC

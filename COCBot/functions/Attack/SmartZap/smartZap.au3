@@ -118,7 +118,7 @@ Func smartZap($minDE = -1)
 		If $g_bSmartZapEnable = True And $g_bNoobZap = False Then
 			SetLog("====== لقد قمت بتفعيل ميزة الصواعق ======", $COLOR_ERROR)
 		ElseIf $g_bNoobZap = True Then
-			SetLog("====== لقد قمت بتفعيل ميزة الزلزال ======", $COLOR_ERROR)
+			SetLog("====== لقد قمت بتفعيل ميزة الصواعق ======", $COLOR_ERROR)
 		EndIf
 	EndIf
 	; Use UI Setting if no Min DE is specified

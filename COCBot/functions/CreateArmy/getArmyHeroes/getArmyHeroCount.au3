@@ -44,13 +44,13 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 		If $sResult <> "" Then ; we found something, figure out what?
 			Select
 				Case StringInStr($sResult, "king", $STR_NOCASESENSEBASIC)
-					If $bSetLog Then SetLog(" - Barbarian King Available", $COLOR_SUCCESS)
+					If $bSetLog Then SetLog(" - الملك متاح", $COLOR_SUCCESS)
 					$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroKing)
 				Case StringInStr($sResult, "queen", $STR_NOCASESENSEBASIC)
-					If $bSetLog Then SetLog(" - Archer Queen Available", $COLOR_SUCCESS)
+					If $bSetLog Then SetLog(" - الملكة متاحة", $COLOR_SUCCESS)
 					$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroQueen)
 				Case StringInStr($sResult, "warden", $STR_NOCASESENSEBASIC)
-					If $bSetLog Then SetLog(" - Grand Warden Available", $COLOR_SUCCESS)
+					If $bSetLog Then SetLog(" - الامر الكبير متاح", $COLOR_SUCCESS)
 					$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroWarden)
 				Case StringInStr($sResult, "heal", $STR_NOCASESENSEBASIC)
 					If $g_bDebugSetlogTrain Or $iDebugArmyHeroCount = 1 Then
@@ -76,7 +76,7 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 								If $g_iSearchNotWaitHeroesEnable = 1 Then
 									$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroKing)
 								Else
-									SetLog("Warning: King Upgrading & Wait enabled, Disable Wait for King or may never attack!", $COLOR_ERROR)
+									SetLog("تحزير ايها الزعيم : الملك بالتطوير يرجى الغاء ميزة انتظار الملوك في البوت !", $COLOR_ERROR)
 								EndIf
 								_GUI_Value_STATE("SHOW", $groupKingSleeping) ; Show king sleeping icon
 							EndIf
@@ -88,7 +88,7 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 								If $g_iSearchNotWaitHeroesEnable = 1 Then
 									$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroQueen)
 								Else
-									SetLog("Warning: Queen Upgrading & Wait enabled, Disable Wait for Queen or may never attack!", $COLOR_ERROR)
+									SetLog("تحزير ايها الزعيم : الملكة بالتطوير يرجى الغاء ميزة انتظار الملوك في البوت!", $COLOR_ERROR)
 								EndIf
 								_GUI_Value_STATE("SHOW", $groupQueenSleeping) ; Show Queen sleeping icon
 							EndIf
@@ -100,7 +100,7 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 								If $g_iSearchNotWaitHeroesEnable = 1 Then
 									$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroWarden)
 								Else
-									SetLog("Warning: Warden Upgrading & Wait enabled, Disable Wait for Warden or may never attack!", $COLOR_ERROR)
+									SetLog("تحزير ايها الزعيم : الامر الكبير  بالتطوير يرجى الغاء ميزة انتظار الملوك في البوت!", $COLOR_ERROR)
 								EndIf
 								_GUI_Value_STATE("SHOW", $groupWardenSleeping) ; Show Warden sleeping icon
 							EndIf
@@ -115,7 +115,7 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 					If $bSetLog Then SetLog("Hero slot#" & $i + 1 & " bad OCR string returned!", $COLOR_ERROR)
 			EndSelect
 		Else
-			If $bSetLog Then SetLog("Hero slot#" & $i + 1 & " status read problem!", $COLOR_ERROR)
+			If $bSetLog Then SetLog("Hero slot#" & $i + 1 & " حالة قراءة المشكلة!", $COLOR_ERROR)
 		EndIf
 	Next
 
@@ -243,7 +243,7 @@ Func LabGuiDisplay() ; called from main loop to get an early status for indictor
 	; If $g_bAutoLabUpgradeEnable = True Then  ====>>>> TODO : or use this or make a checkbox on GUI
 	; make sure lab is located, if not locate lab
 	If $g_aiLaboratoryPos[0] <= 0 Or $g_aiLaboratoryPos[1] <= 0 Then
-		SetLog("Laboratory Location not found!", $COLOR_ERROR)
+		SetLog("موقع المختبر غير موجود!", $COLOR_ERROR)
 		LocateLab() ; Lab location unknown, so find it.
 		If $g_aiLaboratoryPos[0] = 0 Or $g_aiLaboratoryPos[1] = 0 Then
 			SetLog("Problem locating Laboratory, train laboratory position before proceeding", $COLOR_ERROR)
@@ -265,7 +265,7 @@ Func LabGuiDisplay() ; called from main loop to get an early status for indictor
 		Click($g_iQuickMISX + 200, $g_iQuickMISY + 620)
 		If _Sleep($DELAYLABORATORY1) Then Return ; Wait for window to open
 	Else
-		Setlog("Trouble finding research button, try again...", $COLOR_WARNING)
+		Setlog("مشكلة في العثور على زر البحث ، حاول مرة أخرى...", $COLOR_WARNING)
 		ClickP($aAway, 2, $DELAYLABORATORY4, "#0199")
 		;===========Hide Red  Hide Green  Show Gray==
 		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
@@ -298,7 +298,7 @@ Func LabGuiDisplay() ; called from main loop to get an early status for indictor
 		$g_sLabUpgradeTime = ""
 		Return
 	Else
-		SetLog("Unable to determine Lab Status", $COLOR_INFO)
+		SetLog("غير قادر على تحديد حالة المعمل", $COLOR_INFO)
 		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
 		;========Hide Red  Hide Green  Show Gray======
 		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)

@@ -23,7 +23,7 @@ Func TrainClick($iX, $iY, $iTimes, $iSpeed, $aWatchSpot, $sdebugtxt, $TypeTroops
 	If IsTrainPage() Then
 		If $g_bDebugClick Then
 			Local $txt = _DecodeDebug($sdebugtxt)
-			SetLog("TrainClick(" & $iX & "," & $iX & "," & $iTimes & "," & $iSpeed & "," & $sdebugtxt & $txt & "," & $TypeTroops & ")", $COLOR_DEBUG)
+			SetLog("نقرة التدريب(" & $iX & "," & $iX & "," & $iTimes & "," & $iSpeed & "," & $sdebugtxt & $txt & "," & $TypeTroops & ")", $COLOR_DEBUG)
 		EndIf
 
 		If $iTimes <> 1 Then
@@ -38,7 +38,7 @@ Func TrainClick($iX, $iY, $iTimes, $iSpeed, $aWatchSpot, $sdebugtxt, $TypeTroops
 					Local $sLogText = Default
 					If $g_bDebugSetlogTrain Then $sLogText = "TrainClick " & $iX & "," & $iY & "," & $iTimes
 					If _CheckPixel($aWatchSpot, True, Default, $sLogText) = True Then ; Check to see if barrack full
-						If $g_bDebugClick Or $g_bDebugSetlogTrain Then SetLog("Camp is FULL after " & $i & " clicks", $COLOR_DEBUG)
+						If $g_bDebugClick Or $g_bDebugSetlogTrain Then SetLog("معسكر ممتلئ بعد " & $i & " نقرات", $COLOR_DEBUG)
 						; Detected the gray [i] and will exit and return
 						ExitLoop
 					EndIf
@@ -54,7 +54,7 @@ Func TrainClick($iX, $iY, $iTimes, $iSpeed, $aWatchSpot, $sdebugtxt, $TypeTroops
 				Local $sLogText = Default
 				If $g_bDebugSetlogTrain Then $sLogText = "TrainClick " & $iX & "," & $iY & "," & $iTimes
 				If _CheckPixel($aWatchSpot, True, Default, $sLogText) = True Then ; Check to see if barrack full
-					If $g_bDebugClick Or $g_bDebugSetlogTrain Then SetLog("Camp is full", $COLOR_DEBUG)
+					If $g_bDebugClick Or $g_bDebugSetlogTrain Then SetLog("المعسكر ممتلئ", $COLOR_DEBUG)
 					Return ; Check to see if barrack full
 				EndIf
 				If Not $g_bUseRandomClick Then
@@ -69,9 +69,9 @@ Func TrainClick($iX, $iY, $iTimes, $iSpeed, $aWatchSpot, $sdebugtxt, $TypeTroops
 			Local $sLogText = Default
 			If $g_bDebugSetlogTrain Then $sLogText = "TrainClick " & $iX & "," & $iY & "," & $iTimes
 			If isProblemAffect(True) Then checkMainScreen(False) ; Check for BS/CoC errors
-			If $g_bDebugSetlogTrain Then SetLog("Full Check=" & _GetPixelColor($aWatchSpot[0], $aWatchSpot[1], False), $COLOR_DEBUG)
+			If $g_bDebugSetlogTrain Then SetLog("تحقق كامل =" & _GetPixelColor($aWatchSpot[0], $aWatchSpot[1], False), $COLOR_DEBUG)
 			If _CheckPixel($aWatchSpot, True, Default, $sLogText) = True Then
-				If $g_bDebugClick Or $g_bDebugSetlogTrain Then SetLog("Camp is FULL", $COLOR_DEBUG)
+				If $g_bDebugClick Or $g_bDebugSetlogTrain Then SetLog("المعسكر ممتلئ", $COLOR_DEBUG)
 				Return ; Check to see if barrack full
 			EndIf
 			If Not $g_bUseRandomClick Then

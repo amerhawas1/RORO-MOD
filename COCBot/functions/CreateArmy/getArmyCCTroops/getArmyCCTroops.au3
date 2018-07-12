@@ -57,7 +57,7 @@ Func getArmyCCTroops($bOpenArmyWindow = False, $bCloseArmyWindow = False, $bChec
 			EndIf
 
 			$sTroopName = $g_aiCurrentCCTroops[$iTroopIndex] >= 2 ? $g_asTroopNamesPlural[$iTroopIndex] : $g_asTroopNames[$iTroopIndex] ; Select the right Troop Name, If more than one then use the Plural
-			SetLog("- " & $g_aiCurrentCCTroops[$iTroopIndex] & "x " & $sTroopName & " (Clan Castle)") ; Log What Troop is available and How many
+			SetLog("- " & $g_aiCurrentCCTroops[$iTroopIndex] & "  " & $sTroopName & " (Clan Castle)") ; Log What Troop is available and How many
 		Next
 	EndIf
 

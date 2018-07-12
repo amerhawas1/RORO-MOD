@@ -69,10 +69,10 @@ Func getArmyHeroTime($iHeroType, $bOpenArmyWindow = False, $bCloseArmyWindow = F
 
 		If $sResult <> "" Then
 
-			$aResultHeroes[$index] = ConvertOCRTime($aHeroRemainData[$index][2] & " recover" , $sResult, False) ; update global array
+			$aResultHeroes[$index] = ConvertOCRTime($aHeroRemainData[$index][2] & " استعادة" , $sResult, False) ; update global array
 			If _DateDiff("h", $g_aiHeroBoost[$index], _NowCalc()) < 1 Then $aResultHeroes[$index] /= 4 ; Check if Bot boosted Heroes and boost is still active and if it is then reduce heal time ;)
 
-			SetLog("Remaining " & $aHeroRemainData[$index][2] & " recover time: " & StringFormat("%.2f", $aResultHeroes[$index]), $COLOR_INFO)
+			SetLog("متبقا " & $aHeroRemainData[$index][2] & " استرجاع الوقت: " & StringFormat("%.2f", $aResultHeroes[$index]), $COLOR_INFO)
 
 			If $iHeroType = $aHeroRemainData[$index][3] Then ; if only one hero requested, then set return value and exit loop
 				$iRemainTrainHeroTimer = Number($aResultHeroes[$index])
@@ -85,7 +85,7 @@ Func getArmyHeroTime($iHeroType, $bOpenArmyWindow = False, $bCloseArmyWindow = F
 				; reading all heros, need to find if hero is active/wait to determine how to log message?
 				For $pMatchMode = $DB To $g_iMatchMode - 1 ; check all attack modes
 					If IsSpecialTroopToBeUsed($pMatchMode, $aHeroRemainData[$index][3]) And BitAND($g_aiAttackUseHeroes[$pMatchMode], $g_aiSearchHeroWaitEnable[$pMatchMode]) = $g_aiSearchHeroWaitEnable[$pMatchMode] Then ; check if Hero enabled to wait
-						SetLog("Can not read remaining " & $aHeroRemainData[$index][2] & " train time", $COLOR_ERROR)
+						SetLog("لا يمكن قراءة المتبقية " & $aHeroRemainData[$index][2] & " وقت التدريب ", $COLOR_ERROR)
 						ExitLoop
 					Else
 						If $g_bDebugSetlogTrain Or $g_bDebugSetlog Then SetLog("Bad read remain " & $aHeroRemainData[$index][2] & " recover time, but not enabled", $COLOR_DEBUG)

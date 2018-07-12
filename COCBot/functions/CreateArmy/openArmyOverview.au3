@@ -16,14 +16,14 @@ Func OpenArmyOverview($bCheckMain = True, $sWhereFrom = "Undefined")
 
 	If $bCheckMain Then
 		If Not IsMainPage() Then ; check for main page, avoid random troop drop
-			SetLog("Cannot open Army Overview window", $COLOR_ERROR)
+			SetLog("لا يمكن فتح نافذة الجيش ", $COLOR_ERROR)
 			SetError(1)
 			Return False
 		EndIf
 	EndIf
 
 	If WaitforPixel(28, 505 + $g_iBottomOffsetY, 30, 507 + $g_iBottomOffsetY, Hex(0xEEB145, 6), 5, 10) Then
-		If $g_bDebugSetlogTrain Then SetLog("Click $aArmyTrainButton" & " (Called from " & $sWhereFrom & ")", $COLOR_SUCCESS)
+		If $g_bDebugSetlogTrain Then SetLog("انقر $aArmyTrainButton" & " (Called from " & $sWhereFrom & ")", $COLOR_SUCCESS)
 		If Not $g_bUseRandomClick Then
 			ClickP($aArmyTrainButton, 1, 0, "#0293") ; Button Army Overview
 		Else
@@ -63,12 +63,12 @@ EndFunc   ;==>OpenQuickTrainTab
 Func OpenTrainTab($sTab, $bSetLog = True, $sWhereFrom = "Undefined")
 
 	If Not IsTrainPage() Then
-		SetDebugLog("Error in OpenTrainTab: Cannot find the Army Overview Window", $COLOR_ERROR)
+		SetDebugLog("خطأ في  OpenTrainTab: لا يمكن فتح نافذة الجيش", $COLOR_ERROR)
 		SetError(1)
 		Return False
 	EndIf
 
-	If $bSetLog Or $g_bDebugSetlogTrain Then SetLog("Open " & $sTab & ($g_bDebugSetlogTrain ? " (Called from " & $sWhereFrom & ")" : ""), $COLOR_INFO)
+	If $bSetLog Or $g_bDebugSetlogTrain Then SetLog("فتح " & $sTab & ($g_bDebugSetlogTrain ? " (Called from " & $sWhereFrom & ")" : ""), $COLOR_INFO)
 
 	Local $aTabButton = findButton(StringStripWS($sTab, 8), Default, 1, True)
 	If IsArray($aTabButton) And UBound($aTabButton, 1) = 2 Then
@@ -76,13 +76,13 @@ Func OpenTrainTab($sTab, $bSetLog = True, $sWhereFrom = "Undefined")
 		If Not _CheckPixel($aIsTabOpen, True) Then
 			ClickP($aTabButton)
 			If Not _WaitForCheckPixel($aIsTabOpen, True) Then
-				SetLog("Error in OpenTrainTab: Cannot open " & $sTab & ". Pixel to check did not appear", $COLOR_ERROR)
+				SetLog("خطا في فتح نافذة الجيش " & $sTab & ". Pixel to check did not appear", $COLOR_ERROR)
 				SetError(1)
 				Return False
 			EndIf
 		EndIf
 	Else
-		SetDebugLog("Error in OpenTrainTab: $aTabButton is no valid Array", $COLOR_ERROR)
+		SetDebugLog(" فتح نافذة الجيش التدريب: $aTabButton is no valid Array", $COLOR_ERROR)
 		SetError(1)
 		Return False
 	EndIf

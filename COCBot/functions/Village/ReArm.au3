@@ -55,7 +55,7 @@ Func ReArm()
 					If _Sleep($DELAYREARM1) Then Return
 				Else
 					Local $sVerb = StringInStr($aTempArray[0], "فخ") ? "أعاد" : "إعادة تحميل"
-					SetLog($sVerb & " " & $aTempArray[0] & "( )", $COLOR_SUCCESS)
+					SetLog($sVerb & " " & $aTempArray[0] & " ", $COLOR_SUCCESS)
 					$g_abNotNeedAllTime[0] = False
 					$bReArmed = True
 					If _Sleep($DELAYREARM1) Then Return

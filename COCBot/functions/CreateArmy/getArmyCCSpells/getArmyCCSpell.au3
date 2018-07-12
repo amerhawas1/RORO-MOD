@@ -58,7 +58,7 @@ Func getArmyCCSpells($bOpenArmyWindow = False, $bCloseArmyWindow = False, $bChec
 			EndIf
 
 			$sSpellName = $g_aiCurrentCCSpells[$iSpellIndex] >= 2 ? $g_asSpellNames[$iSpellIndex] & " Spells (Clan Castle)" : $g_asSpellNames[$iSpellIndex] & " Spell (Clan Castle)" ; Select the right Spell Name, If more than one then use Spells at the end
-			If $bSetLog Then SetLog("- " & $g_aiCurrentCCSpells[$iSpellIndex] & "x " & $sSpellName) ; Log What Spell is available and How many
+			If $bSetLog Then SetLog("- " & $g_aiCurrentCCSpells[$iSpellIndex] & "  " & $sSpellName) ; Log What Spell is available and How many
 		Next
 	EndIf
 

@@ -55,17 +55,17 @@ Func getArmyCCSpellCapacity($bOpenArmyWindow = False, $bCloseArmyWindow = False,
 				$g_iTotalCCSpells = Number($aGetCCSpellsSize[2])
 				$g_iCurrentCCSpells = Number($aGetCCSpellsSize[1])
 			Else
-				SetLog("CC Spells size read error.", $COLOR_ERROR) ; log if there is read error
+				SetLog("قراءة حجم السبيلات في قلعة القبيلة خاطئة.", $COLOR_ERROR) ; log if there is read error
 				$g_iTotalCCSpells = 0
 				$g_iCurrentCCSpells = 0
 			EndIf
 		Else
-			SetLog("CC Spells size read error.", $COLOR_ERROR) ; log if there is read error
+			SetLog("قراءة حجم السبيلات في قلعة القبيلة خاطئة.", $COLOR_ERROR) ; log if there is read error
 			$g_iTotalCCSpells = 0
 			$g_iCurrentCCSpells = 0
 		EndIf
 
-		If $bSetLog Then SetLog("Total Clan Castle Spells: " & $g_iCurrentCCSpells & "/" & $g_iTotalCCSpells)
+		If $bSetLog Then SetLog("اجمالي العناصر السحرية بقلعة القبيلة: " & $g_iCurrentCCSpells & "/" & $g_iTotalCCSpells)
 	EndIf
 
 	If $bCloseArmyWindow Then

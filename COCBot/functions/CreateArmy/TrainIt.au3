@@ -33,8 +33,8 @@ Func TrainIt($iIndex, $iQuantity = 1, $iSleep = 400)
 						TrainClickP($aTrainPos, $iQuantity, $g_iTrainClickDelay, $FullName, "#0266", $RNDName)
 						If _Sleep($iSleep) Then Return
 						If $g_bOutOfElixir Then
-							SetLog("Not enough " & ($bDark ? "Dark " : "") & "Elixir to train position " & GetTroopName($iIndex) & " troops!", $COLOR_ERROR)
-							SetLog("Switching to Halt Attack, Stay Online Mode...", $COLOR_ERROR)
+							SetLog("لايكفي " & ($bDark ? "دارك اكسير " : "") & "الاكسير للتدريب " & GetTroopName($iIndex) & " القوات!", $COLOR_ERROR)
+							SetLog("التبديل إلى وقف الهجوم ، والبقاء على الانترنت واسطة...", $COLOR_ERROR)
 							If Not $g_bFullArmy Then $g_bRestart = True ;If the army camp is full, If yes then use it to refill storages
 							Return ; We are out of Elixir stop training.
 						EndIf
@@ -52,7 +52,7 @@ Func TrainIt($iIndex, $iQuantity = 1, $iSleep = 400)
 				If $g_bDebugSetlogTrain Then SetLog("Positon X: " & $aTrainPos[0] & "| Y : " & $aTrainPos[1] & " |Color get: " & $sBadPixelColor & " | Need: " & $aTrainPos[2])
 				If StringMid($sBadPixelColor, 1, 2) = StringMid($sBadPixelColor, 3, 2) And StringMid($sBadPixelColor, 1, 2) = StringMid($sBadPixelColor, 5, 2) Then
 					; Pixel is gray, so queue is full -> nothing to inform the user about
-					SetLog("Troop " & GetTroopName($iIndex) & " is not available due to full queue", $COLOR_DEBUG)
+					SetLog("القوات " & GetTroopName($iIndex) & " غير متوفر نظرًا لوجود قائمة انتظار كاملة", $COLOR_DEBUG)
 				Else
 					If $iErrors = 0 Then
 						Local $aEmptyArray[4] = [-1,-1,-1,-1]
@@ -126,7 +126,7 @@ Func GetFullName(Const $iIndex, Const $aTrainPos)
 		Return GetFullNameSlot($aTrainPos, "Spell")
 	EndIf
 
-	SetLog("Don't know how to find the full name of troop with index " & $iIndex & " yet")
+	SetLog("لا تعرف كيفية العثور على الاسم الكامل للقوات مع الفهرس " & $iIndex & " yet")
 
 	Local $aTempSlot[4] = [-1, -1, -1, -1]
 
