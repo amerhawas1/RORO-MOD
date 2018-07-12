@@ -16,17 +16,17 @@ Global Const $DELAYSLEEP = 100 ; For larger sleep time this is the max. Sleep() 
 Global Const $DELAYWAITFORPOPUP = 1500 ; An action was just clicked and waiting for popup
 Global Const $DELAYCLOUDSCLEARED = 1000 ; When Clouds cleared, additional wait
 
-Global Const $DELAYRESPOND = 1 ; Just to make stop button more Responsive
-Global Const $DELAYRUNBOT1 = 750
-Global Const $DELAYRUNBOT2 = 600
-Global Const $DELAYRUNBOT3 = 150
+Global Const $DELAYRESPOND = 5 ; Just to make stop button more Responsive
+Global Const $DELAYRUNBOT1 = 1000
+Global Const $DELAYRUNBOT2 = 800
+Global Const $DELAYRUNBOT3 = 200
 
-Global Const $DELAYRUNBOT5 = 350
-Global Const $DELAYRUNBOT6 = 75
-Global Const $DELAYIDLE1 = 150
+Global Const $DELAYRUNBOT5 = 500
+Global Const $DELAYRUNBOT6 = 100
+Global Const $DELAYIDLE1 = 200
 Global Const $DELAYIDLE2 = 1220
-Global Const $DELAYSMARTWAIT = 350
-Global Const $DELAYATTACKMAIN1 = 750
+Global Const $DELAYSMARTWAIT = 500
+Global Const $DELAYATTACKMAIN1 = 100
 Global Const $DELAYATTACKMAIN2 = 1250
 
 ;algorithmTH
@@ -377,9 +377,9 @@ Global Const $DELAYCLOSEOPEN2000 = 2000
 Global Const $DELAYCLOSEOPEN3000 = 3000
 
 ;Smart Zap
-Global $DELAYSMARTZAP1 = 750
-Global $DELAYSMARTZAP4 = 2250
-Global $DELAYSMARTZAP10 = 7000
+Global $DELAYSMARTZAP1 = 1000
+Global $DELAYSMARTZAP4 = 4000
+Global $DELAYSMARTZAP10 = 10000
 
 ;SwitchBetweenBases
 Global $DELAYSWITCHBASES1 = 1000
