@@ -119,7 +119,7 @@ Func DonateCC($bCheckForNewMsg = False)
 			$bDonate = True
 			Click($Scroll[0], $Scroll[1], 1, 0, "#0172")
 			$y = 90
-			If _Sleep($DELAYDONATECC2 + 100) Then ExitLoop
+			If _Sleep($DELAYDONATECC2 + 50) Then ExitLoop
 			ContinueLoop
 		EndIf
 		ExitLoop
@@ -358,19 +358,7 @@ Func DonateCC($bCheckForNewMsg = False)
 				If $g_bDebugSetlog Then SetDebugLog("Troop/Spell All checkpoint.", $COLOR_DEBUG) ;Debug
 				$g_bDonateAllRespectBlk = True
 
-				If $bDonateAllTroop And Not $g_bSkipDonTroops Then
-					; read available donate cap, and ByRef set the $g_bSkipDonTroops and $g_bSkipDonSpells flags
-					DonateWindowCap($g_bSkipDonTroops, $g_bSkipDonSpells)
-					$iBenchmark = TimerDiff($itime)
-					Setlog("Get available donate cap (to all) in " & StringFormat("%.2f", $iBenchmark) & "'ms", $COLOR_DEBUG)
-					$itime = TimerInit()
-					If $g_bSkipDonTroops And $g_bSkipDonSpells Then
-						DonateWindow($bClose)
-						$bDonate = True
-						$y = $g_aiDonatePixel[1] + 50
-						If _Sleep($DELAYDONATECC2) Then ExitLoop
-						ContinueLoop ; go to next button if already donated, maybe this is an impossible case..
-					EndIf
+				
 					If $g_bDebugSetlog Then SetDebugLog("Troop All checkpoint.", $COLOR_DEBUG)
 
 					;;; DONATE TO ALL for Custom And Typical Donation
@@ -416,7 +404,7 @@ Func DonateCC($bCheckForNewMsg = False)
 					$iBenchmark = TimerDiff($itime)
 					If $g_bDebugSetlog Then SetDebugLog("Get Donated troops (to all) in " & StringFormat("%.2f", $iBenchmark) & "'ms", $COLOR_DEBUG)
 					$itime = TimerInit()
-				EndIf
+				
 
 				If $bDonateAllSpell And Not $g_bSkipDonSpells Then
 					If $g_bDebugSetlog Then SetDebugLog("Spell All checkpoint.", $COLOR_DEBUG)
@@ -646,7 +634,7 @@ Func DonateTroopType(Const $iTroopIndex, $Quant = 0, Const $Custom = False, Cons
 							$g_iCommandStop = 0
 							$g_bFullArmy = False
 						EndIf
-						If _Sleep(1000) Then Return
+						If _Sleep(500) Then Return
 						$icount += 1
 					EndIf
 				Next
@@ -698,7 +686,7 @@ Func DonateTroopType(Const $iTroopIndex, $Quant = 0, Const $Custom = False, Cons
 							$g_iCommandStop = 0
 							$g_bFullArmy = False
 						EndIf
-						If _Sleep(1000) Then Return
+						If _Sleep(500) Then Return
 					EndIf
 				Next
 				$g_iDonTroopsQuantity = $icount ; Count Troops Donated Clicks

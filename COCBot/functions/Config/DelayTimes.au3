@@ -16,29 +16,29 @@ Global Const $DELAYSLEEP = 100 ; For larger sleep time this is the max. Sleep() 
 Global Const $DELAYWAITFORPOPUP = 1500 ; An action was just clicked and waiting for popup
 Global Const $DELAYCLOUDSCLEARED = 1000 ; When Clouds cleared, additional wait
 
-Global Const $DELAYRESPOND = 5 ; Just to make stop button more Responsive
-Global Const $DELAYRUNBOT1 = 1000
-Global Const $DELAYRUNBOT2 = 800
-Global Const $DELAYRUNBOT3 = 200
+Global Const $DELAYRESPOND = 1 ; Just to make stop button more Responsive
+Global Const $DELAYRUNBOT1 = 750
+Global Const $DELAYRUNBOT2 = 600
+Global Const $DELAYRUNBOT3 = 150
 
-Global Const $DELAYRUNBOT5 = 500
-Global Const $DELAYRUNBOT6 = 100
-Global Const $DELAYIDLE1 = 200
-Global Const $DELAYIDLE2 = 1500
-Global Const $DELAYSMARTWAIT = 500
-Global Const $DELAYATTACKMAIN1 = 1000
-Global Const $DELAYATTACKMAIN2 = 1500
+Global Const $DELAYRUNBOT5 = 350
+Global Const $DELAYRUNBOT6 = 75
+Global Const $DELAYIDLE1 = 150
+Global Const $DELAYIDLE2 = 1220
+Global Const $DELAYSMARTWAIT = 350
+Global Const $DELAYATTACKMAIN1 = 750
+Global Const $DELAYATTACKMAIN2 = 1250
 
 ;algorithmTH
 Global Const $DELAYATTCKTHGRID1 = 500
 Global Const $DELAYCASTSPELL1 = 10
 
 ;algorithm_AllTroops
-Global Const $DELAYALGORITHM_ALLTROOPS1 = 2000
-Global Const $DELAYALGORITHM_ALLTROOPS2 = 1000
+Global Const $DELAYALGORITHM_ALLTROOPS1 = 1750
+Global Const $DELAYALGORITHM_ALLTROOPS2 = 800
 Global Const $DELAYALGORITHM_ALLTROOPS3 = $DELAYWAITFORPOPUP
-Global Const $DELAYALGORITHM_ALLTROOPS4 = 100
-Global Const $DELAYALGORITHM_ALLTROOPS5 = 500
+Global Const $DELAYALGORITHM_ALLTROOPS4 = 75
+Global Const $DELAYALGORITHM_ALLTROOPS5 = 300
 
 ;barch
 Global Const $DELAYBARCH1 = 100
@@ -54,8 +54,8 @@ Global Const $DELAYDROPCC1 = 500
 Global Const $DELAYDROPCC2 = 500 ;click
 
 ;dropHeroes
-Global Const $DELAYDROPHEROES1 = 300
-Global Const $DELAYDROPHEROES2 = 500
+Global Const $DELAYDROPHEROES1 = 150
+Global Const $DELAYDROPHEROES2 = 250
 
 ;GoldElixirChange
 Global Const $DELAYGOLDELIXIRCHANGE1 = 500
@@ -74,8 +74,8 @@ Global Const $DELAYDROPONPIXEL2 = 250 ; click
 
 
 ;DropTroop
-Global Const $DELAYDROPTROOP1 = 100
-Global Const $DELAYDROPTROOP2 = 300
+Global Const $DELAYDROPTROOP1 = 75
+Global Const $DELAYDROPTROOP2 = 125
 
 ;ReturnHome
 Global Const $DELAYRETURNHOME1 = 1000
@@ -108,8 +108,8 @@ Global Const $DELAYUNBREAKABLE7 = 100 ;click
 Global Const $DELAYUNBREAKABLE8 = 50 ;click
 
 ;CheckTombs
-Global Const $DELAYCHECKTOMBS1 = 500
-Global Const $DELAYCHECKTOMBS2 = 2000
+Global Const $DELAYCHECKTOMBS1 = 300
+Global Const $DELAYCHECKTOMBS2 = 1400
 
 ;checkMainScreen
 Global Const $DELAYCHECKMAINSCREEN1 = 1000
@@ -133,7 +133,7 @@ Global Const $DELAYISGEMOPEN1 = 350
 Global Const $DELAYISBUILDERBASE = 300
 
 ;waitMainScreen
-Global Const $DELAYWAITMAINSCREEN1 = 2000
+Global Const $DELAYWAITMAINSCREEN1 = 1000
 
 ;ZoomOut
 Global Const $DELAYZOOMOUT1 = 1500
@@ -168,10 +168,10 @@ Global Const $DELAYPREPARESEARCH2 = 2000
 Global Const $DELAYPREPARESEARCH3 = 500
 
 ;VillageSearch
-Global Const $DELAYVILLAGESEARCH1 = 1000
-Global Const $DELAYVILLAGESEARCH2 = 100
-Global Const $DELAYVILLAGESEARCH3 = 500
-Global Const $DELAYVILLAGESEARCH5 = 2000
+Global Const $DELAYVILLAGESEARCH1 = 600
+Global Const $DELAYVILLAGESEARCH2 = 75
+Global Const $DELAYVILLAGESEARCH3 = 250
+Global Const $DELAYVILLAGESEARCH5 = 1400
 
 ;BoostBarracks
 Global Const $DELAYBOOSTBARRACKS1 = 1000
@@ -188,7 +188,7 @@ Global Const $DELAYBOOSTHEROES3 = 500
 Global Const $DELAYBOOSTHEROES4 = 600
 
 ;BotCommand
-Global Const $DELAYBOTCOMMAND1 = 500
+Global Const $DELAYBOTCOMMAND1 = 300
 
 ;BotDetectFirstTime
 Global Const $DELAYBOTDETECT1 = 1000
@@ -211,38 +211,38 @@ Global Const $DELAYCOLLECT2 = 250
 Global Const $DELAYCOLLECT3 = 500
 
 ;DonateCC
-Global Const $DELAYDONATECC1 = 200
-Global Const $DELAYDONATECC2 = 250
-Global Const $DELAYDONATECC3 = 50 ; click
-Global Const $DELAYDONATECC4 = 1250
+Global Const $DELAYDONATECC1 = 100
+Global Const $DELAYDONATECC2 = 100
+Global Const $DELAYDONATECC3 = 30 ; click
+Global Const $DELAYDONATECC4 = 600
 
 ;DonateWindow
-Global Const $DELAYDONATEWINDOW1 = 1000
-Global Const $DELAYDONATEWINDOW2 = 100
+Global Const $DELAYDONATEWINDOW1 = 800
+Global Const $DELAYDONATEWINDOW2 = 125
 
 ;DropTrophy
 Global Const $DELAYDROPTROPHY1 = 1000
 Global Const $DELAYDROPTROPHY4 = 250
 
 ;GetTownHallLevel
-Global Const $DELAYGETTHLEVEL1 = 1000
-Global Const $DELAYGETTHLEVEL2 = 1500
-Global Const $DELAYGETTHLEVEL3 = 200 ; click
+Global Const $DELAYGETTHLEVEL1 = 750
+Global Const $DELAYGETTHLEVEL2 = 950
+Global Const $DELAYGETTHLEVEL3 = 125 ; click
 
 
 ;Laboratory
-Global Const $DELAYLABORATORY1 = 750
-Global Const $DELAYLABORATORY2 = 200
-Global Const $DELAYLABORATORY3 = 1000
-Global Const $DELAYLABORATORY4 = 200 ; click
+Global Const $DELAYLABORATORY1 = 550
+Global Const $DELAYLABORATORY2 = 150
+Global Const $DELAYLABORATORY3 = 750
+Global Const $DELAYLABORATORY4 = 150 ; click
 
 ;LabUpgrade
-Global Const $DELAYLABUPGRADE1 = 1000
-Global Const $DELAYLABUPGRADE2 = 200
-Global Const $DELAYLABUPGRADE3 = 200 ; click
+Global Const $DELAYLABUPGRADE1 = 750
+Global Const $DELAYLABUPGRADE2 = 150
+Global Const $DELAYLABUPGRADE3 = 150 ; click
 
 ;LocateTownHall
-Global Const $DELAYLOCATETH1 = 1000
+Global Const $DELAYLOCATETH1 = 750
 
 ;CheckUpgrades
 Global Const $DELAYCHECKUPGRADES = 1000
@@ -286,23 +286,23 @@ Global Const $DELAYREPLAYSHARE3 = 1000
 Global Const $DELAYREPLAYSHARE4 = 2000
 
 ;RequestCC
-Global Const $DELAYREQUESTCC1 = 1000
+Global Const $DELAYREQUESTCC1 = 650
 
 ;_makerequest
 Global Const $DELAYMAKEREQUEST1 = 500
 Global Const $DELAYMAKEREQUEST2 = 1500
 
 ;Train
-Global Const $DELAYTRAIN1 = 1000
-Global Const $DELAYTRAIN4 = 200
-Global Const $DELAYTRAIN6 = 20 ; click
-Global Const $DELAYTRAIN8 = 5000 ; wait for a while to desapear the 'received castle troops' msg
+Global Const $DELAYTRAIN1 = 750
+Global Const $DELAYTRAIN4 = 150
+Global Const $DELAYTRAIN6 = 10 ; click
+Global Const $DELAYTRAIN8 = 3000 ; wait for a while to desapear the 'received castle troops' msg
 Global Const $DELAYLVUP = 150 ; delay in repeatly increasing levels on the train troops screen when button is held down
 Global Const $g_iQuickTrainButtonRetryDelay = 1000
 
 ;IsTrainPage
-Global Const $DELAYISTRAINPAGE1 = 100
-Global Const $DELAYISTRAINPAGE2 = 1000
+Global Const $DELAYISTRAINPAGE1 = 75
+Global Const $DELAYISTRAINPAGE2 = 750
 
 ;AutoUpgradeBuilding
 Global Const $DELAYAUTOUPGRADEBUILDING1 = 1000
@@ -333,10 +333,10 @@ Global Const $DELAYUPGRADEWALLELIXIR2 = 1000
 Global Const $DELAYUPGRADEWALLELIXIR3 = 500
 
 ;VillageReport
-Global Const $DELAYVILLAGEREPORT1 = 500
+Global Const $DELAYVILLAGEREPORT1 = 200
 
 ; WaitnOpenCoC
-Global Const $DELAYWAITNOPENCOC10000 = 10000
+Global Const $DELAYWAITNOPENCOC10000 = 7000
 
 ;SWHTSearchLimit
 Global Const $DELAYSEARCHLIMIT = 200
@@ -359,8 +359,8 @@ Global Const $DELAYPERSONALSHIELD2 = 500
 Global Const $DELAYPERSONALSHIELD3 = 100
 
 ;Star bonus
-Global Const $DELAYSTARBONUS100 = 100
-Global Const $DELAYSTARBONUS500 = 500
+Global Const $DELAYSTARBONUS100 = 75
+Global Const $DELAYSTARBONUS500 = 300
 
 ; Attack Disable
 Global Const $DELAYATTACKDISABLE100 = 100
@@ -377,16 +377,16 @@ Global Const $DELAYCLOSEOPEN2000 = 2000
 Global Const $DELAYCLOSEOPEN3000 = 3000
 
 ;Smart Zap
-Global $DELAYSMARTZAP1 = 1000
-Global $DELAYSMARTZAP4 = 4000
-Global $DELAYSMARTZAP10 = 10000
+Global $DELAYSMARTZAP1 = 750
+Global $DELAYSMARTZAP4 = 2250
+Global $DELAYSMARTZAP10 = 7000
 
 ;SwitchBetweenBases
 Global $DELAYSWITCHBASES1 = 1000
 
 ;ClockTower
-Global $DELAYCLOCKTOWER1 = 1000
-Global $DELAYCLOCKTOWER2 = 200
+Global $DELAYCLOCKTOWER1 = 650
+Global $DELAYCLOCKTOWER2 = 100
 
 ;SuperXP / GoblinXP
 Global Const $DELAYDROPSuperXP1= 500

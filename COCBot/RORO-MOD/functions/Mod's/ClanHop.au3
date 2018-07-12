@@ -1,12 +1,12 @@
 ; #FUNCTION# ============================================================================================================================
-; Name ..........: ClanHop
+; Name ..........: ClanHop (#-20)
 ; Version........:
 ; Description ...: This function joins/quit random clans and fills requests indefinitly
 ; Syntax ........: clanHop()
 ; Parameters ....: None
 ; Return values .: None
 ; Author ........: zengzeng, MantasM (complete overhaul)
-; Modified ......: Rhinoceros, RORO-MOD (2018)
+; Modified ......: Rhinoceros, Team AiO MOD++ (2017)
 ; Remarks .......: This file is a part of MyBotRun. Copyright 2018
 ; ................ MyBotRun is distributed under the terms of the GNU GPL
 ; Related .......: No
@@ -16,26 +16,26 @@ Func ClanHop()
 
 	If Not $g_bChkClanHop Then Return
 
-	SetLog("Start Clan Hopping", $COLOR_INFO)
+	SetLog("بدء تشيغل ميزة كلان هوب لدعم وترفع اللفل  ", $COLOR_INFO)
 	Local $sTimeStartedHopping = _NowCalc()
 
 	Local $iPosJoinedClans = 0, $iScrolls = 0, $iHopLoops = 0, $iErrors = 0
 
-	Local $aJoinClanBtn[4] = [157, 510, 0x6CBB1F, 20] ; Green Join Button on Chat Tab when you are not in a Clan
-	Local $aClanPage[4] = [768, 398, 0xCE0D0E, 20] ; Red Leave Clan Button on Clan Page
-	Local $aClanPageJoin[4] = [768, 398, 0x74BD2F, 20] ; Green Join Clan Button on Clan Page
-	Local $aJoinClanPage[4] = [720, 310, 0xEBCC80, 20] ; Trophy Amount of Clan Background of first Clan
-	Local $aClanChat[4] = [105, 650, 0x86C808, 40] ; *Your Name* joined the Clan Message Check to verify loaded Clan Chat
+	Local $aJoinClanBtn[4] = [157, 476, 0xD0E974, 20] ; Green Join Button on Chat Tab when you are not in a Clan
+	Local $aClanPage[4] = [735, 385, 0xF65D60, 40] ; Red Leave Clan Button on Clan Page
+	Local $aClanPageJoin[4] = [767, 397, 0x71BC2D, 40] ; Green Join Clan Button on Clan Page
+	Local $aJoinClanPage[4] = [725, 310, 0xEBCC81, 40] ; Trophy Amount of Clan Background of first Clan
+	Local $aClanChat[4] = [105, 650, 0x7BB310, 40] ; *Your Name* joined the Clan Message Check to verify loaded Clan Chat
 	Local $aChatTab[4] = [189, 24, 0x706C50, 20] ; Clan Chat Tab on Top, check if right one is selected
 	Local $aGlobalTab[4] = [189, 24, 0x383828, 20] ; Global Chat Tab on Top, check if right one is selected
-	Local $aClanBadgeNoClan[4] = [151, 307, 0xF05838, 20]; Orange Tile of Clan Logo on Chat Tab if you are not in a Clan
+	Local $aClanBadgeNoClan[4] = [151, 307, 0xEE5035, 20]; Orange Tile of Clan Logo on Chat Tab if you are not in a Clan
 
 	Local $aClanNameBtn[2] = [89, 63] ; Button to open Clan Page from Chat Tab
 
 	$g_iCommandStop = 0 ; Halt Attacking
 
 	If Not IsMainPage() Then
-		SetLog("Couldn't locate Mainscreen!", $COLOR_ERROR)
+		SetLog("لا يمكن تحديد موقع الشاشة الرئيسية!", $COLOR_ERROR)
 		Return
 	EndIf
 
@@ -46,7 +46,7 @@ Func ClanHop()
 
 		If $iErrors >= 10 Then
 			Local $y = 0
-			SetLog("Too Many Errors occured in current ClanHop Loop. Leaving ClanHopping!", $COLOR_ERROR)
+			SetLog("حدثت أخطاء كثيرة جدًا في حلقة المشبك الحالية. المغادرة!", $COLOR_ERROR)
 			While 1
 				If _Sleep(50) Then Return
 				If _ColorCheck(_GetPixelColor($aCloseChat[0], $aCloseChat[1], True), Hex($aCloseChat[2], 6), $aCloseChat[3]) Then
@@ -57,7 +57,7 @@ Func ClanHop()
 					If _Sleep(100) Then Return
 					$y += 1
 					If $y > 30 Then
-						SetLog("Error finding Clan Tab to close.", $COLOR_ERROR)
+						SetLog("لا يمكن العثور على نافذة للخروج.", $COLOR_INFO)
 						AndroidPageError("ClanHop")
 						ExitLoop
 					EndIf
@@ -99,36 +99,36 @@ Func ClanHop()
 		WEnd
 
 		If Not _CheckPixel($aClanBadgeNoClan, $g_bCapturePixel) Then ; If Still in Clan
-			SetLog("Still in a Clan! Leaving the Clan now")
+			SetLog("لا تزال بالقبيلة! مغادرة القبيلة الآن")
 			ClickP($aClanNameBtn)
 			If _WaitForCheckPixel($aClanPage, $g_bCapturePixel, Default, "Wait for Clan Page:") Then
 				ClickP($aClanPage)
 				If Not ClickOkay("ClanHop") Then
-					SetLog("Okay Button not found! Starting over again", $COLOR_ERROR)
+					SetLog("لا يمكن العثور على زر اوك! من جديد حاول", $COLOR_INFO)
 					$iErrors += 1
 					ContinueLoop
 				Else
-					SetLog("Successfully left Clan", $COLOR_SUCCESS)
-					If _Sleep(400) Then Return
+					SetLog("تم مغادرة الكلان بنجاح", $COLOR_SUCCESS)
+					If _Sleep(100) Then Return
 				EndIf
 			Else
-				SetLog("Clan Page did not open! Starting over again", $COLOR_ERROR)
+				SetLog("نافذة القبائل لا تفتح! حاول من جديد", $COLOR_INFO)
 				$iErrors += 1
 				ContinueLoop
 			EndIf
 		EndIf
 
 		If _CheckPixel($aJoinClanBtn, $g_bCapturePixel) Then ; Click on Green Join Button on Donate Window
-			SetLog("Opening Join Clan Page", $COLOR_INFO)
+			SetLog("فتح نافذة الانضمام للقبائل", $COLOR_INFO)
 			ClickP($aJoinClanBtn)
 		Else
-			SetLog("Join Clan Button not visible! Starting over again", $COLOR_ERROR)
+			SetLog("الرجاء الانتظار قليلاً", $COLOR_INFO)
 			$iErrors += 1
 			ContinueLoop
 		EndIf
 
 		If Not _WaitForCheckPixel($aJoinClanPage, $g_bCapturePixel, Default, "Wait For Join Clan Page:") Then ; Wait For The golden Trophy Background of the First Clan in list
-			SetLog("Joinable Clans did not show.. Starting over again", $COLOR_ERROR)
+			SetLog("لا يمكن روية القبائل.. حاول من جديد", $COLOR_INFO)
 			$iErrors += 1
 			ContinueLoop
 		EndIf
@@ -142,9 +142,9 @@ Func ClanHop()
 
 		Click(161, 286 + ($iPosJoinedClans * 55)) ; Open specific Clans Page
 		$iPosJoinedClans += 1
-		If _Sleep(300) Then Return
+
 		If Not _WaitForCheckPixel($aClanPageJoin, $g_bCapturePixel, Default, "Wait For Clan Page:") Then ; Check if Clan Page itself opened up
-			SetLog("Clan Page did not open. Starting over again", $COLOR_ERROR)
+			SetLog("لا يمكن فتح نافذة القبيلة. حاول من جديد", $COLOR_INFO)
 			$iErrors += 1
 			ContinueLoop
 		EndIf
@@ -152,16 +152,16 @@ Func ClanHop()
 		ClickP($aClanPageJoin) ; Join Clan
 
 		If Not _WaitForCheckPixel($aClanChat, $g_bCapturePixel, Default, "Wait For Clan Chat:") Then ; Check for your "joined the Clan" Message to verify that Chat loaded successfully
-			SetLog("Could not verify loaded Clan Chat. Starting over again", $COLOR_ERROR)
+			SetLog("لا يمكن التحقق من تحميل دردشة القبيلة. حاول من جديد", $COLOR_INFO)
 			$iErrors += 1
 			ContinueLoop
 		EndIf
 
-		DonateCC(False) ; Start Donate Sequence
+		DonateCC() ; Start Donate Sequence
 
 		If _Sleep(300) Then Return ; Little Sleep if requests got filled and chat moves
 
-		DonateCC(False)
+		DonateCC()
 
 		ForceCaptureRegion()
 		If Not _CheckPixel($aChatTab, $g_bCapturePixel) Then ClickP($aOpenChat, 1, 0, "#0168") ; Clicks chat tab
@@ -172,20 +172,20 @@ Func ClanHop()
 		If _WaitForCheckPixel($aClanPage, $g_bCapturePixel, Default, "Wait for Clan Page:") Then ; Leave the Clan
 			ClickP($aClanPage)
 			If Not ClickOkay("ClanHop") Then
-				SetLog("Okay Button not found! Starting over again", $COLOR_ERROR)
+				SetLog("لا يمكن العثور على زر اوك! حاول من جديد", $COLOR_INFO)
 				$iErrors += 1
 				ContinueLoop
 			Else
-				SetLog("Successfully left Clan", $COLOR_SUCCESS)
+				SetLog("تم مغادرة القبيلة بنجاح", $COLOR_SUCCESS)
 				If _Sleep(400) Then Return
 			EndIf
 		Else
-			SetLog("Clan Page did not open! Starting over again", $COLOR_ERROR)
+			SetLog("لا يمكن العثور على نافذة القبيلة! حاول من جديد", $COLOR_INFO)
 			$iErrors += 1
 			ContinueLoop
 		EndIf
 
-		If $iHopLoops >= 5 Then
+		
 			; Update Troops and Spells Capacity
 			Local $i = 0
 			While 1
@@ -198,16 +198,17 @@ Func ClanHop()
 					If _Sleep(100) Then Return
 					$i += 1
 					If $i > 30 Then
-						SetLog("Error finding Clan Tab to close.", $COLOR_ERROR)
+						SetLog("لا يمكن العثور على النافذة الخروج من القبيلة.", $COLOR_ERROR)
 						AndroidPageError("ClanHop")
 						ExitLoop
 					EndIf
 				EndIf
 			WEnd
-			TrainRevamp()
+			
+			
 			$iHopLoops = 0
 
-		EndIf
+		
 
 		If _DateDiff("h", $sTimeStartedHopping, _NowCalc) > 1 Then ExitLoop
 		$iHopLoops += 1
