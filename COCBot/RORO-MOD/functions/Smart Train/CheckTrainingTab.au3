@@ -35,19 +35,19 @@ Func CheckTrainingTab($sText = "Troops")
 	If _Sleep(1000) Then Return
 
 	Local $ArmyCamp = GetOCRCurrent(43, 160)
-	SetLog("Checking " & $sText & " tab: " & $ArmyCamp[0] & "/" & $ArmyCamp[1] * 2)
+	SetLog("التحقق " & $sText & " نافذة: " & $ArmyCamp[0] & "/" & $ArmyCamp[1] * 2)
 	If $ArmyCamp[1] = 0 Then $g_sSmartTrainError = SetError(2, 0, "Error GetOCRCurrent called from CheckTrainingTab")
 	If @error Then Return ; quit SmartTrain
 
 	Switch $ArmyCamp[0]
 		Case 0 ; 0/240 troop | 0/11 spell
-			SetLog(" - No " & $sText, $COLOR_ACTION)
+			SetLog(" - لا " & $sText, $COLOR_ACTION)
 			$aeTrainMethod[0] = $g_eFull
 			$aeTrainMethod[1] = $g_eFull ; full army + full queue
 
 		Case 1 To $ArmyCamp[1] - $iTopUp - 1 ; 1-234/240 troops | 1-9/11 spells
-			SetLog(" - Not full " & $sText & " camp", $COLOR_ACTION)
-			If ClearTrainingArmyCamp() Then SetLog("All training " & $sText & " cleared!", $COLOR_SUCCESS)
+			SetLog(" - ليس كامل  " & $sText & " المعسكر ", $COLOR_ACTION)
+			If ClearTrainingArmyCamp() Then SetLog("تديب الكل  " & $sText & " مسح!", $COLOR_SUCCESS)
 			$aeTrainMethod[0] = $g_eRemained
 			$aeTrainMethod[1] = $g_eFull ; remained army + full queue
 
@@ -56,7 +56,7 @@ Func CheckTrainingTab($sText = "Troops")
 				TopUpCamp($sText, $ArmyCamp[1] - $ArmyCamp[0])
 				If @error Then Return SetError(2) ; quit SmartTrain
 			Else
-				SetLog(" - Zero queue " & $sText, $COLOR_ACTION)
+				SetLog(" - القوات الاضافية صفر  " & $sText, $COLOR_ACTION)
 			EndIf
 			$aeTrainMethod[1] = $g_eFull ; no army + full queue
 
@@ -83,7 +83,7 @@ Func CheckTrainingTab($sText = "Troops")
 				TopUpCamp($sText, $ArmyCamp[1] * 2 - $ArmyCamp[0])
 				If @error Then Return SetError(2) ; quit SmartTrain
 			Else
-				SetLog(" - Full queue " & $sText, $COLOR_SUCCESS)
+				SetLog(" - القوات الاضافية ممتلئ " & $sText, $COLOR_SUCCESS)
 			EndIf
 			Local $bSkipTraining = $g_bFullArmy
 			If $sText = "Spells" Then $bSkipTraining = $g_bFullArmySpells Or $g_bForceBrewSpells
@@ -139,7 +139,7 @@ Func TopUpCamp($sText = "Troops", $ArchToMake = 0)
 	Local $eTroop = $eArch
 	If $sText = "Spells" Then $eTroop = $eESpell
 
-	SetLog("Top up with " & $ArchToMake & " " & NameOfTroop($eTroop, $ArchToMake > 1 ? 1 : 0), $COLOR_INFO)
+	SetLog("أعلى مع " & $ArchToMake & " " & NameOfTroop($eTroop, $ArchToMake > 1 ? 1 : 0), $COLOR_INFO)
 
 	If Not TrainIt($eTroop, $ArchToMake, 500) Then $g_sSmartTrainError = SetError(3, 0, "Error TrainIt called from TopUpCamp")
 	If @error Then Return ; quit SmartTrain
@@ -161,12 +161,12 @@ Func ForceBrewSpells($iRemainQueue)
 					$iBrewedCount += 1
 					$iRemainQueue -= $g_aiSpellSpace[$i]
 				Else
-					SetLog("No resources to brew more " & $g_asSpellNames[$i], $COLOR_ACTION)
+					SetLog("لا يوجد موارد لصنع اكثر من  " & $g_asSpellNames[$i], $COLOR_ACTION)
 					ExitLoop
 				EndIf
 				If $iBrewedCount >= $g_aiArmyCompSpells[$i] Then ExitLoop
 			WEnd
-			If $iBrewedCount > 0 Then SetLog(" - Brewed " & $iBrewedCount & "x " & $g_asSpellNames[$i], $COLOR_SUCCESS)
+			If $iBrewedCount > 0 Then SetLog(" - مصنوع  " & $iBrewedCount & "  " & $g_asSpellNames[$i], $COLOR_SUCCESS)
 		EndIf
 	Next
 EndFunc   ;==>ForceBrewSpells

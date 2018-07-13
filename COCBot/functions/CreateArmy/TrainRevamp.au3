@@ -382,24 +382,24 @@ Func IsFullClanCastleSpells($bReturnOnly = False)
 
 		; Debug
 		If $g_iTotalCCSpells >= 2 Then
-			If $g_bDebugSetlogTrain Then SetLog("Slot 1 to remove: " & $aShouldRemove[0])
-			If $g_bDebugSetlogTrain Then SetLog("Slot 2 to remove: " & $aShouldRemove[1])
+			If $g_bDebugSetlogTrain Then SetLog("المجموعة 1 الى الحزف : " & $aShouldRemove[0])
+			If $g_bDebugSetlogTrain Then SetLog("المجموعة   2الى الحزف : " & $aShouldRemove[1])
 		ElseIf $g_iTotalCCSpells = 1 Then
-			If $g_bDebugSetlogTrain Then SetLog("Slot 1 to remove: " & $aShouldRemove[0])
+			If $g_bDebugSetlogTrain Then SetLog("المجموعة 1 الى الحزف: " & $aShouldRemove[0])
 		EndIf
 
 		If $aShouldRemove[0] > 0 Or $aShouldRemove[1] > 0 Then
-			SetLog("Removing unwanted Clancastle Spells!", $COLOR_INFO)
+			SetLog("حذف السبيلات الموجودة في قلعة القبيلة الغير مطلوبة!", $COLOR_INFO)
 			RemoveCastleSpell($aShouldRemove)
 			If _Sleep(1000) Then Return
 			; Check the Request Clan troops & Spells buttom
 			$g_bCanRequestCC = _ColorCheck(_GetPixelColor($aRequestTroopsAO[0], $aRequestTroopsAO[1] + 20, True), Hex($aRequestTroopsAO[3], 6), $aRequestTroopsAO[5]) And _ColorCheck(_GetPixelColor($aRequestTroopsAO[0], $aRequestTroopsAO[1], True), Hex($aRequestTroopsAO[4], 6), $aRequestTroopsAO[5])
 			; Debug
-			If $g_bDebugSetlogTrain Then SetLog(" - Clans Castle button available? " & $g_bCanRequestCC)
+			If $g_bDebugSetlogTrain Then SetLog(" - نافذة قلعة القبيلة متاحة ? " & $g_bCanRequestCC)
 			; Let´s request Troops & Spells
 			If $g_bCanRequestCC Then
 				$rColCheckFullCCTroops = _ColorCheck(_GetPixelColor(24, 470, True), Hex(0x87B820, 6), 30)
-				If $rColCheckFullCCTroops Then SetLog("Clan Castle Spell is empty, Requesting for...")
+				If $rColCheckFullCCTroops Then SetLog("السبيلات في قلعة القبيلة فارغة, طلب دعم...")
 				If Not $bReturnOnly Then
 					RequestCC(False, IIf($rColCheckFullCCTroops Or (Not $g_abSearchCastleTroopsWaitEnable[$DB] And Not $g_abSearchCastleTroopsWaitEnable[$LB]), IIf($g_abSearchCastleSpellsWaitEnable[$LB], IIf(String(GUICtrlRead($g_hCmbABWaitForCastleSpell)) = "Any", "", String(GUICtrlRead($g_hCmbABWaitForCastleSpell) & " Spell")), IIf($g_abSearchCastleSpellsWaitEnable[$DB], IIf(String(GUICtrlRead($g_hCmbDBWaitForCastleSpell)) = "Any", "", String(GUICtrlRead($g_hCmbDBWaitForCastleSpell) & " Spell")), "")), ""))
 				Else
@@ -417,7 +417,7 @@ Func IsFullClanCastleSpells($bReturnOnly = False)
 		$g_bCanRequestCC = _ColorCheck(_GetPixelColor($aRequestTroopsAO[0], $aRequestTroopsAO[1] + 20, True), Hex($aRequestTroopsAO[3], 6), $aRequestTroopsAO[5]) And _ColorCheck(_GetPixelColor($aRequestTroopsAO[0], $aRequestTroopsAO[1], True), Hex($aRequestTroopsAO[4], 6), $aRequestTroopsAO[5])
 		If $g_bCanRequestCC Then
 			$rColCheckFullCCTroops = _ColorCheck(_GetPixelColor(24, 470, True), Hex(0x87B820, 6), 30)
-			If $rColCheckFullCCTroops Then SetLog("Clan Castle Spell is empty, Requesting for...")
+			If $rColCheckFullCCTroops Then SetLog("السبيلات في قلعة القبيلة فارغة, طلب دعم...")
 			If Not $bReturnOnly Then
 				RequestCC(False, IIf($rColCheckFullCCTroops Or (Not $g_abSearchCastleTroopsWaitEnable[$DB] And Not $g_abSearchCastleTroopsWaitEnable[$LB]), IIf($g_abSearchCastleSpellsWaitEnable[$LB], IIf(String(GUICtrlRead($g_hCmbABWaitForCastleSpell)) = "Any", "", String(GUICtrlRead($g_hCmbABWaitForCastleSpell) & " Spell")), IIf($g_abSearchCastleSpellsWaitEnable[$DB], IIf(String(GUICtrlRead($g_hCmbDBWaitForCastleSpell)) = "Any", "", String(GUICtrlRead($g_hCmbDBWaitForCastleSpell) & " Spell")), "")), ""))
 			Else
@@ -439,7 +439,7 @@ Func RemoveCastleSpell($Slots)
 	If $Slots[0] = 0 And $Slots[1] = 0 Then Return
 
 	If Not _ColorCheck(_GetPixelColor(806, 516, True), Hex(0xCEEF76, 6), 25) Then ; If no 'Edit Army' Button found in army tab to edit troops
-		SetLog("Cannot find/verify 'Edit Army' Button in Army tab", $COLOR_WARNING)
+		SetLog("لايمكن العثور على التحقق 'لتعديل الجيش' نافذة الجيش", $COLOR_WARNING)
 		Return False ; Exit function
 	EndIf
 
@@ -460,7 +460,7 @@ Func RemoveCastleSpell($Slots)
 	If _Sleep(400) Then Return
 
 	If Not _ColorCheck(_GetPixelColor(806, 567, True), Hex(0xCEEF76, 6), 25) Then ; If no 'Okay' button found in army tab to save changes
-		SetLog("Cannot find/verify 'Okay' Button in Army tab", $COLOR_WARNING)
+		SetLog("لا يمكن التحقق من زر اوك في نافذة الجيش", $COLOR_WARNING)
 		ClickP($aAway, 2, 0, "#0346") ; Click Away, Necessary! due to possible errors/changes
 		If _Sleep(400) Then OpenArmyOverview(True, "RemoveCastleSpell()") ; Open Army Window AGAIN
 		Return False ; Exit Function
@@ -473,14 +473,14 @@ Func RemoveCastleSpell($Slots)
 	If _Sleep(1200) Then Return
 
 	If Not _ColorCheck(_GetPixelColor(508, 428, True), Hex(0xFFFFFF, 6), 30) Then ; If no 'Okay' button found to verify that we accept the changes
-		SetLog("Cannot find/verify 'Okay #2' Button in Army tab", $COLOR_WARNING)
+		SetLog("لا يمكن التحقق من زر اوك في نافذة الجيش", $COLOR_WARNING)
 		ClickP($aAway, 2, 0, "#0346") ;Click Away
 		Return False ; Exit function
 	EndIf
 
 	Click(Random(443, 583, 1), Random(400, 457, 1)) ; Click on 'Okay' button to Save changes... Last button
 
-	SetLog("Clan Castle Spell Removed", $COLOR_SUCCESS)
+	SetLog("حزف سبيلات قلعة القبيلة", $COLOR_SUCCESS)
 	If _Sleep(200) Then Return
 	Return True
 EndFunc   ;==>RemoveCastleSpell
@@ -511,13 +511,13 @@ Func CompareCCSpellWithGUI($CCSpell1, $CCSpell2, $CastleCapacity)
 
 	; Correct SetLog and flag a Variable to use $bCheckDBCCSpell For dead bases
 	If $g_abAttackTypeEnable[$DB] And $g_abSearchCastleSpellsWaitEnable[$DB] Then
-		If $g_bDebugSetlogTrain Then SetLog("- Let's compare CC Spells on Dead Bases!", $COLOR_DEBUG)
+		If $g_bDebugSetlogTrain Then SetLog("- مقارنة السبيلات القلعة على القرية المهجورة!", $COLOR_DEBUG)
 		$bCheckDBCCSpell = True
 	EndIf
 
 	; Correct Set log and flag a Variable to use $bCheckABCCSpell For Alive Bases
 	If $g_abAttackTypeEnable[$LB] And $g_abSearchCastleSpellsWaitEnable[$LB] Then
-		If $g_bDebugSetlogTrain Then SetLog("- Let's compare CC Spells on Active Bases", $COLOR_DEBUG)
+		If $g_bDebugSetlogTrain Then SetLog("- مقارنة السبيلات القلعة على القرية النشطة", $COLOR_DEBUG)
 		$bCheckABCCSpell = True
 	EndIf
 
@@ -665,10 +665,10 @@ Func TrainUsingWhatToTrain($rWTT, $bSpellsOnly = False)
 
 						Local $sTroopName = ($rWTT[$i][1] > 1 ? $g_asTroopNamesPlural[$iTroopIndex] : $g_asTroopNames[$iTroopIndex])
 						If CheckValuesCost($rWTT[$i][0], $rWTT[$i][1]) Then
-							SetLog("Training " & $rWTT[$i][1] & "x " & $sTroopName, $COLOR_SUCCESS)
+							SetLog("تدريب " & $rWTT[$i][1] & "  " & $sTroopName, $COLOR_SUCCESS)
 							TrainIt($iTroopIndex, $rWTT[$i][1], $g_iTrainClickDelay)
 						Else
-							SetLog("No resources to Train " & $rWTT[$i][1] & "x " & $sTroopName, $COLOR_ACTION)
+							SetLog("لا يوجد موارد كافية للتدريب " & $rWTT[$i][1] & "  " & $sTroopName, $COLOR_ACTION)
 							$g_bOutOfElixir = True
 						EndIf
 					Else ; If Needed Space was Higher Than Left Space
@@ -692,10 +692,10 @@ Func TrainUsingWhatToTrain($rWTT, $bSpellsOnly = False)
 
 						Local $sTroopName = ($CountToTrain > 1 ? $g_asTroopNamesPlural[$iTroopIndex] : $g_asTroopNames[$iTroopIndex])
 						If CheckValuesCost($rWTT[$i][0], $CountToTrain) Then
-							SetLog("Training " & $CountToTrain & "x " & $sTroopName, $COLOR_SUCCESS)
+							SetLog("تدريب " & $CountToTrain & "  " & $sTroopName, $COLOR_SUCCESS)
 							TrainIt($iTroopIndex, $CountToTrain, $g_iTrainClickDelay)
 						Else
-							SetLog("No resources to Train " & $CountToTrain & "x " & $sTroopName, $COLOR_ACTION)
+							SetLog("لا يوجد موارد كافية للتدريب " & $CountToTrain & "  " & $sTroopName, $COLOR_ACTION)
 							$g_bOutOfElixir = True
 						EndIf
 					EndIf
@@ -725,10 +725,10 @@ Func TrainUsingWhatToTrain($rWTT, $bSpellsOnly = False)
 
 						Local $sTroopName = ($rWTT[$i][1] > 1 ? $g_asTroopNamesPlural[$iTroopIndex] : $g_asTroopNames[$iTroopIndex])
 						If CheckValuesCost($rWTT[$i][0], $rWTT[$i][1]) Then
-							SetLog("Training " & $rWTT[$i][1] & "x " & $sTroopName, $COLOR_SUCCESS)
+							SetLog("تدريب " & $rWTT[$i][1] & "  " & $sTroopName, $COLOR_SUCCESS)
 							TrainIt($iTroopIndex, $rWTT[$i][1], $g_iTrainClickDelay)
 						Else
-							SetLog("No resources to Train " & $rWTT[$i][1] & "x " & $sTroopName, $COLOR_ACTION)
+							SetLog("لا يوجد موارد كافية للتدريب " & $rWTT[$i][1] & "  " & $sTroopName, $COLOR_ACTION)
 							$g_bOutOfElixir = True
 						EndIf
 					Else ; If Needed Space was Higher Than Left Space
@@ -752,10 +752,10 @@ Func TrainUsingWhatToTrain($rWTT, $bSpellsOnly = False)
 
 						Local $sTroopName = ($CountToTrain > 1 ? $g_asTroopNamesPlural[$iTroopIndex] : $g_asTroopNames[$iTroopIndex])
 						If CheckValuesCost($rWTT[$i][0], $CountToTrain) Then
-							SetLog("Training " & $CountToTrain & "x " & $sTroopName, $COLOR_SUCCESS)
+							SetLog("تدريب " & $CountToTrain & "  " & $sTroopName, $COLOR_SUCCESS)
 							TrainIt($iTroopIndex, $CountToTrain, $g_iTrainClickDelay)
 						Else
-							SetLog("No resources to Train " & $CountToTrain & "x " & $sTroopName, $COLOR_ACTION)
+							SetLog("لا يوجد موارد كافية للتدريب " & $CountToTrain & "  " & $sTroopName, $COLOR_ACTION)
 							$g_bOutOfElixir = True
 						EndIf
 					EndIf
@@ -773,7 +773,7 @@ Func BrewUsingWhatToTrain($Spell, $Quantity) ; it's job is a bit different with 
 
 	If $Quantity <= 0 Then Return False
 	If $Quantity = 9999 Then
-		SetLog("Brewing " & $sSpellName & " Spell Cancelled " & @CRLF & _
+		SetLog("صنع " & $sSpellName & " Spell Cancelled " & @CRLF & _
 				"                  Reason: Enough as set in GUI " & @CRLF & _
 				"                               This Spell not used in Attack")
 		Return True
@@ -789,10 +789,10 @@ Func BrewUsingWhatToTrain($Spell, $Quantity) ; it's job is a bit different with 
 			If Not $g_bRunState Then Return
 			If $NeededSpace <= $LeftSpace Then ; If Needed Space was Equal Or Lower Than Left Space
 				If CheckValuesCost($Spell, $Quantity) Then
-					SetLog("Brewing " & $Quantity & "x " & $sSpellName & ($Quantity > 1 ? " Spells" : " Spell"), $COLOR_SUCCESS)
+					SetLog("صنع " & $Quantity & "  " & $sSpellName & ($Quantity > 1 ? " Spells" : " Spell"), $COLOR_SUCCESS)
 					TrainIt($iSpellIndex, $Quantity, $g_iTrainClickDelay)
 				Else
-					SetLog("No resources to Brew " & $Quantity & "x " & $sSpellName & ($Quantity > 1 ? " Spells" : " Spell"), $COLOR_ACTION)
+					SetLog("لا يوجد موارد لصنع " & $Quantity & "  " & $sSpellName & ($Quantity > 1 ? " Spells" : " Spell"), $COLOR_ACTION)
 					$g_bOutOfElixir = True
 				EndIf
 
@@ -804,10 +804,10 @@ Func BrewUsingWhatToTrain($Spell, $Quantity) ; it's job is a bit different with 
 			$LeftSpace = ($LeftSpace[1] * 2) - $LeftSpace[0]
 			If $NeededSpace <= $LeftSpace Then ; If Needed Space was Equal Or Lower Than Left Space
 				If CheckValuesCost($Spell, $Quantity) Then
-					SetLog("Brewing " & $Quantity & "x " & $sSpellName & ($Quantity > 1 ? " Spells" : " Spell"), $COLOR_SUCCESS)
+					SetLog("صنع " & $Quantity & "  " & $sSpellName & ($Quantity > 1 ? " Spells" : " Spell"), $COLOR_SUCCESS)
 					TrainIt($iSpellIndex, $Quantity, $g_iTrainClickDelay)
 				Else
-					SetLog("No resources to Brew " & $Quantity & "x " & $sSpellName & ($Quantity > 1 ? " Spells" : " Spell"), $COLOR_ACTION)
+					SetLog("لا يوجد موارد لصنع  " & $Quantity & "  " & $sSpellName & ($Quantity > 1 ? " Spells" : " Spell"), $COLOR_ACTION)
 					$g_bOutOfElixir = True
 				EndIf
 			EndIf
@@ -943,7 +943,7 @@ Func DragIfNeeded($Troop)
 
 	If IsDarkTroop($Troop) Then
 		If _ColorCheck(_GetPixelColor(834, 403, True), Hex(0xD3D3CB, 6), 5) Then $bCheckPixel = True
-		If $g_bDebugSetlogTrain Then SetLog("DragIfNeeded Dark Troops: " & $bCheckPixel)
+		If $g_bDebugSetlogTrain Then SetLog("مطلوب قوات الظلام: " & $bCheckPixel)
 		For $i = 1 To 3
 			If Not $bCheckPixel Then
 				ClickDrag(715, 445 + $g_iMidOffsetY, 220, 445 + $g_iMidOffsetY, 2000)
@@ -955,7 +955,7 @@ Func DragIfNeeded($Troop)
 		Next
 	Else
 		If _ColorCheck(_GetPixelColor(22, 403, True), Hex(0xD3D3CB, 6), 5) Then $bCheckPixel = True
-		If $g_bDebugSetlogTrain Then SetLog("DragIfNeeded Normal Troops: " & $bCheckPixel)
+		If $g_bDebugSetlogTrain Then SetLog("مطلوب قوات طبيعية: " & $bCheckPixel)
 		For $i = 1 To 3
 			If Not $bCheckPixel Then
 				ClickDrag(220, 445 + $g_iMidOffsetY, 725, 445 + $g_iMidOffsetY, 2000)
@@ -966,7 +966,7 @@ Func DragIfNeeded($Troop)
 			EndIf
 		Next
 	EndIf
-	SetLog("Failed to Verify Troop " & $g_asTroopNames[TroopIndexLookup($Troop, "DragIfNeeded")] & " Position or Failed to Drag Successfully", $COLOR_ERROR)
+	SetLog("فشل التحقق من القوات " & $g_asTroopNames[TroopIndexLookup($Troop, "DragIfNeeded")] & " موضع أو فشل السحب بنجاح", $COLOR_ERROR)
 	Return False
 EndFunc   ;==>DragIfNeeded
 
@@ -1098,7 +1098,7 @@ Func RemoveExtraTroops($toRemove)
 		EndIf
 
 		If Not _ColorCheck(_GetPixelColor(806, 516, True), Hex(0xCEEF76, 6), 25) Then ; If no 'Edit Army' Button found in army tab to edit troops
-			SetLog("Cannot find/verify 'Edit Army' Button in Army tab", $COLOR_WARNING)
+			SetLog("لا يمكن العثور التحقق من تعديل الجيش", $COLOR_WARNING)
 			Return False ; Exit function
 		EndIf
 
@@ -1133,7 +1133,7 @@ Func RemoveExtraTroops($toRemove)
 		If _Sleep(150) Then Return
 
 		If Not _ColorCheck(_GetPixelColor(806, 567, True), Hex(0xCEEF76, 6), 25) Then ; If no 'Okay' button found in army tab to save changes
-			SetLog("Cannot find/verify 'Okay' Button in Army tab", $COLOR_WARNING)
+			SetLog("لا يمكن العثور التحقق من تعديل الجيش", $COLOR_WARNING)
 			ClickP($aAway, 2, 0, "#0346") ; Click Away, Necessary! due to possible errors/changes
 			If _Sleep(400) Then OpenArmyOverview(True, "RemoveExtraTroops()") ; Open Army Window AGAIN
 			Return False ; Exit Function
@@ -1146,18 +1146,18 @@ Func RemoveExtraTroops($toRemove)
 		If _Sleep(1200) Then Return
 
 		If Not _ColorCheck(_GetPixelColor(508, 428, True), Hex(0xFFFFFF, 6), 30) Then ; If no 'Okay' button found to verify that we accept the changes
-			SetLog("Cannot find/verify 'Okay #2' Button in Army tab", $COLOR_WARNING)
+			SetLog("لا يمكن العثور التحقق من تعديل الجيش", $COLOR_WARNING)
 			ClickP($aAway, 2, 0, "#0346") ;Click Away
 			Return False ; Exit function
 		EndIf
 
 		Click(Random(443, 583, 1), Random(400, 457, 1)) ; Click on 'Okay' button to Save changes... Last button
 
-		SetLog("All Extra troops removed", $COLOR_SUCCESS)
+		SetLog("جميع القوات الإضافية إزالتها", $COLOR_SUCCESS)
 		If _Sleep(200) Then Return
 		If $iResult = 0 Then $iResult = 1
 	Else ; If No extra troop found
-		SetLog("No extra troop to remove, Great", $COLOR_SUCCESS)
+		SetLog("لا توجد قوات إضافية لإزالة ، عظيم", $COLOR_SUCCESS)
 		$iResult = 3
 	EndIf
 
@@ -1367,7 +1367,7 @@ Func WhatToTrain($ReturnExtraTroopsOnly = False, $bSetLog = True)
 			If $g_bFirstStart Then $g_bFirstStart = False
 			Return $ToReturn
 		EndIf
-		SetLog(" - Your Army is Full, let's make troops before Attack!", $COLOR_INFO)
+		SetLog(" - الجيش الخاص بك ممتلئ ، دعونا ندرب القوات قبل الهجوم!", $COLOR_INFO)
 		; Elixir Troops
 		For $i = 0 To $eTroopCount - 1
 			Local $troopIndex = $g_aiTrainOrder[$i]
@@ -1530,7 +1530,7 @@ Func IsArmyWindow($bSetLog = False, $iTabNumber = 0)
 		If ($g_bDebugSetlog Or $g_bDebugClick) Or $bSetLog Or $g_bDebugSetlogTrain Then SetLog("**" & $txt & " OK**", $COLOR_DEBUG) ;Debug
 		Return True
 	Else
-		If $bSetLog Or $g_bDebugSetlogTrain Then SetLog("You are not in " & $txt & " | TAB " & $iTabNumber, $COLOR_ERROR) ; in case of $i > 10 in while loop
+		If $bSetLog Or $g_bDebugSetlogTrain Then SetLog("أنت لست في " & $txt & " | التبويب " & $iTabNumber, $COLOR_ERROR) ; in case of $i > 10 in while loop
 		If $g_bDebugImageSave Then DebugImageSave("IsTrainPage")
 		Return False
 	EndIf
@@ -1540,7 +1540,7 @@ EndFunc   ;==>IsArmyWindow
 Func CheckQueueTroops($bGetQuantity = True, $bSetLog = True)
 	Local $aResult[1] = [""]
 
-	If $bSetLog Then SetLog("Checking Troops Queue...", $COLOR_INFO)
+	If $bSetLog Then SetLog("التحقق من القوات الاضافية...", $COLOR_INFO)
 	Local $aSearchResult = SearchArmy("trainwindow-TrainTroops-bundle", 18, 182, 839, 261)
 
 	ReDim $aResult[UBound($aSearchResult)]
@@ -1565,7 +1565,7 @@ EndFunc   ;==>CheckQueueTroops
 Func CheckQueueSpells($bGetQuantity = True, $bSetLog = True)
 	Local $aResult[1] = [""], $sImageDir = "trainwindow-SpellsInQueue-bundle"
 	;$hTimer = TimerInit()
-	If $bSetLog Then SetLog("Checking Spells Queue...", $COLOR_INFO)
+	If $bSetLog Then SetLog("التحقق من السبيلات الاضافية...", $COLOR_INFO)
 
 	Local $aSearchResult = SearchArmy($sImageDir, 18, 182, 839, 261)
 	ReDim $aResult[UBound($aSearchResult)]
@@ -1652,7 +1652,7 @@ Func SearchArmy($sImageDir = "", $x = 0, $y = 0, $x1 = 0, $y1 = 0, $sArmyType = 
 			EndIf
 			ExitLoop
 		Else
-			If $iCount = 1 Then SetLog("You have received castle troops! Wait 5's...")
+			If $iCount = 1 Then SetLog("لقد ارسلت طلب الدعم جنود القلعة! انتظر 5 في...")
 			If _Sleep($DELAYTRAIN8) Then Return $aResult
 		EndIf
 	Next
@@ -1752,8 +1752,8 @@ Func TrainArmyNumber($Army, $iMultiClick = 1)
 				SetLog(" - Making the Army " & $Num + 1 & $sLog, $COLOR_INFO)
 				If _Sleep(500) Then Return
 			Else
-				SetLog(" - Error Clicking On Army: " & $Num + 1 & "| Pixel was :" & _GetPixelColor($a_TrainArmy[$Num][0], $a_TrainArmy[$Num][1], True), $COLOR_ACTION)
-				SetLog(" - Please 'edit' the Army " & $Num + 1 & " before start the BOT!!!", $COLOR_ERROR)
+				SetLog(" - خطأ النقر على الجيش: " & $Num + 1 & "| Pixel was :" & _GetPixelColor($a_TrainArmy[$Num][0], $a_TrainArmy[$Num][1], True), $COLOR_ACTION)
+				SetLog(" - يرجى تحرير الجيش " & $Num + 1 & " قبل تشيغيل البوت!!!", $COLOR_ERROR)
 			EndIf
 		EndIf
 	Next
@@ -1814,7 +1814,7 @@ Func MakingDonatedTroops()
 	Next
 	If $areThereDonSpell = 0 And $areThereDonTroop = 0 Then Return
 
-	SetLog("  making donated troops", $COLOR_ACTION1)
+	SetLog("  تدريب القوات التي قمت التبرع بها ", $COLOR_ACTION1)
 	If $areThereDonTroop > 0 Then
 		; Load $g_aiDonateTroops[$i] Values into $avDefaultTroopGroup[19][5]
 		For $i = 0 To UBound($avDefaultTroopGroup) - 1
@@ -1930,7 +1930,7 @@ Func MakingDonatedTroops()
 	EndIf
 	If _Sleep(1000) Then Return
 	$RemainTrainSpace = GetOCRCurrent(43, 160)
-	SetLog(" - Current Capacity: " & $RemainTrainSpace[0] & "/" & ($RemainTrainSpace[1]))
+	SetLog(" - القدرة الحالية: " & $RemainTrainSpace[0] & "/" & ($RemainTrainSpace[1]))
 EndFunc   ;==>MakingDonatedTroops
 
 Func GetOCRCurrent($x_start, $y_start)
@@ -1967,7 +1967,7 @@ EndFunc   ;==>GetOCRCurrent
 
 Func CheckIsFullQueuedAndNotFullArmy()
 
-	SetLog(" - Checking: FULL Queue and Not Full Army", $COLOR_INFO)
+	SetLog(" - التحقق: قائمة الانتظار الكاملة وليس الجيش الكامل", $COLOR_INFO)
 	Local $CheckTroop[4] = [824, 243, 0x94A522, 20] ; the green check symbol [bottom right] at slot 0 troop
 	If Not $g_bRunState Then Return
 
@@ -1976,15 +1976,15 @@ Func CheckIsFullQueuedAndNotFullArmy()
 	Local $aArmyCamp = GetOCRCurrent(43, 160)
 	If UBound($aArmyCamp) = 3 And $aArmyCamp[2] < 0 Then
 		If _ColorCheck(_GetPixelColor($CheckTroop[0], $CheckTroop[1], True), Hex($CheckTroop[2], 6), $CheckTroop[3]) Then
-			SetLog(" - Conditions met: FULL Queue and Not Full Army")
+			SetLog(" - الجيش الاضافي كامل و الجيش ليس كامل بالفعل")
 			DeleteQueued("Troops")
 			If _Sleep(500) Then Return
 			$aArmyCamp = GetOCRCurrent(43, 160)
 			Local $ArchToMake = $aArmyCamp[2]
 			If IsArmyWindow(False, $TrainTroopsTAB) Then TrainIt($eArch, $ArchToMake, $g_iTrainClickDelay) ; PureClick($TrainArch[0], $TrainArch[1], $ArchToMake, 500)
-			SetLog("Trained " & $ArchToMake & " archer(s)!")
+			SetLog("تدريب " & $ArchToMake & " ارشر!")
 		Else
-			SetLog(" - Conditions NOT met: FULL queue and Not Full Army")
+			SetLog(" - الجيش ليس كامل و الجيش الاضافي ايضا")
 		EndIf
 	EndIf
 
@@ -1992,7 +1992,7 @@ EndFunc   ;==>CheckIsFullQueuedAndNotFullArmy
 
 Func CheckIsEmptyQueuedAndNotFullArmy()
 
-	SetLog(" - Checking: Empty Queue and Not Full Army", $COLOR_ACTION1)
+	SetLog(" - التحقق من الجيش الاضافي فارغ والجيش ليس كامل ", $COLOR_ACTION1)
 	Local $CheckTroop[4] = [825, 204, 0xCFCFC8, 15] ; the gray background at slot 0 troop
 	Local $CheckTroop1[4] = [309, 131, 0x79BE29, 15] ; the Green Arrow on Troop Training tab
 	If Not $g_bRunState Then Return
@@ -2003,14 +2003,14 @@ Func CheckIsEmptyQueuedAndNotFullArmy()
 	If UBound($aArmyCamp) = 3 And $aArmyCamp[2] > 0 Then
 		If _ColorCheck(_GetPixelColor($CheckTroop[0], $CheckTroop[1], True), Hex($CheckTroop[2], 6), $CheckTroop[3]) Then
 			If Not _ColorCheck(_GetPixelColor($CheckTroop1[0], $CheckTroop1[1], True), Hex($CheckTroop1[2], 6), $CheckTroop1[3]) Then
-				SetLog(" - Conditions met: Empty Queue and Not Full Army")
+				SetLog(" - التحقق من الجيش الاضافي فارغ والجيش ليس كامل")
 				If _Sleep(500) Then Return
 				$aArmyCamp = GetOCRCurrent(43, 160)
 				Local $ArchToMake = $aArmyCamp[2]
 				If IsArmyWindow(False, $TrainTroopsTAB) Then TrainIt($eArch, $ArchToMake, $g_iTrainClickDelay) ;PureClick($TrainArch[0], $TrainArch[1], $ArchToMake, 500)
-				SetLog(" - Trained " & $ArchToMake & " archer(s)!")
+				SetLog(" - تدريب " & $ArchToMake & " ارشر!")
 			Else
-				SetLog(" - Conditions NOT met: Empty queue and Not Full Army")
+				SetLog(" - لجيش ليس كامل و الجيش الاضافي ايضا")
 			EndIf
 		EndIf
 	EndIf
@@ -2038,15 +2038,15 @@ Func TestTrainRevamp2()
 	$g_bRunState = True
 
 	$g_bDebugOcr = True
-	SetLog("Start......OpenArmy Window.....")
+	SetLog("ابدأ ...... فتح نافذة الجيش .....")
 
 	Local $timer = __TimerInit()
 
 	getArmyTroops(False, False, False, False)
 
-	SetLog("Imgloc Troops Time: " & Round(__TimerDiff($timer) / 1000, 2) & "'s")
+	SetLog("وقت القوات: " & Round(__TimerDiff($timer) / 1000, 2) & "'ثانية")
 
-	SetLog("End......OpenArmy Window.....")
+	SetLog("انهاء ...... فتح نافذة الجيش ......")
 	$g_bDebugOcr = False
 	$g_bRunState = False
 EndFunc   ;==>TestTrainRevamp2
@@ -2108,8 +2108,8 @@ Func CheckValuesCost($Troop = "Arch", $troopQuantity = 1, $DebugLogs = 0)
 
 	; 	DEBUG
 	If $g_bDebugSetlogTrain Or $DebugLogs Then
-		SetLog("- Current resources:")
-		SetLog(" - Elixir: " & _NumberFormat($nElixirCurrent) & " / Dark Elixir: " & _NumberFormat($nDarkCurrent), $COLOR_INFO)
+		SetLog("- الموارد الحالية:")
+		SetLog(" - اكسير: " & _NumberFormat($nElixirCurrent) & " / اكسير الدارك: " & _NumberFormat($nDarkCurrent), $COLOR_INFO)
 		$g_bDebugOcr = $bLocalDebugOCR ; disable OCR Debug
 	EndIf
 
@@ -2124,31 +2124,31 @@ Func CheckValuesCost($Troop = "Arch", $troopQuantity = 1, $DebugLogs = 0)
 	EndIf
 
 	;	DEBUG
-	If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("Individual Cost " & $Troop & "= " & $troopCost)
+	If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("التكلفة الفردية " & $Troop & "= " & $troopCost)
 
 	; Cost of the Troop&Spell x the quantities
 	$troopCost *= $troopQuantity
 
 	; 	DEBUG
-	If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("Total Cost " & $Troop & "= " & $troopCost)
+	If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("التكلفة الإجمالية " & $Troop & "= " & $troopCost)
 
 	If IsDarkTroop($Troop) Then
 		; If is Dark Troop
-		If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("Dark Troop " & $Troop & " Is Dark Troop")
+		If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("قوات الاكسير الظلام " & $Troop & " هي قوات الاكسير الدارك")
 		If $troopCost <= $nDarkCurrent Then
 			Return True
 		EndIf
 		Return False
 	ElseIf IsElixirSpell($Troop) Then
 		; If is Elixir Spell
-		If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("Spell " & $Troop & " Is Elixir Spell")
+		If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("السبيل " & $Troop & " هو سبيل اكسير ")
 		If $troopCost <= $nElixirCurrent Then
 			Return True
 		EndIf
 		Return False
 	ElseIf IsDarkSpell($Troop) Then
 		; If is Dark Spell
-		If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("Dark Spell " & $Troop & " Is Dark Spell")
+		If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("سبيل اكسير الدارك " & $Troop & " هو سبيل اكسير الظلام")
 		If $troopCost <= $nDarkCurrent Then
 			Return True
 		EndIf
@@ -2156,7 +2156,7 @@ Func CheckValuesCost($Troop = "Arch", $troopQuantity = 1, $DebugLogs = 0)
 	Else
 		; If Isn't Dark Troop And Spells, Then is Elixir Troop : )
 		If $troopCost <= $nElixirCurrent Then
-			If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("Troop " & $Troop & " Is Elixir Troop")
+			If $g_bDebugSetlogTrain Or $DebugLogs Then SetLog("قوات " & $Troop & " هي قوات الاكسير")
 			Return True
 		EndIf
 		Return False
@@ -2175,7 +2175,7 @@ Func ThSnipesSkiptrain()
 		Next
 		If $iTemp = 1 Then Return False ; 	make troops before battle ( is using only one troop kind )
 		If $iTemp > 1 Then
-			SetLog("Skipping Training before Attack due to THSnipes!", $COLOR_INFO)
+			SetLog("تخطي التدريب في حاج الهجوم على قنص تاون هول !", $COLOR_INFO)
 			Return True ;	not making troops before battle
 		EndIf
 	Else

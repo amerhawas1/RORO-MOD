@@ -17,16 +17,16 @@ Func CheckPreciseArmyCamp()
 	Local $sTextTroop = "Troops are so far so good!"
 	Local $sTextSpell = "Spells are so far so good!"
 
-	SetLog("Checking ArmyWindow for Troops & Spells precision", $COLOR_INFO)
+	SetLog("التحقق من نافذة القوات والسبيلات بشكل دقيق جدا", $COLOR_INFO)
 
 	Local $bReturnArmyTab = False
 	Local $toRemove = CheckWrongArmyCamp(False) ; Return $toRemove, Get value of $g_bWrongTroop & $g_bWrongSpell
 	If @error Then Return SetError(2) ; Quit SmartTrain
 
 	If Not $g_bWrongTroop And Not $g_bWrongSpell Then ; Troops & Spells are correct
-		If $g_bFullArmy Then $sTextTroop = "All troops are correct!"
-		If $g_bFullArmySpells Then $sTextSpell = "All spells are correct!"
-		If $g_bForceBrewSpells Then $sTextSpell = "Skip checking spells as ForceBrewSpell is activated!"
+		If $g_bFullArmy Then $sTextTroop = "كل القوات صحيحة!"
+		If $g_bFullArmySpells Then $sTextSpell = "كل السبيلات صحيحة!"
+		If $g_bForceBrewSpells Then $sTextSpell = "  "
 
 		SetLog($sTextTroop & " " & $sTextSpell, $COLOR_SUCCESS)
 		Return False
@@ -36,13 +36,13 @@ Func CheckPreciseArmyCamp()
 		Local $bNeedClearSpell = $g_bWrongSpell And _ColorCheck(_GetPixelColor($aGreenArrowBrewSpells[0], $aGreenArrowBrewSpells[1], True), Hex(0xA0D077, 6), 30)
 
 		If $bNeedClearTroop Then
-			SetLog("Need to clear queued troops before removing!", $COLOR_ACTION)
+			SetLog("تحتاج إلى مسح القوات الاضافية قبل إزالتها!", $COLOR_ACTION)
 			ClearTrainingArmyCamp("Troop", Not $bNeedClearSpell) ; open Troop tab, clear all training, return to Army tab if Not $bNeedClearSpell.
 			If @error Then Return SetError(2) ; Quit SmartTrain
 		EndIf
 
 		If $bNeedClearSpell Then
-			SetLog("Need to clear queued spells before removing!", $COLOR_ACTION)
+			SetLog("تحتاج إلى مسح السبييلات الاضافية قبل إزالتها!", $COLOR_ACTION)
 			ClearTrainingArmyCamp("Spell", True) ; open Troop tab, clear all training, return to Army tab.
 			If @error Then Return SetError(2) ; Quit SmartTrain
 		EndIf
@@ -112,9 +112,9 @@ Func CheckWrongArmyCamp($bCheckExistentArmy = True)
 
 		If TotalSpellsToBrewInGUI() > 0 Then
 			If $CounterToRemove <= UBound($toRemove) - 1 Then
-				SetLog("Spells To Remove: ", $COLOR_INFO)
+				SetLog("السبيلات التي سوف تحذف هي : ", $COLOR_INFO)
 				For $i = $CounterToRemove To (UBound($toRemove) - 1)
-					If $toRemove[$i][1] > 0 Then SetLog(" - " & $g_asSpellNames[TroopIndexLookup($toRemove[$i][0]) - $eLSpell] & ": " & $toRemove[$i][1] & "x", $COLOR_SUCCESS)
+					If $toRemove[$i][1] > 0 Then SetLog(" - " & $g_asSpellNames[TroopIndexLookup($toRemove[$i][0]) - $eLSpell] & ": " & $toRemove[$i][1] & "  ", $COLOR_SUCCESS)
 				Next
 				$g_bWrongSpell = True
 			EndIf
@@ -187,7 +187,7 @@ Func RemoveWrongArmyCamp($toRemove)
 
 		Click(Random(443, 583, 1), Random(400, 457, 1)) ; Click on 'Okay' button to Save changes... Last button
 
-		SetLog("All wrong troops removed", $COLOR_SUCCESS)
+		SetLog("حذف جميع القوات الخاطئة", $COLOR_SUCCESS)
 		If _Sleep(200) Then Return
 	EndIf
 

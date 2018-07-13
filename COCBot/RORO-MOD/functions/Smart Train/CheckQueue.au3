@@ -18,7 +18,7 @@ Func CheckQueue(ByRef $eTrainMethod_0, $sText = "Troops")
 	Local $bResult = False
 
 	If $g_bQuickTrainEnable Then
-		SetLog("Delete all queue for quick train", $COLOR_WARNING)
+		SetLog("حزف جميع القوات الاضافية من اجل التدريب السريع", $COLOR_WARNING)
 		DeleteQueue($sText)
 		$bResult = True
 	EndIf
@@ -34,7 +34,7 @@ Func CheckQueue(ByRef $eTrainMethod_0, $sText = "Troops")
 		Next
 	EndIf
 
-	SetLog("Checking queue " & $sText, $COLOR_INFO)
+	SetLog("التحقق من القوات الاضافية " , $COLOR_INFO)
 
 	; Delete slot 11 anyway
 	If Not _ColorCheck(_GetPixelColor($CheckTroop[0] - 11 * 70, $CheckTroop[1], True), Hex($CheckTroop[2], 6), $CheckTroop[3]) Then ; Grey bkground
@@ -110,7 +110,7 @@ Func CheckQueue(ByRef $eTrainMethod_0, $sText = "Troops")
 		EndIf
 
 		If $bResult Then
-			SetLog("Some wrong " & $sText & " in queue", $COLOR_WARNING)
+			SetLog("بعض الأخطاء  " & $sText & " في الجيش الاضافي", $COLOR_WARNING)
 			DeleteQueue($sText)
 		EndIf
 
@@ -123,10 +123,10 @@ EndFunc   ;==>CheckQueue
 Func DeleteQueue($sText = "Troops")
 	Local $CheckTroop[4] = [825, 204, 0xCFCFC8, 15] ; the gray background
 	Local $CheckPink[4] = [825, 186, 0xD7AFA9, 10] ; the pink background
-	SetLog("Removing all queue " & $sText, $COLOR_SUCCESS)
+	SetLog("حزف جميع الجيش الاضافي  " & $sText, $COLOR_SUCCESS)
 	For $i = 0 To 11
 		If _ColorCheck(_GetPixelColor($CheckPink[0] - $i * 70, $CheckPink[1], True), Hex($CheckPink[2], 6), $CheckPink[3]) Then ; Pink background found
-			If $g_bDebugSetlog Then SetDebugLog("Slot: " & $i & " Found queue", $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog("Slot: " & $i & " وجد جيش تاني ", $COLOR_DEBUG)
 			Local $x = 0
 			While Not _ColorCheck(_GetPixelColor($CheckTroop[0] - $i * 70, $CheckTroop[1], True), Hex($CheckTroop[2], 6), $CheckTroop[3])
 				If _Sleep(20) Then Return
@@ -139,7 +139,7 @@ Func DeleteQueue($sText = "Troops")
 					If $x = 22 Then ExitLoop
 				EndIf
 			WEnd
-			If $g_bDebugSetlog Then SetDebugLog("Delete all queue, let's exit clicking", $COLOR_DEBUG)
+			If $g_bDebugSetlog Then SetDebugLog("حزف جميع الجيش الاضافي, let's exit clicking", $COLOR_DEBUG)
 			ExitLoop
 		EndIf
 	Next

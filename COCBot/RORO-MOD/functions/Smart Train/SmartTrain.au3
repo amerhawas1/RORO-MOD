@@ -17,16 +17,16 @@ Func SmartTrain()
 	Local $bCheckWrongArmyCamp = False, $bCheckWrongSpells = False
 
 	If Not $g_bQuickTrainEnable Then
-		SetLog("Start Smart Custom Train")
+		SetLog("تشغيل ميزة التدريب الذكي المخصص")
 	Else
-		SetLog("Start Smart Quick Train")
+		SetLog("تشيغل ميزة التدريب السريع")
 	EndIf
 
 	While 1
 		$bRemoveUnpreciseTroops = CheckPreciseArmyCamp() ; checking troop precision. remove wrong troop if any.
 		If @error Then ExitLoop
 
-		If $bRemoveUnpreciseTroops Then SetLog("Continue Smart Train...!")
+		If $bRemoveUnpreciseTroops Then SetLog("متابعة الى التدريب الذكي ...!")
 
 		; Troops tab
 		If $g_iTotalCampSpace <> 0 Then
@@ -62,7 +62,7 @@ Func SmartTrain()
 
 		; Train
 		If Not IsArray($aeTrainMethod) Or Not IsArray($aeBrewMethod) Then
-			SetLog("Some kinds of error. Quit training", $COLOR_ERROR)
+			SetLog("بعض أنواع الخطأ. ترك التدريب", $COLOR_ERROR)
 		Else
 			If Not $g_bQuickTrainEnable Then ; Custom Train
 				If _Sleep(500) Then Return
@@ -86,16 +86,16 @@ Func SmartTrain()
 				If $g_bChkMultiClick Then $iMultiClick = $g_iMultiClick
 				TrainArmyNumber($g_bQuickTrainArmy, $iMultiClick)
 			Else
-				SetLog("Full queue, skip Quick Train", $COLOR_INFO)
+				SetLog("الجيش الاضافي كامل , تخطي التدريب السريع", $COLOR_INFO)
 			EndIf
-			SetLog("Smart Train accomplished")
+			SetLog("التدريب الذكي اكتمل بنجاح")
 		EndIf
 
 		ExitLoop
 
 	WEnd
 
-	If @error Then SetLog("Quit training. " & $g_sSmartTrainError, $COLOR_ERROR)
+	If @error Then SetLog("ترك التدريب. " & $g_sSmartTrainError, $COLOR_ERROR)
 
 	ClickP($aAway, 2, 0, "#0000") ;Click Away
 	If $bRemoveUnpreciseTroops Then CheckIfArmyIsReady()
@@ -150,20 +150,20 @@ Func TrainNow($sText, $aArmy)
 			If Not DragIfNeeded($aArmy[$i][0]) Then $g_sSmartTrainError = SetError(3, 0, "Error DragIfNeeded called from TrainNow")
 			If @error Then Return ; quit SmartTrain
 
-			Local $sAction = "Training "
-			If $sText = "Spells" Then
-				$sAction = "Brewing "
+			Local $sAction = "تدريب "
+			If $sText = "السبيلات" Then
+				$sAction = "صنع "
 			EndIf
 			Local $iTS_Index = TroopIndexLookup($aArmy[$i][0])
 			Local $sTS_Name = NameOfTroop($iTS_Index, $aArmy[$i][1] > 1 ? 1 : 0)
 
 
 			If CheckValuesCost($aArmy[$i][0], $aArmy[$i][1]) Then
-				SetLog(" - " & $sAction & $aArmy[$i][1] & "x " & $sTS_Name, $COLOR_SUCCESS)
+				SetLog(" - " & $sAction & $aArmy[$i][1] & "   " & $sTS_Name, $COLOR_SUCCESS)
 				If Not TrainIt($iTS_Index, $aArmy[$i][1], $g_iTrainClickDelay) Then $g_sSmartTrainError = SetError(3, 0, "Error TrainIt called from TrainNow")
 				If @error Then Return ; quit SmartTrain
 			Else
-				SetLog("No resources for " & $sAction & $aArmy[$i][1] & "x " & $sTS_Name, $COLOR_ACTION)
+				SetLog("لا يوجد موارد  من اجل  " & $sAction & $aArmy[$i][1] & "  " & $sTS_Name, $COLOR_ACTION)
 			EndIf
 		EndIf
 	Next
@@ -186,9 +186,9 @@ Func DefineWhatToTrain($sText = "Troops", $TrainMethod = $g_eFull, $bTrainQueue 
 
 		Case $g_eFull
 			If Not $bTrainQueue Then
-				SetLog("Custom train full set of " & $sText, $COLOR_INFO)
+				SetLog("مجموعة كاملة من التدريب المخصص " & $sText, $COLOR_INFO)
 			Else
-				SetLog("Custom train full set of queue " & $sText, $COLOR_INFO)
+				SetLog("مجموعة كاملة من التدريب المخصص للجيش الاضافي  " & $sText, $COLOR_INFO)
 			EndIf
 
 			For $i = 0 To (UBound($aCurrent) - 1)
@@ -214,9 +214,9 @@ Func DefineWhatToTrain($sText = "Troops", $TrainMethod = $g_eFull, $bTrainQueue 
 
 		Case $g_eRemained
 			If Not $bTrainQueue Then
-				SetLog("Custom train remaining " & $sText, $COLOR_INFO)
+				SetLog("التدريب المخصص الباقي  " & $sText, $COLOR_INFO)
 			Else
-				SetLog("Custom train remaining queue " & $sText, $COLOR_INFO)
+				SetLog("التدريب المخصص الباقي للجيش الاضافي  " & $sText, $COLOR_INFO)
 			EndIf
 
 			For $i = 0 To (UBound($aCurrent) - 1)
