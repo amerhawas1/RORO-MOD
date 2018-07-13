@@ -82,7 +82,7 @@ Func Collect($bCheckTreasury = True)
 			SetLog("Error in Collect(): Loot Cart Coordinates are not inside the Village (X: " & $aLootCart[0] & " | Y: " & $aLootCart[1], $COLOR_ERROR)
 		EndIf
 	Else
-		SetLog("No Loot Cart found on your Village", $COLOR_SUCCESS)
+		SetLog("لا توجد عربة الموارد التي تتواجد عن الهجوم على القرية", $COLOR_SUCCESS)
 	EndIf
 
 	If $g_bChkTreasuryCollect And $bCheckTreasury Then TreasuryCollect()

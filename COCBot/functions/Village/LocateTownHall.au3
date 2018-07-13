@@ -23,7 +23,7 @@ Func LocateTownHall($bLocationOnly = False)
 	WinGetAndroidHandle()
 	If _GetPixelColor($aTopLeftClient[0], $aTopLeftClient[1], True) <> Hex($aTopLeftClient[2], 6) Or _GetPixelColor($aTopRightClient[0], $aTopRightClient[1], True) <> Hex($aTopRightClient[2], 6) Then
 		Zoomout()
-		Collect()
+		
 	EndIf
 
 	While 1
