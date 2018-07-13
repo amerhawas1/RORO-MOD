@@ -136,7 +136,7 @@ Func DonateCC($bCheckForNewMsg = False)
 
 		ForceCaptureRegion()
 
-		;;; get the Request Buttons
+		; get the Request Buttons
 		$g_aiDonatePixel = _MultiPixelSearch(200, $y, 230, 660 + $g_iBottomOffsetY, -2, 1, Hex(0x6da725, 6), $aChatDonateBtnColors, 20)
 
 		$iBenchmark = TimerDiff($itime)
@@ -148,15 +148,15 @@ Func DonateCC($bCheckForNewMsg = False)
 			If $g_bDebugSetlog Then SetDebugLog("***** Donate Request Number " & $Buttons & " *****", $COLOR_ACTION)
 			If $g_bDebugSetlog Then SetDebugLog("$g_aiDonatePixel: (" & $g_aiDonatePixel[0] & "," & $g_aiDonatePixel[1] & ")", $COLOR_DEBUG)
 
-			;;; Collect Donate users images
+			; Collect Donate users images
 			$donateCCfilter = donateCCWBLUserImageCollect($g_aiDonatePixel[0], $g_aiDonatePixel[1])
 
-			;;; reset every run
+			; reset every run
 			$bDonate = False
 			$g_bSkipDonTroops = False
 			$g_bSkipDonSpells = False
 
-			;;; Read chat request for DonateTroop and DonateSpell
+			; Read chat request for DonateTroop and DonateSpell
 			If $bDonateTroop Or $bDonateSpell And $donateCCfilter Then
 
 				Local $Alphabets[4] = [$g_bChkExtraAlphabets, $g_bChkExtraChinese, $g_bChkExtraKorean, $g_bChkExtraPersian]
@@ -223,13 +223,13 @@ Func DonateCC($bCheckForNewMsg = False)
 				SetLog("Skip reading chat requests. Donate all is enabled!", $COLOR_ACTION)
 			EndIf
 
-			;;; Get remaining CC capacity of requested troops from your ClanMates
+			; Get remaining CC capacity of requested troops from your ClanMates
 			RemainingCCcapacity()
 			$iBenchmark = TimerDiff($itime)
 			If $g_bDebugSetlog Then SetDebugLog("Get remaining CC capacity in " & StringFormat("%.2f", $iBenchmark) & "'ms", $COLOR_DEBUG)
 			$itime = TimerInit()
 
-			;;; Donate Filter
+			; Donate Filter
 			If Not $donateCCfilter Then
 				SetLog("Skip Donation at this Clan Mate...", $COLOR_ACTION)
 				$g_bSkipDonTroops = True
@@ -253,14 +253,14 @@ Func DonateCC($bCheckForNewMsg = False)
 
 			EndIf
 
-			;;; Flagged to Skip Check
+			; Flagged to Skip Check
 			If $g_bSkipDonTroops And $g_bSkipDonSpells Then
 				$bDonate = True
 				$y = $g_aiDonatePixel[1] + 50
 				ContinueLoop ; go to next button if cant read Castle Troops and Spells before the donate window opens
 			EndIf
 
-			;;; Open Donate Window
+			; Open Donate Window
 			If _Sleep($DELAYDONATECC3) Then Return
 			If ($g_bSkipDonTroops And $g_bSkipDonSpells) Or Not DonateWindow($bOpen) Then
 				$bDonate = True
@@ -269,11 +269,11 @@ Func DonateCC($bCheckForNewMsg = False)
 				ExitLoop ; Leave donate to prevent a bot hang condition
 			EndIf
 
-			;;; Variables to use in Loops for Custom.A to Custom.D
+			; Variables to use in Loops for Custom.A to Custom.D
 			Local $eCustom[4] = [$eCustomA, $eCustomB, $eCustomC, $eCustomD]
 			Local $eDonateCustom[4] = [$g_aiDonateCustomTrpNumA, $g_aiDonateCustomTrpNumB, $g_aiDonateCustomTrpNumC, $g_aiDonateCustomTrpNumD]
 
-			;;; Typical Donation
+			; Typical Donation
 			If $bDonateTroop Or $bDonateSpell Then
 				If $g_bDebugSetlog Then SetDebugLog("Troop/Spell checkpoint.", $COLOR_DEBUG)
 
@@ -290,11 +290,11 @@ Func DonateCC($bCheckForNewMsg = False)
 					ContinueLoop ; go to next button if already donated, maybe this is an impossible case..
 				EndIf
 
-				;;;  DONATION TROOPS
+				;  DONATION TROOPS
 				If $bDonateTroop And Not $g_bSkipDonTroops Then
 					If $g_bDebugSetlog Then SetDebugLog("Troop checkpoint.", $COLOR_DEBUG)
 
-					;;;  Custom Combination Troops
+					;  Custom Combination Troops
 					For $x = 0 To UBound($eDonateCustom) - 1
 						If $g_abChkDonateTroop[$eCustom[$x]] And CheckDonateTroop(99, $g_asTxtDonateTroop[$eCustom[$x]], $g_asTxtBlacklistTroop[$eCustom[$x]], $ClanString) Then
 							Local $CorrectDonateCustom = $eDonateCustom[$x]
@@ -316,7 +316,7 @@ Func DonateCC($bCheckForNewMsg = False)
 						EndIf
 					Next
 
-					;;;  Typical Donate troops
+					;  Typical Donate troops
 					If Not $g_bSkipDonTroops Then
 						For $i = 0 To UBound($g_aiDonateTroopPriority) - 1
 							Local $iTroopIndex = $g_aiDonateTroopPriority[$i]
@@ -334,7 +334,7 @@ Func DonateCC($bCheckForNewMsg = False)
 
 				EndIf
 
-				;;; DONATION SPELLS
+				; DONATION SPELLS
 				If $bDonateSpell And Not $g_bSkipDonSpells Then
 					If $g_bDebugSetlog Then SetDebugLog("Spell checkpoint.", $COLOR_DEBUG)
 
@@ -353,7 +353,7 @@ Func DonateCC($bCheckForNewMsg = False)
 				EndIf
 			EndIf
 
-			;;; Donate to All Zone
+			; Donate to All Zone
 			If $bDonateAllTroop Or $bDonateAllSpell Then
 				If $g_bDebugSetlog Then SetDebugLog("Troop/Spell All checkpoint.", $COLOR_DEBUG) ;Debug
 				$g_bDonateAllRespectBlk = True
@@ -361,7 +361,7 @@ Func DonateCC($bCheckForNewMsg = False)
 				
 					If $g_bDebugSetlog Then SetDebugLog("Troop All checkpoint.", $COLOR_DEBUG)
 
-					;;; DONATE TO ALL for Custom And Typical Donation
+					; DONATE TO ALL for Custom And Typical Donation
 					; 0 to 3 is Custom [A to D] and the 4 is the 'Typical'
 					For $x = 0 To 4
 						If $x <> 4 Then
@@ -386,7 +386,7 @@ Func DonateCC($bCheckForNewMsg = False)
 									ElseIf $CorrectDonateCustom[$i][1] > 8 Then
 										$CorrectDonateCustom[$i][1] = 8 ; Number larger than 8 is unnecessary
 									EndIf
-									DonateTroopType($CorrectDonateCustom[$i][0], $CorrectDonateCustom[$i][1], $g_abChkDonateAllTroop[$eCustom[$x]], $bDonateAllTroop) ;;; Donate Custom Troop using DonateTroopType2
+									DonateTroopType($CorrectDonateCustom[$i][0], $CorrectDonateCustom[$i][1], $g_abChkDonateAllTroop[$eCustom[$x]], $bDonateAllTroop) ; Donate Custom Troop using DonateTroopType2
 								Next
 							EndIf
 						Else ; this is the $x = 4 [Typical Donation]
@@ -431,7 +431,7 @@ Func DonateCC($bCheckForNewMsg = False)
 			If _Sleep($DELAYDONATEWINDOW1) Then ExitLoop
 		EndIf
 
-		;;; Check for more donate buttons
+		; Check for more donate buttons
 		ForceCaptureRegion()
 		$g_aiDonatePixel = _MultiPixelSearch(200, $y, 230, 660 + $g_iBottomOffsetY, -2, 1, Hex(0x6da725, 6), $aChatDonateBtnColors, 20)
 
@@ -445,7 +445,7 @@ Func DonateCC($bCheckForNewMsg = False)
 			If $g_bDebugSetlog Then SetDebugLog("No more Donate buttons found, closing chat ($y=" & $y & ")", $COLOR_DEBUG)
 		EndIf
 
-		;;; Scroll Down
+		; Scroll Down
 		ForceCaptureRegion()
 		$Scroll = _PixelSearch(293, 687 - 30, 295, 693 - 30, Hex(0xFFFFFF, 6), 20)
 
