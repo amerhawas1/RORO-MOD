@@ -36,7 +36,7 @@ Func GUIControlCheckCC()
 		If $Limit = 1 And $TxtCC >= 10 Then GUICtrlSetData($g_ahTxtCCSlot[$i], 0)
 		GUICtrlSetLimit($g_ahTxtCCSlot[$i], $Limit)
 		If $i >= 3 Then $CmbSel += 21
-		If $CmbSel <> $aIcons[$CmbSel] Then _GUICtrlSetImage($g_ahPicCCSlot[$i], $g_sLibIconPath, $aIcons[$CmbSel])
+		
 	Next
 
 	; checking expect/total for warning
