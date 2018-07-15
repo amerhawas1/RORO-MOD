@@ -30,7 +30,7 @@ Func CheckAndroidRebootCondition($bRebootAndroid = True, $bLogOnly = False)
 	; check for additional reboot conditions
 	If $g_bGfxError Then
 		$g_bGfxError = False
-		SetLog("Reboot " & $g_sAndroidEmulator & " (" & $g_sAndroidInstance & ") due to detected Gfx Errors")
+		SetLog("اعادة تشغيل " & $g_sAndroidEmulator & " (" & $g_sAndroidInstance & ") بسبب اكتشاف أخطاء Gfx")
 		Return True
 	EndIF
 
@@ -42,20 +42,20 @@ Func CheckAndroidRebootCondition($bRebootAndroid = True, $bLogOnly = False)
 	If $bLogOnly = True Then
 
 		Local $day = 0, $hour = 0, $min = 0, $sec = 0, $sTime
-		_TicksToDay($g_iAndroidRebootHours * 60 * 60 * 1000 - $iLaunched, $day, $hour, $min, $sec)
+		_TicksToDay($g_iAndroidRebootHours * 60 * 60 * 500 - $iLaunched, $day, $hour, $min, $sec)
 		;$sTime = $day > 0 ? StringFormat("%2u Day(s) %02i:%02i:%02i", $day, $hour, $min, $sec) : StringFormat("%02i:%02i:%02i", $hour, $min, $sec)
-		$sTime = StringFormat("%id %ih %im", $day, $hour, $min)
-		SetLog($g_sAndroidEmulator & " (" & $g_sAndroidInstance & ") will be automatically rebooted in " & $sTime)
+		$sTime = StringFormat("%iيوم %iساعة %iدقيقة", $day, $hour, $min)
+		SetLog($g_sAndroidEmulator & " (" & $g_sAndroidInstance & ") سيتم إعادة التشغيل تلقائيًا في " & $sTime)
 		Return True
 
 	EndIf
 
 	If $g_bIdleState = False Then Return False
 
-	Local $iRunTimeHrs = $iLaunched / (60 * 60 * 1000)
+	Local $iRunTimeHrs = $iLaunched / (60 * 60 * 500)
 
 	If $iRunTimeHrs >= $g_iAndroidRebootHours Then
-		SetLog("Reboot " & $g_sAndroidEmulator & " (" & $g_sAndroidInstance & ") due to configured run-time of " & $g_iAndroidRebootHours & "h")
+		SetLog("اعادة تشغيل " & $g_sAndroidEmulator & " (" & $g_sAndroidInstance & ") بسبب تكوين وقت التشغيل من " & $g_iAndroidRebootHours & "ساعة")
 		Return True
 	EndIf
 

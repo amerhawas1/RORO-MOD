@@ -32,9 +32,9 @@ Func CheckAndroidPageError($bRebootAndroid = True)
 		Local $sMin = Round(__TimerDiff($g_aiAndroidPageError[1]) / (60 * 1000), 1) & " Minutes"
 
 		If $bRebootAndroid = True Then
-			SetLog("Reboot " & $g_sAndroidEmulator & " due to " & $g_aiAndroidPageError[0] & " page errors in " & $sMin, $COLOR_ERROR)
+			SetLog("اعادة تشغيل " & $g_sAndroidEmulator & " بسبب " & $g_aiAndroidPageError[0] & " أخطاء الصفحة في " & $sMin, $COLOR_ERROR)
 		Else
-			SetLog($g_sAndroidEmulator & " had " & $g_aiAndroidPageError[0] & " page errors in " & $sMin, $COLOR_ERROR)
+			SetLog($g_sAndroidEmulator & " كان " & $g_aiAndroidPageError[0] & " أخطاء الصفحة في " & $sMin, $COLOR_ERROR)
 		EndIf
 		InitAndroidPageError()
 
@@ -49,7 +49,7 @@ Func CheckAndroidPageError($bRebootAndroid = True)
 	If $bResetTimer = True Then
 
 		If $g_aiAndroidPageError[0] > 0 Then
-			SetDebugLog("Cleared " & $g_aiAndroidPageError[0] & " " & $g_sAndroidEmulator & " page errors")
+			SetDebugLog("مسح " & $g_aiAndroidPageError[0] & " " & $g_sAndroidEmulator & " أخطاء الصفحة")
 		EndIf
 
 		InitAndroidPageError()
@@ -64,7 +64,7 @@ EndFunc   ;==>CheckAndroidPageError
 Func AndroidPageError($sSource)
 
 	$g_aiAndroidPageError[0] += 1
-	SetDebugLog("Page error count increased to " & $g_aiAndroidPageError[0] & ", source: " & $sSource)
+	SetDebugLog("زاد عدد أخطاء الصفحة إلى " & $g_aiAndroidPageError[0] & ", مصدر: " & $sSource)
 	If $g_aiAndroidPageError[1] = 0 Then $g_aiAndroidPageError[1] = __TimerInit()
 	Return $g_aiAndroidPageError[0]
 

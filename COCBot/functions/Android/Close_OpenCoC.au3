@@ -22,9 +22,9 @@ Func CloseCoC($ReOpenCoC = False, $bCheckRunState = True)
 
 	Local $Adb = ""
 	If $ReOpenCoC Then
-		SetLog("Please wait for CoC restart......", $COLOR_ERROR) ; Let user know we need time...
+		SetLog("الرجاء الانتظار  ريثما يتم اعادة تشغيل اللعبة......", $COLOR_ERROR) ; Let user know we need time...
 	Else
-		SetLog("Closing CoC......", $COLOR_ERROR) ; Let user know what we do...
+		SetLog("اغلاق اللعبة......", $COLOR_ERROR) ; Let user know what we do...
 	EndIf
 	WinGetAndroidHandle()
 	If $bCheckRunState And Not $g_bRunState Then Return FuncReturn()
@@ -114,10 +114,10 @@ Func _WaitnOpenCoC($iWaitTime, $bFullRestart = False, $bSuspendComputer = False,
 	$iHour = Floor(Floor($iWaitSec / 60) / 60)
 	$iMin = Floor(Mod(Floor($iWaitSec / 60), 60))
 	$iSec = Floor(Mod($iWaitSec, 60))
-	If $iHour > 0 Then $sWaitTime &= $iHour & " hours "
-	If $iMin > 0 Then $sWaitTime &= $iMin & " minutes "
-	If $iSec > 0 Then $sWaitTime &= $iSec & " seconds "
-	SetLog("Waiting " & $sWaitTime & "before starting CoC", $COLOR_SUCCESS)
+	If $iHour > 0 Then $sWaitTime &= $iHour & " ساعات "
+	If $iMin > 0 Then $sWaitTime &= $iMin & " دقائق "
+	If $iSec > 0 Then $sWaitTime &= $iSec & " ثواني "
+	SetLog("انتظار " & $sWaitTime & "قبل تشغيل اللعبة", $COLOR_SUCCESS)
 	ReduceBotMemory()
 	Local $hTimer = __TimerInit()
 	If $bSuspendComputer Then SuspendComputer($iWaitTime)
@@ -131,7 +131,7 @@ Func _WaitnOpenCoC($iWaitTime, $bFullRestart = False, $bSuspendComputer = False,
 	If Not StartAndroidCoC() Then Return
 	If Not $g_bRunState Then Return
 
-	If $g_bDebugSetlog Then SetDebugLog("CoC Restarted, Waiting for completion", $COLOR_DEBUG)
+	If $g_bDebugSetlog Then SetDebugLog("تم اعادة تشغل اللعبة الرجاء الانتظار ليتم اكتمال الامر", $COLOR_DEBUG)
 
 	If $bFullRestart Then
 		checkMainScreen() ; Use checkMainScreen to restart CoC, and waitMainScreen to handle Take A Break wait, or other errors.

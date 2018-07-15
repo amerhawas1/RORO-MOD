@@ -17,7 +17,7 @@ Func OpenMEmu($bRestart = False)
 
 	Local $PID, $hTimer, $iCount = 0, $process_killed, $cmdOutput, $connected_to, $cmdPar
 
-	SetLog("Starting " & $g_sAndroidEmulator & " and Clash Of Clans", $COLOR_SUCCESS)
+	SetLog("تشغيل " & $g_sAndroidEmulator & " و تشغيل اللعبة مع ", $COLOR_SUCCESS)
 
 	Local $launchAndroid = (WinGetAndroidHandle() = 0 ? True : False)
 	If $launchAndroid Then
@@ -30,7 +30,7 @@ Func OpenMEmu($bRestart = False)
 		EndIf
 	EndIf
 
-	SetLog("Please wait while " & $g_sAndroidEmulator & " and CoC start...", $COLOR_SUCCESS)
+	SetLog("يرجى الانتظار بينما " & $g_sAndroidEmulator & " و فتح اللعبة...", $COLOR_SUCCESS)
 	$hTimer = __TimerInit()
 
 	; Test ADB is connected
@@ -50,13 +50,13 @@ Func OpenMEmu($bRestart = False)
 	;WEnd
 
 	If __TimerDiff($hTimer) >= $g_iAndroidLaunchWaitSec * 1000 Then ; if it took 4 minutes, Android/PC has major issue so exit
-		SetLog("Serious error has occurred, please restart PC and try again", $COLOR_ERROR)
-		SetLog($g_sAndroidEmulator & " refuses to load, waited " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds for window", $COLOR_ERROR)
+		SetLog("حدث خطأ جسيم ، يرجى إعادة تشغيل جهاز الكمبيوتر وإعادة المحاولة", $COLOR_ERROR)
+		SetLog($g_sAndroidEmulator & " يرفض تحميل وانتظر " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثواني ", $COLOR_ERROR)
 		SetError(1, @extended, False)
 		Return False
 	EndIf
 
-	SetLog($g_sAndroidEmulator & " Loaded, took " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds to begin.", $COLOR_SUCCESS)
+	SetLog($g_sAndroidEmulator & " ياخذ للتحميل " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثواني للبدء.", $COLOR_SUCCESS)
 
 	Return True
 
@@ -104,7 +104,7 @@ Func GetMEmuBackgroundMode()
 	Local $iOpenGL = $g_iAndroidBackgroundModeOpenGL
 	; hack for super strange Windows Fall Creator Update with OpenGL and DirectX problems
 	If @OSBuild >= 16299 Then
-		SetDebugLog("DirectX/OpenGL Fix applied for Windows Build 16299")
+		SetDebugLog("DirectX/OpenGL إصلاح تطبيق لـ Windows Build 16299")
 		$iDirectX = $g_iAndroidBackgroundModeOpenGL
 		$iOpenGL = $g_iAndroidBackgroundModeDirectX
 	EndIf
@@ -114,7 +114,7 @@ Func GetMEmuBackgroundMode()
 	Local $aRegExResult = StringRegExp($__VBoxGuestProperties, "Name: graphics_render_mode, value: (.+), timestamp:", $STR_REGEXPARRAYMATCH)
 	If @error = 0 Then
 		Local $graphics_render_mode = $aRegExResult[0]
-		SetDebugLog($g_sAndroidEmulator & " instance " & $g_sAndroidInstance & " rendering mode is " & $graphics_render_mode)
+		SetDebugLog($g_sAndroidEmulator & " المحاكي الفرعي " & $g_sAndroidInstance & " وضع التقديم هو " & $graphics_render_mode)
 		Switch $graphics_render_mode
 			Case "1" ; DirectX
 				Return $iDirectX
@@ -142,7 +142,7 @@ Func InitMEmu($bCheckOnly = False)
 
 	If FileExists($MEmu_Path & "MEmu.exe") = 0 Then
 		If Not $bCheckOnly Then
-			SetLog("Serious error has occurred: Cannot find " & $g_sAndroidEmulator & ":", $COLOR_ERROR)
+			SetLog("حدث خطأ خطير: لا يمكن العثور عليه " & $g_sAndroidEmulator & ":", $COLOR_ERROR)
 			SetLog($MEmu_Path & "MEmu.exe", $COLOR_ERROR)
 			SetError(1, @extended, False)
 		EndIf
@@ -152,7 +152,7 @@ Func InitMEmu($bCheckOnly = False)
 	Local $sPreferredADB = FindPreferredAdbPath()
 	If $sPreferredADB = "" And FileExists($MEmu_Path & "adb.exe") = 0 Then
 		If Not $bCheckOnly Then
-			SetLog("Serious error has occurred: Cannot find " & $g_sAndroidEmulator & ":", $COLOR_ERROR)
+			SetLog("حدث خطأ خطير: لا يمكن العثور عليه " & $g_sAndroidEmulator & ":", $COLOR_ERROR)
 			SetLog($MEmu_Path & "adb.exe", $COLOR_ERROR)
 			SetError(1, @extended, False)
 		EndIf
@@ -161,7 +161,7 @@ Func InitMEmu($bCheckOnly = False)
 
 	If FileExists($MEmu_Manage_Path) = 0 Then
 		If Not $bCheckOnly Then
-			SetLog("Serious error has occurred: Cannot find MEmu-Hyperv:", $COLOR_ERROR)
+			SetLog("حدث خطأ خطير: لا يمكن العثور عليه:", $COLOR_ERROR)
 			SetLog($MEmu_Manage_Path, $COLOR_ERROR)
 			SetError(1, @extended, False)
 		EndIf
@@ -186,7 +186,7 @@ Func InitMEmu($bCheckOnly = False)
 			If $g_bDebugAndroid Then SetDebugLog("Func LaunchConsole: Read $g_sAndroidAdbDeviceHost = " & $g_sAndroidAdbDeviceHost, $COLOR_DEBUG)
 		Else
 			$oops = 1
-			SetLog("Cannot read " & $g_sAndroidEmulator & "(" & $g_sAndroidInstance & ") ADB Device Host", $COLOR_ERROR)
+			SetLog("لا يمكن قراءة " & $g_sAndroidEmulator & "(" & $g_sAndroidInstance & ") ADB Device Host", $COLOR_ERROR)
 		EndIf
 
 		$aRegExResult = StringRegExp($__VBoxVMinfo, "name = ADB.*host port = (\d{3,5}),", $STR_REGEXPARRAYMATCH)
@@ -195,13 +195,13 @@ Func InitMEmu($bCheckOnly = False)
 			If $g_bDebugAndroid Then SetDebugLog("Func LaunchConsole: Read $g_sAndroidAdbDevicePort = " & $g_sAndroidAdbDevicePort, $COLOR_DEBUG)
 		Else
 			$oops = 1
-			SetLog("Cannot read " & $g_sAndroidEmulator & "(" & $g_sAndroidInstance & ") ADB Device Port", $COLOR_ERROR)
+			SetLog("لا يمكن قراءة " & $g_sAndroidEmulator & "(" & $g_sAndroidInstance & ") ADB Device Port", $COLOR_ERROR)
 		EndIf
 
 		If $oops = 0 Then
 			$g_sAndroidAdbDevice = $g_sAndroidAdbDeviceHost & ":" & $g_sAndroidAdbDevicePort
 		Else ; use defaults
-			SetLog("Using ADB default device " & $g_sAndroidAdbDevice & " for " & $g_sAndroidEmulator, $COLOR_ERROR)
+			SetLog("باستخدام الجهاز الافتراضي ADB " & $g_sAndroidAdbDevice & " من اجل " & $g_sAndroidEmulator, $COLOR_ERROR)
 		EndIf
 
 		; get screencap paths: Name: 'picture', Host path: 'C:\Users\Administrator\Pictures\MEmu Photo' (machine mapping), writable
@@ -213,7 +213,7 @@ Func InitMEmu($bCheckOnly = False)
 			$oops = 1
 			$g_bAndroidAdbScreencap = False
 			$g_sAndroidPicturesHostPath = ""
-			SetLog($g_sAndroidEmulator & " Background Mode is not available", $COLOR_ERROR)
+			SetLog($g_sAndroidEmulator & " وضع الخلفية غير متاح", $COLOR_ERROR)
 		EndIf
 
 		$__VBoxGuestProperties = LaunchConsole($__VBoxManage_Path, "guestproperty enumerate " & $g_sAndroidInstance, $process_killed)
@@ -275,15 +275,15 @@ Func CheckScreenMEmu($bSetLog = True)
 		If $Value <> $aValues[$i][1] Then
 			If $iErrCnt = 0 Then
 				If $bSetLog Then
-					SetLog("MyBot doesn't work with " & $g_sAndroidEmulator & " screen configuration!", $COLOR_ERROR)
+					SetLog("لا يعمل MyBot مع " & $g_sAndroidEmulator & " تكوين الشاشة!", $COLOR_ERROR)
 				Else
-					SetDebugLog("MyBot doesn't work with " & $g_sAndroidEmulator & " screen configuration!", $COLOR_ERROR)
+					SetDebugLog("لا يعمل MyBot مع " & $g_sAndroidEmulator & " تكوين الشاشة!", $COLOR_ERROR)
 				EndIf
 			EndIf
 			If $bSetLog Then
-				SetLog("Setting of " & $aValues[$i][0] & " is " & $Value & " and will be changed to " & $aValues[$i][1], $COLOR_ERROR)
+				SetLog("المحدد " & $aValues[$i][0] & " هو " & $Value & " وسيتم تغييرها إلى " & $aValues[$i][1], $COLOR_ERROR)
 			Else
-				SetDebugLog("Setting of " & $aValues[$i][0] & " is " & $Value & " and will be changed to " & $aValues[$i][1], $COLOR_ERROR)
+				SetDebugLog("المحدد " & $aValues[$i][0] & " هو " & $Value & " وسيتم تغييرها إلى " & $aValues[$i][1], $COLOR_ERROR)
 			EndIf
 			$iErrCnt += 1
 		EndIf
@@ -328,11 +328,11 @@ Func FindMEmuWindowConfig()
 	For $i = 0 To UBound($__MEmu_Window) - 1
 		Local $v2 = GetVersionNormalized($__MEmu_Window[$i][0])
 		If $v >= $v2 Then
-			SetDebugLog("Using Window sizes of " & $g_sAndroidEmulator & " " & $__MEmu_Window[$i][0])
+			SetDebugLog("تستخدم النافذة الحجم " & $g_sAndroidEmulator & " " & $__MEmu_Window[$i][0])
 			Return $i
 		EndIf
 	Next
-	SetDebugLog("Cannot find Window sizes of " & $g_sAndroidEmulator & " " & $g_sAndroidVersion)
+	SetDebugLog("لا يمك العثور على حجم النافذة " & $g_sAndroidEmulator & " " & $g_sAndroidVersion)
 	Return -1
 EndFunc   ;==>FindMEmuWindowConfig
 
@@ -373,7 +373,7 @@ Func UpdateMEmuWindowState()
 	If UBound($toolBarPos) = 4 Then
 		Local $tbw_using = $tbw
 		If $toolBarPos[2] > 20 And $toolBarPos[2] < 60 Then $tbw_using = $toolBarPos[2]
-		SetDebugLog($g_sAndroidEmulator & " Tool Bar found, width = " & $toolBarPos[2] & ", height = " & $toolBarPos[3] & ", expected width = " & $tbw & ", using width = " & $tbw_using)
+		SetDebugLog($g_sAndroidEmulator & " تم العثور على شريط الأدوات ، العرض = " & $toolBarPos[2] & ", ارتفاع = " & $toolBarPos[3] & ", العرض المتوقع = " & $tbw & ", باستخدام العرض = " & $tbw_using)
 		$tbw = $tbw_using
 		;ConsoleWrite("Qt5QWindowIcon3=" & $toolBarPos[0] & "," & $toolBarPos[1] & "," & $toolBarPos[2] & "," & $toolBarPos[3] & ($isVisible = 1 ? " visible" : " hidden")) ; 863,33,45,732
 		;If $toolBarPos[2] = $tbw Then
@@ -416,7 +416,7 @@ Func UpdateMEmuWindowState()
 	For $i = 0 To UBound($Values) - 1
 		If $Values[$i][1] <> $Values[$i][2] Then
 			$bChanged = True
-			SetDebugLog($g_sAndroidEmulator & " " & $Values[$i][0] & " updated from " & $Values[$i][1] & " to " & $Values[$i][2])
+			SetDebugLog($g_sAndroidEmulator & " " & $Values[$i][0] & " تحديث من " & $Values[$i][1] & " الى " & $Values[$i][2])
 		EndIf
 	Next
 

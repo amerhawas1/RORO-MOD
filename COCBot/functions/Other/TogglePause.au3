@@ -39,7 +39,7 @@ Func TogglePauseUpdateState($Source)
 		AndroidShield("TogglePauseImpl paused", False)
 		TrayTip($g_sBotTitle, "", 1)
 		If Not $g_bDisableNotifications Then TrayTip($g_sBotTitle, "was Paused!", 1, $TIP_ICONEXCLAMATION)
-		SetLog("Bot was Paused!", $COLOR_ERROR)
+		SetLog("ايقاف مؤقت للبوت!", $COLOR_ERROR)
 		If Not $g_bSearchMode Then
 			$g_iTimePassed += Int(__TimerDiff($g_hTimerSinceStarted))
 			;AdlibUnRegister("SetTime")
@@ -53,7 +53,7 @@ Func TogglePauseUpdateState($Source)
 		AndroidShield("TogglePauseImpl resumed")
 		TrayTip($g_sBotTitle, "", 1)
 		If Not $g_bDisableNotifications Then TrayTip($g_sBotTitle, "was Resumed.", 1, $TIP_ICONASTERISK)
-		SetLog("Bot was Resumed.", $COLOR_SUCCESS)
+		SetLog("استئناف عمل البوت.", $COLOR_SUCCESS)
 		If Not $g_bSearchMode Then
 			$g_hTimerSinceStarted = __TimerInit()
 			;AdlibRegister("SetTime", 1000)
@@ -74,7 +74,7 @@ Func TogglePauseSleep()
 	While $g_bBotPaused ; Actual Pause loop
 		If _Sleep($DELAYTOGGLEPAUSE1, True, True, False) Then ExitLoop
 		If $g_bAutoResumeEnable And __TimerDiff($hTimerAutoResume) >= ($g_iAutoResumeTime * 60000) Then
-			SetLog("Auto resume bot after " & $g_iAutoResumeTime & " minutes of waiting", $COLOR_INFO)
+			SetLog("استناف عمل البوت بعد " & $g_iAutoResumeTime & " دقائق من الانتظار", $COLOR_INFO)
 			TogglePause()
 		EndIf
 		$counter = $counter + 1

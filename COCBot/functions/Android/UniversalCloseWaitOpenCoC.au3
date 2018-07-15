@@ -40,11 +40,11 @@ Func UniversalCloseWaitOpenCoC($iWaitTime = 0, $sSource = "Unknown", $StopEmulat
 			$StopAndroidFlag = Random(0, 2, 1) ; Determine random close emulator flag value
 			Switch $StopAndroidFlag
 				Case 0
-					$msg = " =Time out"
+					$msg = " =نفذ الوقت"
 				Case 1
-					$msg = " =Close CoC"
+					$msg = " =اغلاق اللعبة"
 				Case 2
-					$msg = " =Close Android"
+					$msg = " =اغلاق المحاكي"
 				Case Else
 					$msg = "One Bad Monkey Error!"
 			EndSwitch
@@ -88,7 +88,7 @@ Func UniversalCloseWaitOpenCoC($iWaitTime = 0, $sSource = "Unknown", $StopEmulat
 				If $iWaitTime > 30000 Then
 					AndroidShieldForceDown(True)
 					EnableGuiControls() ; enable bot controls is more than 30 seconds wait time
-					SetLog("Enabled bot controls due to long wait time", $COLOR_SUCCESS)
+					SetLog("عناصر تحكم bot ممكنة بسبب طول وقت الانتظار", $COLOR_SUCCESS)
 				EndIf
 				LockBotSlot(False)
 				WaitnOpenCoC($iWaitTime, $bFullRestart, $bSuspendComputer, True)
@@ -111,7 +111,7 @@ Func UniversalCloseWaitOpenCoC($iWaitTime = 0, $sSource = "Unknown", $StopEmulat
 			CloseAndroid("UniversalCloseWaitOpenCoC")
 			ReduceBotMemory()
 			If $iWaitTime > 0 Then
-				SetLog("Waiting " & $sWaitTime & "before starting CoC", $COLOR_SUCCESS)
+				SetLog("انتظار " & $sWaitTime & "قبل تشغيل اللعبة", $COLOR_SUCCESS)
 				If $iWaitTime > 30000 Then
 					EnableGuiControls() ; enable bot controls is more than 30 seconds wait time
 					SetLog("Enabled bot controls due to long wait time", $COLOR_SUCCESS)

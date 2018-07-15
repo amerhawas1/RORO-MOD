@@ -23,7 +23,7 @@ Func ZoomOut() ;Zooms out
     WinGetAndroidHandle()
 	getBSPos() ; Update $g_hAndroidWindow and Android Window Positions
 	If Not $g_bRunState Then
-		SetDebugLog("Exit ZoomOut, bot not running")
+		SetDebugLog("الخروج من التصغير, ولكن البوت لا يعمل")
 		Return
 	EndIf
 	Local $Result
@@ -99,9 +99,9 @@ Func DefaultZoomOut($ZoomOutKey = "{DOWN}", $tryCtrlWheelScrollAfterCycles = 40,
 
 	If StringInStr($aPicture[0], "zoomou") = 0 Then
 		If $g_bDebugSetlog Then
-			SetDebugLog("Zooming Out (" & $sFunc & ")", $COLOR_INFO)
+			SetDebugLog("التصغير (" & $sFunc & ")", $COLOR_INFO)
 		Else
-			SetLog("Zooming Out", $COLOR_INFO)
+			SetLog("التصغير", $COLOR_INFO)
 		EndIf
 		If _Sleep($DELAYZOOMOUT1) Then Return
 		If $bAndroidZoomOut Then
@@ -173,9 +173,9 @@ Func ZoomOutCtrlWheelScroll($CenterMouseWhileZooming = True, $GlobalMouseWheel =
 	If StringInStr($aPicture[0], "zoomou") = 0 Then
 
 		If $g_bDebugSetlog Then
-			SetDebugLog("Zooming Out (" & $sFunc & ")", $COLOR_INFO)
+			SetDebugLog("التصغير (" & $sFunc & ")", $COLOR_INFO)
 		Else
-			SetLog("Zooming Out", $COLOR_INFO)
+			SetLog("التصغير", $COLOR_INFO)
 		EndIf
 
 		AndroidShield("ZoomOutCtrlWheelScroll") ; Update shield status
@@ -233,7 +233,7 @@ Func ZoomOutCtrlWheelScroll($CenterMouseWhileZooming = True, $GlobalMouseWheel =
 			   Next
 			   For $j = 1 To 3
 				  If $Result[$j] = 0 Then
-					  SetLog("Warning " & $ZoomActions[$j] & " = " & $Result[1], $COLOR_DEBUG)
+					  SetLog("تحذير " & $ZoomActions[$j] & " = " & $Result[1], $COLOR_DEBUG)
 				  EndIf
 			   Next
 			EndIf
@@ -273,9 +273,9 @@ Func ZoomOutCtrlClick($ZoomOutOverWaters = False, $CenterMouseWhileZooming = Fal
 	If StringInStr($aPicture[0], "zoomou") = 0 Then
 
 		If $g_bDebugSetlog Then
-			SetDebugLog("Zooming Out (" & $sFunc & ")", $COLOR_INFO)
+			SetDebugLog("التصغير (" & $sFunc & ")", $COLOR_INFO)
 		Else
-			SetLog("Zooming Out", $COLOR_INFO)
+			SetLog("التصغير", $COLOR_INFO)
 		EndIf
 
 		AndroidShield("ZoomOutCtrlClick") ; Update shield status
@@ -372,9 +372,9 @@ Func AndroidOnlyZoomOut() ;Zooms out
 	If StringInStr($aPicture[0], "zoomou") = 0 Then
 
 		If $g_bDebugSetlog Then
-			SetDebugLog("Zooming Out (" & $sFunc & ")", $COLOR_INFO)
+			SetDebugLog("التصغير (" & $sFunc & ")", $COLOR_INFO)
 		Else
-			SetLog("Zooming Out", $COLOR_INFO)
+			SetLog("التصغير", $COLOR_INFO)
 		EndIf
 		AndroidZoomOut(False) ; use new ADB zoom-out
 		ForceCaptureRegion()

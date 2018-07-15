@@ -22,7 +22,7 @@ Func OpenBlueStacks($bRestart = False)
 	Local $hTimer, $iCount = 0, $cmdPar
 	Local $PID, $ErrorResult, $connected_to, $process_killed
 
-	SetLog("Starting BlueStacks and Clash Of Clans", $COLOR_SUCCESS)
+	SetLog("بدء التشغل محاكي البلوستاكس مع  اللعبة", $COLOR_SUCCESS)
 
 	; always start ADB first to avoid ADB connection problems
 	LaunchConsole($g_sAndroidAdbPath, "start-server", $process_killed)
@@ -44,9 +44,9 @@ Func OpenBlueStacks($bRestart = False)
 		If _Sleep(3000) Then ExitLoop
 		_StatusUpdateTime($hTimer, $g_sAndroidEmulator & " Starting")
 		If __TimerDiff($hTimer) > $g_iAndroidLaunchWaitSec * 1000 Then ; if no BS position returned in 4 minutes, BS/PC has major issue so exit
-			SetLog("Serious error has occurred, please restart PC and try again", $COLOR_ERROR)
-			SetLog("BlueStacks refuses to load, waited " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds", $COLOR_ERROR)
-			SetLog("Unable to continue........", $COLOR_WARNING)
+			SetLog("حدث خطأ جسيم ، يرجى إعادة تشغيل جهاز الكمبيوتر وإعادة المحاولة", $COLOR_ERROR)
+			SetLog("محاكي البلوستاكس يرفض التشغيل  والرجاء انتظار " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثوني", $COLOR_ERROR)
+			SetLog("غير قادر على المتابعة........", $COLOR_WARNING)
 			btnstop()
 			SetError(1, 1, -1)
 			Return False
@@ -60,7 +60,7 @@ Func OpenBlueStacks($bRestart = False)
 		If WaitForAndroidBootCompleted($g_iAndroidLaunchWaitSec - __TimerDiff($hTimer) / 1000, $hTimer) Then Return
 		If Not $g_bRunState Then Return False
 
-		SetLog("BlueStacks Loaded, took " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds to begin.", $COLOR_SUCCESS)
+		SetLog("لفتح محاكي البلوستاكس ياخد وقت " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثواني للبدء.", $COLOR_SUCCESS)
 
 		Return True
 
@@ -73,11 +73,11 @@ EndFunc   ;==>OpenBlueStacks
 Func OpenBlueStacks2($bRestart = False)
 
 	Local $hTimer, $iCount = 0, $cmdOutput, $process_killed, $i, $connected_to, $PID, $cmdPar
-	SetLog("Starting " & $g_sAndroidEmulator & " and Clash Of Clans", $COLOR_SUCCESS)
+	SetLog("تشغيل " & $g_sAndroidEmulator & " و اللعبة", $COLOR_SUCCESS)
 
 	If Not InitAndroid() Then Return False
 
-	SetLog("Please wait while " & $g_sAndroidEmulator & " and CoC start...", $COLOR_SUCCESS)
+	SetLog("يرجى الانتظار بينما " & $g_sAndroidEmulator & " و فتح اللعبة...", $COLOR_SUCCESS)
 
 	CloseUnsupportedBlueStacks2()
 
@@ -102,13 +102,13 @@ Func OpenBlueStacks2($bRestart = False)
 
 		_StatusUpdateTime($hTimer)
 		If __TimerDiff($hTimer) > $g_iAndroidLaunchWaitSec * 1000 Or ($PID = 0 And $bStopIfLaunchFails = True) Then ; if no BS position returned in 4 minutes, BS/PC has major issue so exit
-			SetLog("Serious error has occurred, please restart PC and try again", $COLOR_ERROR)
-			SetLog($g_sAndroidEmulator & " refuses to load, waited " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds", $COLOR_ERROR)
+			SetLog("حدث خطأ جسيم ، يرجى إعادة تشغيل جهاز الكمبيوتر وإعادة المحاولة", $COLOR_ERROR)
+			SetLog($g_sAndroidEmulator & " يرفض تحميل وانتظر " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثواني", $COLOR_ERROR)
 			SetError(1, @extended, False)
 			Return False
 		EndIf
 		If _Sleep(3000) Then Return False
-		_StatusUpdateTime($hTimer, $g_sAndroidEmulator & " Starting")
+		_StatusUpdateTime($hTimer, $g_sAndroidEmulator & " بدء")
 		WinGetAndroidHandle()
 	WEnd
 
@@ -132,7 +132,7 @@ Func OpenBlueStacks2($bRestart = False)
 		If WaitForAndroidBootCompleted($g_iAndroidLaunchWaitSec - __TimerDiff($hTimer) / 1000, $hTimer) Then Return
 		If Not $g_bRunState Then Return False
 
-		SetLog($g_sAndroidEmulator & " Loaded, took " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds to begin.", $COLOR_SUCCESS)
+		SetLog($g_sAndroidEmulator & " للفتح ياخذ " & Round(__TimerDiff($hTimer) / 1000, 2) & " ثواني للبدء.", $COLOR_SUCCESS)
 		AndroidAdbLaunchShellInstance()
 
 		If Not $g_bRunState Then Return False
@@ -206,12 +206,12 @@ Func InitBlueStacksX($bCheckOnly = False, $bAdjustResolution = False, $bLegacyMo
 		If Not $bFileFound Then
 			If $plusMode And Not $bLegacyMode And $i = 0 Then
 				; try legacy mode
-				SetDebugLog("Cannot find " & $g_sAndroidEmulator & " file:" & $File, $COLOR_ACTION)
-				SetDebugLog("Try legacy mode", $COLOR_ACTION)
+				SetDebugLog("لا يستطيع العثور على " & $g_sAndroidEmulator & " ملف:" & $File, $COLOR_ACTION)
+				SetDebugLog("جرب الوضع القديم", $COLOR_ACTION)
 				Return InitBlueStacksX($bCheckOnly, $bAdjustResolution, True)
 			EndIf
 			If Not $bCheckOnly Then
-				SetLog("Serious error has occurred: Cannot find " & $g_sAndroidEmulator & ":", $COLOR_ERROR)
+				SetLog("حدث خطأ خطير: لا يمكن العثور عليه " & $g_sAndroidEmulator & ":", $COLOR_ERROR)
 				SetLog($File, $COLOR_ERROR)
 				SetError(1, @extended, False)
 			EndIf
@@ -285,7 +285,7 @@ Func InitBlueStacks($bCheckOnly = False)
 	Local $bInstalled = InitBlueStacksX($bCheckOnly)
 	If $bInstalled And (GetVersionNormalized($__BlueStacks_Version) < GetVersionNormalized("0.8") Or GetVersionNormalized($__BlueStacks_Version) > GetVersionNormalized("1.x") > 0) Then
 		If Not $bCheckOnly Then
-			SetLog("BlueStacks version is " & $__BlueStacks_Version & " but support version 0.8.x - 1.x not found", $COLOR_ERROR)
+			SetLog("اصدار محاكي الاندرويد هو  " & $__BlueStacks_Version & " ولكن المحاكي لا يدعم بعض الاصدارات القديمة ك 0.8-", $COLOR_ERROR)
 			SetError(1, @extended, False)
 		EndIf
 		Return False
@@ -303,7 +303,7 @@ Func InitBlueStacks2($bCheckOnly = False)
 	Local $bInstalled = InitBlueStacksX($bCheckOnly, True)
 	If $bInstalled And StringInStr($__BlueStacks_Version, "2.") <> 1 And StringInStr($__BlueStacks_Version, "3.") <> 1 And StringInStr($__BlueStacks_Version, "4.") <> 1 Then
 		If Not $bCheckOnly Then
-			SetLog("BlueStacks supported version 2.x, 3.x or 4.x not found", $COLOR_ERROR)
+			SetLog("دعم بلوستاكس الإصدار 2.x أو 3.x أو 4.x غير موجود", $COLOR_ERROR)
 			SetError(1, @extended, False)
 		EndIf
 		Return False
@@ -366,7 +366,7 @@ Func RestartBlueStacksXCoC()
 	If Not InitAndroid() Then Return False
 	If WinGetAndroidHandle() = 0 Then Return False
 	$cmdOutput = AndroidAdbSendShellCommand("am start -W -n " & $g_sAndroidGamePackage & "/" & $g_sAndroidGameClass, 60000) ; timeout of 1 Minute ; disabled -S due to long wait after 2017 Dec. Update
-	SetLog("Please wait for CoC restart......", $COLOR_INFO) ; Let user know we need time...
+	SetLog("الرجاء الانتظار اعادة فتح اللعبة......", $COLOR_INFO) ; Let user know we need time...
 	Return True
 EndFunc   ;==>RestartBlueStacksXCoC
 
@@ -392,9 +392,9 @@ Func CheckScreenBlueStacksX($bSetLog = True)
 		$Value = RegRead($REGISTRY_KEY_DIRECTORY, $aValues[$i][0])
 		If $Value <> $aValues[$i][1] Then
 			If $iErrCnt = 0 Then
-				SetDebugLog("MyBot doesn't work with " & $g_sAndroidEmulator & " screen configuration!", $COLOR_ERROR)
+				SetDebugLog("لا يعمل MyBot مع " & $g_sAndroidEmulator & " تكوين الشاشة!", $COLOR_ERROR)
 			EndIf
-			SetDebugLog("Setting of " & $aValues[$i][0] & " is " & $Value & " and will be changed to " & $aValues[$i][1], $COLOR_ERROR)
+			SetDebugLog("المحدد هو  " & $aValues[$i][0] & " هو " & $Value & " وسيتم تغييرها إلى " & $aValues[$i][1], $COLOR_ERROR)
 			$iErrCnt += 1
 		EndIf
 	Next
@@ -406,11 +406,11 @@ Func CheckScreenBlueStacksX($bSetLog = True)
 		; get last match!
 		$DPI = $aRegExResult[UBound($aRegExResult) - 1]
 		If $DPI <> 160 Then
-			SetDebugLog("DPI is " & $DPI & " and will be changed to 160", $COLOR_ERROR)
+			SetDebugLog("DPI is " & $DPI & " وسيتم تغييرها إلى 160", $COLOR_ERROR)
 			$iErrCnt += 1
 		EndIf
 	Else
-		SetDebugLog("DPI is missing and will be set to 160", $COLOR_ERROR)
+		SetDebugLog("DPI مفقود وسيتم تعيينه على 160", $COLOR_ERROR)
 		$iErrCnt += 1
 	EndIf
 	If $iErrCnt > 0 Then Return False
@@ -630,10 +630,10 @@ Func CloseBlueStacks()
 
 	If Not InitAndroid() Then Return
 
-	SetDebugLog("Closing BlueStacks: " & $__BlueStacks_Path & "HD-Quit.exe")
+	SetDebugLog("اغلاق البلوستاكس: " & $__BlueStacks_Path & "HD-Quit.exe")
 	RunWait($__BlueStacks_Path & "HD-Quit.exe")
 	If @error <> 0 Then
-		SetLog($g_sAndroidEmulator & " failed to quit", $COLOR_ERROR)
+		SetLog($g_sAndroidEmulator & " فشل في الخروج", $COLOR_ERROR)
 		;SetError(1, @extended, -1)
 		;Return False
 	EndIf
@@ -649,7 +649,7 @@ Func CloseBlueStacks()
 		KillBSProcess()
 		If _Sleep(1000) Then Return ; wait a bit
 
-		SetLog("Please wait for full BS shutdown....", $COLOR_SUCCESS)
+		SetLog("الرجاء الانتظار حتى يتم ايقاف تشغل البلوستاكس بالكامل....", $COLOR_SUCCESS)
 
 		For $iIndex = 0 To UBound($aServiceList) - 1
 			ServiceStop($aServiceList[$iIndex])
@@ -667,7 +667,7 @@ Func CloseBlueStacks()
 
 
 	If $g_bDebugAndroid And $bOops Then
-		SetLog("BS Kill Failed to stop service", $COLOR_ERROR)
+		SetLog("BS Kill فشل في إيقاف الخدمة", $COLOR_ERROR)
 	EndIf
 
 	If $bOops Then
@@ -700,14 +700,14 @@ Func CloseBlueStacks2()
 			Local $PID
 			$PID = ProcessExists2($sFile, $g_sAndroidInstance)
 			If $PID Then
-				SetLog($g_sAndroidEmulator & " failed to kill " & $sFile, $COLOR_ERROR)
+				SetLog($g_sAndroidEmulator & " فشل في الايقاف " & $sFile, $COLOR_ERROR)
 			EndIf
 		Next
 	Else
 		SetDebugLog("Closing BlueStacks: " & $__BlueStacks_Path & "HD-Quit.exe")
 		RunWait($__BlueStacks_Path & "HD-Quit.exe")
 		If @error <> 0 Then
-			SetLog($g_sAndroidEmulator & " failed to quit", $COLOR_ERROR)
+			SetLog($g_sAndroidEmulator & " فشل في الايقاف", $COLOR_ERROR)
 			;SetError(1, @extended, -1)
 			;Return False
 		EndIf
@@ -801,8 +801,8 @@ Func CloseUnsupportedBlueStacksX($bClose = True)
 		Opt("WinTitleMatchMode", $WinTitleMatchMode)
 		; Offical "Bluestacks App Player" v2.0 not supported because it changes the Android Screen!!!
 		If $bClose = True Then
-			SetLog("MyBot doesn't work with " & $g_sAndroidEmulator & " App Player", $COLOR_ERROR)
-			SetLog("Please let MyBot start " & $g_sAndroidEmulator & " automatically", $COLOR_INFO)
+			SetLog("لا يعمل MyBot مع " & $g_sAndroidEmulator & " App Player", $COLOR_ERROR)
+			SetLog("يرجى السماح لبرنامج MyBot بالبدء " & $g_sAndroidEmulator & " تلقائيا", $COLOR_INFO)
 			RebootBlueStacks2SetScreen(False)
 		EndIf
 		Return True

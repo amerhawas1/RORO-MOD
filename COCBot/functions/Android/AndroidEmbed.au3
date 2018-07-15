@@ -45,7 +45,7 @@ EndFunc   ;==>AndroidEmbed
 Func _AndroidEmbed($Embed = True, $CallWinGetAndroidHandle = True, $bForceEmbed = False, $bNoAndroidScreenSizeCheck = False)
 
 	If ($CallWinGetAndroidHandle = False And $g_hAndroidWindow = 0) Or ($CallWinGetAndroidHandle = True And WinGetAndroidHandle() = 0) Then
-		SetDebugLog("Android Emulator not launched", $COLOR_ERROR)
+		SetDebugLog("لم يتم تشغل المحاكي بنجاح", $COLOR_ERROR)
 		If $g_bAndroidEmbedded = False Then
 			; nothing to do
 			updateBtnEmbed()
@@ -53,21 +53,21 @@ Func _AndroidEmbed($Embed = True, $CallWinGetAndroidHandle = True, $bForceEmbed 
 		Else
 			; detach android
 			If $Embed = True Then
-				SetDebugLog("Docked Android Window not available, force undock", $COLOR_ERROR)
+				SetDebugLog("دمج المحاكي مع البوت غير متاح", $COLOR_ERROR)
 				$Embed = False
 			EndIf
 		EndIf
 	EndIf
 	If $g_bAndroidBackgroundLaunched = True Then
 		If $g_bAndroidEmbedded = False Then
-			SetDebugLog("Android Emulator launched in background mode", $COLOR_ERROR)
+			SetDebugLog("تم تشغل المحاكي في وضع الخلفية", $COLOR_ERROR)
 			; nothing to do
 			updateBtnEmbed()
 			Return False
 		Else
 			; detach android
 			If $Embed = True Then
-				SetDebugLog("Android Emulator launched in background mode, force undock", $COLOR_ERROR)
+				SetDebugLog("تم تشغل المحاكي في وضع الخلفية", $COLOR_ERROR)
 				$Embed = False
 			EndIf
 		EndIf
@@ -76,13 +76,13 @@ Func _AndroidEmbed($Embed = True, $CallWinGetAndroidHandle = True, $bForceEmbed 
 	Local $aPos = WinGetPos($g_hAndroidWindow)
 	If IsArray($aPos) = 0 Or @error <> 0 Then
 		If $g_bAndroidEmbedded = False Then
-			SetDebugLog("Android Window not available", $COLOR_ERROR)
+			SetDebugLog("نافذة المحاكي غير متاحة", $COLOR_ERROR)
 			updateBtnEmbed()
 			Return False
 		Else
 			; detach android
 			If $Embed = True Then
-				SetDebugLog("Android Window not accessible, force undock", $COLOR_ERROR)
+				SetDebugLog("لا يمكن الوصول الى نافذة المحاكي, force undock", $COLOR_ERROR)
 				$Embed = False
 			EndIf
 		EndIf
@@ -96,13 +96,13 @@ Func _AndroidEmbed($Embed = True, $CallWinGetAndroidHandle = True, $bForceEmbed 
 	Until $hCtrlTarget <> 0 Or __TimerDiff($hTimer) > 3000 ; wait 3 Seconds for window to get accessible
 	If $hCtrlTarget = 0 Then
 		If $g_bAndroidEmbedded = False Then
-			SetDebugLog("Android Control not available", $COLOR_ERROR)
+			SetDebugLog("التحكم بالمحاكي غير متاح", $COLOR_ERROR)
 			updateBtnEmbed()
 			Return False
 		Else
 			; detach android
 			If $Embed = True Then
-				SetDebugLog("Android Control not available, force undock", $COLOR_ERROR)
+				SetDebugLog("التحكم بالمحاكي غير متاح", $COLOR_ERROR)
 				$Embed = False
 			EndIf
 		EndIf

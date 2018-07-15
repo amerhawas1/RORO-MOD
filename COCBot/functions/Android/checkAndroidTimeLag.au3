@@ -100,7 +100,7 @@ Func CheckAndroidTimeLag($bRebootAndroid = True)
 	If $lagPerMin > $g_iAndroidTimeLagThreshold Then
 		$g_aiAndroidTimeLag[4] += 1 ; increase problem counter
 		$g_aiAndroidTimeLag[5] = __TimerInit()
-		SetLog($g_aiAndroidTimeLag[4] & ". Time lag detected of " & $lagPerMin & " sec/min for " & $g_sAndroidEmulator, $COLOR_ERROR)
+		SetLog($g_aiAndroidTimeLag[4] & ". الفارق الزمني للكشف عن " & $lagPerMin & " ثانية / دقيقة ل " & $g_sAndroidEmulator, $COLOR_ERROR)
 		InitAndroidTimeLag(False)
 	EndIf
 

@@ -162,14 +162,14 @@ Func UpdateAndroidConfig($instance = Default, $emulator = Default)
 				If $g_iAndroidConfig <> $i Then
 					$g_iAndroidConfig = $i
 					$g_sAndroidEmulator = $g_avAndroidAppConfig[$g_iAndroidConfig][0]
-					SetLog("Android Emulator " & $g_sAndroidEmulator)
+					SetLog("المحاكي " & $g_sAndroidEmulator)
 				EndIf
 				$emulator = Default
 				ExitLoop
 			EndIf
 		Next
 	EndIf
-	If $emulator <> Default Then SetLog("Unknown Android Emulator " & $emulator, $COLOR_RED)
+	If $emulator <> Default Then SetLog("المحاكي غير معروق  " & $emulator, $COLOR_RED)
 	If $instance = "" Then $instance = Default
 	If $instance = Default Then $instance = $g_avAndroidAppConfig[$g_iAndroidConfig][1]
 	SetDebugLog("UpdateAndroidConfig(""" & $instance & """)")
@@ -287,7 +287,7 @@ Func WinGetAndroidHandle($bInitAndroid = Default, $bTestPid = False)
 		Local $aPos = WinGetPos($g_hAndroidWindow)
 		If IsArray($aPos) Then
 			If $g_bAndroidEmbedded = False And _CheckWindowVisibility($g_hAndroidWindow, $aPos) Then
-				SetDebugLog("Android Window '" & $g_sAndroidTitle & "' not visible, moving to position: " & $aPos[0] & ", " & $aPos[1])
+				SetDebugLog("ناقذة المحاكي '" & $g_sAndroidTitle & "' غير مرئية والانتقال الى الموقف: " & $aPos[0] & ", " & $aPos[1])
 				WinMove($g_hAndroidWindow, "", $aPos[0], $aPos[1])
 				$aPos = WinGetPos($g_hAndroidWindow)
 			EndIf
@@ -301,13 +301,13 @@ Func WinGetAndroidHandle($bInitAndroid = Default, $bTestPid = False)
 		If $currHWnD = 0 Or $currHWnD <> $g_hAndroidWindow Then
 			; Restore original Android Window position
 			If $g_bAndroidEmbedded = False And IsArray($aPos) = 1 And ($g_bIsHidden = False Or ($aPos[0] > -30000 Or $aPos[1] > -30000)) Then
-				SetDebugLog("Move Android Window '" & $g_sAndroidTitle & "' to position: " & $g_iAndroidPosX & ", " & $g_iAndroidPosY)
+				SetDebugLog("انقل نافذة المحاكي '" & $g_sAndroidTitle & "' إلى موقع: " & $g_iAndroidPosX & ", " & $g_iAndroidPosY)
 				HideAndroidWindow(False, Default, Default, "WinGetAndroidHandle:1", 0)
 				$aPos[0] = $g_iAndroidPosX
 				$aPos[1] = $g_iAndroidPosY
 			EndIf
 			Local $instance = ($g_sAndroidInstance = "" ? "" : " (" & $g_sAndroidInstance & ")")
-			SetLog($g_sAndroidEmulator & $instance & " running in window mode", $COLOR_ACTION)
+			SetLog($g_sAndroidEmulator & $instance & " التشيغل في وضع الخلفية", $COLOR_ACTION)
 			If $currHWnD <> 0 And $currHWnD <> $g_hAndroidWindow Then
 				$g_bInitAndroid = True
 				If $bInitAndroid = True Then InitAndroid(True)
@@ -320,7 +320,7 @@ Func WinGetAndroidHandle($bInitAndroid = Default, $bTestPid = False)
 			$g_iAndroidPosX = ($aPos[0] > -30000 ? $aPos[0] : $g_iAndroidPosX)
 			$g_iAndroidPosY = ($aPos[1] > -30000 ? $aPos[1] : $g_iAndroidPosY)
 			If $posX <> $g_iAndroidPosX Or $posY <> $g_iAndroidPosY Then
-				SetDebugLog("Updating Android Window '" & $g_sAndroidTitle & "' position: " & $g_iAndroidPosX & ", " & $g_iAndroidPosY)
+				SetDebugLog("تحديث نافذة المحاكي '" & $g_sAndroidTitle & "' موضع: " & $g_iAndroidPosX & ", " & $g_iAndroidPosY)
 			EndIf
 			If $g_bIsHidden = True And ($aPos[0] > -30000 Or $aPos[1] > -30000) Then
 				; rehide Android
@@ -368,7 +368,7 @@ Func WinGetAndroidHandle($bInitAndroid = Default, $bTestPid = False)
 					Return FuncReturn($pid)
 				EndIf
 				If $g_bAndroidAdbScreencap = True And $g_bAndroidAdbClick = False And AndroidAdbClickSupported() = True Then
-					SetLog("Enabled ADB Click to support background mode", $COLOR_ACTION)
+					SetLog("Enabled ADB انقر لدعم وضع الخلفية", $COLOR_ACTION)
 					$g_bAndroidAdbClick = True
 				EndIf
 				If $g_bAndroidAdbClick = False Or $g_bAndroidAdbScreencap = False Then
@@ -494,13 +494,13 @@ Func _WinGetAndroidHandle($bFindByTitle = False)
 		$aWinList = WinList($g_sAndroidTitle)
 		Opt("WinTitleMatchMode", $iMode)
 		If $aWinList[0][0] = 0 Then
-			SetDebugLog($g_sAndroidEmulator & " Window not found")
+			SetDebugLog($g_sAndroidEmulator & " لا توجد النافذة")
 			If $ReInitAndroid = True Then $g_bInitAndroid = True ; no window anymore, re-initialize Android config
 			UpdateHWnD(0)
 			AndroidEmbed(False, False)
 			Return 0
 		EndIf
-		SetDebugLog("Found " & $aWinList[0][0] & " possible " & $g_sAndroidEmulator & " windows by title '" & $g_sAndroidTitle & "':")
+		SetDebugLog("يوجد " & $aWinList[0][0] & " مستحيل " & $g_sAndroidEmulator & " النافذة عن طريق العتوان '" & $g_sAndroidTitle & "':")
 		For $i = 1 To $aWinList[0][0]
 			SetDebugLog($aWinList[$i][1] & ": " & $aWinList[$i][0])
 		Next
@@ -511,7 +511,7 @@ Func _WinGetAndroidHandle($bFindByTitle = False)
 				$hWin = $aWinList[$i][1]
 				If StringRight($t, StringLen($g_sAndroidInstance)) = $g_sAndroidInstance And ControlGetHandle2($hWin, $g_sAppPaneName, $g_sAppClassInstance) <> 0 Then
 					; looks good, update $g_hAndroidWindow, $g_sAndroidTitle and exit
-					SetDebugLog("Found " & $g_sAndroidEmulator & " Window '" & $t & "' (" & $hWin & ") for instance " & $g_sAndroidInstance)
+					SetDebugLog("يوجد " & $g_sAndroidEmulator & " نافذة '" & $t & "' (" & $hWin & ") من اجل المحاكي " & $g_sAndroidInstance)
 					UpdateHWnD($hWin)
 					$g_sAndroidTitle = UpdateAndroidWindowTitle($g_hAndroidWindow, $t)
 					If $ReInitAndroid = True And $g_bInitAndroid = False Then ; Only initialize Android when not currently running
@@ -655,7 +655,7 @@ Func GetAndroidRunningInstance($bStrictCheck = True)
 				EndIf
 				; validate
 				If WinGetAndroidHandle() <> 0 Then
-					SetDebugLog("Running " & $g_sAndroidEmulator & " instance found: """ & $g_sAndroidInstance & """")
+					SetDebugLog("يشتغل " & $g_sAndroidEmulator & " بوجود المحاكي: """ & $g_sAndroidInstance & """")
 					If $a[0] = 0 Or $g_sAndroidInstance = $currentInstance Then
 						$a[0] = $g_hAndroidWindow
 						$a[1] = $g_sAndroidInstance
@@ -666,7 +666,7 @@ Func GetAndroidRunningInstance($bStrictCheck = True)
 				EndIf
 			Next
 		EndIf
-		If $a[0] <> 0 Then SetDebugLog("Running " & $g_sAndroidEmulator & " instance is """ & $g_sAndroidInstance & """")
+		If $a[0] <> 0 Then SetDebugLog("يشتغل " & $g_sAndroidEmulator & " المحاكي هو """ & $g_sAndroidInstance & """")
 		Return FuncReturn($a)
 	EndIf
 	Return FuncReturn($runningInstance)
@@ -694,7 +694,7 @@ Func DetectRunningAndroid()
 				$g_bSilentSetLog = False
 				$g_bInitAndroid = True ; init Android again now
 				If InitAndroid() = True Then
-					SetDebugLog("Found running " & $g_sAndroidEmulator & " " & $g_sAndroidVersion)
+					SetDebugLog("وجد التشغل " & $g_sAndroidEmulator & " " & $g_sAndroidVersion)
 				EndIf
 				Return FuncReturn()
 			EndIf
@@ -706,7 +706,7 @@ Func DetectRunningAndroid()
 	$g_iAndroidConfig = $iCurrentConfig
 	UpdateAndroidConfig()
 	$g_bSilentSetLog = False
-	SetDebugLog("Found no running Android Emulator")
+	SetDebugLog("وجد التشغيل على المحاكي")
 	FuncReturn()
 EndFunc   ;==>DetectRunningAndroid
 
@@ -724,7 +724,7 @@ Func DetectInstalledAndroid()
 			; installed Android found
 			$g_bFoundInstalledAndroid = True
 			$g_bSilentSetLog = False
-			SetDebugLog("Found installed " & $g_sAndroidEmulator & " " & $g_sAndroidVersion)
+			SetDebugLog("وجدت المثبتة " & $g_sAndroidEmulator & " " & $g_sAndroidVersion)
 			Return FuncReturn()
 		EndIf
 	Next
@@ -734,7 +734,7 @@ Func DetectInstalledAndroid()
 	$g_bInitAndroid = True
 	UpdateAndroidConfig()
 	$g_bSilentSetLog = False
-	SetDebugLog("Found no installed Android Emulator")
+	SetDebugLog("العثور على أي تثبيت محاكي الأندرويد")
 	FuncReturn()
 EndFunc   ;==>DetectInstalledAndroid
 
@@ -788,7 +788,7 @@ Func InitAndroid($bCheckOnly = False, $bLogChangesOnly = True)
 			, $g_sAndroidTitle _
 			, $g_sAndroidProgramPath _
 			, GetAndroidProgramParameter() _
-			, ((IsArray($g_avAndroidProgramFileVersionInfo) ? _ArrayToString($g_avAndroidProgramFileVersionInfo, ",", 1) : "not available")) _
+			, ((IsArray($g_avAndroidProgramFileVersionInfo) ? _ArrayToString($g_avAndroidProgramFileVersionInfo, ",", 1) : "غير متاح")) _
 			, $g_iAndroidSecureFlags _
 			, $g_sAndroidAdbPath _
 			, $__VBoxManage_Path _
@@ -801,7 +801,7 @@ Func InitAndroid($bCheckOnly = False, $bLogChangesOnly = True)
 			, $g_bAndroidAdbInput _
 			, $g_bAndroidAdbClick _
 			, $g_bAndroidAdbClickDrag _
-			, ($g_bChkBackgroundMode = True ? "enabled" : "disabled") _
+			, ($g_bChkBackgroundMode = True ? "مفعل" : "غير مفعل") _
 			, $g_bNoFocusTampering _
 			]
 	SetDebugLog("InitAndroid(" & $bCheckOnly & "): " & $g_sAndroidEmulator)
@@ -819,7 +819,7 @@ Func InitAndroid($bCheckOnly = False, $bLogChangesOnly = True)
 	Local $Result = Execute("Init" & $g_sAndroidEmulator & "(" & $bCheckOnly & ")")
 	If $Result = "" And @error <> 0 Then
 		; Not implemented
-		SetLog("Android support for " & $g_sAndroidEmulator & " is not available", $COLOR_ERROR)
+		SetLog("المحاكي يدعم من اجل " & $g_sAndroidEmulator & " وهو غير متاح", $COLOR_ERROR)
 	EndIf
 
 	Local $successful = @error = 0, $process_killed
@@ -854,37 +854,37 @@ Func InitAndroid($bCheckOnly = False, $bLogChangesOnly = True)
 
 		Local $i = 0
 		Local $sText = ""
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidEmulator) Or $bLogChangesOnly = False Then SetDebugLog("Android: " & $g_sAndroidEmulator)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_iAndroidConfig) Or $bLogChangesOnly = False Then SetDebugLog("Android Config: " & $g_iAndroidConfig)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidVersion) Or $bLogChangesOnly = False Then SetDebugLog("Android Version: " & $g_sAndroidVersion)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidInstance) Or $bLogChangesOnly = False Then SetDebugLog("Android Instance: " & $g_sAndroidInstance)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidTitle) Or $bLogChangesOnly = False Then SetDebugLog("Android Window Title: " & $g_sAndroidTitle)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidProgramPath) Or $bLogChangesOnly = False Then SetDebugLog("Android Program Path: " & $g_sAndroidProgramPath)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], GetAndroidProgramParameter()) Or $bLogChangesOnly = False Then SetDebugLog("Android Program Parameter: " & GetAndroidProgramParameter())
-		$sText = ((IsArray($g_avAndroidProgramFileVersionInfo) ? _ArrayToString($g_avAndroidProgramFileVersionInfo, ",", 1) : "not available"))
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $sText) Or $bLogChangesOnly = False Then SetDebugLog("Android Program FileVersionInfo: " & $sText)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidEmulator) Or $bLogChangesOnly = False Then SetDebugLog("المحاكي: " & $g_sAndroidEmulator)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_iAndroidConfig) Or $bLogChangesOnly = False Then SetDebugLog("اعدادات المحاكي: " & $g_iAndroidConfig)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidVersion) Or $bLogChangesOnly = False Then SetDebugLog("اصدار المحاكي: " & $g_sAndroidVersion)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidInstance) Or $bLogChangesOnly = False Then SetDebugLog("المحاكي الفرعي: " & $g_sAndroidInstance)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidTitle) Or $bLogChangesOnly = False Then SetDebugLog("عنوان نافذة المحاكي: " & $g_sAndroidTitle)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidProgramPath) Or $bLogChangesOnly = False Then SetDebugLog("مسار ملف المحاكي: " & $g_sAndroidProgramPath)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], GetAndroidProgramParameter()) Or $bLogChangesOnly = False Then SetDebugLog("معامل المحاكي: " & GetAndroidProgramParameter())
+		$sText = ((IsArray($g_avAndroidProgramFileVersionInfo) ? _ArrayToString($g_avAndroidProgramFileVersionInfo, ",", 1) : "غير متاح"))
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $sText) Or $bLogChangesOnly = False Then SetDebugLog("معلومات اصدار المحاكي: " & $sText)
 		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_iAndroidSecureFlags) Or $bLogChangesOnly = False Then SetDebugLog("Android SecureME setting: " & $g_iAndroidSecureFlags)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidAdbPath) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB Path: " & $g_sAndroidAdbPath)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $__VBoxManage_Path) Or $bLogChangesOnly = False Then SetDebugLog("Android VBoxManage Path: " & $__VBoxManage_Path)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidAdbDevice) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB Device: " & $g_sAndroidAdbDevice)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidPicturesPath) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB Shared Folder: " & $g_sAndroidPicturesPath)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidAdbPath) Or $bLogChangesOnly = False Then SetDebugLog("مسار المحاكي ABD: " & $g_sAndroidAdbPath)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $__VBoxManage_Path) Or $bLogChangesOnly = False Then SetDebugLog("مسار محاكي الدعم للمحاكي: " & $__VBoxManage_Path)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidAdbDevice) Or $bLogChangesOnly = False Then SetDebugLog("جهاز المحاكي ABD: " & $g_sAndroidAdbDevice)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidPicturesPath) Or $bLogChangesOnly = False Then SetDebugLog("مجلد مشاركة المحاكي: " & $g_sAndroidPicturesPath)
 		; check if share folder exists
 		If FileExists($g_sAndroidPicturesHostPath) Then
 			If ($g_sAndroidPicturesHostFolder <> "" Or BitAND($g_iAndroidSecureFlags, 1) = 1) Then
 				DirCreate($g_sAndroidPicturesHostPath & $g_sAndroidPicturesHostFolder)
 			EndIf
 		ElseIf $g_sAndroidPicturesHostPath <> "" Then
-			SetLog("Shared Folder doesn't exist, please fix:", $COLOR_ERROR)
+			SetLog("لا يوجد ملفات مشاركة المحاكي, الرجاء اصلاحها يدويا:", $COLOR_ERROR)
 			SetLog($g_sAndroidPicturesHostPath, $COLOR_ERROR)
 		EndIf
 		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidPicturesHostPath) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB Shared Folder on Host: " & $g_sAndroidPicturesHostPath)
 		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidPicturesHostFolder) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB Shared SubFolder: " & $g_sAndroidPicturesHostFolder)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidMouseDevice) Or $bLogChangesOnly = False Then SetDebugLog("Android Mouse Device: " & $g_sAndroidMouseDevice)
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_sAndroidMouseDevice) Or $bLogChangesOnly = False Then SetDebugLog("ماوس جهاز المحاكي: " & $g_sAndroidMouseDevice)
 		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_bAndroidAdbScreencap) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB screencap command enabled: " & $g_bAndroidAdbScreencap)
 		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_bAndroidAdbInput) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB input command enabled: " & $g_bAndroidAdbInput)
 		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_bAndroidAdbClick) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB Mouse Click enabled: " & $g_bAndroidAdbClick)
 		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_bAndroidAdbClickDrag) Or $bLogChangesOnly = False Then SetDebugLog("Android ADB Click Drag enabled: " & $g_bAndroidAdbClickDrag)
-		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], ($g_bChkBackgroundMode = True ? "enabled" : "disabled")) Or $bLogChangesOnly = False Then SetDebugLog("Bot Background Mode for screen capture: " & ($g_bChkBackgroundMode = True ? "enabled" : "disabled"))
+		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], ($g_bChkBackgroundMode = True ? "enabled" : "disabled")) Or $bLogChangesOnly = False Then SetDebugLog("وضع الخلفية ل التقاط صورة الشاشة: " & ($g_bChkBackgroundMode = True ? "مفعل" : "غير مفعل"))
 		If CompareAndUpdate($aPriorValues[IncrUpdate($i)], $g_bNoFocusTampering) Or $bLogChangesOnly = False Then SetDebugLog("No Focus Tampering: " & $g_bNoFocusTampering)
 		;$g_hAndroidWindow = WinGetHandle($g_sAndroidTitle) ;Handle for Android window
 		WinGetAndroidHandle() ; Set $g_hAndroidWindow and $g_sAndroidTitle for Android window
@@ -928,13 +928,13 @@ Func OpenAndroid($bRestart = False, $bStartOnlyAndroid = False, $wasRunState = $
 	Static $OpenAndroidActive = 0
 
 	If $OpenAndroidActive >= $g_iOpenAndroidActiveMaxTry Then
-		SetLog("Cannot open " & $g_sAndroidEmulator & ", tried " & $OpenAndroidActive & " times...", $COLOR_ERROR)
+		SetLog("لا يستطيع فتح " & $g_sAndroidEmulator & ", حاول " & $OpenAndroidActive & " مرات...", $COLOR_ERROR)
 		btnStop()
 		Return FuncReturn(False)
 	EndIf
 	$OpenAndroidActive += 1
 	If $OpenAndroidActive > 1 Then
-		SetDebugLog("Opening " & $g_sAndroidEmulator & " recursively " & $OpenAndroidActive & ". time...")
+		SetDebugLog("فتح " & $g_sAndroidEmulator & " متكرر " & $OpenAndroidActive & ". مرات...")
 	EndIf
 	If $bStartOnlyAndroid = True And $wasRunState = False Then $g_bRunState = True
 	Local $Result = _OpenAndroid($bRestart, $bStartOnlyAndroid)
@@ -953,9 +953,9 @@ Func _OpenAndroid($bRestart = False, $bStartOnlyAndroid = False)
 	ReleaseAdbDaemonMutex($hMutex)
 
 	If Not InitAndroid() Then
-		SetLog("Unable to open " & $g_sAndroidEmulator & ($g_sAndroidInstance = "" ? "" : " instance '" & $g_sAndroidInstance & "'"), $COLOR_ERROR)
-		SetLog("Please check emulator/installation", $COLOR_ERROR)
-		SetLog("Unable to continue........", $COLOR_ERROR)
+		SetLog("غير قادر على فتح " & $g_sAndroidEmulator & ($g_sAndroidInstance = "" ? "" : " المحاكي الفرعي '" & $g_sAndroidInstance & "'"), $COLOR_ERROR)
+		SetLog("الرجاء التاكد من وجد المحاكي منصب او محمل", $COLOR_ERROR)
+		SetLog("غير قادر على المتابعة........", $COLOR_ERROR)
 		btnStop()
 		SetError(1, 1, -1)
 		Return False
@@ -1042,13 +1042,13 @@ Func _RestartAndroidCoC($bInitAndroid = True, $bRestart = True, $bStopCoC = True
 	Local $sRestart = ""
 	If $bRestart = True Then
 		If $bStopCoC Then
-			SetLog("Please wait for CoC restart.....", $COLOR_INFO) ; Let user know we need time...
+			SetLog("الرجاء الانتظار اعادة تشغيل اللعبة.....", $COLOR_INFO) ; Let user know we need time...
 			$sRestart = "-S "
 		Else
-			SetLog("Please wait for CoC restart....", $COLOR_INFO) ; Let user know we need time...
+			SetLog("الرجاء الانتظار اعادة تشغيل اللعبة....", $COLOR_INFO) ; Let user know we need time...
 		EndIf
 	Else
-		SetLog("Launch Clash of Clans now...", $COLOR_SUCCESS)
+		SetLog("الدخول للعبة الآن...", $COLOR_SUCCESS)
 	EndIf
 	ConnectAndroidAdb()
 	If Not $g_bRunState Then Return False
@@ -1060,8 +1060,8 @@ Func _RestartAndroidCoC($bInitAndroid = True, $bRestart = True, $bStopCoC = True
 
 	$cmdOutput = AndroidAdbSendShellCommand("set export=$(am start " & $sRestart & "-n " & $g_sAndroidGamePackage & "/" & $g_sAndroidGameClass & " >&2)", 60000) ; timeout of 1 Minute
 	If StringInStr($cmdOutput, "Error:") > 0 And StringInStr($cmdOutput, $g_sAndroidGamePackage) > 0 Then
-		SetLog("Unable to load Clash of Clans, install/reinstall the game.", $COLOR_ERROR)
-		SetLog("Unable to continue........", $COLOR_WARNING)
+		SetLog("غير قادر على فتح اللعبة الرجاء التاكد ما اذا كانت منصبة داخل المحاكي.", $COLOR_ERROR)
+		SetLog("غير قادر على المتابعة........", $COLOR_WARNING)
 		btnStop()
 		SetError(1, 1, -1)
 		Return False
@@ -1096,7 +1096,7 @@ Func CloseAndroid($sSource)
 
 	ResetAndroidProcess()
 
-	SetLog("Stopping " & $g_sAndroidEmulator & "....", $COLOR_INFO)
+	SetLog("التوقف " & $g_sAndroidEmulator & "....", $COLOR_INFO)
 	SetDebugLog("CloseAndroid, caller: " & $sSource)
 
 	; Un-dock Android
@@ -1106,7 +1106,7 @@ Func CloseAndroid($sSource)
 
 	If Not $g_bRunState Then Return FuncReturn(False)
 
-	SetLog("Please wait for full " & $g_sAndroidEmulator & " shutdown...", $COLOR_SUCCESS)
+	SetLog("يرجى الانتظار بالكامل " & $g_sAndroidEmulator & " اغلق...", $COLOR_SUCCESS)
 	Local $pid = GetAndroidPid()
 	If ProcessExists2($pid) Then
 		KillProcess($pid, "CloseAndroid")
@@ -1118,9 +1118,9 @@ Func CloseAndroid($sSource)
 
 	If Not $g_bRunState Then Return FuncReturn(False)
 	If ProcessExists($pid) Then
-		SetLog("Failed to stop " & $g_sAndroidEmulator, $COLOR_ERROR)
+		SetLog("فشل في التوقف " & $g_sAndroidEmulator, $COLOR_ERROR)
 	Else
-		SetLog($g_sAndroidEmulator & " stopped successfully", $COLOR_SUCCESS)
+		SetLog($g_sAndroidEmulator & " التوقف تم بنجاح", $COLOR_SUCCESS)
 	EndIf
 
 	If Not $g_bRunState Then Return FuncReturn(False)
@@ -1157,11 +1157,11 @@ Func SetScreenAndroid()
 	ResumeAndroid()
 	If Not $g_bRunState Then Return False
 	; Set Android screen size and dpi
-	SetLog("Set " & $g_sAndroidEmulator & " screen resolution to " & $g_iAndroidClientWidth & " x " & $g_iAndroidClientHeight, $COLOR_INFO)
+	SetLog("تحديد " & $g_sAndroidEmulator & " دقة الشاشة ل " & $g_iAndroidClientWidth & "   " & $g_iAndroidClientHeight, $COLOR_INFO)
 	Local $Result = Execute("SetScreen" & $g_sAndroidEmulator & "()")
 	If $Result Then
-		SetLog("A restart of your computer might be required", $COLOR_ACTION)
-		SetLog("for the applied changes to take effect.", $COLOR_ACTION)
+		SetLog("قد تكون هناك حاجة لإعادة تشغيل جهاز الكمبيوتر الخاص بك", $COLOR_ACTION)
+		SetLog("لتصبح التغييرات المطبقة نافذة المفعول.", $COLOR_ACTION)
 	EndIf
 	Return $Result
 EndFunc   ;==>SetScreenAndroid
@@ -1199,7 +1199,7 @@ Func WaitForRunningVMS($WaitInSec = 120, $hTimer = 0)
 		If $hTimer <> 0 Then _StatusUpdateTime($hTimer)
 		_Sleep(3000) ; Sleep 3 Seconds
 		If __TimerDiff($hMyTimer) > $WaitInSec * 1000 Then ; if no device available in 4 minutes, Android/PC has major issue so exit
-			SetLog("Serious error has occurred, please restart PC and try again", $COLOR_ERROR)
+			SetLog("حدث خطأ جسيم ، يرجى إعادة تشغيل جهاز الكمبيوتر وإعادة المحاولة", $COLOR_ERROR)
 			SetLog($g_sAndroidEmulator & " refuses to load, waited " & Round(__TimerDiff($hTimer) / 1000, 2) & " seconds for boot completed", $COLOR_ERROR)
 			SetError(1, @extended, False)
 			Return True
