@@ -225,7 +225,7 @@ Func _checkObstacles($bBuilderBase = False, $bRecursive = False) ;Checks if some
 					BanMsgBox()
 					Return checkObstacles_StopBot($msg) ; stop bot
 				EndIf
-				SetLog("Warning: Can not find type of Reload error message", $COLOR_ERROR)
+				SetLog("تحذير: لا يمكن العثور على نوع رسالة الخطأ إعادة تحميل", $COLOR_ERROR)
 		EndSelect
 		If TestCapture() Then Return "Village is out of sync or inactivity or connection lost or maintenance"
 		Return checkObstacles_ReloadCoC($aReloadButton, "#0131", $bRecursive) ; Click for out of sync or inactivity or connection lost or maintenance
@@ -395,7 +395,9 @@ Func checkObstacles_Network($bForceCapture = False, $bReloadCoC = True)
 
 	If UBound(decodeSingleCoord(FindImageInPlace("CocReconnecting", $g_sImgCocReconnecting, "420,355,440,375", $bForceCapture))) > 1 Then
 		If $hCocReconnectingTimer = 0 Then
-			SetLog("Network Connection lost...", $COLOR_ERROR)
+			SetLog("انقطع الاتصال بالشبكة...", $COLOR_ERROR)
+			CloseCoC()
+			OpenCoC() 
 			$hCocReconnectingTimer = __TimerInit()
 		ElseIf __TimerDiff($hCocReconnectingTimer) > $g_iCoCReconnectingTimeout Then
 			SetLog("Network Connection really lost, Reloading CoC...", $COLOR_ERROR)
