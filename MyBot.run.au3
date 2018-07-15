@@ -541,12 +541,12 @@ Func FinalInitialization(Const $sAI)
 	EndIf
 
 	If $g_bFoundRunningAndroid Then
-		SetLog(GetTranslatedFileIni("MBR GUI Design - Loading", "Msg_Android_instance_03", "Found running %s %s", $g_sAndroidEmulator, $g_sAndroidVersion), $COLOR_SUCCESS)
+		SetLog(GetTranslatedFileIni("MBR GUI Design - Loading", "Msg_Android_instance_03", ",وجد التشغيل %s %s", $g_sAndroidEmulator, $g_sAndroidVersion), $COLOR_SUCCESS)
 	EndIf
 	If $g_bFoundInstalledAndroid Then
 		SetLog("Found installed " & $g_sAndroidEmulator & " " & $g_sAndroidVersion, $COLOR_SUCCESS)
 	EndIf
-	SetLog(GetTranslatedFileIni("MBR GUI Design - Loading", "Msg_Android_instance_04", "Android Emulator Configuration: %s", $sAI), $COLOR_SUCCESS)
+	SetLog(GetTranslatedFileIni("MBR GUI Design - Loading", "Msg_Android_instance_04", "تكوين محاكي الأندرويد: %s", $sAI), $COLOR_SUCCESS)
 
 	;AdlibRegister("PushBulletRemoteControl", $g_iPBRemoteControlInterval)
 	;AdlibRegister("PushBulletDeleteOldPushes", $g_iPBDeleteOldPushesInterval)

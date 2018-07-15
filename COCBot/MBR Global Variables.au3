@@ -599,7 +599,7 @@ Global Enum $eBarb, $eArch, $eGiant, $eGobl, $eWall, $eBall, $eWiza, $eHeal, $eD
 Global Enum $DB, $LB, $TS, $MA, $TB, $DT ; DeadBase, ActiveBase, TownhallSnipe, Milking Attack, TownhallBully, DropTrophy
 Global Const $g_iModeCount = 3
 Global $g_iMatchMode = 0 ; 0 Dead / 1 Live / 2 TH Snipe / 3 Milking Attack / 4 TH Bully / 5 Drop Trophy
-Global Const $g_asModeText[6] = ["Dead Base", "Live Base", "TH Snipe", "Milking Attack", "TH Bully", "Drop Trophy"]
+Global Const $g_asModeText[6] = ["قرية مهجورة", "قرية نشطة", "TH Snipe", "Milking Attack", "TH Bully", "Drop Trophy"]
 
 ; Troops
 Global Enum $eTroopBarbarian, $eTroopArcher, $eTroopGiant, $eTroopGoblin, $eTroopWallBreaker, $eTroopBalloon, _
@@ -607,11 +607,11 @@ Global Enum $eTroopBarbarian, $eTroopArcher, $eTroopGiant, $eTroopGoblin, $eTroo
 		$eTroopMinion, $eTroopHogRider, $eTroopValkyrie, $eTroopGolem, $eTroopWitch, _
 		$eTroopLavaHound, $eTroopBowler, $eTroopCount
 Global Const $g_asTroopNames[$eTroopCount] = [ _
-		"بربر", "ارشر", "عملاق", "Goblin", "Wall Breaker", "Balloon", "Wizard", "Healer", "Dragon", "Pekka", "Baby Dragon", "Miner", "Electro Dragon", _
-		"Minion", "Hog Rider", "Valkyrie", "Golem", "Witch", "Lava Hound", "Bowler"]
+		"بربر", "ارشر", "عملاق", "حرامي", "مفجر السور", "بالون", "ساحر", "هلر", "تنين", "بيكا", "بيبي دراغون", "حفار", "تنين الكهرباء", _
+		"مينون", "هوك رايد", "فالكري", "غولم", "واتش", "لافا", "باولر"]
 Global Const $g_asTroopNamesPlural[$eTroopCount] = [ _
-		"بربر", "ارشر", "عملاق", "Goblins", "Wall Breakers", "Balloons", "Wizards", "Healers", "Dragons", "Pekkas", "Baby Dragons", "Miners", "Electro Dragons", _
-		"Minions", "Hog Riders", "Valkyries", "Golems", "Witches", "Lava Hounds", "Bowlers"]
+		"بربر", "ارشر", "عملاق", "حرامي", "مفجر السور", "بالون", "ساحر", "هلر", "تنين", "بيكا", "بيبي دراغون", "حفار", "تنين الكهرباء", _
+		"مينون", "هوك رايد", "فالكري", "غولم", "واتش", "لافا", "باولر"]
 Global Const $g_asTroopShortNames[$eTroopCount] = [ _
 		"Barb", "Arch", "Giant", "Gobl", "Wall", "Ball", "Wiza", "Heal", "Drag", "Pekk", "BabyD", "Mine", "EDrag", _
 		"Mini", "Hogs", "Valk", "Gole", "Witc", "Lava", "Bowl"]
@@ -649,7 +649,7 @@ Global Const $g_aiTroopDonateXP[$eTroopCount] = [1, 1, 5, 1, 2, 5, 4, 14, 20, 25
 ; Spells
 Global Enum $eSpellLightning, $eSpellHeal, $eSpellRage, $eSpellJump, $eSpellFreeze, $eSpellClone, _
 		$eSpellPoison, $eSpellEarthquake, $eSpellHaste, $eSpellSkeleton, $eSpellCount
-Global Const $g_asSpellNames[$eSpellCount] = ["Lightning", "Heal", "Rage", "Jump", "Freeze", "Clone", "Poison", "Earthquake", "Haste", "Skeleton"]
+Global Const $g_asSpellNames[$eSpellCount] = ["صواعق", "هيل", "غضب", "قفز", "تجميد", "استنساخ", "سم", "زلزال", "تسريع", "هياكل"]
 Global Const $g_asSpellShortNames[$eSpellCount] = ["LSpell", "HSpell", "RSpell", "JSpell", "FSpell", "CSpell", "PSpell", "ESpell", "HaSpell", "SkSpell"]
 Global Const $g_aiSpellSpace[$eSpellCount] = [2, 2, 2, 2, 1, 3, 1, 1, 1, 1]
 Global Const $g_aiSpellTrainTime[$eSpellCount] = [360, 360, 360, 360, 360, 720, 180, 180, 180, 180]
@@ -672,21 +672,21 @@ Global Enum $eHeroNone = 0, $eHeroKing = 1, $eHeroQueen = 2, $eHeroWarden = 4
 
 ; Hero standard values
 Global Enum $eHeroBarbarianKing, $eHeroArcherQueen, $eHeroGrandWarden, $eHeroCount
-Global Const $g_asHeroNames[$eHeroCount] = ["Barbarian King", "Archer Queen", "Grand Warden"]
-Global Const $g_asHeroShortNames[$eHeroCount] = ["King", "Queen", "Warden"]
+Global Const $g_asHeroNames[$eHeroCount] = ["الملك", "الملكة", "الامر الكبير"]
+Global Const $g_asHeroShortNames[$eHeroCount] = ["ملك", "ملكة", "امر كبير"]
 Global $g_aiHeroBoost[$eHeroCount] = ["1970/01/01 00:00:00", "1970/01/01 00:00:00", "1970/01/01 00:00:00"] ; Use Epoch as standard values :)
 
 ; Leagues
 Global Enum $eLeagueUnranked, $eLeagueBronze, $eLeagueSilver, $eLeagueGold, $eLeagueCrystal, $eLeagueMaster, $eLeagueChampion, $eLeagueTitan, $eLeagueLegend, $eLeagueCount
 Global Const $g_asLeagueDetails[22][5] = [ _
-		["0", "Bronze III", "0", "B3", "400"], ["1000", "Bronze II", "0", "B2", "500"], ["1300", "Bronze I", "0", "B1", "600"], _
-		["2600", "Silver III", "0", "S3", "800"], ["3700", "Silver II", "0", "S2", "1000"], ["4800", "Silver I", "0", "S1", "1200"], _
-		["10000", "Gold III", "0", "G3", "1400"], ["13500", "Gold II", "0", "G2", "1600"], ["17000", "Gold I", "0", "G1", "1800"], _
-		["40000", "Crystal III", "120", "c3", "2000"], ["55000", "Crystal II", "220", "c2", "2200"], ["70000", "Crystal I", "320", "c1", "2400"], _
-		["110000", "Master III", "560", "M3", "2600"], ["135000", "Master II", "740", "M2", "2800"], ["160000", "Master I", "920", "M1", "3000"], _
-		["200000", "Champion III", "1220", "C3", "3200"], ["225000", "Champion II", "1400", "C2", "3500"], ["250000", "Champion I", "1580", "C1", "3800"], _
-		["280000", "Titan III", "1880", "T3", "4100"], ["300000", "Titan II", "2060", "T2", "4400"], ["320000", "Titan I", "2240", "T1", "4700"], _
-		["340000", "Legend", "2400", "LE", "5000"]]
+		["0", "برونزي الثالث", "0", "B3", "400"], ["1000", "برونزي الثاني", "0", "B2", "500"], ["1300", "برونزي الاول", "0", "B1", "600"], _
+		["2600", "الفضي الثالث", "0", "S3", "800"], ["3700", "الفضي الثاني", "0", "S2", "1000"], ["4800", "الفضي الاول", "0", "S1", "1200"], _
+		["10000", "الذهي الثالث", "0", "G3", "1400"], ["13500", "الذهبي الثاني", "0", "G2", "1600"], ["17000", "الذهبي الاول", "0", "G1", "1800"], _
+		["40000", "الكرستالي الثالث", "120", "c3", "2000"], ["55000", "الكرستالي الثاني", "220", "c2", "2200"], ["70000", "الكرستالي الاول", "320", "c1", "2400"], _
+		["110000", "الماستر الثالث", "560", "M3", "2600"], ["135000", "الماستر الثاني ", "740", "M2", "2800"], ["160000", "الماستر الاول", "920", "M1", "3000"], _
+		["200000", "الشامبيون الثالث", "1220", "C3", "3200"], ["225000", "الشامبيون الثاني", "1400", "C2", "3500"], ["250000", "الشامبيون الاول", "1580", "C1", "3800"], _
+		["280000", "التيتان الثالث", "1880", "T3", "4100"], ["300000", "التيتان الثاني", "2060", "T2", "4400"], ["320000", "التيتان الاول", "2240", "T1", "4700"], _
+		["340000", "اسطوري", "2400", "LE", "5000"]]
 
 ; Loot types
 Global Enum $eLootGold, $eLootElixir, $eLootDarkElixir, $eLootTrophy, $eLootCount
@@ -966,9 +966,9 @@ Global Enum $eTroopBarbarianS, $eTroopArcherS, $eTroopGiantS, $eTroopGoblinS, $e
 		$eTroopMinionS, $eTroopHogRiderS, $eTroopValkyrieS, $eTroopGolemS, $eTroopWitchS, _
 		$eTroopLavaHoundS, $eTroopBowlerS, $eHeroeS, $eCCS, $eDropOrderCount
 Global Const $g_asDropOrderNames[$eDropOrderCount] = [ _
-		"بربر", "ارشر", "عملاق", "Goblins", "Wall Breakers", "Balloons", "Wizards", "Healers", "Dragons", "Pekkas", "Baby Dragons", "Miners", "Electro Dragons", _
-		"Minions", "Hog Riders", "Valkyries", "Golems", "Witches", "Lava Hounds", "Bowlers", _
-		"Clan Castle", "Heroes"]
+		"بربر", "ارشر", "عملاق", "حرامي", "مفجر السور", "بالون", "ساحر", "هلر", "تنين", "بيكا", "بيبي دراغون", "خفار", "تنين الكهرباء", _
+		"مينون", "هوك اريد", "فالكري", "غولم", "واتش", "لافا", "باولر", _
+		"قلعة القبيلة", "ملوك"]
 
 Global Const $g_aiDropOrderIcon[24] = [ _
 		$eIcnOptions, $eIcnBarbarian, $eIcnArcher, $eIcnGiant, $eIcnGoblin, $eIcnWallBreaker, $eIcnBalloon, _

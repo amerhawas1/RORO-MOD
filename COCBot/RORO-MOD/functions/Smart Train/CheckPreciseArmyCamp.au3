@@ -14,8 +14,8 @@ Func CheckPreciseArmyCamp()
 
 	If Not $g_bChkPreciseArmyCamp Then Return False
 
-	Local $sTextTroop = "Troops are so far so good!"
-	Local $sTextSpell = "Spells are so far so good!"
+	Local $sTextTroop = "القوات حتى الآن جيدة جدا!"
+	Local $sTextSpell = "السبيلات حتى الآن جيدة جدا!"
 
 	SetLog("التحقق من نافذة القوات والسبيلات بشكل دقيق جدا", $COLOR_INFO)
 
