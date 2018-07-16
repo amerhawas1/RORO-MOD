@@ -427,7 +427,7 @@ Global $g_iThreads = 0 ; Used by ImgLoc for parallism (for this bot instance), 0
 
 ; Profile file/folder paths
 Global $g_sProfilePath = @ScriptDir & "\Profiles"
-Global $g_sPrivateProfilePath = @MyDocumentsDir & "\MyBot.run-Profiles" ; Used to save private & very sensitive profile information like shared_prefs (notification tokens will be saved in future here also)
+Global $g_sPrivateProfilePath = @ScriptDir & "\Profiles" ; Used to save private & very sensitive profile information like shared_prefs (notification tokens will be saved in future here also)
 Global Const $g_sProfilePresetPath = @ScriptDir & "\Strategies"
 Global $g_sProfileCurrentName = "" ; Name of profile currently being used
 Global $g_sProfileConfigPath = "" ; Path to the current config.ini being used in this profile
