@@ -247,7 +247,7 @@ Func getAndroidPos($FastCheck = False, $RetryCount1 = 0, $RetryCount2 = 0, $bWid
 
 			$aAndroidWindow[0] += $aAdj[0]
 			$aAndroidWindow[1] += $aAdj[1]
-			SetDebugLog($sPre & $g_sAndroidTitle & " Adjusted Window Size: " & $aAndroidWindow[0] & " x " & $aAndroidWindow[1] & " (by " & $aAdj[0] + $aAdj0[0] & ", " & $aAdj[1] + $aAdj0[1] & ")", $COLOR_INFO)
+			SetDebugLog($sPre & $g_sAndroidTitle & " حجم النافذة المعدل: " & $aAndroidWindow[0] & "   " & $aAndroidWindow[1] & " (by " & $aAdj[0] + $aAdj0[0] & ", " & $aAdj[1] + $aAdj0[1] & ")", $COLOR_INFO)
 
 			If $bExpectControlResize And $RetryCount1 < 6 Then
 				WinMove($g_hAndroidWindow, "", $AndroidWinPos[0], $AndroidWinPos[1], $aAndroidWindow[0] - 2, $aAndroidWindow[1] - 2) ; force invalid resize (triggers Android rendering control resize)
@@ -267,7 +267,7 @@ Func getAndroidPos($FastCheck = False, $RetryCount1 = 0, $RetryCount2 = 0, $bWid
 				Local $aNewControlSize = getAndroidPos(True)
 				If UBound($aNewControlSize) > 2 Then
 					;ControlMove($g_hAndroidWindow, $g_sAppPaneName, $g_sAppClassInstance, 0, 0, $g_iAndroidClientWidth, $g_iAndroidClientHeight)
-					SetDebugLog($sPre & $g_sAndroidEmulator & " window resized to " & $aAndroidWindow[0] & " x " & $aAndroidWindow[1], $COLOR_SUCCESS)
+					SetDebugLog($sPre & $g_sAndroidEmulator & " نافذة حجمها " & $aAndroidWindow[0] & "   " & $aAndroidWindow[1], $COLOR_SUCCESS)
 
 					RedrawAndroidWindow()
 					If $bExpectControlResize Then
@@ -281,16 +281,16 @@ Func getAndroidPos($FastCheck = False, $RetryCount1 = 0, $RetryCount2 = 0, $bWid
 						If $aControlSize[2] <> $g_iAndroidClientWidth Or $aControlSize[3] <> $g_iAndroidClientHeight Then
 							If $bExpectControlResize = True Then
 								If $g_bDebugSetlog Then
-									SetDebugLog($sPre & $g_sAndroidEmulator & " window resize didn't work, screen is " & $aControlSize[2] & " x " & $aControlSize[3], $COLOR_ERROR)
+									SetDebugLog($sPre & $g_sAndroidEmulator & " نافذة التغيير لم تنجح, الشاشة " & $aControlSize[2] & " x " & $aControlSize[3], $COLOR_ERROR)
 								Else
-									SetLog($g_sAndroidEmulator & " window resize didn't work, screen is " & $aControlSize[2] & " x " & $aControlSize[3], $COLOR_ERROR)
+									SetLog($g_sAndroidEmulator & " تغيير حجم نافذة لم تنجح ، الشاشة " & $aControlSize[2] & "   " & $aControlSize[3], $COLOR_ERROR)
 								EndIf
 								If $RetryCount1 > 0 And $RetryCount1 < 6 And $RetryCount2 = 0 Then
 									; early abort when cannot be resized
 									Local $bXinc = $aControlSize[0] > $asControlSize[$RetryCount1][0] And $asControlSize[$RetryCount1][0] > $asControlSize[$RetryCount1 - 1][0]
 									Local $bYinc = $aControlSize[1] > $asControlSize[$RetryCount1][1] And $asControlSize[$RetryCount1][1] > $asControlSize[$RetryCount1 - 1][1]
 									If ($bXinc And Not $bYinc) Or (Not $bXinc And $bYinc) Or ($aControlSize[2] < $g_iAndroidClientWidth / 2 Or $aControlSize[2] > $g_iAndroidClientWidth * 1.5 Or $aControlSize[3] < $g_iAndroidClientHeight / 2 Or $aControlSize[3] > $g_iAndroidClientHeight * 1.5) Then
-										SetLog($g_sAndroidEmulator & " window cannot be resized, abort", $COLOR_ERROR)
+										SetLog($g_sAndroidEmulator & " لا يمكن تغيير حجم النافذة ، إحباط", $COLOR_ERROR)
 										Return $aControlSize
 									EndIf
 								EndIf
@@ -311,7 +311,7 @@ Func getAndroidPos($FastCheck = False, $RetryCount1 = 0, $RetryCount2 = 0, $bWid
 						EndIf
 					EndIf
 				Else
-					SetDebugLog($sPre & "WARNING: Cannot resize " & $g_sAndroidEmulator & " window to " & $aAndroidWindow[0] & " x " & $aAndroidWindow[1], $COLOR_ERROR)
+					SetDebugLog($sPre & "تحذير: لا يمكن تغيير حجم " & $g_sAndroidEmulator & " نافذة ل " & $aAndroidWindow[0] & "   " & $aAndroidWindow[1], $COLOR_ERROR)
 				EndIf
 
 			Else
@@ -327,15 +327,15 @@ Func getAndroidPos($FastCheck = False, $RetryCount1 = 0, $RetryCount2 = 0, $bWid
 		EndIf
 
 	Else
-		SetDebugLog($sPre & "WARNING: Cannot resize " & $g_sAndroidEmulator & " window, control '" & $g_sAppClassInstance & "' not available", $COLOR_ERROR)
+		SetDebugLog($sPre & "تحذير: لا يمكن تغيير حجم " & $g_sAndroidEmulator & " نافذة ، تحكم '" & $g_sAppClassInstance & "' غير متاح", $COLOR_ERROR)
 	EndIf
 
 	If $bResizedOK Then
 		;RedrawAndroidWindow()
 		If $g_bDebugSetlog Then
-			SetDebugLog($sPre & $g_sAndroidEmulator & " window resized to work with MyBot", $COLOR_SUCCESS)
+			SetDebugLog($sPre & $g_sAndroidEmulator & " نافذة تغيير حجمها للعمل مع MyBot", $COLOR_SUCCESS)
 		Else
-			SetLog($g_sAndroidEmulator & " window resized to work with MyBot", $COLOR_SUCCESS)
+			SetLog($g_sAndroidEmulator & " نافذة تغيير حجمها للعمل مع MyBot", $COLOR_SUCCESS)
 		EndIf
 		#cs
 		Local $hCtrl = ControlGetHandle($g_hAndroidWindow, $g_sAppPaneName, $g_sAppClassInstance)
