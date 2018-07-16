@@ -87,8 +87,8 @@ Func _ClanGames()
 
 	; Check for BS/CoC errors just in case
 	If isProblemAffect(True) Then checkMainScreen(False)
-
-	; Lets test the Loot Challenges
+	
+	;;;; Lets test the Loot Challenges
 	If $g_bChkClanGamesLoot Then
 		SetLog("التحقق من تحديثات الجمع", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Name , [2] = TH level , [3] = Difficulty Level , [4] = Time to do it
@@ -117,74 +117,8 @@ Func _ClanGames()
 			If $g_bRunState = False Then Return
 		Next
 	EndIf
-
-	; Lets test the Air Troops Challenges
-	If $g_bChkClanGamesAirTroop Then
-		SetLog("التحقق من تحديات القوات الجوية", $COLOR_DEBUG)
-		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Event Quantities
-		Local $AirTroopChallenges = ClanGamesChallenges("$AirTroopChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
-
-		For $i = 0 To UBound($AirTroopChallenges) - 1
-			; Verify if the Troops exist in your Army Composition
-			Local $TroopIndex = Int(Eval("eTroop" & $AirTroopChallenges[$i][1]))
-			; If doesn't Exist the Troop on your Army
-			If $g_aiCurrentTroops[$TroopIndex] < 1 Then
-				If $g_bChkClanGamesDebug Then SetLog("[" & $AirTroopChallenges[$i][1] & "] لا " & $g_asTroopNames[$TroopIndex] & " على تكوين الجيش الخاص بك.")
-				ContinueLoop
-				; If Exist BUT not is required quantities
-			ElseIf $g_aiCurrentTroops[$TroopIndex] > 0 And $g_aiCurrentTroops[$TroopIndex] < $AirTroopChallenges[$i][3] Then
-				If $g_bChkClanGamesDebug Then SetLog("[" & $AirTroopChallenges[$i][1] & "] أنت في حاجة أكثر " & $g_asTroopNames[$TroopIndex] & " [" & $g_aiCurrentTroops[$TroopIndex] & "/" & $AirTroopChallenges[$i][3] & "]")
-				ContinueLoop
-			EndIf
-
-			If QuickMIS("BC1", $AirTroopChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-				SetLog("وجد " & $AirTroopChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
-				$sEventName = "Troops Event | " & $AirTroopChallenges[$i][1]
-				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
-				If _Sleep(1750) Then Return
-				If ClickOnEvent($YourAccScore, $ScoreLimits, $sEventName, $getCapture) Then Return
-				; Some error occurred let's click on Challenges Tab and proceeds
-				ClickP($TabChallengesPosition, 2, 0, "#Tab")
-			EndIf
-			If _Sleep(50) Then Return
-			If $g_bRunState = False Then Return
-		Next
-	EndIf
-
-	; Lets test the Ground Troops Challenges
-	If $g_bChkClanGamesGroundTroop Then
-		SetLog("التحقق من تحديات القوات الارضية", $COLOR_DEBUG)
-		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Event Quantities
-		Local $GroundTroopChallenges = ClanGamesChallenges("$GroundTroopChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
-
-		For $i = 0 To UBound($GroundTroopChallenges) - 1
-			; Verify if the Troops exist in your Army Composition
-			Local $TroopIndex = Int(Eval("eTroop" & $GroundTroopChallenges[$i][1]))
-			; If doesn't Exist the Troop on your Army
-			If $g_aiCurrentTroops[$TroopIndex] < 1 Then
-				If $g_bChkClanGamesDebug Then SetLog("[" & $GroundTroopChallenges[$i][1] & "] لا " & $g_asTroopNames[$TroopIndex] & " على تكوين الجيش الخاص بك.")
-				ContinueLoop
-				; If Exist BUT not is required quantities
-			ElseIf $g_aiCurrentTroops[$TroopIndex] > 0 And $g_aiCurrentTroops[$TroopIndex] < $GroundTroopChallenges[$i][3] Then
-				If $g_bChkClanGamesDebug Then SetLog("[" & $GroundTroopChallenges[$i][1] & "] أنت في حاجة أكثر " & $g_asTroopNames[$TroopIndex] & " [" & $g_aiCurrentTroops[$TroopIndex] & "/" & $GroundTroopChallenges[$i][3] & "]")
-				ContinueLoop
-			EndIf
-
-			If QuickMIS("BC1", $GroundTroopChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
-				SetLog("وجد " & $GroundTroopChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
-				$sEventName = "Troops Event | " & $GroundTroopChallenges[$i][1]
-				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
-				If _Sleep(1750) Then Return
-				If ClickOnEvent($YourAccScore, $ScoreLimits, $sEventName, $getCapture) Then Return
-				; Some error occurred let's click on Challenges Tab and proceeds
-				ClickP($TabChallengesPosition, 2, 0, "#Tab")
-			EndIf
-			If _Sleep(50) Then Return
-			If $g_bRunState = False Then Return
-		Next
-	EndIf
-
-	; Lets test the Battle Challenges
+	
+	;;;; Lets test the Battle Challenges
 	If $g_bChkClanGamesBattle Then
 		SetLog("التحقق من تحديات القتال او المعارك", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Difficulty Level , [4] = Time to do it
@@ -238,7 +172,7 @@ Func _ClanGames()
 		Next
 	EndIf
 
-	; Lets test the Destruction Challenges
+	;;;; Lets test the Destruction Challenges
 	If $g_bChkClanGamesDestruction Then
 		SetLog("التحقق من تحديات التدمير ", $COLOR_DEBUG)
 		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Difficulty Level , [4] = Time to do it
@@ -273,6 +207,81 @@ Func _ClanGames()
 			If $g_bRunState = False Then Return
 		Next
 	EndIf
+	
+	;;;; Lets test the Ground Troops Challenges
+	If $g_bChkClanGamesGroundTroop Then
+		SetLog("التحقق من تحديات القوات الارضية", $COLOR_DEBUG)
+		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Event Quantities
+		Local $GroundTroopChallenges = ClanGamesChallenges("$GroundTroopChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
+
+		For $i = 0 To UBound($GroundTroopChallenges) - 1
+			;;;;; Verify if the Troops exist in your Army Composition
+			Local $TroopIndex = Int(Eval("eTroop" & $GroundTroopChallenges[$i][1]))
+			;;;;; If doesn't Exist the Troop on your Army
+			If $g_aiCurrentTroops[$TroopIndex] < 1 Then
+				If $g_bChkClanGamesDebug Then SetLog("[" & $GroundTroopChallenges[$i][1] & "] لا " & $g_asTroopNames[$TroopIndex] & " على تكوين الجيش الخاص بك.")
+				ContinueLoop
+				;;;;; If Exist BUT not is required quantities
+			ElseIf $g_aiCurrentTroops[$TroopIndex] > 0 And $g_aiCurrentTroops[$TroopIndex] < $GroundTroopChallenges[$i][3] Then
+				If $g_bChkClanGamesDebug Then SetLog("[" & $GroundTroopChallenges[$i][1] & "] أنت في حاجة أكثر " & $g_asTroopNames[$TroopIndex] & " [" & $g_aiCurrentTroops[$TroopIndex] & "/" & $GroundTroopChallenges[$i][3] & "]")
+				ContinueLoop
+			EndIf
+
+			If QuickMIS("BC1", $GroundTroopChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
+				SetLog("وجد " & $GroundTroopChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
+				$sEventName = "Troops Event | " & $GroundTroopChallenges[$i][1]
+				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
+				If _Sleep(1750) Then Return
+				If ClickOnEvent($YourAccScore, $ScoreLimits, $sEventName, $getCapture) Then Return
+				;;;;; Some error occurred let's click on Challenges Tab and proceeds
+				ClickP($TabChallengesPosition, 2, 0, "#Tab")
+			EndIf
+			If _Sleep(50) Then Return
+			If $g_bRunState = False Then Return
+		Next
+	EndIf
+
+	
+
+	
+	
+	
+	;;;; Lets test the Air Troops Challenges
+	If $g_bChkClanGamesAirTroop Then
+		SetLog("التحقق من تحديات القوات الجوية", $COLOR_DEBUG)
+		;[0] = Path Directory , [1] = Event Name , [2] = TH level , [3] = Event Quantities
+		Local $AirTroopChallenges = ClanGamesChallenges("$AirTroopChallenges" , False, $sINIPath, $g_bChkClanGamesDebug)
+
+		For $i = 0 To UBound($AirTroopChallenges) - 1
+			; Verify if the Troops exist in your Army Composition
+			Local $TroopIndex = Int(Eval("eTroop" & $AirTroopChallenges[$i][1]))
+			; If doesn't Exist the Troop on your Army
+			If $g_aiCurrentTroops[$TroopIndex] < 1 Then
+				If $g_bChkClanGamesDebug Then SetLog("[" & $AirTroopChallenges[$i][1] & "] لا " & $g_asTroopNames[$TroopIndex] & " على تكوين الجيش الخاص بك.")
+				ContinueLoop
+				; If Exist BUT not is required quantities
+			ElseIf $g_aiCurrentTroops[$TroopIndex] > 0 And $g_aiCurrentTroops[$TroopIndex] < $AirTroopChallenges[$i][3] Then
+				If $g_bChkClanGamesDebug Then SetLog("[" & $AirTroopChallenges[$i][1] & "] أنت في حاجة أكثر " & $g_asTroopNames[$TroopIndex] & " [" & $g_aiCurrentTroops[$TroopIndex] & "/" & $AirTroopChallenges[$i][3] & "]")
+				ContinueLoop
+			EndIf
+
+			If QuickMIS("BC1", $AirTroopChallenges[$i][0], $x, $y, $x1, $y1, $getCapture, $g_bChkClanGamesDebug) Then
+				SetLog("وجد " & $AirTroopChallenges[$i][1] & " الحدث", $COLOR_SUCCESS)
+				$sEventName = "Troops Event | " & $AirTroopChallenges[$i][1]
+				Click($g_iQuickMISX + $x, $g_iQuickMISY + $y)
+				If _Sleep(1750) Then Return
+				If ClickOnEvent($YourAccScore, $ScoreLimits, $sEventName, $getCapture) Then Return
+				; Some error occurred let's click on Challenges Tab and proceeds
+				ClickP($TabChallengesPosition, 2, 0, "#Tab")
+			EndIf
+			If _Sleep(50) Then Return
+			If $g_bRunState = False Then Return
+		Next
+	EndIf
+
+	
+
+	
 
 	; Lets test the Miscellaneous Challenges
 	If $g_bChkClanGamesMiscellaneous Then
@@ -314,7 +323,7 @@ Func _ClanGames()
 		Next
 	EndIf
 
-	; Lets test the Builder Base Challenges
+	;;;;; Lets test the Builder Base Challenges
 	If $g_bChkClanGamesPurge Then
 		If $g_iPurgeJobCount[$g_iCurAccount] + 1 < $g_iPurgeMax Or $g_iPurgeMax = 0 Then
 			Local $Txt = $g_iPurgeMax
@@ -599,12 +608,12 @@ EndFunc   ;==>getOcrYourScore
 Func ClanGamesChallenges($sReturnArray, $makeIni = False , $sINIPath = "", $debug = False)
 
 	Local $LootChallenges[6][5] = [ _
-				[$g_sImgGold, 		"Gold Challenge"		, 7, 5, 8], _ ; Loot 150,000 Gold from a single Multiplayer Battle				|8h 	|50
-				[$g_sImgElixir, 	"Elixir Challenge"		, 7, 5, 8], _ ; Loot 150,000 Elixir from a single Multiplayer Battle 			|8h 	|50
-				[$g_sImgDark, 		"Dark Elixir Challenge"	, 8, 5, 8], _ ; Loot 1,500 Dark elixir from a single Multiplayer Battle			|8h 	|50
-				[$g_sImgGoldG, 		"Gold Grab"				, 3, 1, 1], _ ; Loot a total of 500,000 TO 1,500,000 from Multiplayer Battle 	|1h-2d 	|100-600
-				[$g_sImgElixirE, 	"Elixir Embezzlement"	, 3, 1, 1], _ ; Loot a total of 500,000 TO 1,500,000 from Multiplayer Battle 	|1h-2d 	|100-600
-				[$g_sImgDarkEH, 	"Dark Elixir Heist"		, 9, 3, 1]]   ; Loot a total of 1,500 TO 12,500 from Multiplayer Battle 		|1h-2d 	|100-600
+				[$g_sImgGold, 		"تحدي الذهب"		, 7, 5, 8], _ ; Loot 150,000 Gold from a single Multiplayer Battle				|8h 	|50
+				[$g_sImgElixir, 	"التحدي الاكسير"		, 7, 4, 8], _ ; Loot 150,000 Elixir from a single Multiplayer Battle 			|8h 	|50
+				[$g_sImgDark, 		"تحدي الاكسير الظلام"	, 8, 3, 8], _ ; Loot 1,500 Dark elixir from a single Multiplayer Battle			|8h 	|50
+				[$g_sImgGoldG, 		"انتزاع الذهب"				, 3, 1, 1], _ ; Loot a total of 500,000 TO 1,500,000 from Multiplayer Battle 	|1h-2d 	|100-600
+				[$g_sImgElixirE, 	"انتزاع الاكسير"	, 3, 1, 1], _ ; Loot a total of 500,000 TO 1,500,000 from Multiplayer Battle 	|1h-2d 	|100-600
+				[$g_sImgDarkEH, 	"انتزاع اكسير الظلام"		, 9, 3, 1]]   ; Loot a total of 1,500 TO 12,500 from Multiplayer Battle 		|1h-2d 	|100-600
 
 	Local $AirTroopChallenges[5][4] = [ _
 				[$g_sImgMini, 		"Minion"			, 7, 20], _		; Earn 2-5 Stars from Multiplayer Battles using 20 Minions			|3h-8h	|40-100
@@ -630,50 +639,50 @@ Func ClanGamesChallenges($sReturnArray, $makeIni = False , $sINIPath = "", $debu
 				[$g_sImgGole, 		"Golem"			, 8,  2]] 				 ; Earn 2-5 Stars from Multiplayer Battles using 2 Golems			|3h-8h	|40-100
 
 	Local $BattleChallenges[9][5] = [ _
-				[$g_sImgStar, 		"Star Collector"		, 3, 1, 8], _ ; Collect a total of 6-18 stars from Multiplayer Battles			|8h-2d	|100-600
-				[$g_sImgLordD, 		"Lord of Destruction"	, 3, 1, 8], _ ; Gather a total of 100%-500% destruction from Multi Battles		|8h-2d	|100-600
-				[$g_sImgPileVict, 	"Pile Of Victories"		, 3, 1, 8], _ ; Win 2-8 Multiplayer Battles										|8h-2d	|100-600
-				[$g_sImgHunt3, 		"Hunt for Three Stars"	, 10,5 ,8], _ ; Score a perfect 3 Stars in Multiplayer Battles					|8h 	|200
-				[$g_sImgWStreak, 	"Winning Streak"		, 9, 5, 8], _ ; Win 2-8 Multiplayer Battles in a row							|8h-2d	|100-600
-				[$g_sImgSlayingT, 	"Slaying The Titans"	, 11,2, 5], _ ; Win 5 Multiplayer Battles In Tital LEague						|5h		|300
-				[$g_sImgNoHeroics, 	"No Heroics Allowed"	, 3 ,5, 8], _ ; Win stars without using Heroes									|8h		|100
-				[$g_sImgNoMagicZone,"No-Magic Zone"			, 3 ,5, 8], _ ; Win stars without using Spells									|8h		|100
-				[$g_sImgAttUp,	 	"Attack Up"				, 3 ,1, 8]]	  ; Gain 3 Stars Against Certain Town Hall							|8h		|200
+				[$g_sImgStar, 		"جمع النجوم"		, 3, 4, 8], _ ; Collect a total of 6-18 stars from Multiplayer Battles			|8h-2d	|100-600
+				[$g_sImgLordD, 		"تحدي نسبة التدمير"	, 3, 1, 8], _ ; Gather a total of 100%-500% destruction from Multi Battles		|8h-2d	|100-600
+				[$g_sImgPileVict, 	"كومة من الانتصارات"		, 3, 3, 8], _ ; Win 2-8 Multiplayer Battles										|8h-2d	|100-600
+				[$g_sImgHunt3, 		"تحدي الحصول على 3 نجوم"	, 10,3 ,8], _ ; Score a perfect 3 Stars in Multiplayer Battles					|8h 	|200
+				[$g_sImgWStreak, 	"الفوز الانتصارات"		, 9, 5, 8], _ ; Win 2-8 Multiplayer Battles in a row							|8h-2d	|100-600
+				[$g_sImgSlayingT, 	"يقتل العمالقة"	, 11,0, 5], _ ; Win 5 Multiplayer Battles In Tital LEague						|5h		|300
+				[$g_sImgNoHeroics, 	"تحدي بدون استخدام الملوك"	, 3 ,2, 8], _ ; Win stars without using Heroes									|8h		|100
+				[$g_sImgNoMagicZone,"تحدي بدون استخدام السبيلات"			, 3 ,2, 8], _ ; Win stars without using Spells									|8h		|100
+				[$g_sImgAttUp,	 	"مهاجمة"				, 3 ,1, 8]]	  ; Gain 3 Stars Against Certain Town Hall							|8h		|200
 
 	Local $DestructionChallenges[28][5] = [ _
-				[$g_sImgCannon, 	"Cannon Carnage"				, 3, 1, 1], _ ; Destroy 5-25 Cannons in Multiplayer Battles					|1h-8h	|75-350
-				[$g_sImgArcherT, 	"Archer Tower Assault"			, 3, 1, 1], _ ; Destroy 5-20 Archer Towers in Multiplayer Battles			|1h-8h	|75-350
-				[$g_sImgMortar, 	"Mortar Mauling"				, 3, 1, 1], _ ; Destroy 4-12 Mortars in Multiplayer Battles					|1h-8h	|40-350
-				[$g_sImgAirDef, 	"Destroy Air Defenses"			, 7, 2, 1], _ ; Destroy 3-12 Air Defenses in Multiplayer Battles			|1h-8h	|40-350
-				[$g_sImgWizard, 	"Wizard Tower Warfare"			, 3, 1, 1], _ ; Destroy 4-12 Wizard Towers in Multiplayer Battles			|1h-8h	|40-350
-				[$g_sImgAirS, 		"Destroy Air Sweepers"			, 8, 4, 1], _ ; Destroy 2-6 Air Sweepers in Multiplayer Battles				|1h-8h	|40-350
-				[$g_sImgTesla, 		"Destroy Tesla Towers"			, 7, 5, 1], _ ; Destroy 4-12 Hidden Teslas in Multiplayer Battles			|1h-8h	|50-350
-				[$g_sImgBombT, 		"Destroy Bomb Towers"			, 8, 2, 1], _ ; Destroy 2 Bomb Towers in Multiplayer Battles				|1h-8h	|50-350
-				[$g_sImgXBow, 		"Destroy X-Bows"				, 9, 5, 1], _ ; Destroy 3-12 X-Bows in Multiplayer Battles					|1h-8h	|50-350
-				[$g_sImgInferno, 	"Destroy Inferno Towers"		, 11,5, 1], _ ; Destroy 2 Inferno Towers in Multiplayer Battles				|1h-2d	|50-600
-				[$g_sImgEagle, 		"Eagle Artillery Elimination"	, 11,5, 1], _ ; Destroy 1-7 Eagle Artillery in Multiplayer Battles			|1h-2d	|50-600
-				[$g_sImgCCC, 		"Clan Castle Charge"			, 5, 2, 1], _ ; Destroy 1-4 Clan Castle in Multiplayer Battles				|1h-8h	|40-350
-				[$g_sImgGoldRaid, 	"Gold Storage Raid"				, 3, 2, 1], _ ; Destroy 3-15 Gold Storages in Multiplayer Battles			|1h-8h	|40-350
-				[$g_sImgElixirR, 	"Elixir Storage Raid"			, 3, 1, 1], _ ; Destroy 3-15 Elixir Storages in Multiplayer Battles			|1h-8h	|40-350
-				[$g_sImgDESRaid, 	"Dark Elixir Storage Raid"		, 8, 3, 1], _ ; Destroy 1-4 Dark Elixir Storage in Multiplayer Battles		|1h-8h	|40-350
-				[$g_sImgGoldMM, 	"Gold Mine Mayhem"				, 3, 1, 1], _ ; Destroy 6-20 Gold Mines in Multiplayer Battles				|1h-8h	|40-350
-				[$g_sImgElixirPE, 	"Elixir Pump Elimination"		, 3, 1, 1], _ ; Destroy 6-20 Elixir Collectors in Multiplayer Battles		|1h-8h	|40-350
-				[$g_sImgDarkEP, 	"Dark Elixir Plumbers"			, 3, 1, 1], _ ; Destroy 2-8 Dark Elixir Drills in Multiplayer Battles		|1h-8h	|40-350
-				[$g_sImgLab, 		"Laboratory Strike"				, 3, 1, 1], _ ; Destroy 2-6 Laboratories in Multiplayer Battles				|1h-8h	|40-200
-				[$g_sImgSFact, 		"Spell Factory Sabotage"		, 3, 1, 1], _ ; Destroy 2-6 Spell Factories in Multiplayer Battles			|1h-8h	|40-200
-				[$g_sImgDSFact, 	"Dark Spell Factory Sabotage"	, 8, 1, 1], _ ; Destroy 2-6 Dark Spell Factories in Multiplayer Battles		|1h-8h	|40-200
-				[$g_sImgBBAltar, 	"Destroy Barbarian King Altars"	, 9, 4, 1], _ ; Destroy 2-5 Barbarian King Altars in Multiplayer Battles	|1h-8h	|50-150
-				[$g_sImgAQAltar, 	"Destroy Archer Queen Altars"	, 10,5, 1], _ ; Destroy 2-5 Archer Queen Altars in Multiplayer Battles		|1h-8h	|50-150
-				[$g_sImgGWAltar, 	"Destroy Grand Warden Altars"	, 11,5, 1], _ ; Destroy 2-5 Grand Warden Altars in Multiplayer Battles		|1h-8h	|50-150
-				[$g_sImgHeroHunt, 	"Hero Level Hunter"				, 9, 5, 8], _ ; Knockout 125 Level Heroes on Multiplayer Battles			|8h		|100
-				[$g_sImgKingHunt, 	"King Level Hunter"				, 9, 5, 8], _ ; Knockout 50 Level King on Multiplayer Battles				|8h		|100
-				[$g_sImgQueenHunt, 	"Queen Level Hunter"			, 10,5, 8], _ ; Knockout 50 Level Queen on Multiplayer Battles				|8h		|100
-				[$g_sImgWardenHunt, "Warden Level Hunter"			, 11,5, 8]]   ; Knockout 20 Level Warden on Multiplayer Battles				|8h		|100
+				[$g_sImgCannon, 	"تحدي تدمير المدفع"				, 3, 2, 1], _ ; Destroy 5-25 Cannons in Multiplayer Battles					|1h-8h	|75-350
+				[$g_sImgArcherT, 	"تحدي تدمير برج الارشر"			, 3, 3, 1], _ ; Destroy 5-20 Archer Towers in Multiplayer Battles			|1h-8h	|75-350
+				[$g_sImgMortar, 	"تحدي تدمير مدفع الهاون"				, 3, 1, 1], _ ; Destroy 4-12 Mortars in Multiplayer Battles					|1h-8h	|40-350
+				[$g_sImgAirDef, 	"تحدي تدمير المضاض الجوي"			, 7, 2, 1], _ ; Destroy 3-12 Air Defenses in Multiplayer Battles			|1h-8h	|40-350
+				[$g_sImgWizard, 	"تحدي تدمير برج الساحر"			, 3, 3, 1], _ ; Destroy 4-12 Wizard Towers in Multiplayer Battles			|1h-8h	|40-350
+				[$g_sImgAirS, 		"تحدي تدمير نافخ الهواء"			, 8, 2, 1], _ ; Destroy 2-6 Air Sweepers in Multiplayer Battles				|1h-8h	|40-350
+				[$g_sImgTesla, 		"تحدي تدمير التيسلا"			, 7, 5, 1], _ ; Destroy 4-12 Hidden Teslas in Multiplayer Battles			|1h-8h	|50-350
+				[$g_sImgBombT, 		"تحدي تدمير برج القنابل"			, 8, 2, 1], _ ; Destroy 2 Bomb Towers in Multiplayer Battles				|1h-8h	|50-350
+				[$g_sImgXBow, 		"تحدي تدمير الاكس بو"				, 9, 1, 1], _ ; Destroy 3-12 X-Bows in Multiplayer Battles					|1h-8h	|50-350
+				[$g_sImgInferno, 	"تحدي تدمير الانفيرنو"		, 11,1, 1], _ ; Destroy 2 Inferno Towers in Multiplayer Battles				|1h-2d	|50-600
+				[$g_sImgEagle, 		"تحدي تدمير مدفع النسر"	, 11,1, 1], _ ; Destroy 1-7 Eagle Artillery in Multiplayer Battles			|1h-2d	|50-600
+				[$g_sImgCCC, 		"تحدي تدمير فلعة القبيلة"			, 5, 2, 1], _ ; Destroy 1-4 Clan Castle in Multiplayer Battles				|1h-8h	|40-350
+				[$g_sImgGoldRaid, 	"تحدي تدمير مخزن الذهب"				, 3, 2, 1], _ ; Destroy 3-15 Gold Storages in Multiplayer Battles			|1h-8h	|40-350
+				[$g_sImgElixirR, 	"تحدي تدمير مخزن الاكسير"			, 3, 1, 1], _ ; Destroy 3-15 Elixir Storages in Multiplayer Battles			|1h-8h	|40-350
+				[$g_sImgDESRaid, 	"تحدي تدمير مخزن اكسير الظلام"		, 8, 2, 1], _ ; Destroy 1-4 Dark Elixir Storage in Multiplayer Battles		|1h-8h	|40-350
+				[$g_sImgGoldMM, 	"تحدي تدمير مستخرجات الذهب"				, 3, 4, 1], _ ; Destroy 6-20 Gold Mines in Multiplayer Battles				|1h-8h	|40-350
+				[$g_sImgElixirPE, 	"تحدي تدمير مستخرجات الاكسير"		, 3, 4, 1], _ ; Destroy 6-20 Elixir Collectors in Multiplayer Battles		|1h-8h	|40-350
+				[$g_sImgDarkEP, 	"تحدي تدمير مستخرجات الاكسير الظلام"			, 3, 4, 1], _ ; Destroy 2-8 Dark Elixir Drills in Multiplayer Battles		|1h-8h	|40-350
+				[$g_sImgLab, 		"تحدي تدمير المختبر"				, 3, 5, 1], _ ; Destroy 2-6 Laboratories in Multiplayer Battles				|1h-8h	|40-200
+				[$g_sImgSFact, 		"تحدي تدمير مصنع السحر"		, 3, 5, 1], _ ; Destroy 2-6 Spell Factories in Multiplayer Battles			|1h-8h	|40-200
+				[$g_sImgDSFact, 	"تحدي تدمير مصنع سحر الظلام"	, 8, 5, 1], _ ; Destroy 2-6 Dark Spell Factories in Multiplayer Battles		|1h-8h	|40-200
+				[$g_sImgBBAltar, 	"تحدي تدمير مكان الملك"	, 9, 5, 1], _ ; Destroy 2-5 Barbarian King Altars in Multiplayer Battles	|1h-8h	|50-150
+				[$g_sImgAQAltar, 	"تحدي تدمير مكان الملكة"	, 10,5, 1], _ ; Destroy 2-5 Archer Queen Altars in Multiplayer Battles		|1h-8h	|50-150
+				[$g_sImgGWAltar, 	"تحدي تدمير الامر الكبير"	, 11,5, 1], _ ; Destroy 2-5 Grand Warden Altars in Multiplayer Battles		|1h-8h	|50-150
+				[$g_sImgHeroHunt, 	"تحدي قتل  الملوك والحصول على نسبة"				, 9, 3, 8], _ ; Knockout 125 Level Heroes on Multiplayer Battles			|8h		|100
+				[$g_sImgKingHunt, 	"تحدي الحصول على نسبة من قتل الملك"				, 9, 1, 8], _ ; Knockout 50 Level King on Multiplayer Battles				|8h		|100
+				[$g_sImgQueenHunt, 	"تحدي الحصور على نسبة من قتل الملكة"			, 10,1, 8], _ ; Knockout 50 Level Queen on Multiplayer Battles				|8h		|100
+				[$g_sImgWardenHunt, "تحدي الحصول على نسبة من قتل الامر الكبير"			, 11,1, 8]]   ; Knockout 20 Level Warden on Multiplayer Battles				|8h		|100
 
 	Local $MiscChallenges[3][5] = [ _
-				[$g_sImgGard,	 	"Gardening Exercise", 3, 1, 8], _ 	; Clear 5 obstacles from your Home Village or Builder Base		|8h	|50
-				[$g_sImgDonS,	 	"Donate Spells"		, 9, 3, 8], _ 	; Donate a total of 10 housing space worth of spells			|8h	|50
-				[$g_sImgDonH,	 	"Helping Hand"		, 6, 2, 8]]   	; Donate a total of 100 housing space worth of troops			|8h	|50
+				[$g_sImgGard,	 	"تحدي ازالة الشجر من القرية ", 3, 5, 8], _ 	; Clear 5 obstacles from your Home Village or Builder Base		|8h	|50
+				[$g_sImgDonS,	 	"تحدي نبرع السبيلات"		, 9, 3, 8], _ 	; Donate a total of 10 housing space worth of spells			|8h	|50
+				[$g_sImgDonH,	 	"تحدي تبرع القوات"		, 6, 2, 8]]   	; Donate a total of 100 housing space worth of troops			|8h	|50
 
 
 	; Just in Case
@@ -735,7 +744,7 @@ Func ClanGamesChallenges($sReturnArray, $makeIni = False , $sINIPath = "", $debu
 			$TempChallenge = $array[$i]
 			If $debug Then Setlog("[" & $section[$i] & "]")
 			For $j = 0 to UBound($TempChallenge) -1
-				If IniWrite($LocalINI, $section[$i], $TempChallenge[$j][1], $TempChallenge[$j][3]) <> 1 Then SetLog("Error on :" & $section[$i] & "|" & $TempChallenge[$j][1], $COLOR_WARNING)
+				If IniWrite($LocalINI, $section[$i], $TempChallenge[$j][1], $TempChallenge[$j][3]) <> 1 Then SetLog("خطأ في :" & $section[$i] & "|" & $TempChallenge[$j][1], $COLOR_WARNING)
 				If $debug Then Setlog(" - " & $TempChallenge[$j][1] & ": " &  $TempChallenge[$j][3])
 				If _sleep(100) Then Return
 			Next
