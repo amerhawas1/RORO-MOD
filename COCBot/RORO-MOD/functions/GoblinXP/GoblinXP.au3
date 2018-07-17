@@ -131,7 +131,7 @@ Func MainSuperXPHandler()
 	If $g_bDebugSetlog Or $g_bDebugSX Then SetDebugLog("Begin MainSuperXPHandler, $irbSXTraining=" & $irbSXTraining & ", $IsFullArmywithHeroesAndSpells=" & $g_bIsFullArmywithHeroesAndSpells, $COLOR_DEBUG)
 	If $irbSXTraining = 1 And $g_bIsFullArmywithHeroesAndSpells Then Return ; If Gain while Training Enabled but Army is Full Then Return
 	If $iGainedXP >= $itxtMaxXPtoGain Then
-		SetLog("You have Max XP to Gain GoblinXP", $COLOR_DEBUG)
+		SetLog(" لديك الحد الاقصى من نقاط الاكس بي ", $COLOR_DEBUG)
 		If $g_bDebugSX Then SetDebugLog("$iGainedXP = " & $iGainedXP & "|$itxtMaxXPtoGain = " & $itxtMaxXPtoGain, $COLOR_DEBUG)
 		$ichkEnableSuperXP = 0
 		GUICtrlSetState($chkEnableSuperXP, $GUI_UNCHECKED)
@@ -139,7 +139,7 @@ Func MainSuperXPHandler()
 	EndIf
 
 	If Not WaitForMain() Then
-		SetLog("Cannot get in Main Screen!! Exiting SuperXP", $COLOR_RED)
+		SetLog(" لا يمكن الحصول على الشاشة الرئيسية !! الخروج من SuperXP ", $COLOR_RED)
 		Return False
 	EndIf
 
@@ -148,9 +148,9 @@ Func MainSuperXPHandler()
 	If Number($g_aiCurrentLoot) > Number($g_iDropTrophyMax) Then Return
 
 	Local $aHeroResult = getArmyHeroCount(True, True)
-	If $aHeroResult = @error And @error > 0 Then SetLog("Error while getting hero count, #" & @error, $COLOR_DEBUG)
+	If $aHeroResult = @error And @error > 0 Then SetLog(" حدث خطأ أثناء الحصول على عدد البطل ، # " & @error, $COLOR_DEBUG)
 	If Not WaitForMain() Then
-		SetLog("Cannot get in Main Screen!! Exiting SuperXP", $COLOR_RED)
+		SetLog(" لا يمكن الحصول على الشاشة الرئيسية !! الخروج من SuperXP ", $COLOR_RED)
 		Return False
 	EndIf
 
@@ -177,18 +177,18 @@ Func MainSuperXPHandler()
 	; Okay everything is Good, Attack Goblin Picnic
 	While $g_canGainXP
 		If Not WaitForMain() Then
-			SetLog("Cannot get in Main Screen!! Exiting SuperXP", $COLOR_RED)
+			SetLog(" لا يمكن الحصول على الشاشة الرئيسية !! الخروج من SuperXP ", $COLOR_RED)
 			Return False
 		EndIf
 		If $iGainedXP >= $itxtMaxXPtoGain And Not $ichkFastGoblinXP Then
 			$g_canGainXP = False
-			SetLog("You have Max XP to Gain GoblinXP", $COLOR_DEBUG)
+			SetLog(" لديك الحد الاقصى من نقاط الاكس بي ", $COLOR_DEBUG)
 			If $g_bDebugSX Then SetDebugLog("$iGainedXP = " & $iGainedXP & "|$itxtMaxXPtoGain = " & $itxtMaxXPtoGain, $COLOR_DEBUG)
 			$ichkEnableSuperXP = 0
 			GUICtrlSetState($chkEnableSuperXP, $GUI_UNCHECKED)
 			ExitLoop ; If Gain XP More Than Max XP to Gain Then Exit/Return
 		EndIf
-		SetLog("Attacking to Goblin Picnic - GoblinXP", $COLOR_BLUE)
+		SetLog(" الهجوم الى نزهة الغول ", $COLOR_BLUE)
 		If Not $g_bRunState Then Return
 		If Not OpenGoblinPicnic() Then
 			SafeReturnSX()
@@ -201,7 +201,7 @@ Func MainSuperXPHandler()
 			WaitToFinishSuperXP()
 		EndIf
 		If Not $g_bRunState Then Return
-		SetLog("Attack Finished - GoblinXP", $COLOR_GREEN)
+		SetLog(" انتهى هجوم تجميع الاكس بي ", $COLOR_GREEN)
 		If $rAttackSuperXP Then AttackFinishedSX()
 		If Not $g_canGainXP Then ExitLoop
 		$CurrentXPgain += 5
@@ -219,7 +219,7 @@ Func MainSuperXPHandler()
 		$g_canGainXP = ($g_iHeroAvailable <> $eHeroNone And (IIf($ichkSXBK = $eHeroNone, False, BitAND($g_iHeroAvailable, $eHeroKing) = $eHeroKing) Or IIf($ichkSXAQ = $eHeroNone, False, BitAND($g_iHeroAvailable, $eHeroQueen) = $eHeroQueen) Or IIf($ichkSXGW = $eHeroNone, False, BitAND($g_iHeroAvailable, $eHeroWarden) = $eHeroWarden) And IIf($irbSXTraining = 1, $g_bIsFullArmywithHeroesAndSpells = False, True) And $ichkEnableSuperXP = 1 And Number($iGainedXP) < Number($itxtMaxXPtoGain)))
 
 		If ProfileSwitchAccountEnabled() And $g_canGainXP And $CurrentXPgain >= 50 And Not $ichkFastGoblinXP Then
-			SetLog("Switch Account is enable let's check it", $COLOR_GREEN)
+			SetLog(" تم تمكين تبديل الحساب لنتحقق من ذلك ", $COLOR_GREEN)
 			ExitLoop
 		EndIf
 
@@ -254,7 +254,7 @@ Func CheckForFullArmy()
 
 	;Test for Train/Donate Only and Fullarmy
 	If ($g_iCommandStop = 3 Or $g_iCommandStop = 0) And $g_bFullArmy Then
-		SetLog("You are in halt attack mode and your Army is prepared!", $COLOR_DEBUG) ;Debug
+		SetLog(" كنت في وضع الهجوم وقف ويتم إعداد الجيش الخاص بك! ", $COLOR_DEBUG) ;Debug
 		If $g_bFirstStart Then $g_bFirstStart = False
 		Return
 	EndIf
@@ -302,7 +302,7 @@ Func ExitSPPage()
 		If $Counter >= 200 Then ExitLoop
 	WEnd
 	If $Counter >= 200 Then
-		SetLog("Cannot Exit Single Player Page", $COLOR_RED)
+		SetLog(" لا يمكن الخروج من صفحة لاعب واحد ", $COLOR_RED)
 		Return False
 	EndIf
 	If $g_bDebugSX Then SetDebugLog("SX|ExitSPPage Finished", $COLOR_PURPLE)
@@ -431,7 +431,7 @@ Func AttackSuperXP()
 	EndIf
 	PrepareSuperXPAttack()
 	If CheckAvailableHeroes() = False Then
-		SetLog("No heroes available to attack with", $COLOR_ORANGE)
+		SetLog(" لا يوجد ملوك متاحون للهجوم ", $COLOR_ORANGE)
 		ReturnHomeSuperXP()
 		Return False
 	EndIf
@@ -452,7 +452,7 @@ EndFunc   ;==>CheckAvailableHeroes
 
 Func DropAQSuperXP($bActivateASAP = True)
 	If $g_iQueenSlot <> -1 And $ichkSXAQ <> $eHeroNone Then
-		SetLog("Deploying Queen", $COLOR_BLUE)
+		SetLog(" نشر الملكة ", $COLOR_BLUE)
 		Click(GetXPosOfArmySlot($g_iQueenSlot, 68), 595 + $g_ibottomOffsetY, 1, 0, "#0000") ;Select Queen
 		If _Sleep($DELAYDROPSuperXP1) Then Return False
 		If CheckEarnedStars($g_minStarsToEnd) = True Then Return True
@@ -470,7 +470,7 @@ EndFunc   ;==>DropAQSuperXP
 
 Func DropGWSuperXP($bActivateASAP = True)
 	If $g_iWardenSlot <> -1 And $ichkSXGW <> $eHeroNone Then
-		SetLog("Deploying Warden", $COLOR_BLUE)
+		SetLog(" نشر الآمر الكبير ", $COLOR_BLUE)
 		Click(GetXPosOfArmySlot($g_iWardenSlot, 68), 595 + $g_ibottomOffsetY, 1, 0, "#0179") ;Select Warden
 		If _Sleep($DELAYDROPSuperXP1) Then Return False
 		If CheckEarnedStars($g_minStarsToEnd) = True Then Return True
@@ -488,7 +488,7 @@ EndFunc   ;==>DropGWSuperXP
 
 Func DropBKSuperXP($bActivateASAP = True)
 	If $g_iKingSlot <> -1 And $ichkSXBK <> $eHeroNone Then
-		SetLog("Deploying King", $COLOR_BLUE)
+		SetLog(" نشر الملك ", $COLOR_BLUE)
 		Click(GetXPosOfArmySlot($g_iKingSlot, 68), 595 + $g_ibottomOffsetY, 1, 0, "#0177") ;Select King
 		If _Sleep($DELAYDROPSuperXP1) Then Return False
 		If CheckEarnedStars($g_minStarsToEnd) = True Then Return True
@@ -595,7 +595,7 @@ Func CheckEarnedStars($ExitWhileHave = 0) ; If the parameter is 0, will not exit
 		; IT CAN BE DETECTED By WRONG... But just made this to prevent heroes getting attacked
 		; Please Simply Comment This If Condition If you Saw Problems And Bot Returned to Home Without Getting At Least One Star
 		If _ColorCheck(_GetPixelColor(455, 405, True), Hex(0xD0D8D0, 6), 20) Then
-			SetLog("1 Star earned", $COLOR_GREEN)
+			SetLog(" حصل على نجمة ", $COLOR_GREEN)
 			If ReturnHomeSuperXP() = False Then CloseCoC(True) ; If Something Was Wrong with Returning Home, Close CoC And Open Again
 			Return True
 		EndIf
@@ -604,7 +604,7 @@ Func CheckEarnedStars($ExitWhileHave = 0) ; If the parameter is 0, will not exit
 	If _ColorCheck(_GetPixelColor(714, 594, True), Hex(0xCCCFC8, 6), 20) Then $starsearned += 1
 
 	If $ExitWhileHave <> 0 And $starsearned >= $ExitWhileHave Then
-		SetLog($starsearned & " Star earned", $COLOR_GREEN)
+		SetLog($starsearned & " حصل على نجم ", $COLOR_GREEN)
 		If ReturnHomeSuperXP() = False Then CloseCoC(True) ; If Something Was Wrong with Returning Home, Close CoC And Open Again
 		Return True
 	EndIf
@@ -613,7 +613,7 @@ Func CheckEarnedStars($ExitWhileHave = 0) ; If the parameter is 0, will not exit
 		If _ColorCheck(_GetPixelColor(740, 583, True), Hex(0xC6CBC5, 6), 20) Then $starsearned += 1
 
 		If $ExitWhileHave <> 0 And $starsearned >= $ExitWhileHave Then
-			SetLog($starsearned & " Stars earned", $COLOR_GREEN)
+			SetLog($starsearned & "  حصل على نجم ", $COLOR_GREEN)
 			If ReturnHomeSuperXP() = False Then CloseCoC(True) ; If Something Was Wrong with Returning Home, Close CoC And Open Again
 			Return True
 		EndIf
@@ -622,7 +622,7 @@ Func CheckEarnedStars($ExitWhileHave = 0) ; If the parameter is 0, will not exit
 			If _ColorCheck(_GetPixelColor(764, 583, True), Hex(0xBEC5BE, 6), 20) Then $starsearned += 1
 
 			If $ExitWhileHave <> 0 And $starsearned >= $ExitWhileHave Then
-				SetLog($starsearned & " Stars earned", $COLOR_GREEN)
+				SetLog($starsearned & " حصل على نجم ", $COLOR_GREEN)
 				If ReturnHomeSuperXP() = False Then CloseCoC(True) ; If Something Was Wrong with Returning Home, Close CoC And Open Again
 				Return True
 			EndIf
@@ -641,7 +641,7 @@ Func ReturnHomeSuperXP()
 	$g_iKingSlot = -1
 	$g_iQueenSlot = -1
 	$g_iWardenSlot = -1
-	SetLog("Returning Home - SuperXP", $COLOR_BLUE)
+	SetLog(" العودة الى صفحة الرئيسية ", $COLOR_BLUE)
 
 	; 1st Step
 	While _ColorCheck(_GetPixelColor($EndBattleText[0], $EndBattleText[1], True), Hex($EndBattleText[2], 6), $EndBattleText[3]) = False ; First EndBattle Button
@@ -700,7 +700,7 @@ Func ReturnHomeSuperXP()
 		EndIf
 		$Counter += 1
 		If $Counter >= 50 Or isProblemAffect(True) Then
-			SetLog("Cannot return home.", $COLOR_RED)
+			SetLog(" لايمكن العودة الى صفحة الرئيسية ", $COLOR_RED)
 			checkMainScreen(True)
 			Return True
 		EndIf
@@ -721,10 +721,10 @@ Func WaitForNoClouds()
 			If $g_bRestart Then
 				$g_iNbrOfOoS += 1
 				UpdateStats()
-				SetLog("Disconnected At Search Clouds - SuperXP", $COLOR_RED)
+				SetLog("غير متصل في البحث الغيوم ", $COLOR_RED)
 				PushMsg("OoSResources")
 			Else
-				SetLog("Stuck At Search Clouds, Restarting CoC and Bot... - SuperXP", $COLOR_RED)
+				SetLog(" تمسك في الغيوم البحث اعادة تشغيل البوت و اللعبة ", $COLOR_RED)
 				$g_bIsClientSyncError = False ; disable fast OOS restart if not simple error and restarting CoC
 				CloseCoC(True)
 			EndIf
@@ -741,13 +741,13 @@ Func OpenGoblinPicnic()
 	If $g_bDebugSX Then SetDebugLog("SX|OpenGoblinPicnic", $COLOR_PURPLE)
 	;Local $rOpenSinglePlayerPage = OpenSinglePlayerPage()
 	If OpenSinglePlayerPage() = False Then
-		SetLog("Failed to open Attack page, Single Player", $COLOR_RED)
+		SetLog(" فشل في فتح صفحة الهجوم لاعب واحد ", $COLOR_RED)
 		SafeReturnSX()
 		Return False
 	EndIf
 	Local $rDragToGoblinPicnic = DragToGoblinPicnic()
 	If $rDragToGoblinPicnic = False Then
-		SetLog("Failed to find Goblin Picnic", $COLOR_RED)
+		SetLog(" فشل العثور على هجوم النزهة ", $COLOR_RED)
 		SafeReturnSX()
 		Return False
 	EndIf
@@ -767,7 +767,7 @@ Func OpenGoblinPicnic()
 				SafeReturnSX()
 				Return False
 			EndIf
-			SetLog("Attack Button Cannot be Verified", $COLOR_RED)
+			SetLog(" Attack Button Cannot be Verified ", $COLOR_RED)
 			DebugImageSave("SuperXP_", True, "png", True, String(Number($rDragToGoblinPicnic[0], 2) & ", " & Number($rDragToGoblinPicnic[1], 2) & @CRLF & Number($rDragToGoblinPicnic[0], 2) & ", " & Number($rDragToGoblinPicnic[1] + 78, 2)))
 			SafeReturnSX()
 			Return False
@@ -782,7 +782,7 @@ Func OpenGoblinPicnic()
 		If _Sleep(50) Then ExitLoop
 		$Counter += 1
 		If $Counter > 150 Then
-			SetLog("Still in SinglePlayer Page!! Something Strange Happened", $COLOR_RED)
+			SetLog(" لا يزال في صفحة لاعب واحد! شيء غريب حدث ", $COLOR_RED)
 			;DebugImageSave("SuperXP_", True, "png", True, String(Number($rDragToGoblinPicnic[0], 2) & ", " & Number($rDragToGoblinPicnic[1], 2) & @CRLF & Number($rDragToGoblinPicnic[0], 2) & ", " & Number($rDragToGoblinPicnic[1] + 78, 2)), 80, 145, 35, $rDragToGoblinPicnic[0] - 5, $rDragToGoblinPicnic[1] - 5 + 78, 10, 10)
 			$g_canGainXP = False
 			Return False
@@ -801,7 +801,7 @@ Func OpenGoblinPicnic()
 
 	Local $rIsGoblinPicnic = IsInGoblinPicnic() ; Wait/Check if is In Goblin Picnic Base
 	If $rIsGoblinPicnic = False Then
-		SetLog("Looks like we're not in Goblin Picnic", $COLOR_RED)
+		SetLog(" يبدو اننا لسنا في نزهة الغول ", $COLOR_RED)
 		If _CheckPixel($aCancelFight, $g_bNoCapturePixel) Or _CheckPixel($aCancelFight2, $g_bNoCapturePixel) Then
 			If $g_bDebugSetlog Then SetDebugLog("#cOb# Clicks X 2, $aCancelFight", $COLOR_BLUE)
 			PureClickP($aCancelFight, 1, 0, "#0135") ;Clicks X
@@ -812,7 +812,7 @@ Func OpenGoblinPicnic()
 		SafeReturnSX()
 		Return False
 	EndIf
-	SetLog("Now we're in Goblin Picnic Base", $COLOR_GREEN)
+	SetLog(" نحن الآن في قاعدة نزهة الغول ", $COLOR_GREEN)
 	Return True
 EndFunc   ;==>OpenGoblinPicnic
 
@@ -991,7 +991,7 @@ Func OpenSinglePlayerPage()
 		Return False
 	EndIf
 
-	SetLog("Going to Gain XP...", $COLOR_BLUE)
+	SetLog(" الذهاب إلى كسب XP ... ", $COLOR_BLUE)
 
 	If IsMainPage() Then
 
@@ -1010,7 +1010,7 @@ Func OpenSinglePlayerPage()
 		If $j > 214 Then ExitLoop
 	WEnd
 	If $j > 214 Then
-		SetLog("Launch attack Page Fail", $COLOR_RED)
+		SetLog(" إطلاق صفحة الهجوم فشل ", $COLOR_RED)
 		checkMainScreen()
 		Return False
 	Else
