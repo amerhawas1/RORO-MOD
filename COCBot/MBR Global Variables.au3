@@ -672,8 +672,8 @@ Global Enum $eHeroNone = 0, $eHeroKing = 1, $eHeroQueen = 2, $eHeroWarden = 4
 
 ; Hero standard values
 Global Enum $eHeroBarbarianKing, $eHeroArcherQueen, $eHeroGrandWarden, $eHeroCount
-Global Const $g_asHeroNames[$eHeroCount] = ["الملك", "الملكة", "الامر الكبير"]
-Global Const $g_asHeroShortNames[$eHeroCount] = ["ملك", "ملكة", "امر كبير"]
+Global Const $g_asHeroNames[$eHeroCount] = ["Barbarian King", "Archer Queen", "Grand Warden"]
+Global Const $g_asHeroShortNames[$eHeroCount] = ["King", "Queen", "Warden"]
 Global $g_aiHeroBoost[$eHeroCount] = ["1970/01/01 00:00:00", "1970/01/01 00:00:00", "1970/01/01 00:00:00"] ; Use Epoch as standard values :)
 
 ; Leagues
