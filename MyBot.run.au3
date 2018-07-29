@@ -707,6 +707,7 @@ Func runBot() ;Bot that runs everything in order
 			If $g_bRestart = True Then ContinueLoop
 			If _Sleep($DELAYRUNBOT3) Then Return
 			VillageReport()
+			PullSharedPrefs()
 			TrainRevamp()
 				CheckCC() ; CheckCC Troops - Team AiO MOD++
 				RequestCC()

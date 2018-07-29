@@ -4,7 +4,7 @@
 ; Syntax ........: readConfig()
 ; Parameters ....: NA
 ; Return values .: NA
-; Author ........: RORO-MOD (2018)
+; Author ........: Team AiO MOD++ (2018)
 ; Modified ......:
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
@@ -14,8 +14,8 @@
 ; ===============================================================================================================================
 
 Func ReadConfig_MOD()
-	; <><><> RORO-MOD (2018) <><><>
-	; CSV Deploy Speed - RORO-MOD
+	; <><><> Team AiO MOD++ (2018) <><><>
+	; CSV Deploy Speed - Team AiO MOD++
 	IniReadS($icmbCSVSpeed[$LB], $g_sProfileConfigPath, "CSV Speed", "cmbCSVSpeed[LB]", $icmbCSVSpeed[$LB], "int")
 	IniReadS($icmbCSVSpeed[$DB], $g_sProfileConfigPath, "CSV Speed", "cmbCSVSpeed[DB]", $icmbCSVSpeed[$DB], "int")
 	For $i = $DB To $LB
@@ -25,13 +25,13 @@ Func ReadConfig_MOD()
 			$g_CSVSpeedDivider[$i] = 2 + $icmbCSVSpeed[$i] - 5            ; $g_CSVSpeedDivider = 2, 3, 4, 5
 		EndIf
 	Next
-	; Auto Dock, Hide Emulator & Bot - RORO-MOD
+	; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
 	IniReadS($g_bEnableAuto, $g_sProfileConfigPath, "general", "EnableAuto", $g_bEnableAuto, "Bool")
 	IniReadS($g_iChkAutoDock, $g_sProfileConfigPath, "general", "AutoDock", $g_iChkAutoDock, "Bool")
 	IniReadS($g_iChkAutoHideEmulator, $g_sProfileConfigPath, "general", "AutoHide", $g_iChkAutoHideEmulator, "Bool")
 	IniReadS($g_iChkAutoMinimizeBot, $g_sProfileConfigPath, "general", "AutoMinimize", $g_iChkAutoMinimizeBot, "Bool")
 
-	; Check Collector Outside - RORO-MOD
+	; Check Collector Outside - Team AiO MOD++
 	IniReadS($g_bDBMeetCollOutside, $g_sProfileConfigPath, "search", "DBMeetCollOutside", $g_bDBMeetCollOutside, "Bool")
 	IniReadS($g_iTxtDBMinCollOutsidePercent, $g_sProfileConfigPath, "search", "TxtDBMinCollOutsidePercent", $g_iTxtDBMinCollOutsidePercent, "int")
 	IniReadS($g_bDBCollectorsNearRedline, $g_sProfileConfigPath, "search", "DBCollectorsNearRedline", $g_bDBCollectorsNearRedline, "int")
@@ -43,10 +43,10 @@ Func ReadConfig_MOD()
 	IniReadS($g_bSkipCollectorCheckTH, $g_sProfileConfigPath, "search", "SkipCollectorCheckTH", $g_bSkipCollectorCheckTH, "int")
 	IniReadS($g_iCmbSkipCollectorCheckTH, $g_sProfileConfigPath, "search", "CmbSkipCollectorCheckTH", $g_iCmbSkipCollectorCheckTH, "int")
 
-	; ClanHop - RORO-MOD
+	; ClanHop - Team AiO MOD++
 	IniReadS($g_bChkClanHop, $g_sProfileConfigPath, "donate", "chkClanHop", $g_bChkClanHop, "Bool")
 
-	; Bot Humanization - RORO-MOD
+	; Bot Humanization - Team AiO MOD++
 	IniReadS($g_ichkUseBotHumanization, $g_sProfileConfigPath, "Bot Humanization", "chkUseBotHumanization", $g_ichkUseBotHumanization, "int")
 	IniReadS($g_ichkUseAltRClick, $g_sProfileConfigPath, "Bot Humanization", "chkUseAltRClick", $g_ichkUseAltRClick, "int")
 	IniReadS($g_ichkCollectAchievements, $g_sProfileConfigPath, "Bot Humanization", "chkCollectAchievements", $g_ichkCollectAchievements, "int")
@@ -66,7 +66,7 @@ Func ReadConfig_MOD()
 	IniReadS($g_icmbMaxActionsNumber, $g_sProfileConfigPath, "Bot Humanization", "cmbMaxActionsNumber", $g_icmbMaxActionsNumber, "int")
 	IniReadS($g_ichallengeMessage, $g_sProfileConfigPath, "Bot Humanization", "challengeMessage", $g_ichallengeMessage)
 
-	; Goblin XP - RORO-MOD
+	; Goblin XP - Team AiO MOD++
 	IniReadS($ichkEnableSuperXP, $g_sProfileConfigPath, "GoblinXP", "EnableSuperXP", 0, "int")
 	IniReadS($ichkSkipZoomOutXP, $g_sProfileConfigPath, "GoblinXP", "SkipZoomOutXP", 0, "int")
 	IniReadS($ichkFastGoblinXP, $g_sProfileConfigPath, "GoblinXP", "FastGoblinXP", 0, "int")
@@ -76,7 +76,7 @@ Func ReadConfig_MOD()
 	IniReadS($ichkSXAQ, $g_sProfileConfigPath, "GoblinXP", "SXAQ", $eHeroNone)
 	IniReadS($ichkSXGW, $g_sProfileConfigPath, "GoblinXP", "SXGW", $eHeroNone)
 
-	; GTFO - RORO-MOD
+	; GTFO - Team AiO MOD++
 	IniReadS($g_bChkUseGTFO, $g_sProfileConfigPath, "GTFO", "chkUseGTFO", $g_bChkUseGTFO, "Bool")
 	IniReadS($g_iTxtMinSaveGTFO_Elixir, $g_sProfileConfigPath, "GTFO", "txtMinSaveGTFO_Elixir", $g_iTxtMinSaveGTFO_Elixir, "Int")
 	IniReadS($g_iTxtMinSaveGTFO_DE, $g_sProfileConfigPath, "GTFO", "txtMinSaveGTFO_DE", $g_iTxtMinSaveGTFO_DE, "Int")
@@ -86,14 +86,18 @@ Func ReadConfig_MOD()
 	IniReadS($g_bChkKickOutSpammers, $g_sProfileConfigPath, "GTFO", "chkKickOutSpammers", $g_bChkKickOutSpammers, "Bool")
 	IniReadS($g_iTxtKickLimit, $g_sProfileConfigPath, "GTFO", "txtKickLimit", $g_iTxtKickLimit, "Int")
 
-	; Max logout time - RORO-MOD
+	; Max logout time - Team AiO MOD++
 	IniReadS($g_bTrainLogoutMaxTime, $g_sProfileConfigPath, "TrainLogout", "TrainLogoutMaxTime", $g_bTrainLogoutMaxTime, "Bool")
 	IniReadS($g_iTrainLogoutMaxTime, $g_sProfileConfigPath, "TrainLogout", "TrainLogoutMaxTimeTXT", $g_iTrainLogoutMaxTime, "int")
 
-	; Request CC Troops at first - RORO-MOD
+	; Slot11 - Team AiO MOD++
+	IniReadS($g_abChkExtendedAttackBar[$DB], $g_sProfileConfigPath, "attack", "ExtendedAttackBarDB", False, "Bool")
+	IniReadS($g_abChkExtendedAttackBar[$LB], $g_sProfileConfigPath, "attack", "ExtendedAttackBarLB", False, "Bool")
+
+	; Request CC Troops at first - Team AiO MOD++
 	IniReadS($g_bReqCCFirst, $g_sProfileConfigPath, "planned", "ReqCCFirst", $g_bReqCCFirst, "Bool")
 
-	; CheckCC Troops - RORO-MOD
+	; CheckCC Troops - Team AiO MOD++
 	IniReadS($g_bChkCC, $g_sProfileConfigPath, "CheckCC", "Enable", $g_bChkCC, "Bool")
 	IniReadS($g_iCmbCastleCapacityT, $g_sProfileConfigPath, "CheckCC", "Troop Capacity", $g_iCmbCastleCapacityT, "int")
 	IniReadS($g_iCmbCastleCapacityS, $g_sProfileConfigPath, "CheckCC", "Spell Capacity", $g_iCmbCastleCapacityS, "int")
@@ -124,11 +128,11 @@ Func ReadConfig_MOD()
 		EndIf
 	Next
 
-	; Check Grand Warden Mode - RORO-MOD
+	; Check Grand Warden Mode - Team AiO MOD++
 	IniReadS($g_bCheckWardenMode, $g_sProfileConfigPath, "other", "chkCheckWardenMode", False, "Bool")
 	IniReadS($g_iCheckWardenMode, $g_sProfileConfigPath, "other", "cmbCheckWardenMode", 0, "int")
 
-	; Unit/Wave Factor - RORO-MOD
+	; Unit/Wave Factor - Team AiO MOD++
 	IniReadS($g_iChkGiantSlot, $g_sProfileConfigPath, "SetSleep", "EnableGiantSlot", $g_iChkGiantSlot, "int")
 	IniReadS($g_iCmbGiantSlot, $g_sProfileConfigPath, "SetSleep", "CmbGiantSlot", $g_iCmbGiantSlot ,"int")
 	IniReadS($g_iChkUnitFactor, $g_sProfileConfigPath, "SetSleep", "EnableUnitFactor", $g_iChkUnitFactor, "int")
@@ -136,21 +140,20 @@ Func ReadConfig_MOD()
 	IniReadS($g_iChkWaveFactor, $g_sProfileConfigPath, "SetSleep", "EnableWaveFactor", $g_iChkWaveFactor, "int")
 	IniReadS($g_iTxtWaveFactor, $g_sProfileConfigPath, "SetSleep", "WaveFactor", $g_iTxtWaveFactor, "int")
 
-	; Restart Search Legend league - RORO-MOD
+	; Restart Search Legend league - Team AiO MOD++
 	IniReadS($g_bIsSearchTimeout, $g_sProfileConfigPath, "other", "ChkSearchTimeout", $g_bIsSearchTimeout, "Bool")
 	IniReadS($g_iSearchTimeout, $g_sProfileConfigPath, "other", "SearchTimeout", $g_iSearchTimeout, "int")
 
-	; Stop on Low battery - RORO-MOD
+	; Stop on Low battery - Team AiO MOD++
 	IniReadS($g_bStopOnBatt, $g_sProfileConfigPath, "other", "ChkStopOnBatt", $g_bStopOnBatt, "Bool")
-	IniReadS($g_iSearchTimeout, $g_sProfileConfigPath, "other", "StopOnBatt", $g_iStopOnBatt, "int")
+	IniReadS($g_iStopOnBatt, $g_sProfileConfigPath, "other", "StopOnBatt", $g_iStopOnBatt, "int")
 
-	; Attack Log - RORO-MOD
+	; Attack Log - Team AiO MOD++
 	IniReadS($g_bColorfulAttackLog, $g_sProfileConfigPath, "attack", "ColorfulAttackLog", False, "Bool")
 
-	; Stop For War - RORO-MOD
+	; Stop For War - Team AiO MOD++
 	IniReadS($g_bStopForWar, $g_sProfileConfigPath, "war preparation", "Enable", False, "Bool")
 	IniReadS($g_iStopTime, $g_sProfileConfigPath, "war preparation", "Stop Time", 0, "Int")
-	IniReadS($g_bStopBeforeBattle, $g_sProfileConfigPath, "war preparation", "Stop Before", True, "Bool")
 	IniReadS($g_iReturnTime, $g_sProfileConfigPath, "war preparation", "Return Time", 0, "Int")
 	IniReadS($g_bTrainWarTroop, $g_sProfileConfigPath, "war preparation", "Train War Troop", False, "Bool")
 	IniReadS($g_bUseQuickTrainWar, $g_sProfileConfigPath, "war preparation", "QuickTrain War Troop", False, "Bool")
@@ -168,14 +171,9 @@ Func ReadConfig_MOD()
 	IniReadS($g_bRequestCCForWar, $g_sProfileConfigPath, "war preparation", "RequestCC War", False, "Bool")
 	$g_sTxtRequestCCForWar = IniRead($g_sProfileConfigPath, "war preparation", "RequestCC War Text", "War troop please")
 
-	; Request troops for defense - RORO-MOD
+	; Request troops for defense - Team AiO MOD++
 	$g_bRequestTroopsEnableDefense = (IniRead($g_sProfileConfigPath, "RequestDefense", "RequestDefenseEnable", "0") = "1")
 	$g_sRequestTroopsTextDefense = IniRead($g_sProfileConfigPath, "RequestDefense", "txtRequestDefense", "")
 	$g_iRequestDefenseEarly = Int(IniRead($g_sProfileConfigPath, "RequestDefense", "RequestDefenseEarly", "0"))
-
- ; Skip Request CC - RORO-MOD++
-	$g_bSkipRequestCC = (IniRead($g_sProfileConfigPath, "donate", "SkipRequestCC", "0") = "1")
-	$g_iSkipRequestCCTroop = Int(IniRead($g_sProfileConfigPath, "donate", "SkipRequestCC_Troop", "40"))
-	$g_iSkipRequestCCSpell = Int(IniRead($g_sProfileConfigPath, "donate", "SkipRequestCC_Spell", "2"))
 
 EndFunc   ;==>ReadConfig_MOD

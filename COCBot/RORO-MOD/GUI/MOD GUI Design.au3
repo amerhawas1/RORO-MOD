@@ -29,7 +29,7 @@ Global $g_hGUI_ROROMOD_TAB = 0, $g_hGUI_ROROMOD_TAB_ITEM1 = 0, $g_hGUI_ROROMOD_T
 ; CheckCC Troops
 #include "MOD GUI Design - CheckTroopsCC.au3"
 
-; War Preparation
+; Stop For War
 #include "MOD GUI Design - WarPreparation.au3"
 
 ; Emulator
@@ -52,7 +52,7 @@ Func CreateROROMODTab()
 		$g_hGUI_ROROMOD_TAB_ITEM3 = GUICtrlCreateTabItem(GetTranslatedFileIni("MBR Main GUI", "Tab_06_STab_03", "Goblin XP"))
 			GoblinXPGUI()
 		$g_hGUI_ROROMOD_TAB_ITEM4 = GUICtrlCreateTabItem(GetTranslatedFileIni("MBR Main GUI", "Tab_06_STab_04", "War Preparation"))
-			CreateMiscWarPreparationSubTab()
+			WarPreparationGUI()
 		 $g_hGUI_ROROMOD_TAB_ITEM5 = GUICtrlCreateTabItem(GetTranslatedFileIni("MBR Main GUI", "Tab_06_STab_05", "Emulator"))
 			CreateEmulatorSubTab()
 	     

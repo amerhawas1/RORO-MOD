@@ -185,6 +185,8 @@ Func DropTroopFromINI($vectors, $indexStart, $indexEnd, $indexArray, $qtaMin, $q
 					$delayDrop = $delayDropMin
 				EndIf
 				debugAttackCSV(">> delay change drop point: " & $delayDrop)
+								$delayDrop = Int($delayDrop / $g_CSVSpeedDivider[$g_iMatchMode]); CSV Deploy Speed - Team AiO MOD++
+				debugAttackCSV(">> delay change drop point: " & $delayDrop & " (x" & $g_CSVSpeedDivider[$g_iMatchMode] & " faster)")
 			EndIf
 
 			For $j = 1 To $numbersOfVectors

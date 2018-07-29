@@ -143,7 +143,9 @@ Func _checkObstacles($bBuilderBase = False, $bRecursive = False) ;Checks if some
 				EndIf
 			Case _CheckPixel($aIsCheckOOS, $g_bNoCapturePixel) Or (UBound(decodeSingleCoord(FindImageInPlace("OOS", $g_sImgOutOfSync, "355,335,435,395", False, $g_iAndroidLollipop))) > 1) ; Check OoS
 				SetLog("Out of Sync Error, Reloading CoC...", $COLOR_ERROR)
-				PureClickP($aReloadButton, 1, 0, "#0131")
+				CloseCoC()
+			    OpenCoC()
+				
 				Return True
 			Case _CheckPixel($aIsMaintenance, $g_bNoCapturePixel) ; Check Maintenance
 				$Result = getOcrMaintenanceTime(171, 345 + $g_iMidOffsetY, "Check Obstacles OCR Maintenance Break=") ; OCR text to find wait time
@@ -320,11 +322,16 @@ Func _checkObstacles($bBuilderBase = False, $bRecursive = False) ;Checks if some
 		; if black bar at top, e.g. in Android home screen, restart CoC
 		SetDebugLog("checkObstacles: Found Black Android Screen")
 	EndIf
-
+    If $g_bOnlySCIDAccounts Then
+		SetDebugLog("check Log in with Supercell ID login by Clicks")
+		; check Log in with Supercell ID login screen by Clicks
+		CheckLoginWithSupercellIDScreen()
+	EndIf
 	; check if google account list shown and select first
 	If Not CheckGoogleSelectAccount() Then
-		; check Log in with Supercell ID login screen
-		CheckLoginWithSupercellID()
+	 		SetDebugLog("check Log in with Supercell ID login by shared_prefs")
+		; check Log in with Supercell ID login screen by shared_prefs
+		If CheckLoginWithSupercellID() then Return True 	
 	EndIf
 
 	Return False
@@ -396,7 +403,7 @@ Func checkObstacles_Network($bForceCapture = False, $bReloadCoC = True)
 	If UBound(decodeSingleCoord(FindImageInPlace("CocReconnecting", $g_sImgCocReconnecting, "420,355,440,375", $bForceCapture))) > 1 Then
 		If $hCocReconnectingTimer = 0 Then
 			SetLog("انقطع الاتصال بالشبكة...", $COLOR_ERROR)
-			CloseCoC()
+			PushSharedPrefs()
 			OpenCoC() 
 			$hCocReconnectingTimer = __TimerInit()
 		ElseIf __TimerDiff($hCocReconnectingTimer) > $g_iCoCReconnectingTimeout Then

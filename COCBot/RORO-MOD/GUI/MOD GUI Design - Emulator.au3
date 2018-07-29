@@ -13,87 +13,61 @@
 ; Example .......: No
 ; ===============================================================================================================================
 
-Global $g_EmulatorSubTab = 0
-
+Global $g_EmulatorSubTab = 0 
+Global $g_sLibIconPathMOD = 0
+  Global $idPic = 0
 Func CreateEmulatorSubTab()
 
 	
 	Local $x = 15, $y = 40
-	GUICtrlCreateGroup("War preration", $x - 10, $y - 15, $g_iSizeWGrpTab3, $g_iSizeHGrpTab3)
-
-   $y = 60
-
-$g_EmulatorSubTab = "My Bot is brought to you by a worldwide team of open source" & @CRLF & _
-			"programmers and a vibrant community of forum members!"
-	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 8, $y - 10, 400, 35, $SS_CENTER)
+	GUICtrlCreateGroup("محاكيات", $x - 10, $y - 15, $g_iSizeWGrpTab3, $g_iSizeHGrpTab3)
+   $y = 30
+   $g_EmulatorSubTab = "البرامج الاساسية لتشغل البوت بشكل صحيح" & @CRLF & _
+			"وبعض المحاكيات التي تدعم البوت بشكل صحيح وجيد جدا" & @CRLF & _
+			                   "RORO-MOD مقدم من مطورين"
+	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 8, $y + 30  - 10, 400, 50, $SS_CENTER)
 	GUICtrlSetFont(-1, 10, $FW_BOLD, Default, "Arial")
 	GUICtrlSetColor(-1, $COLOR_NAVY)
+	
+	 
+	 Local const $icon = @ScriptDir & "\images\RORO2.bmp"
+		GUICtrlCreatePic($icon, $x + 300, $y + 120 , 120, 120, $SS_CENTERIMAGE)
+	 
+	$g_EmulatorSubTab = " البرامج الاساسية"
+   GUICtrlCreateLabel($g_EmulatorSubTab, $x + 125 , $y + 100  - 10, 150, 15, $SS_CENTER)
+   GUICtrlSetFont(-1, 10, $FW_BOLD, Default, "Arial")
+	GUICtrlSetColor(-1, $COLOR_NAVY)
+   
+   GUICtrlCreateLabel( " VC 2010 ", $x + 20 , $y + 110, 250, 15)
+   GUICtrlSetFont(-1, 10, $FW_BOLD, Default, "Arial")
+	GUICtrlSetColor(-1, $COLOR_NAVY)
+   
+     $g_EmulatorSubTab = GUICtrlCreateInput("http://v.ht/ROROMOD3", $x + 10, $y + 130, 300, 20, $SS_CENTER)
+		 
+		 GUICtrlCreateLabel( "NET Framework 4.5  ", $x + 20 , $y + 150, 250, 15)
+   GUICtrlSetFont(-1, 10, $FW_BOLD, Default, "Arial")
+	GUICtrlSetColor(-1, $COLOR_NAVY)
+   
+     $g_EmulatorSubTab = GUICtrlCreateInput("http://v.ht/ROROMOD1", $x + 10, $y + 165, 300, 20, $SS_CENTER)
+		 
+		 GUICtrlCreateLabel( "AUTOIT  ", $x + 20 , $y + 185, 250, 15)
+   GUICtrlSetFont(-1, 10, $FW_BOLD, Default, "Arial")
+	GUICtrlSetColor(-1, $COLOR_NAVY)
+   
+     $g_EmulatorSubTab = GUICtrlCreateInput("http://v.ht/ROROMOD", $x + 10, $y + 200, 300, 20, $SS_CENTER)
+		 
+		 
+		 
+		 
+		 
+		 $g_EmulatorSubTab = " المحاكيات"
+   GUICtrlCreateLabel($g_EmulatorSubTab, $x + 125 , $y + 240  - 10, 150, 15, $SS_CENTER)
+		 GUICtrlSetFont(-1, 10, $FW_BOLD, Default, "Arial")
+	GUICtrlSetColor(-1, $COLOR_NAVY)
 
-	$y += 30
-	$g_EmulatorSubTab = "MEMU 2.7.2 :"
-	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 44, $y, 180, 30, $SS_CENTER)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	$g_EmulatorSubTab = GUICtrlCreateLabel("http://cutt.us/SkY9c", $x + 223, $y, 150, 20)
-	GUICtrlSetCursor(-1, 0)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	GUICtrlSetColor(-1, $COLOR_INFO)	
-	
-	$y += 20
-	$g_EmulatorSubTab = "MEMU  3.6.2.0  :"
-	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 44, $y, 180, 30, $SS_CENTER)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	$g_EmulatorSubTab = GUICtrlCreateLabel("http://cutt.us/9qUTY", $x + 223, $y, 150, 20)
-	GUICtrlSetCursor(-1, 0)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	GUICtrlSetColor(-1, $COLOR_INFO)
-	
-	$y += 20
-	$g_EmulatorSubTab = "MEMU 2.9.6.1 :"
-	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 44, $y, 180, 30, $SS_CENTER)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	$g_EmulatorSubTab = GUICtrlCreateLabel("http://cutt.us/I6j5J", $x + 223, $y, 150, 20)
-	GUICtrlSetCursor(-1, 0)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	GUICtrlSetColor(-1, $COLOR_INFO)
-	
-	$y += 20
-	$g_EmulatorSubTab = "MEMU 2.9.3 :"
-	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 44, $y, 180, 30, $SS_CENTER)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	$g_EmulatorSubTab = GUICtrlCreateLabel("http://cutt.us/pByXx", $x + 223, $y, 150, 20)
-	GUICtrlSetCursor(-1, 0)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	GUICtrlSetColor(-1, $COLOR_INFO)
-	
-	
-	$y += 20
-	$g_EmulatorSubTab = "MEMU 2.7.2 :"
-	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 44, $y, 180, 30, $SS_CENTER)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	$g_EmulatorSubTab = GUICtrlCreateLabel("http://cutt.us/SkY9c", $x + 223, $y, 150, 20)
-	GUICtrlSetCursor(-1, 0)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	GUICtrlSetColor(-1, $COLOR_INFO)
-	
-	
-	$y += 20
-	$g_EmulatorSubTab = "MEMU 2.8.6 :"
-	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 44, $y, 180, 30, $SS_CENTER)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	$g_EmulatorSubTab = GUICtrlCreateLabel("http://cutt.us/haxTL", $x + 223, $y, 150, 20)
-	GUICtrlSetCursor(-1, 0)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	GUICtrlSetColor(-1, $COLOR_INFO)
-	
-	
-	$y += 20
-	$g_EmulatorSubTab = "MEMU 2.7.0 :"
-	GUICtrlCreateLabel($g_EmulatorSubTab, $x + 44, $y, 180, 30, $SS_CENTER)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	$g_EmulatorSubTab = GUICtrlCreateLabel("http://cutt.us/E5AyP", $x + 223, $y, 150, 20)
-	GUICtrlSetCursor(-1, 0)
-	GUICtrlSetFont(-1, 9.5, $FW_BOLD, Default, "Arial")
-	GUICtrlSetColor(-1, $COLOR_INFO)
+	Local const $icon2 = @ScriptDir & "\images\RORO3.bmp"
+		GUICtrlCreatePic($icon2, $x + 300, $y + 250 , 120, 120, $SS_CENTERIMAGE)
+
 	
 
 EndFunc   ;==>CreateEmulatorSubTab

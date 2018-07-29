@@ -4,7 +4,7 @@
 ; Syntax ........: saveConfig()
 ; Parameters ....: NA
 ; Return values .: NA
-; Author ........: RORO-MOD (2018)
+; Author ........: Team AiO MOD++ (2018)
 ; Modified ......:
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
@@ -14,19 +14,19 @@
 ; ===============================================================================================================================
 
 Func SaveConfig_MOD()
-	; <><><> RORO-MOD (2018) <><><>
+	; <><><> Team AiO MOD++ (2018) <><><>
 	ApplyConfig_MOD(GetApplyConfigSaveAction())
-	; CSV Deploy Speed - RORO-MOD
+	; CSV Deploy Speed - Team AiO MOD++
 	_Ini_Add("CSV Speed", "cmbCSVSpeed[LB]", _GUICtrlComboBox_GetCurSel($cmbCSVSpeed[$LB]))
 	_Ini_Add("CSV Speed", "cmbCSVSpeed[DB]", _GUICtrlComboBox_GetCurSel($cmbCSVSpeed[$DB]))
 
-	; Auto Dock, Hide Emulator & Bot - RORO-MOD
+	; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
 	_Ini_Add("general", "EnableAuto", $g_bEnableAuto ? 1 : 0)
 	_Ini_Add("general", "AutoDock", $g_iChkAutoDock ? 1 : 0)
 	_Ini_Add("general", "AutoHide", $g_iChkAutoHideEmulator ? 1 : 0)
 	_Ini_Add("general", "AutoMinimize", $g_iChkAutoMinimizeBot ? 1 : 0)
 
-	; Check Collector Outside - RORO-MOD
+	; Check Collector Outside - Team AiO MOD++
 	_Ini_Add("search", "DBMeetCollOutside", $g_bDBMeetCollOutside)
 	_Ini_Add("search", "TxtDBMinCollOutsidePercent", GUICtrlRead($g_hTxtDBMinCollOutsidePercent))
 	_Ini_Add("search", "DBCollectorsNearRedline", $g_bDBCollectorsNearRedline ? 1 : 0)
@@ -38,10 +38,10 @@ Func SaveConfig_MOD()
 	_Ini_Add("search", "SkipCollectorCheckTH", $g_bSkipCollectorCheckTH ? 1 : 0)
 	_Ini_Add("search", "CmbSkipCollectorCheckTH", _GUICtrlComboBox_GetCurSel($g_hCmbSkipCollectorCheckTH))
 
-	; ClanHop - RORO-MOD
+	; ClanHop - Team AiO MOD++
 	_Ini_Add("donate", "chkClanHop", $g_bChkClanHop)
 
-	; Bot Humanization - RORO-MOD
+	; Bot Humanization - Team AiO MOD++
 	_Ini_Add("Bot Humanization", "chkUseBotHumanization", $g_ichkUseBotHumanization)
 	_Ini_Add("Bot Humanization", "chkUseAltRClick", $g_ichkUseAltRClick)
 	_Ini_Add("Bot Humanization", "chkCollectAchievements", $g_ichkCollectAchievements)
@@ -61,7 +61,7 @@ Func SaveConfig_MOD()
 	_Ini_Add("Bot Humanization", "cmbMaxActionsNumber", _GUICtrlComboBox_GetCurSel($g_cmbMaxActionsNumber))
 	_Ini_Add("Bot Humanization", "challengeMessage", GUICtrlRead($g_challengeMessage))
 
-	; Goblin XP - RORO-MOD
+	; Goblin XP - Team AiO MOD++
 	_Ini_Add("GoblinXP", "EnableSuperXP", $ichkEnableSuperXP)
 	_Ini_Add("GoblinXP", "SkipZoomOutXP", $ichkSkipZoomOutXP)
 	_Ini_Add("GoblinXP", "FastGoblinXP", $ichkFastGoblinXP)
@@ -71,7 +71,7 @@ Func SaveConfig_MOD()
 	_Ini_Add("GoblinXP", "SXGW", $ichkSXGW)
 	_Ini_Add("GoblinXP", "MaxXptoGain", GUICtrlRead($txtMaxXPtoGain))
 
-	; GTFO - RORO-MOD
+	; GTFO - Team AiO MOD++
 	_Ini_Add("GTFO", "chkUseGTFO", $g_bChkUseGTFO)
 	_Ini_Add("GTFO", "txtMinSaveGTFO_Elixir",$g_iTxtMinSaveGTFO_Elixir)
 	_Ini_Add("GTFO", "txtMinSaveGTFO_DE", $g_iTxtMinSaveGTFO_DE)
@@ -81,14 +81,18 @@ Func SaveConfig_MOD()
 	_Ini_Add("GTFO", "chkKickOutSpammers", $g_bChkKickOutSpammers)
 	_Ini_Add("GTFO", "txtKickLimit", $g_iTxtKickLimit)
 
-	; Max logout time - RORO-MOD
+	; Max logout time - Team AiO MOD++
 	_Ini_Add("TrainLogout", "TrainLogoutMaxTime", $g_bTrainLogoutMaxTime)
 	_Ini_Add("TrainLogout", "TrainLogoutMaxTimeTXT", $g_iTrainLogoutMaxTime)
 
-	; Request CC Troops at first - RORO-MOD
+	; Slot11 - Team AiO MOD++
+	_Ini_Add("attack", "ExtendedAttackBarDB", $g_abChkExtendedAttackBar[$DB] ? 1 : 0)
+	_Ini_Add("attack", "ExtendedAttackBarLB", $g_abChkExtendedAttackBar[$LB] ? 1 : 0)
+
+	; Request CC Troops at first - Team AiO MOD++
 	_Ini_Add("planned", "ReqCCFirst", $g_bReqCCFirst)
 
-	; CheckCC Troops - RORO-MOD
+	; CheckCC Troops - Team AiO MOD++
 	_Ini_Add("CheckCC", "Enable", $g_bChkCC)
 	_Ini_Add("CheckCC", "Troop Capacity", $g_iCmbCastleCapacityT)
 	_Ini_Add("CheckCC", "Spell Capacity", $g_iCmbCastleCapacityS)
@@ -97,11 +101,11 @@ Func SaveConfig_MOD()
 		_Ini_Add("CheckCC", "ExpectQty" & $i, $g_aiTxtCCSlot[$i])
 	Next
 
-	; Check Grand Warden Mode - RORO-MOD
+	; Check Grand Warden Mode - Team AiO MOD++
 	_Ini_Add("other", "chkCheckWardenMode", $g_bCheckWardenMode ? 1 : 0)
 	_Ini_Add("other", "cmbCheckWardenMode", $g_iCheckWardenMode)
 
-	; Unit/Wave Factor - RORO-MOD
+	; Unit/Wave Factor - Team AiO MOD++
 	_Ini_Add("SetSleep", "EnableGiantSlot", $g_iChkGiantSlot)
 	_Ini_Add("SetSleep", "CmbGiantSlot", _GUICtrlComboBox_GetCurSel($g_hCmbGiantSlot))
 	_Ini_Add("SetSleep", "EnableUnitFactor", $g_iChkUnitFactor)
@@ -109,21 +113,20 @@ Func SaveConfig_MOD()
 	_Ini_Add("SetSleep", "EnableWaveFactor", $g_iChkWaveFactor)
 	_Ini_Add("SetSleep", "WaveFactor", GUICtrlRead($g_hTxtWaveFactor))
 
-	; Restart Search Legend league - RORO-MOD
+	; Restart Search Legend league - Team AiO MOD++
 	_Ini_Add("other", "ChkSearchTimeout", $g_bIsSearchTimeout)
 	_Ini_Add("other", "SearchTimeout", $g_iSearchTimeout)
 
-	; Stop on Low battery - RORO-MOD
+	; Stop on Low battery - Team AiO MOD++
 	_Ini_Add("other", "ChkStopOnBatt", $g_bStopOnBatt)
 	_Ini_Add("other", "StopOnBatt", $g_iStopOnBatt)
 
-	; Attack Log - RORO-MOD
+	; Attack Log - Team AiO MOD++
 	_Ini_Add("attack", "ColorfulAttackLog", $g_bColorfulAttackLog ? 1 : 0)
 
-	; Stop For War - RORO-MOD
+	; Stop For War - Team AiO MOD++
 	_Ini_Add("war preparation", "Enable", $g_bStopForWar ? 1 : 0)
 	_Ini_Add("war preparation", "Stop Time", $g_iStopTime)
-	_Ini_Add("war preparation", "Stop Before", $g_bStopBeforeBattle ? 1 : 0)
 	_Ini_Add("war preparation", "Return Time", $g_iReturnTime)
 	_Ini_Add("war preparation", "Train War Troop", $g_bTrainWarTroop ? 1 : 0)
 	_Ini_Add("war preparation", "QuickTrain War Troop", $g_bUseQuickTrainWar ? 1 : 0)
@@ -141,7 +144,7 @@ Func SaveConfig_MOD()
 	_Ini_Add("war preparation", "RequestCC War", $g_bRequestCCForWar ? 1 : 0)
 	_Ini_Add("war preparation", "RequestCC War Text", $g_sTxtRequestCCForWar)
 
-	; Request troops for defense - RORO-MOD
+	; Request troops for defense - Team AiO MOD++
 	_Ini_Add("RequestDefense", "RequestDefenseEnable", $g_bRequestTroopsEnableDefense ? 1 : 0)
 	_Ini_Add("RequestDefense", "txtRequestDefense", $g_sRequestTroopsTextDefense)
 	_Ini_Add("RequestDefense", "RequestDefenseEarly", $g_iRequestDefenseEarly)

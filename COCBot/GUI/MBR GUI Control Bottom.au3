@@ -44,7 +44,7 @@ Func Initiate()
 
 		$g_bFirstStart = True
 		$g_bInitiateSwitchAcc = True
-
+        $g_iFirstTimeLab = 0
 		If $g_bNotifyDeleteAllPushesOnStart Then _DeletePush()
 
 		If Not $g_bSearchMode Then

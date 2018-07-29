@@ -16,6 +16,19 @@
 Func PrepareSearch() ;Click attack button and find match button, will break shield
 
 	SetLog("الذهاب للهجوم...", $COLOR_INFO)
+; RestartSearchPickupHero - Check Remaining Heal Time
+	If $g_bSearchRestartPickupHero Then
+		For $pTroopType = $eKing To $eWarden ; check all 3 hero
+			For $pMatchMode = $DB To $g_iModeCount - 1 ; check all attack modes
+				If IsSpecialTroopToBeUsed($pMatchMode, $pTroopType) Then
+					If Not _DateIsValid($g_asHeroHealTime[$pTroopType - $eKing]) Then
+						getArmyHeroTime("All", True, True)
+						ExitLoop 2
+					EndIf
+				EndIf
+			Next
+		Next
+	EndIf
 
 	ChkAttackCSVConfig()
 

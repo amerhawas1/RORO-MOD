@@ -13,7 +13,7 @@
 ; Example .......: No
 ; ===============================================================================================================================
 #include-once
-Global $g_hGUI_MISC = 0, $g_hGUI_MISC_TAB = 0, $g_hGUI_MISC_TAB_ITEM1 = 0, $g_hGUI_MISC_TAB_ITEM2 = 0, $g_hGUI_MISC_TAB_ITEM3 = 0
+Global $g_hGUI_MISC = 0, $g_hGUI_MISC_TAB = 0, $g_hGUI_MISC_TAB_ITEM1 = 0, $g_hGUI_MISC_TAB_ITEM2 = 0, $g_hGUI_MISC_TAB_ITEM3 = 0, $g_hGUI_MISC_TAB_ITEM4 = 0
 
 Global $g_hChkBotStop = 0, $g_hCmbBotCommand = 0, $g_hCmbBotCond = 0, $g_hCmbHoursStop = 0
 Global $g_hTxtRestartGold = 0, $g_hTxtRestartElixir = 0, $g_hTxtRestartDark = 0
@@ -47,6 +47,8 @@ Func CreateVillageMisc()
 		CreateMiscBuilderBaseSubTab()
 	$g_hGUI_MISC_TAB_ITEM3 = GUICtrlCreateTabItem(GetTranslatedFileIni("MBR Main GUI", "MISC_TAB_ITEM3", "Clan Games"))
 		CreateMiscClanGamesV3SubTab()
+	$g_hGUI_MISC_TAB_ITEM4 =  GUICtrlCreateTabItem(GetTranslatedFileIni("MBR Main GUI", "MISC_TAB_ITEM3", "Clan Games log "))
+		CreateMiscClanGameslogSubTab()
 	GUICtrlCreateTabItem("")
 
 EndFunc   ;==>CreateVillageMisc
@@ -340,7 +342,7 @@ EndFunc   ;==>CreateMiscBuilderBaseSubTab
 
 ; Clan Games v3
 Func CreateMiscClanGamesV3SubTab()
-        GUISetBkColor(0xE0FFFF)
+        GUISetBkColor(0x1481e5)
 	Local Const $g_sLibIconPathMOD = @ScriptDir & "\images\ROROMOD.bmp"
 
 	; GUI SubTab
@@ -359,7 +361,7 @@ Func CreateMiscClanGamesV3SubTab()
 		GUICtrlCreateGroup("", -99, -99, 1, 1)
 
 	$x = 150
-		$g_hChkClanGamesEnabled = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesEnabled", "Clan Games"), $x, $y, -1, -1)
+		$g_hChkClanGamesEnabled = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesEnabled", "Clan Games"), $x, $y, -1, -1 )
 			GUICtrlSetOnEvent(-1, "chkActivateClangames")
 			GUICtrlSetState(-1, $GUI_CHECKED)
 		$g_hChkClanGamesOnly = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesOnly", "Clan Games Only"), $x + 100 , $y, -1, -1)
@@ -389,15 +391,16 @@ Func CreateMiscClanGamesV3SubTab()
 		GUICtrlSetState(-1, $GUI_CHECKED)
 			GUICtrlSetOnEvent(-1, "chkPurgeLimits")
 		$g_hcmbPurgeLimit = GUICtrlCreateCombo("" , $x + 155, $y, 70, -1, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
-			GUICtrlSetData(-1, "Unlimited| 1x| 2x| 3x| 4x| 5x| 6x| 7x| 8x| 9x|10x", " 5x")
+			GUICtrlSetData(-1, "Unlimited")
 	$y += 25
 		$g_hChkClanGamesStopBeforeReachAndPurge = GUICtrlCreateCheckbox(GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "ChkClanGamesStopBeforeReachAndPurge", "Stop before completing your limit and only Purge"), $x, $y, -1, -1)
 	GUICtrlCreateGroup("", -99, -99, 1, 1)
-
-	$x = 15
-	$y = 45
-	$g_hTxtClanGamesLog = GUICtrlCreateEdit("", $x - 10, 275, $g_iSizeWGrpTab3, 127, BitOR($GUI_SS_DEFAULT_EDIT, $ES_READONLY, $ES_AUTOVSCROLL))
+	EndFunc   ;==>CreateMiscClanGamesV3SubTab
+	Func CreateMiscClanGameslogSubTab()
+Local $x = 5, $y = 45
+	$g_hTxtClanGamesLog = GUICtrlCreateEdit("", $x , 40, $g_iSizeWGrpTab3, 350, BitOR($GUI_SS_DEFAULT_EDIT, $ES_READONLY, $ES_AUTOVSCROLL))
 	GUICtrlSetData(-1, GetTranslatedFileIni("MBR GUI Design Child Village - Misc", "TxtClanGamesLog", _
 			"--------------------------------------------------------- Clan Games LOG ------------------------------------------------"))
+			EndFunc   ;==>CreateMiscClanGameslogSubTab
 
-EndFunc   ;==>CreateMiscClanGamesV3SubTab
+

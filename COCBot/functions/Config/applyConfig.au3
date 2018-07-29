@@ -412,6 +412,12 @@ Func ApplyConfig_600_11($TypeReadSave)
 	Switch $TypeReadSave
 		Case "Read"
 			GUICtrlSetState($g_hChkRequestTroopsEnable, $g_bRequestTroopsEnable ? $GUI_CHECKED : $GUI_UNCHECKED)
+						; Request Type - Demen
+			GUICtrlSetState($g_hChkRequestType_Troops, $g_abRequestType[0] ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($g_hChkRequestType_Spells, $g_abRequestType[1] ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($g_hChkRequestType_Siege, $g_abRequestType[2] ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetData($g_hTxtRequestCountCCTroop, $g_iRequestCountCCTroop)
+			GUICtrlSetData($g_hTxtRequestCountCCSpell, $g_iRequestCountCCSpell)
 			chkRequestCCHours()
 			GUICtrlSetData($g_hTxtRequestCC, $g_sRequestTroopsText)
 			For $i = 0 To 23
@@ -420,6 +426,12 @@ Func ApplyConfig_600_11($TypeReadSave)
 		Case "Save"
 			$g_bRequestTroopsEnable = (GUICtrlRead($g_hChkRequestTroopsEnable) = $GUI_CHECKED)
 			$g_sRequestTroopsText = GUICtrlRead($g_hTxtRequestCC)
+			; Request Type - Demen
+			$g_abRequestType[0] = (GUICtrlRead($g_hChkRequestType_Troops) = $GUI_CHECKED)
+			$g_abRequestType[1] = (GUICtrlRead($g_hChkRequestType_Spells) = $GUI_CHECKED)
+			$g_abRequestType[2] = (GUICtrlRead($g_hChkRequestType_Siege) = $GUI_CHECKED)
+			$g_iRequestCountCCTroop = GUICtrlRead($g_hTxtRequestCountCCTroop)
+			$g_iRequestCountCCSpell = GUICtrlRead($g_hTxtRequestCountCCSpell)
 			For $i = 0 To 23
 				$g_abRequestCCHours[$i] = (GUICtrlRead($g_ahChkRequestCCHours[$i]) = $GUI_CHECKED)
 			Next
@@ -882,6 +894,7 @@ Func ApplyConfig_600_28($TypeReadSave)
 			_GUICtrlComboBox_SetCurSel($g_hCmbAttackNowDelay, $g_iSearchAttackNowDelay)
 			GUICtrlSetState($g_hChkRestartSearchLimit, $g_bSearchRestartEnable ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetData($g_hTxtRestartSearchlimit, $g_iSearchRestartLimit)
+			GUICtrlSetState($g_hChkRestartSearchPickupHero, $g_bSearchRestartPickupHero ? $GUI_CHECKED : $GUI_UNCHECKED)
 			ChkRestartSearchLimit()
 			GUICtrlSetState($g_hChkAlertSearch, $g_bSearchAlertMe ? $GUI_CHECKED : $GUI_UNCHECKED)
 		Case "Save"
@@ -898,6 +911,7 @@ Func ApplyConfig_600_28($TypeReadSave)
 			$g_iSearchAttackNowDelay = _GUICtrlComboBox_GetCurSel($g_hCmbAttackNowDelay)
 			$g_bSearchRestartEnable = (GUICtrlRead($g_hChkRestartSearchLimit) = $GUI_CHECKED)
 			$g_iSearchRestartLimit = GUICtrlRead($g_hTxtRestartSearchlimit)
+			$g_bSearchRestartPickupHero = (GUICtrlRead($g_hChkRestartSearchPickupHero) = $GUI_CHECKED)
 			$g_bSearchAlertMe = (GUICtrlRead($g_hChkAlertSearch) = $GUI_CHECKED)
 	EndSwitch
 EndFunc   ;==>ApplyConfig_600_28
@@ -1935,6 +1949,9 @@ Func ApplyConfig_600_35_1($TypeReadSave)
 			chkAutoResume()
 			GUICtrlSetState($g_hChkDisableNotifications, $g_bDisableNotifications ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetState($g_hChkFixClanCastle, $g_bForceClanCastleDetection ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($g_hChkOnlySCIDAccounts, $g_bOnlySCIDAccounts ? $GUI_CHECKED : $GUI_UNCHECKED)
+			_GUICtrlComboBox_SetCurSel($g_hCmbWhatSCIDAccount2Use, $g_iWhatSCIDAccount2Use)
+			OnlySCIDAccounts()
 		Case "Save"
 			$g_bDisableSplash = (GUICtrlRead($g_hChkDisableSplash) = $GUI_CHECKED)
 			$g_bCheckVersion = (GUICtrlRead($g_hChkForMBRUpdates) = $GUI_CHECKED)
@@ -1967,6 +1984,8 @@ Func ApplyConfig_600_35_1($TypeReadSave)
 			$g_iAutoResumeTime = GUICtrlRead($g_hTxtAutoResumeTime)
 			$g_bDisableNotifications = (GUICtrlRead($g_hChkDisableNotifications) = $GUI_CHECKED)
 			$g_bForceClanCastleDetection = (GUICtrlRead($g_hChkFixClanCastle) = $GUI_CHECKED)
+						$g_bOnlySCIDAccounts = (GUICtrlRead($g_hChkOnlySCIDAccounts) = $GUI_CHECKED)
+			$g_iWhatSCIDAccount2Use = _GUICtrlComboBox_GetCurSel($g_hCmbWhatSCIDAccount2Use)
 	EndSwitch
 EndFunc   ;==>ApplyConfig_600_35_1
 

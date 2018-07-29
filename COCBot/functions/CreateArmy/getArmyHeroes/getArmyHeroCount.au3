@@ -44,13 +44,13 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 		If $sResult <> "" Then ; we found something, figure out what?
 			Select
 				Case StringInStr($sResult, "king", $STR_NOCASESENSEBASIC)
-					If $bSetLog Then SetLog(" - الملك متاح", $COLOR_SUCCESS)
+					If $bSetLog Then SetLog(" - Barbarian King Available", $COLOR_SUCCESS)
 					$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroKing)
 				Case StringInStr($sResult, "queen", $STR_NOCASESENSEBASIC)
-					If $bSetLog Then SetLog(" - الملكة متاحة", $COLOR_SUCCESS)
+					If $bSetLog Then SetLog(" - Archer Queen Available", $COLOR_SUCCESS)
 					$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroQueen)
 				Case StringInStr($sResult, "warden", $STR_NOCASESENSEBASIC)
-					If $bSetLog Then SetLog(" - الامر الكبير متاح", $COLOR_SUCCESS)
+					If $bSetLog Then SetLog(" - Grand Warden Available", $COLOR_SUCCESS)
 					$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroWarden)
 				Case StringInStr($sResult, "heal", $STR_NOCASESENSEBASIC)
 					If $g_bDebugSetlogTrain Or $iDebugArmyHeroCount = 1 Then
@@ -76,7 +76,7 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 								If $g_iSearchNotWaitHeroesEnable = 1 Then
 									$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroKing)
 								Else
-									SetLog("تحزير ايها الزعيم : الملك بالتطوير يرجى الغاء ميزة انتظار الملوك في البوت !", $COLOR_ERROR)
+									SetLog("Warning: King Upgrading & Wait enabled, Disable Wait for King or may never attack!", $COLOR_ERROR)
 								EndIf
 								_GUI_Value_STATE("SHOW", $groupKingSleeping) ; Show king sleeping icon
 							EndIf
@@ -88,7 +88,7 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 								If $g_iSearchNotWaitHeroesEnable = 1 Then
 									$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroQueen)
 								Else
-									SetLog("تحزير ايها الزعيم : الملكة بالتطوير يرجى الغاء ميزة انتظار الملوك في البوت!", $COLOR_ERROR)
+									SetLog("Warning: Queen Upgrading & Wait enabled, Disable Wait for Queen or may never attack!", $COLOR_ERROR)
 								EndIf
 								_GUI_Value_STATE("SHOW", $groupQueenSleeping) ; Show Queen sleeping icon
 							EndIf
@@ -100,7 +100,7 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 								If $g_iSearchNotWaitHeroesEnable = 1 Then
 									$g_iHeroAvailable = BitOR($g_iHeroAvailable, $eHeroWarden)
 								Else
-									SetLog("تحزير ايها الزعيم : الامر الكبير  بالتطوير يرجى الغاء ميزة انتظار الملوك في البوت!", $COLOR_ERROR)
+									SetLog("Warning: Warden Upgrading & Wait enabled, Disable Wait for Warden or may never attack!", $COLOR_ERROR)
 								EndIf
 								_GUI_Value_STATE("SHOW", $groupWardenSleeping) ; Show Warden sleeping icon
 							EndIf
@@ -115,7 +115,7 @@ Func getArmyHeroCount($bOpenArmyWindow = False, $bCloseArmyWindow = False, $Chec
 					If $bSetLog Then SetLog("Hero slot#" & $i + 1 & " bad OCR string returned!", $COLOR_ERROR)
 			EndSelect
 		Else
-			If $bSetLog Then SetLog("Hero slot#" & $i + 1 & " حالة قراءة المشكلة!", $COLOR_ERROR)
+			If $bSetLog Then SetLog("Hero slot#" & $i + 1 & " status read problem!", $COLOR_ERROR)
 		EndIf
 	Next
 
@@ -130,7 +130,7 @@ EndFunc   ;==>getArmyHeroCount
 
 Func ArmyHeroStatus($i)
 	Local $sImageDir = "trainwindow-HeroStatus-bundle", $sResult = ""
-	Local Const $aHeroesRect[3][4] = [[655, 340, 680, 365], [730, 340, 755, 365], [805, 340, 830, 365]]
+	Local Const $aHeroesRect[3][4] = [[655, 340, 680, 370], [730, 340, 755, 370], [805, 340, 830, 370]]
 
 	; Perform the search
 	_CaptureRegion2($aHeroesRect[$i][0], $aHeroesRect[$i][1], $aHeroesRect[$i][2], $aHeroesRect[$i][3])
@@ -230,20 +230,32 @@ EndFunc   ;==>ArmyHeroStatus
 
 Func LabGuiDisplay() ; called from main loop to get an early status for indictors in bot bottom
 
-	Local Static $iLastTimeChecked[8] = [0, 0, 0, 0, 0, 0, 0, 0]
-	If $iLastTimeChecked[$g_iCurAccount] < @HOUR + 1 And Not $g_bSearchAttackNowEnable And $iLastTimeChecked[$g_iCurAccount] <> 0 Then Return
+	Local Static $iLastTimeChecked[8] = [0, 0, 0, 0, 0, 0, 0, 0], $iDateCalc
+
+		; Check if is a valid date and Calculated the number of minutes from remain time Lab and now
+	If _DateIsValid($g_sLabUpgradeTime) Then
+		$iDateCalc = _DateDiff('n', _NowCalc(), $g_sLabUpgradeTime)
+	Else
+		; Check the number of hours from last check
+		$iDateCalc =_DateDiff('n', $iLastTimeChecked[$g_iCurAccount], _NowCalc())
+		; A check each 6 hours [6*60 = 360]
+		If $iDateCalc = 360 then $iDateCalc = 0
+	EndIf
+
+	If $iDateCalc <> 0 And Not $g_bSearchAttackNowEnable And $iLastTimeChecked[$g_iCurAccount] <> 0 Then Return
+
 	;CLOSE ARMY WINDOW
 	ClickP($aAway, 2, 0, "#0346") ;Click Away
 	If _Sleep(1500) Then Return ; Delay AFTER the click Away Prevents lots of coc restarts
 
-	Setlog("التحقق من حالة المختبر", $COLOR_INFO)
+	Setlog("Checking Lab Status", $COLOR_INFO)
 
 	;=================Section 2 Lab Gui
 
 	; If $g_bAutoLabUpgradeEnable = True Then  ====>>>> TODO : or use this or make a checkbox on GUI
 	; make sure lab is located, if not locate lab
 	If $g_aiLaboratoryPos[0] <= 0 Or $g_aiLaboratoryPos[1] <= 0 Then
-		SetLog("موقع المختبر غير موجود!", $COLOR_ERROR)
+		SetLog("Laboratory Location not found!", $COLOR_ERROR)
 		LocateLab() ; Lab location unknown, so find it.
 		If $g_aiLaboratoryPos[0] = 0 Or $g_aiLaboratoryPos[1] = 0 Then
 			SetLog("Problem locating Laboratory, train laboratory position before proceeding", $COLOR_ERROR)
@@ -260,12 +272,14 @@ Func LabGuiDisplay() ; called from main loop to get an early status for indictor
 	If _Sleep(1000) Then Return ; Wait for window to open
 	; Find Research Button
 
+	$iLastTimeChecked[$g_iCurAccount] = _NowCalc()
+
 	If QuickMIS("BC1", @ScriptDir & "\imgxml\Lab\Research", 200, 620, 700, 700) Then
 		;If $g_iDebugImageSave = 1 Then DebugImageSave("LabUpgrade") ; Debug Only
 		Click($g_iQuickMISX + 200, $g_iQuickMISY + 620)
 		If _Sleep($DELAYLABORATORY1) Then Return ; Wait for window to open
 	Else
-		Setlog("مشكلة في العثور على زر البحث ، حاول مرة أخرى...", $COLOR_WARNING)
+		Setlog("Trouble finding research button, try again...", $COLOR_WARNING)
 		ClickP($aAway, 2, $DELAYLABORATORY4, "#0199")
 		;===========Hide Red  Hide Green  Show Gray==
 		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
@@ -277,7 +291,7 @@ Func LabGuiDisplay() ; called from main loop to get an early status for indictor
 
 	; check for upgrade in process - look for green in finish upgrade with gems button
 	If _ColorCheck(_GetPixelColor(730, 200, True), Hex(0xA2CB6C, 6), 20) Then ; Look for light green in upper right corner of lab window.
-		SetLog("المختبر يعمل حاليا. ", $COLOR_INFO)
+		SetLog("Laboratory is Running. ", $COLOR_INFO)
 		;==========Hide Red  Show Green Hide Gray===
 		GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
 		GUICtrlSetState($g_hPicLabRed, $GUI_HIDE)
@@ -287,7 +301,7 @@ Func LabGuiDisplay() ; called from main loop to get an early status for indictor
 		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
 		Return True
 	ElseIf _ColorCheck(_GetPixelColor(730, 200, True), Hex(0x8088B0, 6), 20) Then ; Look for light purple in upper right corner of lab window.
-		SetLog("المختبر متوقف حاليا", $COLOR_INFO)
+		SetLog("Laboratory has Stopped", $COLOR_INFO)
 		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
 		;========Show Red  Hide Green  Hide Gray=====
 		GUICtrlSetState($g_hPicLabGray, $GUI_HIDE)
@@ -298,7 +312,7 @@ Func LabGuiDisplay() ; called from main loop to get an early status for indictor
 		$g_sLabUpgradeTime = ""
 		Return
 	Else
-		SetLog("غير قادر على تحديد حالة المعمل", $COLOR_INFO)
+		SetLog("Unable to determine Lab Status", $COLOR_INFO)
 		ClickP($aAway, 2, $DELAYLABORATORY4, "#0359")
 		;========Hide Red  Hide Green  Show Gray======
 		GUICtrlSetState($g_hPicLabGreen, $GUI_HIDE)
@@ -308,7 +322,26 @@ Func LabGuiDisplay() ; called from main loop to get an early status for indictor
 		Return
 	EndIf
 
-	$iLastTimeChecked[$g_iCurAccount] = @HOUR
-
 	; EndIf
 EndFunc   ;==>LabGuiDisplay
+
+Func HideShields($bHide = False)
+	Local Static $ShieldState[19]
+	Local $counter
+	If $bHide = True Then
+		$counter = 0
+		For $i = $g_hlblKing to $g_hPicLabGreen
+			$ShieldState[$counter] = GUICtrlGetState($i)
+			GUICtrlSetState($i, $GUI_HIDE)
+			$counter += 1
+		Next
+	Else
+		$counter = 0
+		For $i = $g_hlblKing to $g_hPicLabGreen
+			If $ShieldState[$counter] = 80 Then
+				GUICtrlSetState($i, $GUI_SHOW )
+			EndIf
+			$counter += 1
+		Next
+	EndIf
+EndFunc

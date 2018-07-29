@@ -4,7 +4,7 @@
 ; Syntax ........: applyConfig()
 ; Parameters ....: $bRedrawAtExit = True, redraws bot window after config was applied
 ; Return values .: NA
-; Author ........: RORO-MOD (2018)
+; Author ........: Team AiO MOD++ (2018)
 ; Modified ......:
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
@@ -14,14 +14,14 @@
 ; ===============================================================================================================================
 
 Func ApplyConfig_MOD($TypeReadSave)
-	; <><><> RORO-MOD (2018) <><><>
+	; <><><> Team AiO MOD++ (2018) <><><>
 	Switch $TypeReadSave
 		Case "Read"
-			; CSV Deploy Speed - RORO-MOD
+			; CSV Deploy Speed - Team AiO MOD++
 			_GUICtrlComboBox_SetCurSel($cmbCSVSpeed[$LB], $icmbCSVSpeed[$LB])
 			_GUICtrlComboBox_SetCurSel($cmbCSVSpeed[$DB], $icmbCSVSpeed[$DB])
 
-			; Auto Dock, Hide Emulator & Bot - RORO-MOD
+			; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
 			GUICtrlSetState($g_hChkEnableAuto, $g_bEnableAuto = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			chkEnableAuto()
 			If $g_iChkAutoDock Then
@@ -34,7 +34,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 			btnEnableAuto()
 			GUICtrlSetState($g_hChkAutoMinimizeBot, $g_iChkAutoMinimizeBot = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 
-			; Check Collector Outside - RORO-MOD
+			; Check Collector Outside - Team AiO MOD++
 			GUICtrlSetState($g_hChkDBMeetCollOutside, $g_bDBMeetCollOutside = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetData($g_hTxtDBMinCollOutsidePercent, $g_iTxtDBMinCollOutsidePercent)
 			GUICtrlSetState($g_hChkDBCollectorsNearRedline, $g_bDBCollectorsNearRedline = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
@@ -47,10 +47,10 @@ Func ApplyConfig_MOD($TypeReadSave)
 			_GUICtrlComboBox_SetCurSel($g_hCmbSkipCollectorCheckTH, $g_iCmbSkipCollectorCheckTH)
 			chkDBMeetCollOutside()
 
-			; ClanHop - RORO-MOD
+			; ClanHop - Team AiO MOD++
 			GUICtrlSetState($g_hChkClanHop, $g_bChkClanHop = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 
-			; Bot Humanization - RORO-MOD
+			; Bot Humanization - Team AiO MOD++
 			GUICtrlSetState($g_chkUseBotHumanization, $g_ichkUseBotHumanization = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetState($g_chkUseAltRClick, $g_ichkUseAltRClick = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetState($g_chkCollectAchievements, $g_ichkCollectAchievements = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
@@ -73,7 +73,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 			cmbStandardReplay()
 			cmbWarReplay()
 
-			; Goblin XP - RORO-MOD
+			; Goblin XP - Team AiO MOD++
 			GUICtrlSetState($chkEnableSuperXP, $ichkEnableSuperXP = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
 			chkEnableSuperXP()
 			GUICtrlSetState($chkSkipZoomOutXP, $ichkSkipZoomOutXP = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
@@ -85,7 +85,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 			GUICtrlSetState($chkSXAQ, $ichkSXAQ = $eHeroQueen ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetState($chkSXGW, $ichkSXGW = $eHeroWarden ? $GUI_CHECKED : $GUI_UNCHECKED)
 
-			; GTFO - RORO-MOD
+			; GTFO - Team AiO MOD++
 			GUICtrlSetState($g_hChkUseGTFO, $g_bChkUseGTFO = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetData($g_hTxtMinSaveGTFO_Elixir, $g_iTxtMinSaveGTFO_Elixir)
 			GUICtrlSetData($g_hTxtMinSaveGTFO_DE, $g_iTxtMinSaveGTFO_DE)
@@ -98,15 +98,19 @@ Func ApplyConfig_MOD($TypeReadSave)
 			GUICtrlSetData($g_hTxtKickLimit, $g_iTxtKickLimit)
 			ApplyKickOut()
 
-			; Max logout time - RORO-MOD
+			; Max logout time - Team AiO MOD++
 			GUICtrlSetState($g_hChkTrainLogoutMaxTime, $g_bTrainLogoutMaxTime = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			chkTrainLogoutMaxTime()
 			GUICtrlSetData($g_hTxtTrainLogoutMaxTime, $g_iTrainLogoutMaxTime)
 
-			; Request CC Troops at first - RORO-MOD
+			; Slot11 - Team AiO MOD++
+			GUICtrlSetState($g_hChkExtendedAttackBarDB, $g_abChkExtendedAttackBar[$DB] ? $GUI_CHECKED : $GUI_UNCHECKED)
+			GUICtrlSetState($g_hChkExtendedAttackBarLB, $g_abChkExtendedAttackBar[$LB] ? $GUI_CHECKED : $GUI_UNCHECKED)
+
+			; Request CC Troops at first - Team AiO MOD++
 			GUICtrlSetState($g_hChkReqCCFirst, $g_bReqCCFirst = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 
-			; CheckCC Troops - RORO-MOD
+			; CheckCC Troops - Team AiO MOD++
 			GUICtrlSetState($g_hChkTroopsCC, $g_bChkCC = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			_GUICtrlComboBox_SetCurSel($g_hCmbCastleCapacityT, $g_iCmbCastleCapacityT)
 			_GUICtrlComboBox_SetCurSel($g_hCmbCastleCapacityS, $g_iCmbCastleCapacityS)
@@ -116,16 +120,16 @@ Func ApplyConfig_MOD($TypeReadSave)
 			Next
 			GUIControlCheckCC()
 
-			; Check Grand Warden Mode - RORO-MOD
+			; Check Grand Warden Mode - Team AiO MOD++
 			GUICtrlSetState($g_hChkCheckWardenMode, $g_bCheckWardenMode ? $GUI_CHECKED : $GUI_UNCHECKED)
 			chkCheckWardenMode()
 			_GUICtrlComboBox_SetCurSel($g_hCmbCheckWardenMode, $g_iCheckWardenMode)
 
-			; Classic Four Finger - RORO-MOD
+			; Classic Four Finger - Team AiO MOD++
 			cmbStandardDropSidesAB()
 			Bridge()
 
-			; Unit/Wave Factor - RORO-MOD
+			; Unit/Wave Factor - Team AiO MOD++
 			GUICtrlSetState($g_hChkGiantSlot, $g_iChkGiantSlot = 1 ? $GUI_CHECKED : $GUI_UNCHECKED)
 			_GUICtrlComboBox_SetCurSel($g_hCmbGiantSlot, $g_iCmbGiantSlot)
 			chkGiantSlot()
@@ -136,28 +140,23 @@ Func ApplyConfig_MOD($TypeReadSave)
 			GUICtrlSetData($g_hTxtWaveFactor, $g_iTxtWaveFactor)
 			chkWaveFactor()
 
-			; Restart Search Legend league - RORO-MOD
+			; Restart Search Legend league - Team AiO MOD++
 			GUICtrlSetState($g_hChkSearchTimeout, $g_bIsSearchTimeout = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetData($g_hTxtSearchTimeout, $g_iSearchTimeout)
 			chkSearchTimeout()
 
-			; Stop on Low battery - RORO-MOD
+			; Stop on Low battery - Team AiO MOD++
 			GUICtrlSetState($g_hChkStopOnBatt, $g_bStopOnBatt = True ? $GUI_CHECKED : $GUI_UNCHECKED)
 			GUICtrlSetData($g_hTxtStopOnBatt, $g_iStopOnBatt)
 			chkStopOnBatt()
 
-            ; Skip Request CC - Team AiO MOD++
-			_Ini_Add("donate", "SkipRequestCC", $g_bSkipRequestCC ? 1 : 0)
-			_Ini_Add("donate", "SkipRequestCC_Troop", $g_iSkipRequestCCTroop)
-			_Ini_Add("donate", "SkipRequestCC_Spell", $g_iSkipRequestCCSpell)
-
-			; Attack Log - RORO-MOD
+			; Attack Log - Team AiO MOD++
 			GUICtrlSetState($g_hChkColorfulAttackLog, $g_bColorfulAttackLog ? $GUI_CHECKED : $GUI_UNCHECKED)
 
-			; Stop For War - RORO-MOD
+			; Stop For War - Team AiO MOD++
 			GUICtrlSetState($g_hChkStopForWar, $g_bStopForWar ? $GUI_CHECKED : $GUI_UNCHECKED)
-			_GUICtrlComboBox_SetCurSel($g_hCmbStopTime, $g_iStopTime)
-			_GUICtrlComboBox_SetCurSel($g_CmbStopBeforeBattle, $g_bStopBeforeBattle ? 0 : 1)
+			_GUICtrlComboBox_SetCurSel($g_hCmbStopTime, Abs($g_iStopTime))
+			_GUICtrlComboBox_SetCurSel($g_hCmbStopBeforeBattle, $g_iStopTime < 0 ? 0 : 1)
 			_GUICtrlComboBox_SetCurSel($g_hCmbReturnTime, $g_iReturnTime)
 
 			GUICtrlSetState($g_hChkTrainWarTroop, $g_bTrainWarTroop ? $GUI_CHECKED : $GUI_UNCHECKED)
@@ -177,30 +176,24 @@ Func ApplyConfig_MOD($TypeReadSave)
 			ReadConfig_600_52_2()
 			ChkStopForWar()
 
-			; Request troops for defense - RORO-MOD
+			; Request troops for defense - Team AiO MOD++
 			GUICtrlSetState($g_hChkRequestTroopsEnableDefense, $g_bRequestTroopsEnableDefense ? $GUI_CHECKED : $GUI_UNCHECKED)
 			chkRequestDefense()
 			GUICtrlSetData($g_hTxtRequestCCDefense, $g_sRequestTroopsTextDefense)
 			GUICtrlSetData($g_hTxtRequestDefenseEarly, $g_iRequestDefenseEarly)
 
-;~ ; Skip Request CC - RORO-MOD++
-			GUICtrlSetState($g_hChkSkipRequestCC, $g_bSkipRequestCC ? $GUI_CHECKED : $GUI_UNCHECKED)
-			chkSkipRequestCC()
-			GUICtrlSetData($g_hTxtSkipRequestCCTroop, $g_iSkipRequestCCTroop)
-			GUICtrlSetData($g_hTxtSkipRequestCCSpell, $g_iSkipRequestCCSpell)
-
 		Case "Save"
-			; CSV Deploy Speed - RORO-MOD
+			; CSV Deploy Speed - Team AiO MOD++
 			$icmbCSVSpeed[$LB] = _GUICtrlComboBox_GetCurSel($cmbCSVSpeed[$LB])
 			$icmbCSVSpeed[$DB] = _GUICtrlComboBox_GetCurSel($cmbCSVSpeed[$DB])
 
-			; Auto Dock, Hide Emulator & Bot - RORO-MOD
+			; Auto Dock, Hide Emulator & Bot - Team AiO MOD++
 			$g_bEnableAuto = (GUICtrlRead($g_hChkEnableAuto) = $GUI_CHECKED)
 			$g_iChkAutoDock = (GUICtrlRead($g_hChkAutoDock) = $GUI_CHECKED)
 			$g_iChkAutoHideEmulator = (GUICtrlRead($g_hChkAutoHideEmulator) = $GUI_CHECKED)
 			$g_iChkAutoMinimizeBot = (GUICtrlRead($g_hChkAutoMinimizeBot) = $GUI_CHECKED)
 
-			; Check Collector Outside - RORO-MOD
+			; Check Collector Outside - Team AiO MOD++
 			$g_bDBMeetCollOutside = (GUICtrlRead($g_hChkDBMeetCollOutside) = $GUI_CHECKED)
 			$g_iTxtDBMinCollOutsidePercent = GUICtrlRead($g_hTxtDBMinCollOutsidePercent)
 			$g_bDBCollectorsNearRedline = GUICtrlRead($g_hChkDBCollectorsNearRedline) = $GUI_CHECKED ? 1 : 0
@@ -212,10 +205,10 @@ Func ApplyConfig_MOD($TypeReadSave)
 			$g_bSkipCollectorCheckTH = GUICtrlRead($g_hChkSkipCollectorCheckTH) = $GUI_CHECKED ? 1 : 0
 			$g_iCmbSkipCollectorCheckTH = _GUICtrlComboBox_GetCurSel($g_hCmbSkipCollectorCheckTH)
 
-			; ClanHop - RORO-MOD
+			; ClanHop - Team AiO MOD++
 			$g_bChkClanHop = (GUICtrlRead($g_hChkClanHop) = $GUI_CHECKED)
 
-			; Bot Humanization - RORO-MOD
+			; Bot Humanization - Team AiO MOD++
 			$g_ichkUseBotHumanization = GUICtrlRead($g_chkUseBotHumanization) = $GUI_CHECKED ? 1 : 0
 			$g_ichkUseAltRClick = GUICtrlRead($g_chkUseAltRClick) = $GUI_CHECKED ? 1 : 0
 			$g_ichkCollectAchievements = GUICtrlRead($g_chkCollectAchievements) = $GUI_CHECKED ? 1 : 0
@@ -235,7 +228,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 			$g_icmbMaxActionsNumber = _GUICtrlComboBox_GetCurSel($g_icmbMaxActionsNumber)
 			$g_ichallengeMessage = GUICtrlRead($g_challengeMessage)
 
-			; Goblin XP - RORO-MOD
+			; Goblin XP - Team AiO MOD++
 			$ichkEnableSuperXP = GUICtrlRead($chkEnableSuperXP) = $GUI_CHECKED ? 1 : 0
 			$ichkSkipZoomOutXP = GUICtrlRead($chkSkipZoomOutXP) = $GUI_CHECKED ? 1 : 0
 			$ichkFastGoblinXP = GUICtrlRead($chkFastGoblinXP) = $GUI_CHECKED ? 1 : 0
@@ -245,7 +238,7 @@ Func ApplyConfig_MOD($TypeReadSave)
 			$ichkSXGW = (GUICtrlRead($chkSXGW) = $GUI_CHECKED) ? $eHeroWarden : $eHeroNone
 			$itxtMaxXPtoGain = Int(GUICtrlRead($txtMaxXPtoGain))
 
-			; GTFO - RORO-MOD
+			; GTFO - Team AiO MOD++
 			$g_bChkUseGTFO = (GUICtrlRead($g_hChkUseGTFO) = $GUI_CHECKED)
 			$g_iTxtMinSaveGTFO_Elixir = Number(GUICtrlRead($g_hTxtMinSaveGTFO_Elixir))
 			$g_iTxtMinSaveGTFO_DE = Number( GUICtrlRead($g_hTxtMinSaveGTFO_DE))
@@ -256,14 +249,18 @@ Func ApplyConfig_MOD($TypeReadSave)
 			$g_bChkKickOutSpammers = (GUICtrlRead($g_hChkKickOutSpammers) = $GUI_CHECKED)
 			$g_iTxtKickLimit = Number(GUICtrlRead($g_hTxtKickLimit))
 
-			; Max logout time - RORO-MOD
+			; Max logout time - Team AiO MOD++
 			$g_bTrainLogoutMaxTime = (GUICtrlRead($g_hChkTrainLogoutMaxTime) = $GUI_CHECKED)
 			$g_iTrainLogoutMaxTime = GUICtrlRead($g_hTxtTrainLogoutMaxTime)
 
-			; Request CC Troops at first - RORO-MOD
+			; Slot11 - Team AiO MOD++
+			$g_abChkExtendedAttackBar[$DB] = (GUICtrlRead($g_hChkExtendedAttackBarDB) = $GUI_CHECKED)
+			$g_abChkExtendedAttackBar[$LB] = (GUICtrlRead($g_hChkExtendedAttackBarLB) = $GUI_CHECKED)
+
+			; Request CC Troops at first - Team AiO MOD++
 			$g_bReqCCFirst = (GUICtrlRead($g_hChkReqCCFirst) = $GUI_CHECKED)
 
-			; CheckCC Troops - RORO-MOD
+			; CheckCC Troops - Team AiO MOD++
 			$g_bChkCC = (GUICtrlRead($g_hChkTroopsCC) = $GUI_CHECKED)
 			$g_iCmbCastleCapacityT = _GUICtrlComboBox_GetCurSel($g_hCmbCastleCapacityT)
 			$g_iCmbCastleCapacityS = _GUICtrlComboBox_GetCurSel($g_hCmbCastleCapacityS)
@@ -272,11 +269,11 @@ Func ApplyConfig_MOD($TypeReadSave)
 				$g_aiTxtCCSlot[$i] = GUICtrlRead($g_ahTxtCCSlot[$i])
 			Next
 
-			; Check Grand Warden Mode - RORO-MOD
+			; Check Grand Warden Mode - Team AiO MOD++
 			$g_bCheckWardenMode = (GUICtrlRead($g_hChkCheckWardenMode) = $GUI_CHECKED)
 			$g_iCheckWardenMode = _GUICtrlComboBox_GetCurSel($g_hCmbCheckWardenMode)
 
-			; Unit/Wave Factor - RORO-MOD
+			; Unit/Wave Factor - Team AiO MOD++
 			$g_iChkGiantSlot = GUICtrlRead($g_hChkGiantSlot) = $GUI_CHECKED ? 1 : 0
 			$g_iCmbGiantSlot = _GUICtrlComboBox_GetCurSel($g_hCmbGiantSlot)
 			$g_iChkUnitFactor = GUICtrlRead($g_hChkUnitFactor) = $GUI_CHECKED ? 1 : 0
@@ -284,22 +281,22 @@ Func ApplyConfig_MOD($TypeReadSave)
 			$g_iChkWaveFactor = GUICtrlRead($g_hChkWaveFactor) = $GUI_CHECKED ? 1 : 0
 			$g_iTxtWaveFactor = GUICtrlRead($g_hTxtWaveFactor)
 
-			; Restart Search Legend league - RORO-MOD
+			; Restart Search Legend league - Team AiO MOD++
 			$g_bIsSearchTimeout = (GUICtrlRead($g_hChkSearchTimeout) = $GUI_CHECKED)
 			$g_iSearchTimeout = GUICtrlRead($g_hTxtSearchTimeout)
 
-			; Stop on Low battery - RORO-MOD
+			; Stop on Low battery - Team AiO MOD++
 			$g_bStopOnBatt = (GUICtrlRead($g_hChkStopOnBatt) = $GUI_CHECKED)
 			$g_iStopOnBatt = GUICtrlRead($g_hTxtStopOnBatt)
 
-			; Attack Log - RORO-MOD
+			; Attack Log - Team AiO MOD++
 			$g_bColorfulAttackLog = (GUICtrlRead($g_hChkColorfulAttackLog) = $GUI_CHECKED)
 
-			; Stop For War - RORO-MOD
+			; Stop For War - Team AiO MOD++
 			$g_bStopForWar = GUICtrlRead($g_hChkStopForWar)  = $GUI_CHECKED
 
 			$g_iStopTime = _GUICtrlComboBox_GetCurSel($g_hCmbStopTime)
-			$g_bStopBeforeBattle = _GUICtrlComboBox_GetCurSel($g_CmbStopBeforeBattle) = 0
+			If _GUICtrlComboBox_GetCurSel($g_hCmbStopBeforeBattle) = 0 Then $g_iStopTime = $g_iStopTime * -1
 			$g_iReturnTime = _GUICtrlComboBox_GetCurSel($g_hCmbReturnTime)
 
 			$g_bTrainWarTroop = GUICtrlRead($g_hChkTrainWarTroop) = $GUI_CHECKED
@@ -317,14 +314,10 @@ Func ApplyConfig_MOD($TypeReadSave)
 			$g_bRequestCCForWar = GUICtrlRead($g_hChkRequestCCForWar) = $GUI_CHECKED
 			$g_sTxtRequestCCForWar = GUICtrlRead($g_hTxtRequestCCForWar)
 
-			; Request troops for defense - RORO-MOD
+			; Request troops for defense - Team AiO MOD++
 			$g_bRequestTroopsEnableDefense = (GUICtrlRead($g_hChkRequestTroopsEnableDefense) = $GUI_CHECKED)
 			$g_sRequestTroopsTextDefense = GUICtrlRead($g_hTxtRequestCCDefense)
 			$g_iRequestDefenseEarly = GUICtrlRead($g_hTxtRequestDefenseEarly)
 
-; Skip Request CC - RORO-MOD++
-			$g_bSkipRequestCC = (GUICtrlRead($g_hChkSkipRequestCC) = $GUI_CHECKED)
-			$g_iSkipRequestCCTroop = GUICtrlRead($g_hTxtSkipRequestCCTroop)
-			$g_iSkipRequestCCSpell = GUICtrlRead($g_hTxtSkipRequestCCSpell)
 	EndSwitch
 EndFunc   ;==>ApplyConfig_MOD

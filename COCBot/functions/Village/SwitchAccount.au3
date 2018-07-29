@@ -105,9 +105,16 @@ Func CheckSwitchAcc()
 	; Force Switch when PBT detected
 	If $g_abPBActive[$g_iCurAccount] = True Then $bForceSwitch = True
 
-	If $g_iCommandStop = 0 Then ; Forced to switch when in halt attack mode
+	If $g_iCommandStop = 0 Or $g_iCommandStop = 3 Then ; Forced to switch when in halt attack mode
 		SetLog("هذا الحساب في وضع الهجوم التوقف ، والتحول إلى حساب آخر", $COLOR_ACTION)
-		SetSwitchAccLog(" - HaltAttack, Force switch")
+		SetSwitchAccLog(" - Halt Attack, Force switch")
+		; Force the remain train time to 120 min just in case of SmartSwitch checked
+		If $g_bChkSmartSwitch then
+			$g_aiRemainTrainTime[$g_iCurAccount] = 120
+			$g_aiTimerStart[$g_iCurAccount] = TimerInit()
+			SetDebugLog("Halt Account " & $g_asProfileName[$g_iCurAccount] & " with " &  $g_aiRemainTrainTime[$g_iCurAccount] & "'m")
+		EndIf
+		; Force switch
 		$bForceSwitch = True
 	ElseIf $g_bWaitForCCTroopSpell Then
 		SetLog("لا تزال تنتظر قوات التحالف / نوبات ، والتحول إلى حساب آخر", $COLOR_ACTION)
@@ -140,9 +147,9 @@ Func CheckSwitchAcc()
 		SetSwitchAccLog("ابقى في [" & $g_iCurAccount + 1 & "]", $COLOR_SUCCESS)
 		If _Sleep(500) Then Return
 	Else
-		$nMinRemainTrain = CheckTroopTimeAllAccount($bForceSwitch)
-
-		If $g_bChkSmartSwitch = 1 Then ; Smart switch
+		If $g_bChkSmartSwitch = True Then ; Smart switch
+			SetDebugLog("-Smart Switch-")
+			$nMinRemainTrain = CheckTroopTimeAllAccount($bForceSwitch)
 			If $nMinRemainTrain <= 1 And Not $bForceSwitch And Not $g_bDonateLikeCrazy Then ; Active (force switch shall give priority to Donate Account)
 				If $g_bDebugSetlog Then SetDebugLog("التبديل إلى أو البقاء في حساب نشط: " & $g_iNextAccount + 1, $COLOR_DEBUG)
 				$g_iDonateSwitchCounter = 0
@@ -163,26 +170,32 @@ Func CheckSwitchAcc()
 				EndIf
 			EndIf
 		Else ; Normal switch (continuous)
+		    SetDebugLog("-Normal Switch-")
 			$g_iNextAccount = $g_iCurAccount + 1
 			If $g_iNextAccount > $g_iTotalAcc Then $g_iNextAccount = 0
 			While $abAccountNo[$g_iNextAccount] = False
 				$g_iNextAccount += 1
+				SetDebugLog("- While Account: " & $g_asProfileName[$g_iNextAccount] & " number: " & $g_iNextAccount + 1)
 				If $g_iNextAccount > $g_iTotalAcc Then $g_iNextAccount = 0 ; avoid idle Account
 			WEnd
 		EndIf
-
+        SetDebugLog("- Current Account: " & $g_asProfileName[$g_iCurAccount] & " number: " & $g_iCurAccount + 1)
+		SetDebugLog("- Next Account: " & $g_asProfileName[$g_iNextAccount]& " number: " & $g_iNextAccount + 1)
 		; Just a loop for all acc to check it if necessary
 		For $i = 0 To $g_iTotalAcc
-			; Check if the next account is PBT and IF the remain Train Time is Less/More than 2 minutes
-			If $g_abPBActive[$g_iNextAccount] And $g_aiRemainTrainTime[$g_iNextAccount] > 2 Then
-				SetLog("الحساب " & $g_iNextAccount + 1 & " في فترة استراحة شخصية!", $COLOR_INFO)
-				SetSwitchAccLog(" - الحساب " & $g_iNextAccount + 1 & " is in PTB")
+			 			; Check if the next account is PBT and IF the remain Train Time is Less/More than 2 minutes OR the account is disable
+			If($g_abPBActive[$g_iNextAccount] And $g_aiRemainTrainTime[$g_iNextAccount] > 2) Or $abAccountNo[$g_iNextAccount] = False Then
+				if $abAccountNo[$g_iNextAccount] = False Then
+					SetLog("Account " & $g_iNextAccount + 1 & " disabled!", $COLOR_INFO)
+					SetSwitchAccLog(" - Account " & $g_iNextAccount + 1 & " disabled")
+				Else
+					SetLog("Account " & $g_iNextAccount + 1 & " is in a Personal Break Time!", $COLOR_INFO)
+					SetSwitchAccLog(" - Account " & $g_iNextAccount + 1 & " is in PTB")
+				EndIf
+
 				$g_iNextAccount = $g_iNextAccount + 1
 				If $g_iNextAccount > $g_iTotalAcc Then $g_iNextAccount = 0
-				While $abAccountNo[$g_iNextAccount] = False
-					$g_iNextAccount += 1
-					If $g_iNextAccount > $g_iTotalAcc Then $g_iNextAccount = 0 ; avoid idle Account
-				WEnd
+				
 			Else
 				ExitLoop
 			EndIf
@@ -355,7 +368,8 @@ Func SwitchCOCAcc($NextAccount)
 
 		$StartOnlineTime = TimerInit()
 		SetSwitchAccLog("Switched to Acc [" & $NextAccount + 1 & "]", $COLOR_SUCCESS)
-
+        		; Reset the log
+		$g_hLogFile = 0
 		If $g_bChkSharedPrefs Then
 			; disconnect account again for saving shared_prefs
 			waitMainScreen()
@@ -608,13 +622,13 @@ Func SwitchCOCAcc_ConfirmSCID(ByRef $bResult)
 	For $i = 0 To 30 ; Checking LogOut & Confirm button continuously in 30sec
 		If QuickMIS("BC1", $g_sImgLogOutButton, 620, 246, 693, 308) Then ; Check Log Out button
 			SetLog("   2. تسجيل الخروج من الحساب ")
-			Click($g_iQuickMISX + 587, $g_iQuickMISY + 268, 2, 500, "Click Log Out SC_ID") ; Click LogOut button
+			Click($g_iQuickMISX + 620, $g_iQuickMISY + 246, 2, 500, "Click Log Out SC_ID") ; Click LogOut button
 			If _Sleep(500) Then Return "Exit"
 
 			For $j = 0 To 20
 				If QuickMIS("BC1", $g_sImgConfirmButton, 400, 414, 586, 455) Then ; Check Confirm button
 					SetLog("   3. الضغط عل زر قائمة السوبر اي دي  ")
-					Click($g_iQuickMISX + 370, $g_iQuickMISY + 402, 1, 0, "Click Confirm SC_ID") ; Click Confirm button
+					Click($g_iQuickMISX + 400, $g_iQuickMISY + 414, 1, 0, "Click Confirm SC_ID") ; Click Confirm button
 					If _Sleep(500) Then Return "Exit"
 					;ExitLoop
 					Return "OK"
@@ -789,13 +803,13 @@ Func CheckTroopTimeAllAccount($bExcludeCurrent = False) ; Return the minimum rem
 	For $i = 0 To $g_iTotalAcc
 		If $bExcludeCurrent And $i = $g_iCurAccount Then ContinueLoop
 		If $abAccountNo[$i] And Not $g_abDonateOnly[$i] Then ;	Only check Active profiles
-			If $g_aiRemainTrainTime[$i] <= $iMinRemainTrain Then
+		If $g_aiRemainTrainTime[$i] < $iMinRemainTrain Then
 				$iMinRemainTrain = $g_aiRemainTrainTime[$i]
 				$g_iNextAccount = $i
 			EndIf
 		EndIf
 	Next
-
+SetDebugLog("- Min Remain Train Time is " & $iMinRemainTrain)
 	Return $iMinRemainTrain
 
 EndFunc   ;==>CheckTroopTimeAllAccount
@@ -906,7 +920,7 @@ Func CheckLoginWithSupercellID()
 	Local $pColor = _GetPixelColor($aLoginWithSupercellID[0], $aLoginWithSupercellID[1], False)
 	Local $pColor1 = _GetPixelColor($aLoginWithSupercellID2[0], $aLoginWithSupercellID2[1], False)
 	; Green Button and White Font
-	If _ColorCheck($pColor, Hex($aLoginWithSupercellID[2], 6), $aLoginWithSupercellID[3]) And _ColorCheck($pColor1, Hex($aLoginWithSupercellID2[2], 6), $aLoginWithSupercellID2[3]) then
+	If _ColorCheck($pColor, Hex($aLoginWithSupercellID[2], 6), $aLoginWithSupercellID[3]) And _ColorCheck($pColor1, Hex($aLoginWithSupercellID2[2], 6), $aLoginWithSupercellID2[3]) Then
 
 		SetDebugLog("Found Log in with Supercell ID pixel")
 
@@ -955,7 +969,45 @@ Func CheckLoginWithSupercellID()
 
 	Return $bResult
 EndFunc   ;==>CheckLoginWithSupercellID
-
+ 
+ Func CheckLoginWithSupercellIDScreen()
+	Local $g_sImgSCID = @ScriptDir &"\imgxml\SuperCellID\Accounts"
+	Local $AccountsCoord[0][2]
+	; Account List check be there, validate with imgloc
+		If UBound(decodeSingleCoord(FindImageInPlace("LoginWithSupercellID", $g_sImgLoginWithSupercellID, "318,678(125,30)", False))) > 1 Then
+			; Google Account selection found
+			SetLog("Verified Log in with Supercell ID boot screen")
+			Click($aLoginWithSupercellID[0], $aLoginWithSupercellID[1], 1, 0, "Click Log in with SC_ID")
+			If _Sleep(2000) Then return
+			For $i = 0 to 10
+				Local $XCoordinates = QuickMIS("CX", $g_sImgSCID, 600, 165, 690, 605, True, $g_bDebugImageSave)
+				If UBound($XCoordinates) > 0 Then
+					SetDebugLog("[SCID Accounts]: " & UBound($XCoordinates), $COLOR_DEBUG)
+					Redim $AccountsCoord[UBound($XCoordinates)][2]
+					For $j = 0 to UBound($XCoordinates) - 1
+						Local $Coordinates = StringSplit($XCoordinates[$j], ",", 2)
+						$AccountsCoord[$j][0] = $Coordinates[0] + 600
+						$AccountsCoord[$j][1] = $Coordinates[1] + 165
+						SetDebugLog("[" & $j &  "] Account coordinates: " & $AccountsCoord[$j][0] & "," & $AccountsCoord[$j][1])
+					Next
+					_ArraySort($AccountsCoord, 0, 0, 0, 1)  ; short by column 1 [Y]
+					Setlog("SC_ID account number " & $g_iWhatSCIDAccount2Use + 1)
+					If $g_iWhatSCIDAccount2Use + 1 > UBound($XCoordinates) then
+						setlog("You selected a SCID undetected account!!", $COLOR_ERROR)
+						ExitLoop
+					EndIf
+					Click($AccountsCoord[$g_iWhatSCIDAccount2Use][0] - 150 , $AccountsCoord[$g_iWhatSCIDAccount2Use][1], 1)
+					SetLog("Please wait for loading CoC...!")
+					ExitLoop
+				EndIf
+				If $g_bRunState = False Then Return
+				If _sleep(1000) then return
+			NExt
+		Else
+			SetDebugLog("Log in with Supercell ID boot screen not verified")
+		EndIf
+EndFunc
+ 
 Func SwitchAccountCheckProfileInUse($sNewProfile)
 	; now check if profile is used in another group
 	Local $sInGroups = ""
