@@ -2,7 +2,7 @@
 ; Name ..........: CheckWardenMode
 ; Description ...: Check in which Mode the Warden is and switch if needed
 ; Author ........: MantasM (10-2017), NguyenAnhHD (04-2018)
-; Modified ......: RORO-MOD (2018)
+; Modified ......: Team AiO MOD++ (2018)
 ; Remarks .......: This file is part of MyBot, previously known as ClashGameBot. Copyright 2015-2018
 ;                  MyBot is distributed under the terms of the GNU GPL
 ; Related .......:
@@ -12,7 +12,7 @@
 
 Func CheckWardenMode($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 	If Not $g_bCheckWardenMode Or $g_iCheckWardenMode = -1 Then Return
-	SetLog("Checking if Warden is in the correct Mode", $COLOR_INFO)
+	SetLog(" التحقق من الامر الكبير إذا كان  في الوضع الصحيح ", $COLOR_INFO)
 
 	If Not $bOpenArmyWindow And Not IsTrainPage() Then ; check for train page
 		SetError(1)
@@ -26,21 +26,21 @@ Func CheckWardenMode($bOpenArmyWindow = False, $bCloseArmyWindow = False)
 	EndIf
 
 	If QuickMIS("BC1", $g_sImgGrandWardenHeal, 800, 341, 829, 369) Then
-		SetLog("Grand Warden not available, skip check....!", $COLOR_ACTION)
+		SetLog(" الامر الكبير غير متوفر ، وتخطي الاختيار ....! ", $COLOR_ACTION)
 		If $bCloseArmyWindow Then ClickP($aAway, 2, $DELAYCHECKARMYCAMP4, "#0000")
 		Return
 	EndIf
 
 	If QuickMIS("BC1", $g_sImgGrandWardenMode, 795, 403, 825, 426) Then
-		SetLog("Found Grand Warden in Air Mode!")
+		SetLog(" العثور على الآمر الكبير في وضع الهواء! ")
 		If $g_iCheckWardenMode = 0 Then
-			SetLog("Switching Wardens Mode to Ground", $COLOR_INFO)
+			SetLog(" تحويل الآمر الكبير الى وضع الارضي", $COLOR_INFO)
 			SwitchWardenMode(Not $bCloseArmyWindow)
 		EndIf
 	Else
-		SetLog("Found Grand Warden in Ground Mode!")
+		SetLog(" العثور على الآمر الكبير في وضع الأرض! ")
 		If $g_iCheckWardenMode = 1 Then
-			SetLog("Switching Wardens Mode to Air", $COLOR_INFO)
+			SetLog(" تحويل الآمر الكبير الى وضع الهواء", $COLOR_INFO)
 			SwitchWardenMode(Not $bCloseArmyWindow)
 		EndIf
 	EndIf
@@ -80,11 +80,11 @@ Func SwitchWardenMode($bReopenArmyWindow = True)
 			If IsArray($aBtnCoordinates) Then
 				ClickP($aBtnCoordinates, 1, 0, "#0000")
 				If _Sleep($DELAYCHECKARMYCAMP4) Then Return
-				SetLog("Switched Grand Warden Mode successfully!", $COLOR_SUCCESS)
+				SetLog(" تحول وضع الآمر الكبير بنجاح! ", $COLOR_SUCCESS)
 				ClickP($aAway, 1, 0, "#0000")
 				If _Sleep($DELAYCHECKARMYCAMP4) Then Return
 			Else
-				SetLog("Cannot find the Grand Wardens Switch Mode button!", $COLOR_ERROR)
+				SetLog(" لا يمكن العثور على زر تبديل الآمر الكبير ", $COLOR_ERROR)
 				Return
 			EndIf
 		EndIf
