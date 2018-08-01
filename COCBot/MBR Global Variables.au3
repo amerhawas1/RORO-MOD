@@ -611,8 +611,8 @@ Global Const $g_asTroopNames[$eTroopCount] = [ _
 		"بربر", "ارشر", "عملاق", "حرامي", "مفجر السور", "بالون", "ساحر", "هلر", "تنين", "بيكا", "بيبي دراغون", "حفار", "تنين الكهرباء", _
 		"مينون", "هوك رايد", "فالكري", "غولم", "واتش", "لافا", "باولر"]
 Global Const $g_asTroopNamesPlural[$eTroopCount] = [ _
-		"بربر", "ارشر", "عملاق", "حرامي", "مفجر السور", "بالون", "ساحر", "هلر", "تنين", "بيكا", "بيبي دراغون", "حفار", "تنين الكهرباء", _
-		"مينون", "هوك رايد", "فالكري", "غولم", "واتش", "لافا", "باولر"]
+		"Barbarians", "Archers", "Giants", "Goblins", "Wall Breakers", "Balloons", "Wizards", "Healers", "Dragons", "Pekkas", "Baby Dragons", "Miners", "Electro Dragons", _
+		"Minions", "Hog Riders", "Valkyries", "Golems", "Witches", "Lava Hounds", "Bowlers"]
 Global Const $g_asTroopShortNames[$eTroopCount] = [ _
 		"Barb", "Arch", "Giant", "Gobl", "Wall", "Ball", "Wiza", "Heal", "Drag", "Pekk", "BabyD", "Mine", "EDrag", _
 		"Mini", "Hogs", "Valk", "Gole", "Witc", "Lava", "Bowl"]

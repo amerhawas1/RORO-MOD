@@ -108,7 +108,7 @@ Func RequestCC($ClickPAtEnd = True, $specifyText = "")
 								EndIf
 							EndIf
 						Else
-							SetLog("CC " & $sLog[$i] & " is full" & ($i > 0 ? " or not available." : "."))
+							SetLog("قوات القبيلة  " & $sLog[$i] & " ممتلئ" & ($i > 0 ? " أو غير متوفر." : "."))
 						EndIf
 						If $bNeedRequest Then ExitLoop
 					Else

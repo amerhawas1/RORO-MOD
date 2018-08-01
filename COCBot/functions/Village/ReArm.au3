@@ -58,8 +58,8 @@ Func ReArm()
 					Click(585, 252, 1, 0, "#0227") ; Click close gem window "X"
 					If _Sleep($DELAYREARM1) Then Return
 				Else
-					Local $sVerb = StringInStr($aTempArray[0], "Trap") ? "Rearmed" : "Reloaded"
-					SetLog($sVerb & " " & $aTempArray[0] & "(s)", $COLOR_SUCCESS)
+					Local $sVerb = StringInStr($aTempArray[0], "فخ") ? "اعاد" : "اعادة تحميل"
+					SetLog($sVerb & " " & $aTempArray[0] & " ", $COLOR_SUCCESS)
 					$g_abNotNeedAllTime[0] = False
 					$bReArmed = True
 					If _Sleep($DELAYREARM1) Then Return
