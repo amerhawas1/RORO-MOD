@@ -47,7 +47,7 @@ Func CreateVillageMisc()
 		CreateMiscBuilderBaseSubTab()
 	$g_hGUI_MISC_TAB_ITEM3 = GUICtrlCreateTabItem(GetTranslatedFileIni("MBR Main GUI", "MISC_TAB_ITEM3", "Clan Games"))
 		CreateMiscClanGamesV3SubTab()
-	$g_hGUI_MISC_TAB_ITEM4 =  GUICtrlCreateTabItem(GetTranslatedFileIni("MBR Main GUI", "MISC_TAB_ITEM3", "Clan Games log "))
+	$g_hGUI_MISC_TAB_ITEM4 =  GUICtrlCreateTabItem(GetTranslatedFileIni("MBR Main GUI", "MISC_TAB_ITEM4", "انجازات مباريات القبيلة"))
 		CreateMiscClanGameslogSubTab()
 	GUICtrlCreateTabItem("")
 
